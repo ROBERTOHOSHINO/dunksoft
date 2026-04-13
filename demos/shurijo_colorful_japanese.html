@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>首里城 — 色彩日本語・ふりがなデモ</title>
+<style>
+:root {
+  --noun: #c0392b;
+  --verb: #1a5276;
+  --adj: #1e5c2f;
+  --particle: #6c3483;
+  --aux: #b7950b;
+  --adverb: #0e7b82;
+  --proper: #c0550a;
+  --bg: #ffffff;
+  --bg2: #f7f6f2;
+  --text: #1a1a1a;
+  --text2: #555550;
+  --text3: #999990;
+  --border: rgba(0,0,0,0.12);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--text); font-family: "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif; }
+.page { max-width: 720px; margin: 0 auto; padding: 2rem 1.5rem 3rem; }
+.hero { border-left: 3px solid #c0550a; padding: 0.5rem 0 0.5rem 1rem; margin-bottom: 1.75rem; }
+.hero h1 { font-size: 20px; font-weight: 500; color: var(--text); margin: 0 0 4px; }
+.hero p { font-size: 13px; color: var(--text2); margin: 0; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-bottom: 1.75rem; padding: 12px 16px; background: var(--bg2); border-radius: 8px; }
+.leg-item { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--text2); }
+.dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.section { margin-bottom: 1.75rem; }
+.section-num { font-size: 11px; font-weight: 500; color: var(--text3); letter-spacing: 0.08em; margin-bottom: 4px; }
+.section-title { font-size: 16px; font-weight: 500; color: var(--text); margin-bottom: 10px; }
+.text-jp { font-size: 17px; line-height: 2.6; color: var(--text); margin-bottom: 10px; }
+ruby rt { font-size: 10px; color: var(--text3); }
+.text-en { font-size: 13px; color: var(--text2); line-height: 1.75; border-left: 2px solid var(--border); padding-left: 10px; }
+.nn { color: var(--noun); }
+.vb { color: var(--verb); }
+.aj { color: var(--adj); }
+.pt { color: var(--particle); }
+.ax { color: var(--aux); }
+.av { color: var(--adverb); }
+.pn { color: var(--proper); font-weight: 500; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-bottom: 1.75rem; }
+.stat { background: var(--bg2); border-radius: 8px; padding: 14px 16px; }
+.stat-num { font-size: 22px; font-weight: 500; color: var(--text); }
+.stat-label { font-size: 12px; color: var(--text2); margin-top: 4px; line-height: 1.5; }
+hr { border: none; border-top: 0.5px solid var(--border); margin: 1.5rem 0; }
+.footer { font-size: 11px; color: var(--text3); text-align: center; margin-top: 2rem; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="hero">
+    <h1>首里城 — 色彩日本語・ふりがなデモ</h1>
+    <p>Shuri Castle — Colorful Japanese Demo | Fire, Loss &amp; Revival</p>
+  </div>
+
+  <div class="legend">
+    <div class="leg-item"><div class="dot" style="background:var(--noun)"></div>名詞 Noun</div>
+    <div class="leg-item"><div class="dot" style="background:var(--verb)"></div>動詞 Verb</div>
+    <div class="leg-item"><div class="dot" style="background:var(--adj)"></div>形容詞 Adjective</div>
+    <div class="leg-item"><div class="dot" style="background:var(--particle)"></div>助詞 Particle</div>
+    <div class="leg-item"><div class="dot" style="background:var(--aux)"></div>助動詞 Auxiliary</div>
+    <div class="leg-item"><div class="dot" style="background:var(--adverb)"></div>副詞 Adverb</div>
+    <div class="leg-item"><div class="dot" style="background:var(--proper)"></div>固有名詞 Proper noun</div>
+  </div>
+
+  <!-- 01 歴史 -->
+  <div class="section">
+    <div class="section-num">01 — 歴史 / History</div>
+    <div class="section-title">琉球王国のシンボル</div>
+    <p class="text-jp">
+      <span class="pn"><ruby>首里城<rt>しゅりじょう</rt></ruby></span><span class="pt">は</span>、
+      <span class="pn"><ruby>琉球王国<rt>りゅうきゅうおうこく</rt></ruby></span><span class="pt">の</span>
+      <span class="nn"><ruby>王城<rt>おうじょう</rt></ruby></span><span class="pt">として</span>、
+      <span class="av">かつて</span>
+      <span class="pn"><ruby>那覇港<rt>なはこう</rt></ruby></span><span class="pt">を</span>
+      <span class="vb"><ruby>見下<rt>みお</rt></ruby>ろす</span>
+      <span class="nn"><ruby>丘<rt>おか</rt></ruby></span><span class="pt">に</span>
+      <span class="vb"><ruby>建<rt>た</rt></ruby>てられ</span>、
+      <span class="nn"><ruby>万国津梁<rt>ばんこくしんりょう</rt></ruby></span>——
+      <span class="aj"><ruby>世界<rt>せかい</rt></ruby>の<ruby>架<rt>か</rt></ruby>け<ruby>橋<rt>はし</rt></ruby></span>——
+      <span class="pt">として</span>
+      <span class="nn"><ruby>独自<rt>どくじ</rt></ruby></span><span class="pt">の</span>
+      <span class="nn"><ruby>文化<rt>ぶんか</rt></ruby></span><span class="pt">を</span>
+      <span class="vb"><ruby>築<rt>きず</rt></ruby>いてきました</span>。
+    </p>
+    <p class="text-en">Shuri Castle, royal seat of the Ryukyu Kingdom, stood on a hill overlooking Naha Port. Known as "Bankoku Shinryo" — Bridge Between Nations — it was the cradle of a unique Okinawan culture.</p>
+  </div>
+
+  <hr>
+
+  <!-- 02 火災消失 -->
+  <div class="section">
+    <div class="section-num">02 — 火災消失 / The Fire</div>
+    <div class="section-title">2019年10月31日</div>
+    <p class="text-jp">
+      <span class="nn"><ruby>令和元年<rt>れいわがんねん</rt></ruby></span><span class="pt">の</span>
+      <span class="nn"><ruby>未明<rt>みめい</rt></ruby></span>、
+      <span class="pn"><ruby>正殿<rt>せいでん</rt></ruby></span>
+      <span class="nn"><ruby>内部<rt>ないぶ</rt></ruby></span><span class="pt">から</span>
+      <span class="vb"><ruby>発生<rt>はっせい</rt></ruby>した</span>
+      <span class="nn"><ruby>火災<rt>かさい</rt></ruby></span><span class="pt">により</span>、
+      <span class="av">約</span>11<span class="nn"><ruby>時間<rt>じかん</rt></ruby></span>
+      <span class="vb"><ruby>燃<rt>も</rt></ruby>え<ruby>続<rt>つづ</rt></ruby>け</span>、
+      <span class="pn"><ruby>正殿<rt>せいでん</rt></ruby></span><span class="pt">を</span>
+      <span class="av">はじめとする</span>9<span class="nn"><ruby>施設<rt>しせつ</rt></ruby></span><span class="pt">が</span>
+      <span class="vb"><ruby>焼失<rt>しょうしつ</rt></ruby>しました</span>。
+      <span class="pn"><ruby>沖縄<rt>おきなわ</rt></ruby></span><span class="pt">の</span>
+      <span class="nn"><ruby>人々<rt>ひとびと</rt></ruby></span><span class="pt">に</span>、
+      <span class="aj"><ruby>大<rt>おお</rt></ruby>きな</span>
+      <span class="nn"><ruby>喪失感<rt>そうしつかん</rt></ruby></span><span class="pt">を</span>
+      <span class="vb"><ruby>与<rt>あた</rt></ruby>えました</span>。
+    </p>
+    <p class="text-en">In the early hours of October 31, 2019, a fire starting inside the main hall burned for approximately 11 hours, destroying 9 structures including the Seiden (main hall). The loss left the people of Okinawa devastated.</p>
+  </div>
+
+  <hr>
+
+  <!-- 数字 -->
+  <div class="stats">
+    <div class="stat"><div class="stat-num">9</div><div class="stat-label">焼失施設数<br>Structures lost</div></div>
+    <div class="stat"><div class="stat-num">11h</div><div class="stat-label">燃え続けた時間<br>Duration of fire</div></div>
+    <div class="stat"><div class="stat-num">55億円</div><div class="stat-label">寄付支援金<br>Donations raised</div></div>
+    <div class="stat"><div class="stat-num">2026</div><div class="stat-label">正殿復元完成予定<br>Completion target</div></div>
+  </div>
+
+  <hr>
+
+  <!-- 03 復興 -->
+  <div class="section">
+    <div class="section-num">03 — 復興 / Revival</div>
+    <div class="section-title">「見せる復興」</div>
+    <p class="text-jp">
+      <span class="nn"><ruby>復興<rt>ふっこう</rt></ruby></span><span class="pt">の</span>
+      <span class="nn">テーマ</span><span class="pt">は</span>
+      「<span class="vb"><ruby>見<rt>み</rt></ruby>せる</span>
+      <span class="nn"><ruby>復興<rt>ふっこう</rt></ruby></span>」。
+      <span class="nn"><ruby>職人<rt>しょくにん</rt></ruby></span><span class="pt">たちの</span>
+      <span class="nn"><ruby>技<rt>わざ</rt></ruby></span><span class="pt">を</span>
+      <span class="av">間近で</span>
+      <span class="vb"><ruby>見学<rt>けんがく</rt></ruby>でき</span>、
+      <span class="pn"><ruby>沖縄<rt>おきなわ</rt></ruby></span><span class="pt">の</span>
+      <span class="nn"><ruby>歴史<rt>れきし</rt></ruby></span><span class="pt">と</span>
+      <span class="nn"><ruby>文化<rt>ぶんか</rt></ruby></span><span class="pt">を</span>
+      <span class="vb"><ruby>次<rt>つぎ</rt></ruby>の<ruby>世代<rt>せだい</rt></ruby>へ<ruby>継承<rt>けいしょう</rt></ruby>する</span>
+      <span class="aj"><ruby>大切<rt>たいせつ</rt></ruby>な</span>
+      <span class="nn"><ruby>場<rt>ば</rt></ruby></span><span class="pt">となって</span>
+      <span class="ax">います</span>。
+    </p>
+    <p class="text-en">The revival theme is "Restoration on Display." Visitors can watch master craftspeople at work, making the reconstruction itself a living classroom for passing Okinawa's history and culture to future generations.</p>
+  </div>
+
+  <hr>
+
+  <!-- 04 継承の意義 -->
+  <div class="section">
+    <div class="section-num">04 — 継承の意義 / The Meaning of Continuity</div>
+    <div class="section-title">何度でも蘇る城</div>
+    <p class="text-jp">
+      <span class="pn"><ruby>首里城<rt>しゅりじょう</rt></ruby></span><span class="pt">は</span>
+      <span class="nn"><ruby>今回<rt>こんかい</rt></ruby></span><span class="pt">を</span>
+      <span class="av">含め</span>5<span class="nn"><ruby>度<rt>ど</rt></ruby></span>
+      <span class="vb"><ruby>火災<rt>かさい</rt></ruby>に<ruby>遭<rt>あ</rt></ruby>い</span>、
+      <span class="av">そのたびに</span>
+      <span class="vb"><ruby>蘇<rt>よみがえ</rt></ruby>ってきました</span>。
+      <span class="nn"><ruby>城壁<rt>じょうへき</rt></ruby></span><span class="pt">に</span>
+      <span class="vb"><ruby>刻<rt>きざ</rt></ruby>まれた</span>
+      <span class="nn"><ruby>記憶<rt>きおく</rt></ruby></span><span class="pt">と</span>
+      <span class="nn"><ruby>平和<rt>へいわ</rt></ruby></span><span class="pt">への</span>
+      <span class="nn"><ruby>誓<rt>ちか</rt></ruby>い</span><span class="pt">は</span>、
+      <span class="nn"><ruby>次<rt>つぎ</rt></ruby></span><span class="pt">の</span>
+      <span class="nn"><ruby>世代<rt>せだい</rt></ruby></span><span class="pt">へ</span>
+      <span class="av">静かに</span>
+      <span class="vb"><ruby>受<rt>う</rt></ruby>け<ruby>継<rt>つ</rt></ruby>がれていきます</span>。
+    </p>
+    <p class="text-en">Including this fire, Shuri Castle has risen from flames five times. The memories and pledges for peace inscribed in its stones are quietly passed on, generation by generation.</p>
+  </div>
+
+  <div class="footer">
+    色彩日本語 COLORFUL JAPANESE™ &nbsp;|&nbsp; Smart Life Styles® &nbsp;|&nbsp; © Dunksoft / Roberto Hoshino
+  </div>
+
+</div>
+</body>
+</html>
