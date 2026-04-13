@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Life Styles® Vision | Dunksoft</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&family=Noto+Serif+JP:wght@400;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1814;
+  --ink2: #4a4640;
+  --ink3: #9a9690;
+  --paper: #f7f5f0;
+  --paper2: #efecea;
+  --paper3: #e5e2dc;
+  --accent: #c0550a;
+  --accent2: #1D9E75;
+  --accent3: #534AB7;
+  --line: rgba(26,24,20,0.1);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 300;
+  line-height: 1.8;
+  font-size: 15px;
+}
+.page { max-width: 720px; margin: 0 auto; padding: 48px 32px 64px; }
+
+/* ヘッダー */
+.top-label {
+  font-family: "DM Mono", monospace;
+  font-size: 10px;
+  letter-spacing: .14em;
+  color: var(--ink3);
+  margin-bottom: 8px;
+}
+.vision-title {
+  font-family: "Noto Serif JP", serif;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: .04em;
+  margin-bottom: 6px;
+}
+.vision-title ruby rt { font-size: .38em; color: var(--ink3); font-family: "Noto Sans JP", sans-serif; font-weight: 300; }
+.vision-sub {
+  font-size: 13px;
+  color: var(--ink3);
+  margin-bottom: 36px;
+  font-family: "DM Mono", monospace;
+}
+
+/* DNA バー */
+.dna-bar {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 36px;
+  background: var(--paper2);
+  border: 0.5px solid var(--line);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.dna-item {
+  flex: 1;
+  padding: 16px 20px;
+  text-align: center;
+  border-right: 0.5px solid var(--line);
+}
+.dna-item:last-child { border-right: none; }
+.dna-num {
+  font-family: "DM Mono", monospace;
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--ink);
+  display: block;
+}
+.dna-label {
+  font-size: 11px;
+  color: var(--ink3);
+  line-height: 1.5;
+  margin-top: 2px;
+}
+.dna-label ruby rt { font-size: .7em; }
+
+/* レイヤー */
+.layers { display: flex; flex-direction: column; gap: 1px; background: var(--line); margin-bottom: 36px; }
+.layer {
+  background: var(--paper);
+  padding: 20px 24px;
+  cursor: pointer;
+  transition: background .15s;
+  border: none;
+  width: 100%;
+  text-align: left;
+}
+.layer:hover { background: var(--paper2); }
+.layer-row { display: flex; align-items: center; gap: 14px; }
+.layer-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.layer-main { flex: 1; }
+.layer-jp {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.6;
+}
+.layer-jp ruby rt { font-size: .5em; color: var(--ink3); font-weight: 300; }
+.layer-en { font-size: 12px; color: var(--ink3); margin-top: 2px; }
+.layer-arrow { font-size: 14px; color: var(--ink3); transition: transform .2s; }
+.layer.open .layer-arrow { transform: rotate(90deg); }
+.detail {
+  display: none;
+  background: var(--paper2);
+  padding: 14px 20px 14px 48px;
+  font-size: 13px;
+  color: var(--ink2);
+  line-height: 1.9;
+  border-top: 0.5px solid var(--line);
+}
+.detail ruby rt { font-size: .65em; color: var(--ink3); }
+.detail .en { color: var(--ink3); font-size: 12px; font-family: "DM Mono", monospace; margin-top: 4px; display: block; }
+.layer.open + .detail { display: block; }
+
+/* ツール */
+.tools-label {
+  font-family: "DM Mono", monospace;
+  font-size: 10px;
+  letter-spacing: .12em;
+  color: var(--ink3);
+  margin-bottom: 12px;
+}
+.tools {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--line);
+  margin-bottom: 36px;
+}
+.tool-card {
+  background: var(--paper);
+  padding: 16px 14px;
+  text-align: center;
+}
+.tool-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.5;
+}
+.tool-name ruby rt { font-size: .5em; color: var(--ink3); font-weight: 300; }
+.tool-en { font-size: 11px; color: var(--ink3); margin-top: 3px; font-family: "DM Mono", monospace; }
+
+/* Web バナー */
+.web-banner {
+  border: 0.5px solid var(--line);
+  border-radius: 4px;
+  padding: 18px 22px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--paper);
+}
+.web-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent2); flex-shrink: 0; }
+.web-txt {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+}
+.web-txt ruby rt { font-size: .5em; color: var(--ink3); font-weight: 300; }
+.web-sub { font-size: 11px; color: var(--ink3); margin-top: 3px; font-family: "DM Mono", monospace; }
+
+/* フッター */
+.footer {
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 0.5px solid var(--line);
+  font-size: 11px;
+  color: var(--ink3);
+  font-family: "DM Mono", monospace;
+  text-align: center;
+}
+
+@media (max-width: 480px) {
+  .page { padding: 32px 16px 48px; }
+  .dna-bar { flex-direction: column; }
+  .dna-item { border-right: none; border-bottom: 0.5px solid var(--line); }
+  .dna-item:last-child { border-bottom: none; }
+  .tools { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div style="margin-bottom:24px">
+    <a href="/" style="font-size:11px;font-family:'DM Mono',monospace;color:var(--ink3);text-decoration:none;letter-spacing:.08em">← dunksoft.jp</a>
+  </div>
+
+  <div class="top-label">SMART LIFE STYLES® VISION — DUNKSOFT</div>
+  <h1 class="vision-title">
+    <ruby>時代<rt>じだい</rt></ruby>を<ruby>繋<rt>つな</rt></ruby>ぐ、<ruby>自己成長<rt>じこせいちょう</rt></ruby>の<ruby>複利<rt>ふくり</rt></ruby>
+  </h1>
+  <p class="vision-sub">Connecting generations through shared memory &amp; self-growth</p>
+
+  <!-- DNA バー -->
+  <div class="dna-bar">
+    <div class="dna-item">
+      <span class="dna-num">32</span>
+      <div class="dna-label"><ruby>世代<rt>せだい</rt></ruby><br>Generations</div>
+    </div>
+    <div class="dna-item">
+      <span class="dna-num">42億人</span>
+      <div class="dna-label">DNA<ruby>のつながり<rt></rt></ruby><br>Connected lives</div>
+    </div>
+    <div class="dna-item">
+      <span class="dna-num"><ruby>複利<rt>ふくり</rt></ruby></span>
+      <div class="dna-label"><ruby>成長<rt>せいちょう</rt></ruby>モデル<br>Compound growth</div>
+    </div>
+  </div>
+
+  <!-- レイヤー -->
+  <div class="layers">
+
+    <button class="layer" onclick="toggle(this)">
+      <div class="layer-row">
+        <div class="layer-dot" style="background:#534AB7"></div>
+        <div class="layer-main">
+          <div class="layer-jp"><ruby>個人<rt>こじん</rt></ruby>の<ruby>成長<rt>せいちょう</rt></ruby> — Vicky Project</div>
+          <div class="layer-en">Self-growth · Personal narrative · Compound model</div>
+        </div>
+        <div class="layer-arrow">›</div>
+      </div>
+    </button>
+    <div class="detail">
+      <ruby>若者<rt>わかもの</rt></ruby>が<ruby>自分<rt>じぶん</rt></ruby>の<ruby>物語<rt>ものがたり</rt></ruby>を<ruby>共有<rt>きょうゆう</rt></ruby>し、<ruby>複利<rt>ふくり</rt></ruby>のように<ruby>自己<rt>じこ</rt></ruby>を<ruby>成長<rt>せいちょう</rt></ruby>させるモデル。
+      <span class="en">Young people share their story and grow exponentially through connection.</span>
+    </div>
+
+    <button class="layer" onclick="toggle(this)">
+      <div class="layer-row">
+        <div class="layer-dot" style="background:#1D9E75"></div>
+        <div class="layer-main">
+          <div class="layer-jp"><ruby>言語<rt>げんご</rt></ruby>の<ruby>壁<rt>かべ</rt></ruby>を<ruby>越<rt>こ</rt></ruby>える — <ruby>色彩日本語<rt>しきさいにほんご</rt></ruby>™ · 三省堂</div>
+          <div class="layer-en">Language access · Furigana · Colorful Japanese</div>
+        </div>
+        <div class="layer-arrow">›</div>
+      </div>
+    </button>
+    <div class="detail">
+      <ruby>品詞<rt>ひんし</rt></ruby>カラーとふりがなで、<ruby>子<rt>こ</rt></ruby>どもから<ruby>外国人<rt>がいこくじん</rt></ruby>まで<ruby>誰<rt>だれ</rt></ruby>もが<ruby>読<rt>よ</rt></ruby>める<ruby>日本語<rt>にほんご</rt></ruby>に。
+      <span class="en">Color-coded grammar makes Japanese readable for everyone, everywhere.</span>
+    </div>
+
+    <button class="layer" onclick="toggle(this)">
+      <div class="layer-row">
+        <div class="layer-dot" style="background:#BA7517"></div>
+        <div class="layer-main">
+          <div class="layer-jp"><ruby>歴史<rt>れきし</rt></ruby>の<ruby>継承<rt>けいしょう</rt></ruby> — <ruby>旧海軍<rt>きゅうかいぐん</rt></ruby>・<ruby>首里城<rt>しゅりじょう</rt></ruby></div>
+          <div class="layer-en">Memory &amp; continuity · Okinawa · Revival</div>
+        </div>
+        <div class="layer-arrow">›</div>
+      </div>
+    </button>
+    <div class="detail">
+      <ruby>過去<rt>かこ</rt></ruby>の<ruby>記憶<rt>きおく</rt></ruby>を<ruby>共有<rt>きょうゆう</rt></ruby>し、<ruby>時代<rt>じだい</rt></ruby>を<ruby>繋<rt>つな</rt></ruby>ぐ<ruby>意識<rt>いしき</rt></ruby>づけ。<ruby>首里城<rt>しゅりじょう</rt></ruby>は5<ruby>度<rt>ど</rt></ruby><ruby>蘇<rt>よみがえ</rt></ruby>った。32<ruby>世代<rt>せだい</rt></ruby>・42<ruby>億人<rt>おくにん</rt></ruby>のDNAをリアルに<ruby>感<rt>かん</rt></ruby>じてもらう。
+      <span class="en">Shared historical memory connects generations. Shuri Castle has risen five times.</span>
+    </div>
+
+    <button class="layer" onclick="toggle(this)">
+      <div class="layer-row">
+        <div class="layer-dot" style="background:#993C1D"></div>
+        <div class="layer-main">
+          <div class="layer-jp"><ruby>文化<rt>ぶんか</rt></ruby>・<ruby>伝統<rt>でんとう</rt></ruby>の<ruby>再生<rt>さいせい</rt></ruby> — <ruby>神田藍<rt>かんだあい</rt></ruby>の<ruby>会<rt>かい</rt></ruby>・<ruby>東京楠堂<rt>とうきょうくすのきどう</rt></ruby></div>
+          <div class="layer-en">Community · Tradition · Business &amp; culture revival</div>
+        </div>
+        <div class="layer-arrow">›</div>
+      </div>
+    </button>
+    <div class="detail">
+      <ruby>復興<rt>ふっこう</rt></ruby>には<ruby>ビジネス<rt></rt></ruby>と<ruby>コミュニティ<rt></rt></ruby>の<ruby>維持<rt>いじ</rt></ruby>が<ruby>不可欠<rt>ふかけつ</rt></ruby>。<ruby>伝統文化<rt>でんとうぶんか</rt></ruby>の<ruby>見直<rt>みなお</rt></ruby>しが<ruby>地域<rt>ちいき</rt></ruby>を<ruby>支<rt>ささ</rt></ruby>える。
+      <span class="en">Revival needs community and business. Traditional culture sustains the region.</span>
+    </div>
+
+    <button class="layer" onclick="toggle(this)">
+      <div class="layer-row">
+        <div class="layer-dot" style="background:#185FA5"></div>
+        <div class="layer-main">
+          <div class="layer-jp"><ruby>認証<rt>にんしょう</rt></ruby>のデザイン — <ruby>天然色漢字<rt>てんねんしょくかんじ</rt></ruby>INDEX™</div>
+          <div class="layer-en">Visual auth · Kanji × color · Trusted community</div>
+        </div>
+        <div class="layer-arrow">›</div>
+      </div>
+    </button>
+    <div class="detail">
+      <ruby>漢字<rt>かんじ</rt></ruby>×<ruby>色<rt>いろ</rt></ruby>で<ruby>認証体験<rt>にんしょうたいけん</rt></ruby>を<ruby>豊<rt>ゆた</rt></ruby>かに。<ruby>関心<rt>かんしん</rt></ruby>を<ruby>持<rt>も</rt></ruby>つ<ruby>人<rt>ひと</rt></ruby>が<ruby>増<rt>ふ</rt></ruby>えてから<ruby>本格展開<rt>ほんかくてんかい</rt></ruby>。
+      <span class="en">Authentication through Kanji × color. Expanding when the community is ready.</span>
+    </div>
+
+  </div>
+
+  <!-- ツール -->
+  <div class="tools-label">活用ツール / TOOLS</div>
+  <div class="tools">
+    <div class="tool-card">
+      <div class="tool-name"><ruby>色彩<rt>しきさい</rt></ruby>日本語™</div>
+      <div class="tool-en">Colorful Japanese</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name"><ruby>天然色<rt>てんねんしょく</rt></ruby>漢字™</div>
+      <div class="tool-en">Kanji Index</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name">English<br>Colorizer</div>
+      <div class="tool-en">Grammar color</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name">Claude.ai<br>Demo</div>
+      <div class="tool-en">AI prototype</div>
+    </div>
+  </div>
+
+  <!-- Web バナー -->
+  <div class="web-banner">
+    <div class="web-dot"></div>
+    <div>
+      <div class="web-txt">dunksoft.net — <ruby>次<rt>つぎ</rt></ruby>のステップ</div>
+      <div class="web-sub">Headless website · All projects unified · Coming soon</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    色彩日本語 COLORFUL JAPANESE™ &nbsp;|&nbsp; Smart Life Styles® &nbsp;|&nbsp; © Dunksoft / Roberto Hoshino
+  </div>
+
+</div>
+<script>
+function toggle(btn) {
+  const detail = btn.nextElementSibling;
+  const isOpen = btn.classList.contains('open');
+  document.querySelectorAll('.layer.open').forEach(el => el.classList.remove('open'));
+  if (!isOpen) btn.classList.add('open');
+}
+</script>
+</body>
+</html>
