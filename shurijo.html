@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>首里城 — 火災消失と復興の意義 | 色彩日本語デモ</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&family=Noto+Serif+JP:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --noun: #c0392b;
+  --verb: #1a5276;
+  --adj: #1e5c2f;
+  --particle: #6c3483;
+  --aux: #b7950b;
+  --adverb: #0e7b82;
+  --proper: #c0550a;
+  --ink: #1a1814;
+  --ink2: #4a4640;
+  --ink3: #9a9690;
+  --paper: #f7f5f0;
+  --paper2: #efecea;
+  --line: rgba(26,24,20,0.1);
+  --red: #c0550a;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--paper); color: var(--ink); font-family: "Noto Sans JP", sans-serif; font-weight: 300; line-height: 1.8; }
+.page { max-width: 720px; margin: 0 auto; padding: 48px 24px 80px; }
+
+/* ヘッダー */
+.site-label { font-size: 10px; letter-spacing: .14em; color: var(--ink3); margin-bottom: 6px; font-family: monospace; }
+.main-title { font-family: "Noto Serif JP", serif; font-size: 26px; font-weight: 600; line-height: 1.4; margin-bottom: 4px; }
+.main-title ruby rt { font-size: .38em; color: var(--ink3); font-family: "Noto Sans JP", sans-serif; font-weight: 300; }
+.main-sub { font-size: 12px; color: var(--ink3); margin-bottom: 32px; font-family: monospace; }
+
+/* 凡例 */
+.legend { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-bottom: 32px; padding: 12px 16px; background: var(--paper2); border-radius: 4px; }
+.leg { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--ink2); }
+.dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+
+/* セクション */
+.section { margin-bottom: 40px; }
+.sec-num { font-size: 10px; letter-spacing: .12em; color: var(--ink3); margin-bottom: 4px; font-family: monospace; }
+.sec-title { font-family: "Noto Serif JP", serif; font-size: 17px; font-weight: 600; margin-bottom: 14px; line-height: 1.5; }
+.sec-title ruby rt { font-size: .42em; color: var(--ink3); font-family: "Noto Sans JP", sans-serif; font-weight: 300; }
+.text-jp { font-size: 16px; line-height: 2.6; margin-bottom: 10px; }
+.text-jp ruby rt { font-size: 10px; color: var(--ink3); }
+.text-en { font-size: 13px; color: var(--ink2); line-height: 1.75; border-left: 2px solid var(--line); padding-left: 12px; margin-bottom: 0; }
+
+/* 品詞カラー */
+.nn { color: var(--noun); }
+.vb { color: var(--verb); }
+.aj { color: var(--adj); }
+.pt { color: var(--particle); }
+.ax { color: var(--aux); }
+.av { color: var(--adverb); }
+.pn { color: var(--proper); font-weight: 500; }
+
+/* 数字カード */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; margin-bottom: 40px; }
+.stat { background: var(--paper2); border-radius: 4px; padding: 14px 16px; }
+.stat-num { font-size: 22px; font-weight: 500; font-family: monospace; }
+.stat-label { font-size: 11px; color: var(--ink3); margin-top: 3px; line-height: 1.5; }
+.stat-label ruby rt { font-size: .7em; }
+
+/* 職人ボックス */
+.craft-box { background: var(--paper2); border-radius: 4px; padding: 20px 22px; margin-bottom: 40px; }
+.craft-title { font-size: 13px; font-weight: 500; color: var(--ink3); margin-bottom: 12px; letter-spacing: .06em; font-family: monospace; }
+.craft-steps { display: flex; flex-wrap: wrap; gap: 6px; }
+.step { font-size: 12px; padding: 4px 12px; background: var(--paper); border: 0.5px solid var(--line); border-radius: 2px; color: var(--ink2); }
+.step ruby rt { font-size: .65em; color: var(--ink3); }
+
+/* 音楽ボックス */
+.music-box {
+  border-left: 3px solid var(--red);
+  padding: 20px 24px;
+  margin-bottom: 40px;
+  background: var(--paper);
+}
+.music-quote { font-family: "Noto Serif JP", serif; font-size: 15px; line-height: 2; margin-bottom: 10px; }
+.music-quote ruby rt { font-size: .45em; color: var(--ink3); font-family: "Noto Sans JP", sans-serif; font-weight: 300; }
+.music-caption { font-size: 12px; color: var(--ink3); font-family: monospace; }
+
+/* 龍ボックス */
+.dragon-box { border: 0.5px solid var(--line); border-radius: 4px; padding: 16px 20px; margin-bottom: 40px; display: flex; gap: 20px; align-items: flex-start; }
+.dragon-size { text-align: center; flex-shrink: 0; }
+.dragon-num { font-size: 28px; font-weight: 500; font-family: monospace; color: var(--red); display: block; }
+.dragon-unit { font-size: 11px; color: var(--ink3); }
+.dragon-desc { font-size: 13px; color: var(--ink2); line-height: 1.9; }
+.dragon-desc ruby rt { font-size: .65em; color: var(--ink3); }
+
+hr { border: none; border-top: 0.5px solid var(--line); margin: 32px 0; }
+
+.footer { font-size: 11px; color: var(--ink3); text-align: center; font-family: monospace; margin-top: 48px; padding-top: 24px; border-top: 0.5px solid var(--line); }
+
+@media (max-width: 480px) {
+  .page { padding: 32px 16px 60px; }
+  .dragon-box { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="site-label">COLORFUL JAPANESE™ — HISTORY DEMO | DUNKSOFT.NET</div>
+  <h1 class="main-title">
+    <ruby>首里城<rt>しゅりじょう</rt></ruby> —
+    <ruby>火災消失<rt>かさいしょうしつ</rt></ruby>と<ruby>復興<rt>ふっこう</rt></ruby>の<ruby>意義<rt>いぎ</rt></ruby>
+  </h1>
+  <p class="main-sub">Shuri Castle — Fire, Loss &amp; the Meaning of Revival | 2026.04.10 現地取材</p>
+
+  <!-- 凡例 -->
+  <div class="legend">
+    <div class="leg"><div class="dot" style="background:var(--noun)"></div>名詞 Noun</div>
+    <div class="leg"><div class="dot" style="background:var(--verb)"></div>動詞 Verb</div>
+    <div class="leg"><div class="dot" style="background:var(--adj)"></div>形容詞 Adjective</div>
+    <div class="leg"><div class="dot" style="background:var(--particle)"></div>助詞 Particle</div>
+    <div class="leg"><div class="dot" style="background:var(--aux)"></div>助動詞 Auxiliary</div>
+    <div class="leg"><div class="dot" style="background:var(--adverb)"></div>副詞 Adverb</div>
+    <div class="leg"><div class="dot" style="background:var(--proper)"></div>固有名詞 Proper noun</div>
+  </div>
+
+  <!-- 01 歴史 -->
+  <div class="section">
+    <div class="sec-num">01 — 歴史 / History</div>
+    <h2 class="sec-title"><ruby>琉球王国<rt>りゅうきゅうおうこく</rt></ruby>のシンボル</h2>
+    <p class="text-jp">
+      <span class="pn"><ruby>首里城<rt>しゅりじょう</rt></ruby></span><span class="pt">は</span>、
+      <span class="pn"><ruby>琉球王国<rt>りゅうきゅうおうこく</rt></ruby></span><span class="pt">の</span>
+      <span class="nn"><ruby>王城<rt>おうじょう</rt></ruby></span><span class="pt">として</span>、
+      <span class="pn"><ruby>那覇港<rt>なはこう</rt></ruby></span><span class="pt">を</span>
+      <span class="vb"><ruby>見下<rt>みお</rt></ruby>ろす</span>
+      <span class="nn"><ruby>丘<rt>おか</rt></ruby></span><span class="pt">に</span>
+      <span class="vb"><ruby>建<rt>た</rt></ruby>てられ</span>、
+      「<span class="nn"><ruby>万国津梁<rt>ばんこくしんりょう</rt></ruby></span>」——
+      <span class="aj"><ruby>世界<rt>せかい</rt></ruby>の<ruby>架<rt>か</rt></ruby>け<ruby>橋<rt>はし</rt></ruby></span>——
+      <span class="pt">として</span>
+      <span class="nn"><ruby>独自<rt>どくじ</rt></ruby></span><span class="pt">の</span>
+      <span class="nn"><ruby>文化<rt>ぶんか</rt></ruby></span><span class="pt">を</span>
+      <span class="vb"><ruby>築<rt>きず</rt></ruby>いてきました</span>。
+    </p>
+    <p class="text-en">Shuri Castle, royal seat of the Ryukyu Kingdom, stood on a hill overlooking Naha Port. Known as "Bankoku Shinryo" — Bridge Between Nations — it was the cradle of a unique Okinawan culture.</p>
+  </div>
+
+  <hr>
+
+  <!-- 02 火災 -->
+  <div class="section">
+    <div class="sec-num">02 — 火災消失 / The Fire · 2019.10.31</div>
+    <h2 class="sec-title">5<ruby>度目<rt>どめ</rt></ruby>の<ruby>喪失<rt>そうしつ</rt></ruby></h2>
+    <p class="text-jp">
+      <span class="nn"><ruby>令和元年<rt>れいわがんねん</rt></ruby></span>
+      <span class="nn"><ruby>未明<rt>みめい</rt></ruby></span>、
+      <span class="pn"><ruby>正殿<rt>せいでん</rt></ruby></span>
+      <span class="nn"><ruby>内部<rt>ないぶ</rt></ruby></span><span class="pt">から</span>
+      <span class="vb"><ruby>発生<rt>はっせい</rt></ruby>した</span>
+      <span class="nn"><ruby>火災<rt>かさい</rt></ruby></span><span class="pt">は</span>、
+      <span class="av">約</span>11<span class="nn"><ruby>時間<rt>じかん</rt></ruby></span>
+      <span class="vb"><ruby>燃<rt>も</rt></ruby>え<ruby>続<rt>つづ</rt></ruby>け</span>、
+      9<span class="nn"><ruby>施設<rt>しせつ</rt></ruby></span><span class="pt">を</span>
+      <span class="vb"><ruby>焼失<rt>しょうしつ</rt></ruby>させました</span>。
+      <span class="pn"><ruby>首里城<rt>しゅりじょう</rt></ruby></span><span class="pt">にとって</span>
+      <span class="nn"><ruby>450<rt></rt></ruby>年</span><span class="pt">の</span>
+      <span class="nn"><ruby>歴史<rt>れきし</rt></ruby></span><span class="pt">で</span>
+      <span class="av">5<ruby>度目<rt>どめ</rt></ruby></span><span class="pt">の</span>
+      <span class="nn"><ruby>火災<rt>かさい</rt></ruby></span><span class="pt">でした</span>。
+    </p>
+    <p class="text-en">In the early hours of October 31, 2019, a fire burned for 11 hours, destroying 9 structures. For Shuri Castle, with 450 years of history, this was the fifth time it had fallen to flames.</p>
+  </div>
+
+  <!-- 数字 -->
+  <div class="stats">
+    <div class="stat"><div class="stat-num">9</div><div class="stat-label"><ruby>焼失施設数<rt>しょうしつしせつすう</rt></ruby><br>Structures lost</div></div>
+    <div class="stat"><div class="stat-num">11h</div><div class="stat-label"><ruby>燃<rt>も</rt></ruby>え<ruby>続<rt>つづ</rt></ruby>けた<ruby>時間<rt>じかん</rt></ruby><br>Duration of fire</div></div>
+    <div class="stat"><div class="stat-num">55億円</div><div class="stat-label"><ruby>寄付支援金<rt>きふしえんきん</rt></ruby><br>Donations raised</div></div>
+    <div class="stat"><div class="stat-num">2026秋</div><div class="stat-label"><ruby>正殿完成予定<rt>せいでんかんせいよてい</rt></ruby><br>Completion target</div></div>
+  </div>
+
+  <hr>
+
+  <!-- 03 見せる復興 -->
+  <div class="section">
+    <div class="sec-num">03 — 見せる復興 / Restoration on Display</div>
+    <h2 class="sec-title">3<ruby>本柱<rt>ほんばしら</rt></ruby>の<ruby>復元<rt>ふくげん</rt></ruby></h2>
+    <p class="text-jp">
+      <span class="nn"><ruby>復興<rt>ふっこう</rt></ruby></span><span class="pt">の</span>
+      <span class="nn">テーマ</span><span class="pt">は</span>
+      「<span class="vb"><ruby>見<rt>み</rt></ruby>せる</span>
+      <span class="nn"><ruby>復興<rt>ふっこう</rt></ruby></span>」。
+      <span class="nn"><ruby>見学<rt>けんがく</rt></ruby>デッキ</span><span class="pt">から</span>
+      <span class="nn"><ruby>職人<rt>しょくにん</rt></ruby></span><span class="pt">の</span>
+      <span class="nn"><ruby>技<rt>わざ</rt></ruby></span><span class="pt">を</span>
+      <span class="av">間近で</span>
+      <span class="vb"><ruby>見<rt>み</rt></ruby>られる</span>。
+      <span class="pn"><ruby>正殿<rt>せいでん</rt></ruby></span><span class="pt">の</span>
+      <span class="nn"><ruby>塗装工事<rt>とそうこうじ</rt></ruby></span><span class="pt">は</span>
+      <span class="av">約</span>14<span class="nn"><ruby>ヶ月<rt>かげつ</rt></ruby></span>、
+      26<span class="nn"><ruby>工程<rt>こうてい</rt></ruby></span><span class="pt">に</span>
+      <span class="vb"><ruby>及<rt>およ</rt></ruby>びます</span>。
+    </p>
+    <p class="text-en">The revival theme is "Restoration on Display." From viewing decks, visitors can watch master craftspeople at work. The painting of the Seiden alone involves 26 processes over 14 months.</p>
+  </div>
+
+  <!-- 職人の工程 -->
+  <div class="craft-box">
+    <div class="craft-title">鬼瓦（<ruby>獅子<rt>しし</rt></ruby>）製作工程 / Craft Process</div>
+    <div class="craft-steps">
+      <div class="step"><ruby>粘土原型<rt>ねんどげんけい</rt></ruby>製作</div>
+      <div class="step"><ruby>石膏原型<rt>せっこうげんけい</rt></ruby>製作</div>
+      <div class="step"><ruby>手<rt>て</rt></ruby>びねり<ruby>成形<rt>せいけい</rt></ruby></div>
+      <div class="step"><ruby>素焼<rt>すやき</rt></ruby>き（1<ruby>回目<rt>かいめ</rt></ruby>）</div>
+      <div class="step"><ruby>施釉<rt>せゆう</rt></ruby></div>
+      <div class="step"><ruby>焼成<rt>しょうせい</rt></ruby>（2<ruby>回目<rt>かいめ</rt></ruby>）</div>
+      <div class="step">GRC<ruby>塗布一体成形<rt>とふいったいせいけい</rt></ruby></div>
+      <div class="step"><ruby>赤瓦上<rt>あかがわらじょう</rt></ruby>での<ruby>固定<rt>こてい</rt></ruby></div>
+    </div>
+  </div>
+
+  <!-- 大龍柱 -->
+  <div class="dragon-box">
+    <div class="dragon-size">
+      <span class="dragon-num">3.4m</span>
+      <div class="dragon-unit"><ruby>大龍柱<rt>だいりゅうちゅう</rt></ruby><br>幅 / width</div>
+    </div>
+    <div class="dragon-desc">
+      <ruby>正殿<rt>せいでん</rt></ruby>に<ruby>鎮座<rt>ちんざ</rt></ruby>する<ruby>大龍柱<rt>だいりゅうちゅう</rt></ruby>は<ruby>高<rt>たか</rt></ruby>さ<ruby>約<rt>やく</rt></ruby>1.6m・<ruby>横幅<rt>よこはば</rt></ruby><ruby>約<rt>やく</rt></ruby>3.4m。
+      2019<ruby>年<rt>ねん</rt></ruby>の<ruby>火災<rt>かさい</rt></ruby>でも<ruby>倒<rt>たお</rt></ruby>れず<ruby>残<rt>のこ</rt></ruby>り、<ruby>現在<rt>げんざい</rt></ruby>は<ruby>補修展示室<rt>ほしゅうてんじしつ</rt></ruby>に<ruby>保管<rt>ほかん</rt></ruby>されています。
+      <ruby>龍<rt>りゅう</rt></ruby>の<ruby>髭<rt>ひげ</rt></ruby>の<ruby>一部<rt>いちぶ</rt></ruby>は<ruby>遺跡発掘<rt>いせきはっくつ</rt></ruby>で<ruby>発見<rt>はっけん</rt></ruby>され、<ruby>復元<rt>ふくげん</rt></ruby>に<ruby>活<rt>い</rt></ruby>かされました。
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- 04 偶然ではない流れ -->
+  <div class="section">
+    <div class="sec-num">04 — 偶然ではない流れ / Signs of Revival</div>
+    <h2 class="sec-title"><ruby>歴史<rt>れきし</rt></ruby>が<ruby>自<rt>みずか</rt></ruby>ら<ruby>蘇<rt>よみがえ</rt></ruby>ろうとしている</h2>
+    <p class="text-jp">
+      <ruby>遺跡発掘<rt>いせきはっくつ</rt></ruby><span class="pt">で</span>
+      <span class="pn"><ruby>龍<rt>りゅう</rt></ruby>の<ruby>髭<rt>ひげ</rt></ruby></span><span class="pt">が</span>
+      <span class="vb"><ruby>見<rt>み</rt></ruby>つかり</span>、
+      <span class="pn">アメリカ</span><span class="pt">で</span>
+      <ruby>歴代<rt>れきだい</rt></ruby>の<ruby>王<rt>おう</rt></ruby>の
+      <span class="nn"><ruby>肖像画<rt>しょうぞうが</rt></ruby></span>が4<span class="nn"><ruby>枚<rt>まい</rt></ruby></span>
+      <span class="vb"><ruby>発見<rt>はっけん</rt></ruby>された</span>。
+      <span class="nn"><ruby>過去<rt>かこ</rt></ruby></span><span class="pt">の</span>
+      <span class="nn"><ruby>記憶<rt>きおく</rt></ruby></span><span class="pt">が</span>、
+      <span class="nn"><ruby>復興<rt>ふっこう</rt></ruby></span><span class="pt">の</span>
+      <span class="nn"><ruby>タイミング<rt></rt></ruby></span><span class="pt">に</span>
+      <span class="av">次々と</span>
+      <span class="vb"><ruby>現<rt>あらわ</rt></ruby>れている</span>。
+    </p>
+    <p class="text-en">Dragon whiskers were unearthed during excavation, and four royal portraits were discovered in America. Pieces of the past are appearing, one by one, just as the revival gathers momentum.</p>
+  </div>
+
+  <hr>
+
+  <!-- 05 ヨーヨー・マ -->
+  <div class="section">
+    <div class="sec-num">05 — 音楽と復興 / Music &amp; Revival</div>
+    <h2 class="sec-title"><ruby>ヨーヨー・マ<rt></rt></ruby>と<ruby>バッハ<rt></rt></ruby>、<ruby>復興<rt>ふっこう</rt></ruby>の<ruby>場所<rt>ばしょ</rt></ruby>で</h2>
+  </div>
+
+  <div class="music-box">
+    <p class="music-quote">
+      <span class="pn">ノートルダム大聖堂</span><span class="pt">の</span>
+      <span class="nn"><ruby>消失<rt>しょうしつ</rt></ruby></span><span class="pt">から</span>の
+      <span class="nn"><ruby>復興<rt>ふっこう</rt></ruby></span><span class="pt">の</span>
+      <span class="nn"><ruby>コンサート<rt></rt></ruby></span><span class="pt">でも</span>
+      <span class="vb"><ruby>演奏<rt>えんそう</rt></ruby>した</span>
+      <span class="pn">ヨーヨー・マ</span>が、
+      <span class="pn"><ruby>首里城<rt>しゅりじょう</rt></ruby></span><span class="pt">の</span>
+      <span class="nn"><ruby>目前<rt>もくぜん</rt></ruby></span><span class="pt">で</span>
+      <span class="pn">バッハ</span>の
+      <span class="nn"><ruby>無伴奏組曲<rt>むばんそうくみきょく</rt></ruby></span>
+      <span class="nn"><ruby>全曲<rt>ぜんきょく</rt></ruby></span><span class="pt">を</span>
+      <span class="vb"><ruby>奏<rt>かな</rt></ruby>でた</span>。
+    </p>
+    <p class="text-en" style="border:none;padding:0;margin-bottom:12px">
+      Yo-Yo Ma, who performed at Notre-Dame Cathedral's revival concert after its fire, played Bach's complete Unaccompanied Cello Suites at a venue facing Shuri Castle.
+    </p>
+    <p class="music-caption">
+      ノートルダム 2019年火災 → 2024年復活 ／ 首里城 2019年火災 → 2026年秋 復元完成予定<br>
+      Notre-Dame fire 2019 → reopened 2024 / Shuri Castle fire 2019 → restoration complete autumn 2026
+    </p>
+  </div>
+
+  <div class="section">
+    <p class="text-jp">
+      <span class="nn"><ruby>復興<rt>ふっこう</rt></ruby></span><span class="pt">は</span>
+      <span class="nn"><ruby>建物<rt>たてもの</rt></ruby></span><span class="pt">だけ</span><span class="pt">では</span>
+      <span class="aj">ない</span>。
+      <span class="nn"><ruby>音楽<rt>おんがく</rt></ruby></span>、
+      <span class="nn"><ruby>芸術<rt>げいじゅつ</rt></ruby></span>、
+      <span class="nn"><ruby>人<rt>ひと</rt></ruby>の<ruby>記憶<rt>きおく</rt></ruby></span>——
+      <span class="av">すべてが</span>
+      <span class="vb"><ruby>繋<rt>つな</rt></ruby>がって</span>
+      <span class="nn"><ruby>文化<rt>ぶんか</rt></ruby></span><span class="pt">は</span>
+      <span class="vb"><ruby>蘇<rt>よみがえ</rt></ruby>る</span>。
+    </p>
+    <p class="text-en">Revival is not only about buildings. Music, art, human memory — everything connects, and culture comes back to life.</p>
+  </div>
+
+  <hr>
+
+  <!-- 06 継承の意義 -->
+  <div class="section">
+    <div class="sec-num">06 — 継承の意義 / The Meaning of Continuity</div>
+    <h2 class="sec-title">32<ruby>世代<rt>せだい</rt></ruby>・42<ruby>億人<rt>おくにん</rt></ruby>の<ruby>DNA<rt></rt></ruby></h2>
+    <p class="text-jp">
+      <span class="pn"><ruby>首里城<rt>しゅりじょう</rt></ruby></span><span class="pt">は</span>
+      <span class="nn"><ruby>今回<rt>こんかい</rt></ruby></span><span class="pt">を</span>
+      <span class="av">含め</span>5<span class="nn"><ruby>度<rt>ど</rt></ruby></span>
+      <span class="vb"><ruby>蘇<rt>よみがえ</rt></ruby>ってきた</span>。
+      <span class="nn"><ruby>城壁<rt>じょうへき</rt></ruby></span><span class="pt">に</span>
+      <span class="vb"><ruby>刻<rt>きざ</rt></ruby>まれた</span>
+      <span class="nn"><ruby>記憶<rt>きおく</rt></ruby></span><span class="pt">は</span>、
+      32<span class="nn"><ruby>世代<rt>せだい</rt></ruby></span>・42<span class="nn"><ruby>億人<rt>おくにん</rt></ruby></span>の
+      <span class="nn">DNA</span><span class="pt">を</span>
+      <span class="vb"><ruby>繋<rt>つな</rt></ruby>ぐ</span>
+      <span class="aj"><ruby>大切<rt>たいせつ</rt></ruby>な</span>
+      <span class="nn"><ruby>橋<rt>はし</rt></ruby></span><span class="pt">です</span>。
+    </p>
+    <p class="text-en">Including this fire, Shuri Castle has risen five times. The memories inscribed in its stones are a vital bridge connecting 32 generations and 4.2 billion people through shared DNA.</p>
+  </div>
+
+  <div class="footer">
+    <ruby>色彩日本語<rt>しきさいにほんご</rt></ruby> COLORFUL JAPANESE™ &nbsp;|&nbsp;
+    Smart Life Styles® &nbsp;|&nbsp;
+    © Dunksoft / Roberto Hoshino<br>
+    <span style="font-size:10px">2026.04.10 首里城 現地取材 · dunksoft.net</span>
+  </div>
+
+</div>
+</body>
+</html>
