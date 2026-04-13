@@ -357,14 +357,26 @@ footer p { font-size: 11px; color: var(--ink3); letter-spacing: .06em; line-heig
 <!-- VISION LAYERS -->
 <section class="vision" id="vision">
   <div class="section-label">Vision Layers — <ruby>全体像<rt>ぜんたいぞう</rt></ruby></div>
-  <div class="layers">
+
+  <!-- 色彩日本語コントロール -->
+  <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:1.5rem;padding:12px 16px;background:var(--paper2);border-radius:4px">
+    <span style="font-size:10px;letter-spacing:.1em;color:var(--ink3);margin-right:4px">色彩日本語™</span>
+    <button class="cj-btn cj-on" id="btn-bushu" onclick="setCJMode('bushu',this)">部首色</button>
+    <button class="cj-btn" id="btn-hinshi" onclick="setCJMode('hinshi',this)">品詞色</button>
+    <button class="cj-btn" id="btn-mono" onclick="setCJMode('mono',this)">モノクロ</button>
+    <button class="cj-btn cj-on" id="btn-ruby" onclick="toggleCJRuby()">ふりがな ON</button>
+    <span style="font-size:10px;color:var(--ink3);margin-left:8px">サイズ</span>
+    <input type="range" min="13" max="22" value="15" style="width:80px;accent-color:var(--accent)" oninput="setCJSize(this.value)">
+  </div>
+
+  <div class="layers" id="cj-layers">
 
     <div class="layer">
       <div class="layer-num">01</div>
       <div class="layer-body">
-        <div class="layer-title"><ruby>個人<rt>こじん</rt></ruby>の<ruby>成長<rt>せいちょう</rt></ruby> — Vicky Project</div>
+        <div class="layer-title cj-text" data-plain="個人の成長 — Vicky Project" data-ruby="個人,こじん|成長,せいちょう"></div>
         <div class="layer-en">Self-growth · Personal narrative · Compound model</div>
-        <div class="layer-desc"><ruby>若者<rt>わかもの</rt></ruby>が<ruby>自分<rt>じぶん</rt></ruby>の<ruby>物語<rt>ものがたり</rt></ruby>を<ruby>共有<rt>きょうゆう</rt></ruby>し、<ruby>複利<rt>ふくり</rt></ruby>のように<ruby>成長<rt>せいちょう</rt></ruby>するモデル。</div>
+        <div class="layer-desc cj-text" data-plain="若者が自分の物語を共有し、複利のように成長するモデル。" data-ruby="若者,わかもの|自分,じぶん|物語,ものがたり|共有,きょうゆう|複利,ふくり|成長,せいちょう"></div>
       </div>
       <div class="layer-tag tag-live">LIVE</div>
     </div>
@@ -372,9 +384,9 @@ footer p { font-size: 11px; color: var(--ink3); letter-spacing: .06em; line-heig
     <div class="layer">
       <div class="layer-num">02</div>
       <div class="layer-body">
-        <div class="layer-title"><ruby>言語<rt>げんご</rt></ruby>の<ruby>壁<rt>かべ</rt></ruby>を<ruby>越<rt>こ</rt></ruby>える — <ruby>色彩日本語<rt>しきさいにほんご</rt></ruby>™</div>
+        <div class="layer-title cj-text" data-plain="言語の壁を越える — 色彩日本語™" data-ruby="言語,げんご|壁,かべ|越,こ|色彩日本語,しきさいにほんご"></div>
         <div class="layer-en">Colorful Japanese · Furigana · Grammar colour-coding</div>
-        <div class="layer-desc"><ruby>品詞<rt>ひんし</rt></ruby>カラーとふりがなで、<ruby>子<rt>こ</rt></ruby>どもから<ruby>外国人<rt>がいこくじん</rt></ruby>まで<ruby>読<rt>よ</rt></ruby>める<ruby>日本語<rt>にほんご</rt></ruby>に。</div>
+        <div class="layer-desc cj-text" data-plain="品詞カラーとふりがなで、子どもから外国人まで読める日本語に。" data-ruby="品詞,ひんし|子,こ|外国人,がいこくじん|読,よ|日本語,にほんご"></div>
       </div>
       <div class="layer-tag tag-live">DEMO</div>
     </div>
@@ -382,9 +394,9 @@ footer p { font-size: 11px; color: var(--ink3); letter-spacing: .06em; line-heig
     <div class="layer">
       <div class="layer-num">03</div>
       <div class="layer-body">
-        <div class="layer-title"><ruby>歴史<rt>れきし</rt></ruby>の<ruby>継承<rt>けいしょう</rt></ruby> — <ruby>首里城<rt>しゅりじょう</rt></ruby>・<ruby>旧海軍<rt>きゅうかいぐん</rt></ruby></div>
+        <div class="layer-title cj-text" data-plain="歴史の継承 — 首里城・旧海軍" data-ruby="歴史,れきし|継承,けいしょう|首里城,しゅりじょう|旧海軍,きゅうかいぐん"></div>
         <div class="layer-en">Memory continuity · Okinawa · Revival</div>
-        <div class="layer-desc"><ruby>過去<rt>かこ</rt></ruby>の<ruby>記憶<rt>きおく</rt></ruby>を<ruby>共有<rt>きょうゆう</rt></ruby>し<ruby>時代<rt>じだい</rt></ruby>を<ruby>繋<rt>つな</rt></ruby>ぐ。<ruby>首里城<rt>しゅりじょう</rt></ruby>は5<ruby>度<rt>ど</rt></ruby><ruby>蘇<rt>よみがえ</rt></ruby>った。</div>
+        <div class="layer-desc cj-text" data-plain="過去の記憶を共有し時代を繋ぐ。首里城は5度蘇った。" data-ruby="過去,かこ|記憶,きおく|共有,きょうゆう|時代,じだい|繋,つな|首里城,しゅりじょう|度,ど|蘇,よみがえ"></div>
       </div>
       <div class="layer-tag tag-demo">DEMO</div>
     </div>
@@ -392,9 +404,9 @@ footer p { font-size: 11px; color: var(--ink3); letter-spacing: .06em; line-heig
     <div class="layer">
       <div class="layer-num">04</div>
       <div class="layer-body">
-        <div class="layer-title"><ruby>文化<rt>ぶんか</rt></ruby>・<ruby>伝統<rt>でんとう</rt></ruby>の<ruby>再生<rt>さいせい</rt></ruby> — <ruby>神田藍<rt>かんだあい</rt></ruby>の<ruby>会<rt>かい</rt></ruby></div>
+        <div class="layer-title cj-text" data-plain="文化・伝統の再生 — 神田藍の会" data-ruby="文化,ぶんか|伝統,でんとう|再生,さいせい|神田藍,かんだあい|会,かい"></div>
         <div class="layer-en">Community · Tradition · Business &amp; culture revival</div>
-        <div class="layer-desc"><ruby>復興<rt>ふっこう</rt></ruby>にはビジネスとコミュニティの<ruby>維持<rt>いじ</rt></ruby>が<ruby>不可欠<rt>ふかけつ</rt></ruby>。<ruby>伝統文化<rt>でんとうぶんか</rt></ruby>の<ruby>見直<rt>みなお</rt></ruby>しが<ruby>地域<rt>ちいき</rt></ruby>を<ruby>支<rt>ささ</rt></ruby>える。</div>
+        <div class="layer-desc cj-text" data-plain="復興にはビジネスとコミュニティの維持が不可欠。伝統文化の見直しが地域を支える。" data-ruby="復興,ふっこう|維持,いじ|不可欠,ふかけつ|伝統文化,でんとうぶんか|見直,みなお|地域,ちいき|支,ささ"></div>
       </div>
       <div class="layer-tag tag-soon">SOON</div>
     </div>
@@ -402,15 +414,118 @@ footer p { font-size: 11px; color: var(--ink3); letter-spacing: .06em; line-heig
     <div class="layer">
       <div class="layer-num">05</div>
       <div class="layer-body">
-        <div class="layer-title"><ruby>天然色漢字<rt>てんねんしょくかんじ</rt></ruby>INDEX™ — <ruby>認証<rt>にんしょう</rt></ruby></div>
+        <div class="layer-title cj-text" data-plain="天然色漢字INDEX™ — 認証" data-ruby="天然色漢字,てんねんしょくかんじ|認証,にんしょう"></div>
         <div class="layer-en">Colorful Kanji · Visual authentication · Community gate</div>
-        <div class="layer-desc"><ruby>漢字<rt>かんじ</rt></ruby>×<ruby>色<rt>いろ</rt></ruby>で<ruby>認証<rt>にんしょう</rt></ruby>。<ruby>誰<rt>だれ</rt></ruby>でも<ruby>良<rt>よ</rt></ruby>いわけではない——<ruby>文化<rt>ぶんか</rt></ruby>の<ruby>門<rt>もん</rt></ruby>を<ruby>美<rt>うつく</rt></ruby>しく<ruby>守<rt>まも</rt></ruby>る。</div>
+        <div class="layer-desc cj-text" data-plain="漢字×色で認証。誰でも良いわけではない——文化の門を美しく守る。" data-ruby="漢字,かんじ|色,いろ|認証,にんしょう|誰,だれ|良,よ|文化,ぶんか|門,もん|美,うつく|守,まも"></div>
       </div>
       <div class="layer-tag tag-demo">PROTO</div>
     </div>
 
   </div>
 </section>
+
+<style>
+.cj-btn{font-size:10px;padding:4px 12px;border-radius:10px;border:1px solid #ddd;background:#f5f5f5;color:#999;cursor:pointer;transition:all .15s}
+.cj-btn.cj-on{border-color:var(--accent);color:var(--accent);background:#fdf0e8}
+</style>
+
+<script>
+const CJ_BUSHU_COLOR={"氵":"#4FC3F7","水":"#29B6F6","火":"#FF7043","灬":"#FF5722","木":"#66BB6A","金":"#FFB300","糸":"#EC407A","言":"#4DD0E1","人":"#BA68C8","亻":"#AB47BC","土":"#A1887F","日":"#F9A825","月":"#FFA726","手":"#D4E157","扌":"#C0CA33","心":"#F06292","忄":"#EC407A","艹":"#8BC34A","口":"#FFA726","刀":"#90A4AE","石":"#9E9E9E","雨":"#7986CB","竹":"#A5D6A7","示":"#EF9A9A","礻":"#E57373","衣":"#CE93D8","辶":"#4DB6AC","禾":"#D4AC0D","目":"#4CAF50","田":"#C5E1A5","門":"#4DB6AC","宀":"#80DEEA","力":"#CE93D8","大":"#90A4AE"};
+const CJ_KANJI_BUSHU={"語":"言","言":"言","話":"言","読":"言","書":"曰","文":"文","字":"宀","名":"口","歴":"止","史":"口","成":"戈","長":"长","代":"亻","時":"日","期":"月","以":"人","来":"木","前":"刀","後":"彳","新":"斤","変":"攵","化":"亻","進":"辶","研":"石","功":"力","造":"辶","機":"木","電":"雨","体":"亻","学":"子","経":"糸","営":"火","会":"人","組":"糸","記":"言","録":"金","人":"人","働":"亻","金":"金","地":"土","色":"色","流":"氵","誌":"言","章":"立","権":"木","表":"衣","改":"攵","株":"木","着":"目","分":"刀","総":"糸","作":"亻","有":"月","世":"一","品":"口","型":"土","再":"冂","立":"立","建":"廴","量":"里","生":"生","産":"生","国":"囗","理":"玉","事":"亅","用":"用","個":"亻","自":"自","物":"牛","共":"八","利","刀","複":"衣","若":"艹","者":"耂","語":"言","力":"力","壁":"土","越":"走","彩":"彡","日":"日","本":"木","語":"言","文":"文","化":"亻","伝":"亻","統":"糸","再":"冂","神":"礻","田":"田","維":"糸","持":"扌","欠":"欠","域":"土","支":"支","漢":"氵","字":"宀","認":"言","証":"言","門":"門","美":"大","守":"宀","過":"辶","去":"厶","憶":"忄","継":"糸","承":"手","時":"日","繋":"糸","復":"彳","興":"臼","蘇":"艹","城":"土","旧":"日","海":"氵","軍":"冖","天":"大","然":"灬","索":"糸"};
+const CJ_HINSHI_COLOR={"名詞":"#c0392b","動詞":"#1a5276","形容詞":"#1e5c2f","助詞":"#6c3483","固有名詞":"#c0550a"};
+
+let cjMode="bushu", cjRuby=true, cjSize=15;
+
+function getBushuColor(c){
+  if(!/[\u4e00-\u9fff]/.test(c)) return null;
+  const b=CJ_KANJI_BUSHU[c];
+  if(b && CJ_BUSHU_COLOR[b]) return CJ_BUSHU_COLOR[b];
+  return `hsl(${(c.charCodeAt(0)*37)%360},50%,58%)`;
+}
+
+function getHinshiColor(c){
+  if(!/[\u4e00-\u9fff\u3040-\u309f]/.test(c)) return null;
+  // 簡易品詞判定（名詞系をデフォルト）
+  return CJ_HINSHI_COLOR["名詞"];
+}
+
+function renderCJText(plain, rubyMap, mode, sz){
+  // rubyMapを辞書化
+  const rd={};
+  rubyMap.split("|").forEach(pair=>{
+    const [k,v]=pair.split(",");
+    if(k&&v) rd[k]=v;
+  });
+
+  let result="", i=0;
+  while(i<plain.length){
+    let matched=false;
+    // 長いものから先にマッチ
+    const keys=Object.keys(rd).sort((a,b)=>b.length-a.length);
+    for(const k of keys){
+      if(plain.startsWith(k,i)){
+        const chars=k.split("");
+        const colored=chars.map(c=>{
+          let col=null;
+          if(mode==="bushu") col=getBushuColor(c);
+          else if(mode==="hinshi") col=CJ_HINSHI_COLOR["固有名詞"];
+          return col
+            ? `<span style="color:${col};font-size:${sz}px">${c}</span>`
+            : `<span style="font-size:${sz}px">${c}</span>`;
+        }).join("");
+        if(cjRuby){
+          const rtSz=Math.max(8,sz*0.52);
+          result+=`<ruby>${colored}<rt style="font-size:${rtSz}px;color:#999">${rd[k]}</rt></ruby>`;
+        } else {
+          result+=colored;
+        }
+        i+=k.length; matched=true; break;
+      }
+    }
+    if(!matched){
+      const c=plain[i];
+      let col=null;
+      if(mode==="bushu") col=getBushuColor(c);
+      else if(mode==="hinshi" && /[\u4e00-\u9fff]/.test(c)) col=CJ_HINSHI_COLOR["名詞"];
+      result += col
+        ? `<span style="color:${col};font-size:${sz}px">${c}</span>`
+        : `<span style="color:#555;font-size:${sz}px">${c}</span>`;
+      i++;
+    }
+  }
+  return result;
+}
+
+function renderAllCJ(){
+  document.querySelectorAll(".cj-text").forEach(el=>{
+    const plain=el.dataset.plain||"";
+    const rubyMap=el.dataset.ruby||"";
+    el.innerHTML=renderCJText(plain, rubyMap, cjMode, cjSize);
+  });
+}
+
+function setCJMode(mode, btn){
+  cjMode=mode;
+  document.querySelectorAll(".cj-btn:not(#btn-ruby)").forEach(b=>b.classList.remove("cj-on"));
+  btn.classList.add("cj-on");
+  renderAllCJ();
+}
+
+function toggleCJRuby(){
+  cjRuby=!cjRuby;
+  const btn=document.getElementById("btn-ruby");
+  btn.textContent=cjRuby?"ふりがな ON":"ふりがな OFF";
+  btn.classList.toggle("cj-on",cjRuby);
+  renderAllCJ();
+}
+
+function setCJSize(v){
+  cjSize=parseInt(v);
+  renderAllCJ();
+}
+
+renderAllCJ();
+</script>
 
 <div class="divider"></div>
 
