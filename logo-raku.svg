@@ -1,0 +1,14 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- 白（上の部分） -->
+  <path d="M90 40 h20 v20 h-20 z" fill="#ffffff" stroke="#000" stroke-width="2"/>
+
+  <!-- 左側（黄色） -->
+  <path d="M70 40 v120" stroke="#f4d000" stroke-width="12" stroke-linecap="round"/>
+
+  <!-- 右側（青） -->
+  <path d="M130 40 v120" stroke="#0077cc" stroke-width="12" stroke-linecap="round"/>
+
+  <!-- 木（緑） -->
+  <path d="M80 140 h40" stroke="#2e9f42" stroke-width="12" stroke-linecap="round"/>
+  <path d="M100 100 v60" stroke="#2e9f42" stroke-width="12" stroke-linecap="round"/>
+</svg>

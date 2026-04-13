@@ -1,0 +1,38 @@
+<svg width="200" height="200" viewBox="0 0 200 200"
+     xmlns="http://www.w3.org/2000/svg">
+
+  <!-- ① 白（最初に表示） -->
+  <path id="white-part" d="M90 40 h20 v20 h-20 z"
+        fill="#ffffff" stroke="#000" stroke-width="2">
+    <animate attributeName="opacity" from="0" to="1"
+             dur="0.6s" begin="0s" fill="freeze"/>
+  </path>
+
+  <!-- ② 左側（黄色） -->
+  <path id="left-line" d="M70 40 v120"
+        stroke="#f4d000" stroke-width="12" stroke-linecap="round" opacity="0">
+    <animate attributeName="opacity" from="0" to="1"
+             dur="0.6s" begin="0.6s" fill="freeze"/>
+  </path>
+
+  <!-- ③ 右側（青） -->
+  <path id="right-line" d="M130 40 v120"
+        stroke="#0077cc" stroke-width="12" stroke-linecap="round" opacity="0">
+    <animate attributeName="opacity" from="0" to="1"
+             dur="0.6s" begin="1.2s" fill="freeze"/>
+  </path>
+
+  <!-- ④ 木（緑） -->
+  <path id="tree-h" d="M80 140 h40"
+        stroke="#2e9f42" stroke-width="12" stroke-linecap="round" opacity="0">
+    <animate attributeName="opacity" from="0" to="1"
+             dur="0.6s" begin="1.8s" fill="freeze"/>
+  </path>
+
+  <path id="tree-v" d="M100 100 v60"
+        stroke="#2e9f42" stroke-width="12" stroke-linecap="round" opacity="0">
+    <animate attributeName="opacity" from="0" to="1"
+             dur="0.6s" begin="2.4s" fill="freeze"/>
+  </path>
+
+</svg>
