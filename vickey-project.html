@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ビッキーPROJECT | DUNKSOFT®</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Zen+Kaku+Gothic+New:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #C9920A;
+  --gold-lt: #ffe066;
+  --gold-pale: #fffbe6;
+  --ink: #1a1814;
+  --ink-2: #3d3a35;
+  --ink-3: #7a7570;
+  --cream: #faf8f3;
+  --cream-2: #f2ede3;
+  --dunk-green: #2d7a4f;
+  --dunk-green-lt: #e6f5ed;
+  --red-accent: #c0392b;
+  --blue-accent: #1a5276;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Zen Kaku Gothic New', 'Noto Sans JP', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  line-height: 1.8;
+  overflow-x: hidden;
+}
+
+/* ── NOISE TEXTURE OVERLAY ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
+}
+
+/* ── HEADER ── */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(26,24,20,0.95);
+  backdrop-filter: blur(10px);
+  padding: 12px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(201,146,10,0.3);
+}
+.site-logo {
+  font-size: 13px;
+  font-weight: 900;
+  color: var(--gold-lt);
+  letter-spacing: 0.15em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.dunk-badge {
+  background: var(--dunk-green);
+  color: #fff;
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 3px;
+  letter-spacing: 0.1em;
+}
+.header-nav {
+  display: flex;
+  gap: 24px;
+}
+.header-nav a {
+  color: rgba(255,255,255,0.65);
+  text-decoration: none;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  transition: color 0.2s;
+}
+.header-nav a:hover { color: var(--gold-lt); }
+
+/* ── HERO ── */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--ink);
+  overflow: hidden;
+  padding: 60px 24px;
+  text-align: center;
+}
+.hero-bg-kanji {
+  position: absolute;
+  font-size: min(40vw, 420px);
+  font-weight: 900;
+  color: rgba(201,146,10,0.04);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  letter-spacing: -0.05em;
+}
+.hero-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  margin-bottom: 24px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.hero-eyebrow::before,
+.hero-eyebrow::after {
+  content: '';
+  width: 32px;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.6;
+}
+.hero-cat {
+  width: 120px;
+  height: 120px;
+  border-radius: 24px;
+  border: 3px solid rgba(201,146,10,0.5);
+  box-shadow: 0 0 40px rgba(201,146,10,0.2), 0 20px 60px rgba(0,0,0,0.4);
+  margin-bottom: 32px;
+  position: relative;
+  background: rgba(201,146,10,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 64px;
+  overflow: hidden;
+}
+.hero-cat img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 21px;
+}
+.hero-title {
+  font-size: clamp(36px, 8vw, 72px);
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.1;
+  margin-bottom: 8px;
+  letter-spacing: -0.02em;
+  position: relative;
+}
+.hero-title span {
+  color: var(--gold-lt);
+  display: inline-block;
+}
+.hero-subtitle {
+  font-size: clamp(12px, 2vw, 16px);
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.25em;
+  margin-bottom: 40px;
+  font-weight: 400;
+}
+.hero-desc {
+  max-width: 560px;
+  color: rgba(255,255,255,0.72);
+  font-size: 15px;
+  line-height: 2;
+  margin-bottom: 48px;
+}
+.hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 48px;
+}
+.hero-tag {
+  background: rgba(201,146,10,0.12);
+  border: 1px solid rgba(201,146,10,0.35);
+  color: var(--gold-lt);
+  font-size: 11px;
+  padding: 5px 14px;
+  border-radius: 20px;
+  letter-spacing: 0.08em;
+}
+.scroll-hint {
+  color: rgba(255,255,255,0.3);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  animation: bounce 2s ease-in-out infinite;
+}
+.scroll-hint::after {
+  content: '↓';
+  font-size: 18px;
+}
+@keyframes bounce {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
+/* ── SECTION COMMON ── */
+.section {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 80px 24px;
+  position: relative;
+  z-index: 1;
+}
+.section-label {
+  font-size: 10px;
+  letter-spacing: 0.35em;
+  color: var(--gold);
+  margin-bottom: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.section-label::before {
+  content: '';
+  width: 24px;
+  height: 1px;
+  background: var(--gold);
+}
+.section-title {
+  font-size: clamp(26px, 5vw, 42px);
+  font-weight: 900;
+  line-height: 1.25;
+  margin-bottom: 8px;
+  color: var(--ink);
+}
+.section-title em {
+  font-style: normal;
+  color: var(--gold);
+}
+.section-lead {
+  font-size: 15px;
+  color: var(--ink-3);
+  margin-bottom: 48px;
+  line-height: 1.9;
+  max-width: 640px;
+}
+
+/* ── DIVIDER ── */
+.divider {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--cream-2) 20%, var(--cream-2) 80%, transparent);
+  margin: 0;
+}
+
+/* ── HISTORY TIMELINE (P.2) ── */
+.history-bg {
+  background: var(--ink);
+  position: relative;
+  overflow: hidden;
+}
+.history-bg::before {
+  content: '1997';
+  position: absolute;
+  right: -20px;
+  top: 40px;
+  font-size: clamp(120px, 20vw, 220px);
+  font-weight: 900;
+  color: rgba(255,255,255,0.03);
+  line-height: 1;
+  pointer-events: none;
+}
+.history-bg .section-label,
+.history-bg .section-title { color: #fff; }
+.history-bg .section-title em { color: var(--gold-lt); }
+.history-bg .section-lead { color: rgba(255,255,255,0.55); }
+
+.timeline {
+  position: relative;
+  padding-left: 32px;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+  width: 1px;
+  background: linear-gradient(180deg, var(--gold) 0%, rgba(201,146,10,0.2) 100%);
+}
+.tl-item {
+  position: relative;
+  margin-bottom: 40px;
+  opacity: 0;
+  transform: translateX(-20px);
+  animation: fadeInLeft 0.6s ease forwards;
+}
+.tl-item:nth-child(1) { animation-delay: 0.1s; }
+.tl-item:nth-child(2) { animation-delay: 0.25s; }
+.tl-item:nth-child(3) { animation-delay: 0.4s; }
+.tl-item:nth-child(4) { animation-delay: 0.55s; }
+.tl-item:nth-child(5) { animation-delay: 0.7s; }
+@keyframes fadeInLeft {
+  to { opacity: 1; transform: translateX(0); }
+}
+.tl-item::before {
+  content: '';
+  position: absolute;
+  left: -38px;
+  top: 6px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 12px rgba(201,146,10,0.6);
+}
+.tl-year {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 0.15em;
+  margin-bottom: 6px;
+}
+.tl-heading {
+  font-size: 18px;
+  font-weight: 900;
+  color: #fff;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+.tl-body {
+  font-size: 13px;
+  color: rgba(255,255,255,0.58);
+  line-height: 1.9;
+}
+.tl-highlight {
+  display: inline-block;
+  background: rgba(201,146,10,0.15);
+  border: 1px solid rgba(201,146,10,0.3);
+  color: var(--gold-lt);
+  font-size: 11px;
+  padding: 3px 10px;
+  border-radius: 4px;
+  margin-top: 8px;
+  font-weight: 700;
+}
+
+/* ── 5匹カード (P.3) ── */
+.cats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 14px;
+  margin-top: 40px;
+}
+.cat-card {
+  background: var(--cream-2);
+  border: 1.5px solid rgba(201,146,10,0.2);
+  border-radius: 16px;
+  padding: 20px 14px;
+  text-align: center;
+  transition: all 0.25s;
+  cursor: default;
+}
+.cat-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--gold);
+  box-shadow: 0 12px 32px rgba(201,146,10,0.12);
+}
+.cat-icon {
+  font-size: 36px;
+  margin-bottom: 10px;
+  display: block;
+}
+.cat-name {
+  font-size: 14px;
+  font-weight: 900;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+.cat-role {
+  font-size: 11px;
+  color: var(--gold);
+  font-weight: 700;
+  margin-bottom: 8px;
+  letter-spacing: 0.05em;
+}
+.cat-desc {
+  font-size: 11px;
+  color: var(--ink-3);
+  line-height: 1.7;
+}
+
+/* ── FINANCE / AGENT SECTION (P.8) ── */
+.finance-bg {
+  background: linear-gradient(160deg, #0f2a1a 0%, #0a1a2e 100%);
+  position: relative;
+  overflow: hidden;
+}
+.finance-bg::before {
+  content: 'AI';
+  position: absolute;
+  right: -30px;
+  bottom: -20px;
+  font-size: clamp(180px, 30vw, 320px);
+  font-weight: 900;
+  color: rgba(29,158,117,0.05);
+  line-height: 1;
+  pointer-events: none;
+}
+.finance-bg .section-label { color: #9FE1CB; }
+.finance-bg .section-title { color: #fff; }
+.finance-bg .section-title em { color: #9FE1CB; }
+.finance-bg .section-lead { color: rgba(255,255,255,0.55); }
+
+.news-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(159,225,203,0.2);
+  border-radius: 14px;
+  padding: 24px;
+  margin-bottom: 16px;
+  position: relative;
+  overflow: hidden;
+}
+.news-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, #1D9E75, rgba(29,158,117,0.2));
+}
+.news-label {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: #9FE1CB;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.news-heading {
+  font-size: 17px;
+  font-weight: 900;
+  color: #fff;
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+.news-body {
+  font-size: 13px;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.9;
+}
+.news-body strong {
+  color: #9FE1CB;
+  font-weight: 700;
+}
+
+.agent-roles {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 14px;
+  margin-top: 36px;
+}
+.agent-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 14px;
+  padding: 22px 18px;
+  transition: all 0.25s;
+}
+.agent-card:hover {
+  background: rgba(29,158,117,0.08);
+  border-color: rgba(159,225,203,0.35);
+  transform: translateY(-3px);
+}
+.agent-emoji { font-size: 28px; margin-bottom: 12px; display: block; }
+.agent-name {
+  font-size: 15px;
+  font-weight: 900;
+  color: #fff;
+  margin-bottom: 4px;
+}
+.agent-role-badge {
+  display: inline-block;
+  background: rgba(29,158,117,0.2);
+  color: #9FE1CB;
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+.agent-desc {
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.8;
+}
+
+/* ── CHANGE SECTION (P.11) ── */
+.change-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 40px;
+}
+@media (max-width: 600px) {
+  .change-grid { grid-template-columns: 1fr; }
+}
+.change-card {
+  border-radius: 16px;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+}
+.change-card.near {
+  background: linear-gradient(135deg, #fff8e1, #fffdf5);
+  border: 1.5px solid rgba(201,146,10,0.25);
+}
+.change-card.mid {
+  background: linear-gradient(135deg, #e8f5e9, #f1f8f1);
+  border: 1.5px solid rgba(45,122,79,0.25);
+}
+.change-period {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  margin-bottom: 10px;
+}
+.change-card.near .change-period { color: var(--gold); }
+.change-card.mid .change-period { color: var(--dunk-green); }
+.change-card-title {
+  font-size: 17px;
+  font-weight: 900;
+  margin-bottom: 14px;
+  line-height: 1.4;
+}
+.change-card.near .change-card-title { color: var(--ink); }
+.change-card.mid .change-card-title { color: var(--ink); }
+.change-items { list-style: none; }
+.change-items li {
+  font-size: 12px;
+  color: var(--ink-2);
+  line-height: 1.8;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+.change-items li:last-child { border-bottom: none; }
+.change-items li::before {
+  content: '→';
+  flex-shrink: 0;
+  font-size: 11px;
+  margin-top: 2px;
+}
+.change-card.near .change-items li::before { color: var(--gold); }
+.change-card.mid .change-items li::before { color: var(--dunk-green); }
+
+/* ── STATS BAR ── */
+.stats-strip {
+  background: var(--gold);
+  padding: 20px 24px;
+  overflow: hidden;
+}
+.stats-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.stat-item { text-align: center; }
+.stat-num {
+  font-size: clamp(24px, 4vw, 36px);
+  font-weight: 900;
+  color: var(--ink);
+  line-height: 1;
+  display: block;
+}
+.stat-label {
+  font-size: 10px;
+  color: rgba(26,24,20,0.65);
+  letter-spacing: 0.1em;
+  margin-top: 4px;
+  font-weight: 700;
+}
+
+/* ── CTA ── */
+.cta-section {
+  background: var(--ink);
+  text-align: center;
+  padding: 80px 24px;
+  position: relative;
+  overflow: hidden;
+}
+.cta-section::before {
+  content: 'VICKEY';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: clamp(80px, 14vw, 160px);
+  font-weight: 900;
+  color: rgba(255,255,255,0.025);
+  white-space: nowrap;
+  pointer-events: none;
+}
+.cta-label {
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.cta-label::before, .cta-label::after {
+  content: '';
+  width: 24px;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.5;
+}
+.cta-title {
+  font-size: clamp(22px, 4vw, 36px);
+  font-weight: 900;
+  color: #fff;
+  margin-bottom: 16px;
+  line-height: 1.4;
+}
+.cta-desc {
+  font-size: 14px;
+  color: rgba(255,255,255,0.5);
+  max-width: 480px;
+  margin: 0 auto 36px;
+  line-height: 1.9;
+}
+.cta-buttons {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.btn-primary {
+  background: var(--gold);
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 900;
+  padding: 14px 32px;
+  border-radius: 8px;
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  transition: all 0.2s;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+.btn-primary:hover {
+  background: var(--gold-lt);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(201,146,10,0.35);
+}
+.btn-secondary {
+  background: transparent;
+  color: rgba(255,255,255,0.7);
+  font-size: 13px;
+  font-weight: 700;
+  padding: 14px 32px;
+  border-radius: 8px;
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  border: 1px solid rgba(255,255,255,0.2);
+  transition: all 0.2s;
+  font-family: inherit;
+  cursor: pointer;
+}
+.btn-secondary:hover {
+  border-color: rgba(255,255,255,0.5);
+  color: #fff;
+}
+
+/* ── FOOTER ── */
+footer {
+  background: #100f0d;
+  padding: 32px 24px;
+  text-align: center;
+  font-size: 11px;
+  color: rgba(255,255,255,0.25);
+  line-height: 2;
+  letter-spacing: 0.05em;
+}
+footer strong { color: rgba(255,255,255,0.5); }
+
+/* ── MOBILE ── */
+@media (max-width: 640px) {
+  .header-nav { display: none; }
+  .cats-grid { grid-template-columns: repeat(2, 1fr); }
+  .agent-roles { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="site-logo">
+    <span class="dunk-badge">DUNKSOFT®</span>
+    VICKEY PROJECT
+  </div>
+  <nav class="header-nav">
+    <a href="#history">誕生の歴史</a>
+    <a href="#agents">AIエージェント</a>
+    <a href="#finance">金融×AI</a>
+    <a href="#roadmap">変化の波</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-kanji">招</div>
+  <div class="hero-eyebrow">VICKEY PROJECT 2026</div>
+  <div id="vfb-hero" class="hero-cat">🐱</div>
+  <h1 class="hero-title">
+    ビッキー<span>PROJECT</span><br>
+    <span style="font-size:0.55em;letter-spacing:0.05em;color:rgba(255,255,255,0.55)">with Claude.ai × DUNKSOFT®</span>
+  </h1>
+  <p class="hero-subtitle">AI-AGENT × NISA × COLORFUL KANJI INDEX®</p>
+  <p class="hero-desc">
+    1997年に生まれた招き猫キャラクター「ビッキー」が、<br>
+    30周年を迎えた今、AIエージェントとして新しい時代へ。<br>
+    子どもから大人まで、<strong style="color:rgba(255,255,255,0.85)">「金融をわかりやすく」</strong>届けるプロジェクトです。
+  </p>
+  <div class="hero-tags">
+    <span class="hero-tag">招き猫 × AI-AGENT</span>
+    <span class="hero-tag">こどもNISAナビ</span>
+    <span class="hero-tag">COLORFUL KANJI INDEX®</span>
+    <span class="hero-tag">ブロックチェーン決済</span>
+    <span class="hero-tag">金融教育</span>
+  </div>
+  <div class="scroll-hint">SCROLL</div>
+</section>
+
+<!-- STATS -->
+<div class="stats-strip">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <span class="stat-num">1997</span>
+      <div class="stat-label">ビッキー誕生年</div>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">30<small style="font-size:0.5em">周年</small></span>
+      <div class="stat-label">2026年で迎える節目</div>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">5<small style="font-size:0.5em">匹</small></span>
+      <div class="stat-label">AIエージェントとして進化</div>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">1,800<small style="font-size:0.4em">万円</small></span>
+      <div class="stat-label">新NISA 生涯非課税枠</div>
+    </div>
+  </div>
+</div>
+
+<!-- HISTORY (P.2) -->
+<section class="history-bg" id="history">
+  <div class="section">
+    <div class="section-label">HISTORY</div>
+    <h2 class="section-title">1997年、<em>ビッキー誕生</em></h2>
+    <p class="section-lead">
+      第3次AIブームの波の中、ダンクソフトはAIを使ったキャラクター開発に挑戦。双子の招き猫「ビッキーマネ」「ビッキーモネ」が誕生し、30年の時を経て再びAIと共に歩み始めました。
+    </p>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-year">1990年代初頭</div>
+        <div class="tl-heading">第3次AIブームとダンクソフトの挑戦</div>
+        <div class="tl-body">日興証券の子会社であるAI専門企業とパートナリングし、株価予測や阪急電鉄のダイヤ最適化などを手がける。その後独自にAIの産業応用を拡大。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">1997年</div>
+        <div class="tl-heading">双子の招き猫「ビッキー姉妹」誕生</div>
+        <div class="tl-body">AIでキャラクター創造に挑戦し、<strong style="color:rgba(255,220,102,0.9)">ビッキーマネ（人招き）</strong>と<strong style="color:rgba(255,220,102,0.9)">ビッキーモネ（財運招き）</strong>を提案。ビッキーマネがキャラクターとして採用される。</div>
+        <div><span class="tl-highlight">🐱 ビッキー誕生</span></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2000年代〜2010年代</div>
+        <div class="tl-heading">インターネットにより良いものをのせていく®</div>
+        <div class="tl-body">建築業界の工程管理AI、弁護士事務所の多重債務者支援など、社会課題をテクノロジーで解決。証券会社WEBサイトの企画・運営・保守なども手がけ続ける。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2026年 — 30周年</div>
+        <div class="tl-heading">5匹のキャラクターがAI-Agentへ進化</div>
+        <div class="tl-body">再度のAIブームに合わせて、ビッキー・マネ・モネ・ノワール・ショコラ・タビー・ミーシャの仲間たちがAIエージェントとして新たなステージへ。</div>
+        <div><span class="tl-highlight">🚀 AI-AGENT始動</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CATS (P.3) -->
+<section style="background:var(--cream-2);">
+  <div class="section">
+    <div class="section-label">AI-AGENTS</div>
+    <h2 class="section-title">ビッキーマネ® 30周年<br><em>5匹のAIエージェント</em></h2>
+    <p class="section-lead">
+      それぞれが役割を持ち、ユーザーに寄り添う5匹のAIキャラクターチーム。DUNKSOFTのミッション「インターネットにより良いものをのせていく®」を体現するAIチームとして活動します。
+    </p>
+    <div class="cats-grid">
+      <div class="cat-card">
+        <span class="cat-icon">😺</span>
+        <div class="cat-name">ビッキー</div>
+        <div class="cat-role">導く・案内する</div>
+        <div class="cat-desc">口座開設・体験投資・学習テストまで"運転手"として伴走。ユーザーをゴールまで導く。</div>
+      </div>
+      <div class="cat-card">
+        <span class="cat-icon">🐱</span>
+        <div class="cat-name">マネ（姉）</div>
+        <div class="cat-role">守る・金運招き</div>
+        <div class="cat-desc">リスクと保全を嚙み砕き、費用・税を「電卓」で見せる。財運を招く頼れるお姉さん。</div>
+      </div>
+      <div class="cat-card">
+        <span class="cat-icon">😸</span>
+        <div class="cat-name">モネ（妹）</div>
+        <div class="cat-role">つなぐ・人脈招き</div>
+        <div class="cat-desc">発行体の人・現場の話を届け、コミュニティを育てる。縁をつなぐ妹キャラ。</div>
+      </div>
+      <div class="cat-card">
+        <span class="cat-icon">🐈‍⬛</span>
+        <div class="cat-name">ノワール</div>
+        <div class="cat-role">挑戦・リスク管理</div>
+        <div class="cat-desc">黒猫のノワールは挑戦と冷静さを併せ持つ。想定外シナリオをカバーするリスク管理担当。</div>
+      </div>
+      <div class="cat-card">
+        <span class="cat-icon">🐈</span>
+        <div class="cat-name">タビー / ショコラ</div>
+        <div class="cat-role">未来をつくる・アイデア</div>
+        <div class="cat-desc">キジ猫のタビーと三毛猫ショコラが新しいアイデアと気持ちの動きを生む。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINANCE × AI (P.8) -->
+<section class="finance-bg" id="finance">
+  <div class="section">
+    <div class="section-label">FINANCE × AI</div>
+    <h2 class="section-title">金融システムの進化と<br><em>AI-Agentの誕生</em></h2>
+    <p class="section-lead">
+      ブロックチェーン証券決済の実証実験が政府正式支援へ。この歴史的転換点に、若者・子どもと対話するAI-Agentが求められています。
+    </p>
+
+    <div class="news-card">
+      <div class="news-label">📰 2026年 政府発表</div>
+      <div class="news-heading">ブロックチェーン×ステーブルコインによる証券決済を正式支援</div>
+      <div class="news-body">
+        大手証券会社などが計画する<strong>ステーブルコインを使った株式売買などの実証実験</strong>を政府が支援。「証券取引のプロセスの改善を見据えた業界横断的な前向きな取り組み。画期的だ」と評価された。大和証券グループ本社は3メガバンクと、株式・債券・投資信託などの決済をブロックチェーン（分散型台帳）上で行う実証実験を開始。
+      </div>
+    </div>
+
+    <div class="news-card">
+      <div class="news-label">💡 ビッキーPROJECTの役割</div>
+      <div class="news-heading">「怖くない」「わかる」「使える」をAIキャラクターで実現</div>
+      <div class="news-body">
+        複雑な金融の仕組みを<strong>漢字1字＋色＋AIキャラクターの会話</strong>でわかりやすく届ける。子どもから高齢者まで、幅広い年齢層に「まず使える」体験を提供。縦画面×会話UIをハブに、「怖くない」「学べる」を前面に出すことで<strong>若年層にも刺さる</strong>設計を目指す。
+      </div>
+    </div>
+
+    <div class="agent-roles">
+      <div class="agent-card">
+        <span class="agent-emoji">🎓</span>
+        <div class="agent-name">こどもNISAナビ</div>
+        <span class="agent-role-badge">学習・教育</span>
+        <div class="agent-desc">COLORFUL KANJI INDEX®を活用し、難しい投資用語を漢字1字で直感理解。クイズ形式で楽しく学べる。</div>
+      </div>
+      <div class="agent-card">
+        <span class="agent-emoji">📊</span>
+        <div class="agent-name">複利シミュレーター</div>
+        <span class="agent-role-badge">体験・計算</span>
+        <div class="agent-desc">スライダーを動かすだけで複利の魔法を体感。「早く始めるほど」が数字で見える。</div>
+      </div>
+      <div class="agent-card">
+        <span class="agent-emoji">🏢</span>
+        <div class="agent-name">企業30年変化マップ</div>
+        <span class="agent-role-badge">データ・分析</span>
+        <div class="agent-desc">任天堂・ユニクロ・ソニーなど10社の30年間の変化を漢字タブで比較。長期投資の視点を育む。</div>
+      </div>
+      <div class="agent-card">
+        <span class="agent-emoji">🔒</span>
+        <div class="agent-name">信頼ゾーン</div>
+        <span class="agent-role-badge">安心・透明性</span>
+        <div class="agent-desc">「なぜ安全？」の答えを即提示。日銀・金融庁の枠組みに沿う安心文言と根拠リンク付き。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHANGE TIMELINE (P.11) -->
+<section id="roadmap">
+  <div class="section">
+    <div class="section-label">ROADMAP</div>
+    <h2 class="section-title">金融の<em>変化の波</em>に<br>乗るために</h2>
+    <p class="section-lead">
+      直近1年から中長期3年にわたる金融システムの変化。ビッキーPROJECTはその変化のフロントとして、人々と金融をつなぎます。
+    </p>
+    <div class="change-grid">
+      <div class="change-card near">
+        <div class="change-period">⚡ 直近（今〜1年）</div>
+        <div class="change-card-title">実証・周辺整備の年</div>
+        <ul class="change-items">
+          <li>政府がブロックチェーン証券決済を正式支援</li>
+          <li>大手証券×3メガバンクの協調実証が始動</li>
+          <li>ST（セキュリティトークン）のDVP化が前進</li>
+          <li>2023年資金決済法改正でステーブルコインが施行</li>
+          <li>日銀CBDCパイロットが接続性・UI/UXまで検討</li>
+        </ul>
+      </div>
+      <div class="change-card mid">
+        <div class="change-period">🌱 中長期（1〜3年）</div>
+        <div class="change-card-title">実装・体験差別化の年</div>
+        <ul class="change-items">
+          <li>「アトミック/同時決済」が業界標準へ</li>
+          <li>銀行系トークンマネーの実装拡大（DCJPY等）</li>
+          <li>ST市場の再加速・不動産や社債へ拡大</li>
+          <li>大手通信の参入で若年層のオンボーディングが加速</li>
+          <li>24/7運転・営業時間外の証券受渡が現実味</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="margin-top:36px;background:linear-gradient(135deg,#fffbe6,#fff8f0);border:1.5px solid rgba(201,146,10,0.2);border-radius:16px;padding:28px;">
+      <div style="font-size:11px;font-weight:700;letter-spacing:0.15em;color:var(--gold);margin-bottom:14px;">🎯 若い人たちに刺さる訴求ポイント</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;">
+        <div style="font-size:13px;color:var(--ink-2);line-height:1.8;padding:12px;background:#fff;border-radius:10px;border:1px solid rgba(201,146,10,0.12)">
+          <strong style="color:var(--gold);display:block;margin-bottom:4px">「まず100円で触る」</strong>体験課金で本物のST・債券を小口から。ポイント→ステーブル→投資体験のワンタップ導線。
+        </div>
+        <div style="font-size:13px;color:var(--ink-2);line-height:1.8;padding:12px;background:#fff;border-radius:10px;border:1px solid rgba(201,146,10,0.12)">
+          <strong style="color:var(--gold);display:block;margin-bottom:4px">「安全で透明」を先に</strong>だれが発行し、どこで保全し、どう償還されるかをカードUIで比較。
+        </div>
+        <div style="font-size:13px;color:var(--ink-2);line-height:1.8;padding:12px;background:#fff;border-radius:10px;border:1px solid rgba(201,146,10,0.12)">
+          <strong style="color:var(--gold);display:block;margin-bottom:4px">「24時間、ビッキーに聞けばOK」</strong>会話で学ぶ→その場で完了。根拠リンク付きで"強い安心"。
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="agents">
+  <div class="cta-label">NEXT STEP</div>
+  <h2 class="cta-title">
+    ビッキーPROJECTと<br>一緒に未来をつくろう
+  </h2>
+  <p class="cta-desc">
+    COLORFUL KANJI INDEX®とAI-AGENTが融合した新しい金融教育プラットフォーム。こどもNISAナビ・複利シミュレーター・企業30年変化マップを今すぐ体験できます。
+  </p>
+  <div class="cta-buttons">
+    <a href="https://dunksoft.jp/" class="btn-primary" target="_blank">DUNKSOFT.JP →</a>
+    <button class="btn-secondary" onclick="alert('こどもNISAナビを準備中です！')">こどもNISAナビを見る</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <strong>COLORFUL KANJI INDEX® / VICKEYファミリー</strong><br>
+  Copyright © DUNKSOFT® 2026　インターネットにより良いものをのせていく®<br>
+  制作：Claude (Anthropic) × ビッキーPROJECT<br>
+  ※ 投資は自己責任です。内容は学習・紹介目的です。
+</footer>
+
+<script>
+// VICKEYアイコン読み込み（フリッカー防止）
+(function(){
+  const img = new Image();
+  img.onload = function(){
+    const el = document.getElementById('vfb-hero');
+    el.innerHTML = '';
+    const i = document.createElement('img');
+    i.src = 'https://robertohoshino.github.io/kanji-index/Vickey.png';
+    i.alt = 'VICKEY';
+    el.appendChild(i);
+  };
+  img.onerror = function(){ /* 絵文字フォールバックのまま */ };
+  img.src = 'https://robertohoshino.github.io/kanji-index/Vickey.png';
+})();
+
+// スムーズスクロール
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const el = document.querySelector(a.getAttribute('href'));
+    if(el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+</script>
+</body>
+</html>
