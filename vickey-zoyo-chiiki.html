@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VICKEYファミリーの生前贈与ガイド × Smart Life Styles™</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Hiragino Sans','Meiryo',sans-serif;background:#f0f7f4;color:#2d2d2d;min-height:100vh}
+ruby rt{font-size:0.6em;color:#888}
+
+/* ── HERO ── */
+.hero{
+  background:linear-gradient(135deg,#0a2e1e 0%,#1a6b5a 50%,#2d8a3e 100%);
+  padding:24px 18px 22px;
+  display:flex;align-items:center;gap:16px;
+  position:relative;overflow:hidden;
+}
+.hero::after{
+  content:'贈';font-size:160px;
+  position:absolute;right:-16px;top:-20px;
+  opacity:.06;color:#fff;font-weight:900;line-height:1;
+  font-family:'Hiragino Mincho Pro','YuMincho',serif;
+}
+.hero-icon{
+  width:80px;height:80px;border-radius:16px;
+  background:rgba(255,255,255,.15);
+  display:flex;align-items:center;justify-content:center;
+  font-size:42px;flex-shrink:0;
+}
+.hero-text{flex:1}
+.hero-sub{font-size:10px;color:rgba(255,255,255,.8);letter-spacing:2px;margin-bottom:4px}
+.hero-title{font-size:clamp(16px,4vw,22px);font-weight:900;color:#fff;line-height:1.4}
+.hero-title span{color:#a7f3d0}
+.hero-desc{font-size:11px;color:rgba(255,255,255,.85);margin-top:6px;line-height:1.7}
+.hero-badge{
+  display:inline-block;background:rgba(255,255,255,.9);
+  border-radius:20px;padding:4px 14px;margin-top:8px;
+  font-size:12px;font-weight:800;color:#1a6b5a;
+}
+
+/* ── CKI BAR ── */
+.cki-bar{
+  background:#1a2e25;color:#fff;
+  padding:10px 16px;font-size:11px;
+  display:flex;align-items:center;justify-content:center;
+  gap:10px;flex-wrap:wrap;
+}
+.cki-bar b{color:#a7f3d0}
+.cki-demo{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.cki-k{font-size:20px;font-weight:900;line-height:1;padding:2px 6px;border-radius:4px}
+
+/* ── SECTION ── */
+.section{max-width:960px;margin:0 auto;padding:24px 16px}
+.sec-title{
+  font-size:16px;font-weight:900;margin-bottom:16px;
+  display:flex;align-items:center;gap:8px;color:#1a2e25;
+}
+.sec-title::before{
+  content:'';display:block;width:5px;height:20px;
+  background:linear-gradient(180deg,#1a6b5a,#a7f3d0);border-radius:3px;
+}
+
+/* ── VICKEY BUBBLES ── */
+.bubble-wrap{display:flex;gap:10px;align-items:flex-start;margin-bottom:12px}
+.bubble-right{flex-direction:row-reverse}
+.vcface{
+  width:40px;height:40px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;flex-shrink:0;
+  box-shadow:0 2px 8px rgba(0,0,0,.15);
+}
+.vcface.mone{background:linear-gradient(135deg,#fbbf24,#f59e0b);border:2.5px solid #C9920A}
+.vcface.mane{background:linear-gradient(135deg,#6ee7b7,#1a6b5a);border:2.5px solid #065f46}
+.vc-name{font-size:10px;font-weight:800;margin-bottom:3px}
+.vc-name.mone{color:#B45309}
+.vc-name.mane{color:#065f46}
+.vc-bubble{border-radius:4px 14px 14px 14px;padding:10px 13px;font-size:12px;line-height:1.9;color:#374151}
+.vc-bubble.mone{background:#fffbeb;border:1.5px solid #fcd34d}
+.vc-bubble.mane{background:#ecfdf5;border:1.5px solid #6ee7b7;border-radius:14px 4px 14px 14px}
+
+/* ── TAX REFORM BANNER ── */
+.reform-banner{
+  background:linear-gradient(135deg,#1a6b5a,#065f46);
+  border-radius:16px;padding:20px;margin:16px 0;
+  color:#fff;box-shadow:0 6px 20px rgba(26,107,90,.25);
+}
+.reform-banner h3{
+  font-size:15px;font-weight:900;margin-bottom:12px;
+  color:#a7f3d0;display:flex;align-items:center;gap:8px;
+}
+.reform-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.reform-card{background:rgba(255,255,255,.1);border-radius:10px;padding:13px}
+.reform-card h4{font-size:11px;font-weight:800;color:#a7f3d0;margin-bottom:6px}
+.reform-card p{font-size:11px;color:rgba(255,255,255,.85);line-height:1.8}
+.reform-card .num{font-size:22px;font-weight:900;color:#fbbf24;display:block;margin-bottom:3px}
+
+/* ── ROLE TABS ── */
+.role-tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.role-tab{
+  flex:1;min-width:140px;
+  padding:12px 16px;border-radius:12px;
+  border:2.5px solid #d1fae5;background:#fff;
+  cursor:pointer;transition:all .2s;text-align:center;
+  box-shadow:0 2px 6px rgba(0,0,0,.06);
+}
+.role-tab:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(26,107,90,.12)}
+.role-tab.active{
+  background:linear-gradient(135deg,#ecfdf5,#d1fae5);
+  border-color:#1a6b5a;
+  box-shadow:0 4px 14px rgba(26,107,90,.2);
+  transform:translateY(-2px);
+}
+.role-tab .role-kanji{font-size:28px;font-weight:900;display:block;line-height:1.1}
+.role-tab .role-label{font-size:10px;color:#555;margin-top:3px}
+.role-tab.active .role-label{color:#1a6b5a;font-weight:700}
+
+/* ── CONTENT PANELS ── */
+.role-panel{display:none}
+.role-panel.active{display:block}
+
+/* ── STORY CARD ── */
+.story-section{
+  background:linear-gradient(135deg,#ecfdf5,#fff);
+  border:2px solid #a7f3d0;border-radius:16px;
+  padding:20px;margin:16px 0;
+  box-shadow:0 4px 16px rgba(26,107,90,.08);
+}
+.story-title{font-size:14px;font-weight:900;color:#065f46;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.story-steps{display:flex;flex-direction:column;gap:0}
+.story-step{
+  display:flex;gap:14px;padding:14px 0;
+  border-bottom:1px dashed #d1fae5;align-items:flex-start;
+}
+.story-step:last-child{border-bottom:none}
+.step-icon{
+  width:36px;height:36px;border-radius:50%;
+  background:linear-gradient(135deg,#1a6b5a,#065f46);
+  color:#fff;display:flex;align-items:center;justify-content:center;
+  font-size:16px;flex-shrink:0;font-weight:900;
+}
+.step-text{}
+.step-heading{font-size:13px;font-weight:700;color:#1a2e25;margin-bottom:4px}
+.step-body{font-size:12px;color:#555;line-height:1.8}
+
+/* ── DNA VISUAL ── */
+.dna-section{
+  background:linear-gradient(135deg,#0a2e1e,#1a3d2e);
+  border-radius:16px;padding:20px;margin:16px 0;
+  color:#fff;
+}
+.dna-title{font-size:15px;font-weight:900;color:#a7f3d0;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.dna-flow{
+  display:flex;align-items:center;justify-content:center;
+  gap:8px;flex-wrap:wrap;margin:16px 0;
+}
+.dna-node{
+  background:rgba(255,255,255,.1);border:1.5px solid rgba(167,243,208,.3);
+  border-radius:12px;padding:12px 16px;text-align:center;min-width:100px;
+}
+.dna-kanji{font-size:32px;font-weight:900;line-height:1;display:block}
+.dna-label{font-size:10px;color:rgba(255,255,255,.7);margin-top:4px}
+.dna-arrow{color:#a7f3d0;font-size:20px;font-weight:900}
+.dna-desc{font-size:12px;color:rgba(255,255,255,.8);line-height:2;margin-top:12px;border-top:1px solid rgba(255,255,255,.1);padding-top:12px}
+
+/* ── REGION SECTION ── */
+.region-section{
+  background:linear-gradient(135deg,#fef9c3,#fff);
+  border:2px solid #fde68a;border-radius:16px;
+  padding:20px;margin:16px 0;
+}
+.region-title{font-size:14px;font-weight:900;color:#92400e;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.region-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:10px}
+.region-card{background:#fff;border-radius:10px;padding:13px;border:1.5px solid #fde68a}
+.region-card h4{font-size:11px;font-weight:800;color:#92400e;margin-bottom:6px;display:flex;align-items:center;gap:5px}
+.region-card p{font-size:11px;color:#555;line-height:1.8}
+
+/* ── SIMULATOR ── */
+.sim-section{
+  background:linear-gradient(135deg,#ecfdf5,#fff);
+  border:2px solid #6ee7b7;border-radius:16px;
+  padding:20px;margin:16px 0;
+  box-shadow:0 4px 16px rgba(26,107,90,.08);
+}
+.sim-title{font-size:15px;font-weight:900;color:#065f46;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.slider-row{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.slider-label{font-size:12px;color:#374151;min-width:80px;line-height:1.5}
+.slider-val{font-size:14px;font-weight:700;min-width:90px;text-align:right;color:#1a6b5a}
+input[type=range]{flex:1;accent-color:#1a6b5a}
+.result-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:16px 0}
+.result-card{border-radius:10px;padding:12px;text-align:center}
+.result-card.start{background:#ecfdf5}
+.result-card.gain{background:#fffbeb}
+.result-card.total{background:#f0fdf4}
+.result-label{font-size:10px;margin-bottom:4px;color:#555}
+.result-val{font-size:18px;font-weight:700}
+.result-card.start .result-val{color:#065f46}
+.result-card.gain .result-val{color:#B45309}
+.result-card.total .result-val{color:#1a6b5a}
+.sim-msg{
+  background:#ecfdf5;border-radius:10px;padding:12px;
+  font-size:12px;color:#065f46;line-height:1.8;
+  font-weight:700;text-align:center;margin-top:8px;
+  border:1.5px solid #a7f3d0;
+}
+
+/* ── FOOTER ── */
+footer{
+  text-align:center;padding:16px;font-size:10px;color:#aaa;
+  border-top:3px dashed #d1fae5;margin-top:16px;
+  background:#fff;line-height:2;
+}
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<div class="hero">
+  <div class="hero-icon">🌿</div>
+  <div class="hero-text">
+    <div class="hero-sub">天然色漢字INDEX™ × Smart Life Styles™</div>
+    <div class="hero-title">VICKEYファミリーの<br><span><ruby>生前贈与<rt>せいぜんぞうよ</rt></ruby>ガイド</span></div>
+    <div class="hero-desc"><ruby>贈<rt>おく</rt></ruby>る<ruby>人<rt>ひと</rt></ruby>・<ruby>受<rt>う</rt></ruby>け<ruby>取<rt>と</rt></ruby>る<ruby>人<rt>ひと</rt></ruby>・<ruby>地域<rt>ちいき</rt></ruby>をつなぐ、<ruby>新<rt>あたら</rt></ruby>しいお<ruby>金<rt>かね</rt></ruby>の<ruby>育<rt>そだ</rt></ruby>て<ruby>方<rt>かた</rt></ruby></div>
+    <div class="hero-badge">🌱 DNAの<ruby>継承<rt>けいしょう</rt></ruby> × <ruby>地域再生<rt>ちいきさいせい</rt></ruby></div>
+  </div>
+</div>
+
+<!-- ══ CKI BAR ══ -->
+<div class="cki-bar">
+  <b>COLORFUL KANJI INDEX®</b>
+  <span style="font-size:10px"><ruby>想<rt>おも</rt></ruby>いを<ruby>漢字<rt>かんじ</rt></ruby>1<ruby>字<rt>じ</rt></ruby>＋<ruby>色<rt>いろ</rt></ruby>で<ruby>伝<rt>つた</rt></ruby>える：</span>
+  <div class="cki-demo">
+    <span class="cki-k" style="color:#1a6b5a;background:#ecfdf5">贈</span><span style="font-size:9px;color:#aaa"><ruby>生前贈与<rt>せいぜんぞうよ</rt></ruby></span>
+    <span class="cki-k" style="color:#065f46;background:#d1fae5">継</span><span style="font-size:9px;color:#aaa">DNA<ruby>継承<rt>けいしょう</rt></ruby></span>
+    <span class="cki-k" style="color:#B45309;background:#fffbeb">育</span><span style="font-size:9px;color:#aaa"><ruby>資産育成<rt>しさんいくせい</rt></ruby></span>
+    <span class="cki-k" style="color:#1a3a8f;background:#eff6ff">地</span><span style="font-size:9px;color:#aaa"><ruby>地域再生<rt>ちいきさいせい</rt></ruby></span>
+    <span class="cki-k" style="color:#7c3aed;background:#f5f3ff">藍</span><span style="font-size:9px;color:#aaa"><ruby>文化継承<rt>ぶんかけいしょう</rt></ruby></span>
+  </div>
+  <span style="color:#777;font-size:10px">© <ruby>株式会社<rt>かぶしきがいしゃ</rt></ruby>ダンクソフト</span>
+</div>
+
+<!-- ══ 税制改正バナー ══ -->
+<div class="section">
+  <div class="reform-banner">
+    <h3>📋 <ruby>令和<rt>れいわ</rt></ruby>8<ruby>年度<rt>ねんど</rt></ruby><ruby>税制改正大綱<rt>ぜいせいかいせいたいこう</rt></ruby>（<ruby>相続税<rt>そうぞくぜい</rt></ruby>・<ruby>贈与税<rt>ぞうよぜい</rt></ruby>）が<ruby>変<rt>か</rt></ruby>えること</h3>
+    <div class="reform-grid">
+      <div class="reform-card">
+        <span class="num">7年</span>
+        <h4><ruby>生前贈与加算期間<rt>せいぜんぞうよかさんきかん</rt></ruby>の<ruby>延長<rt>えんちょう</rt></ruby></h4>
+        <p><ruby>亡<rt>な</rt></ruby>くなる前3<ruby>年<rt>ねん</rt></ruby>→7<ruby>年間<rt>ねんかん</rt></ruby>に<ruby>贈与<rt>ぞうよ</rt></ruby>した<ruby>財産<rt>ざいさん</rt></ruby>が<ruby>相続財産<rt>そうぞくざいさん</rt></ruby>に<ruby>加算<rt>かさん</rt></ruby>される。<ruby>早め<rt>はやめ</rt></ruby>の<ruby>計画<rt>けいかく</rt></ruby>がより<ruby>重要<rt>じゅうよう</rt></ruby>に。</p>
+      </div>
+      <div class="reform-card">
+        <span class="num">110万円</span>
+        <h4><ruby>暦年贈与<rt>こよみねんぞうよ</rt></ruby>の<ruby>基礎控除<rt>きそこうじょ</rt></ruby></h4>
+        <p><ruby>年間<rt>ねんかん</rt></ruby>110<ruby>万円<rt>まんえん</rt></ruby>まで<ruby>非課税<rt>ひかぜい</rt></ruby>。<ruby>孫<rt>まご</rt></ruby>に<ruby>毎年<rt>まいとし</rt></ruby>コツコツ<ruby>贈与<rt>ぞうよ</rt></ruby>して、<ruby>長期運用<rt>ちょうきうんよう</rt></ruby>のたねにするのが<ruby>賢<rt>かしこ</rt></ruby>い<ruby>選択<rt>せんたく</rt></ruby>。</p>
+      </div>
+      <div class="reform-card">
+        <span class="num">1,500万円</span>
+        <h4><ruby>教育資金一括贈与<rt>きょういくしきんいっかつぞうよ</rt></ruby>の<ruby>特例<rt>とくれい</rt></ruby></h4>
+        <p><ruby>祖父母<rt>そふぼ</rt></ruby>から<ruby>孫<rt>まご</rt></ruby>へ、<ruby>教育資金<rt>きょういくしきん</rt></ruby>として<ruby>最大<rt>さいだい</rt></ruby>1,500<ruby>万円<rt>まんえん</rt></ruby>まで<ruby>非課税<rt>ひかぜい</rt></ruby>。<ruby>知恵<rt>ちえ</rt></ruby>と<ruby>お金<rt>おかね</rt></ruby>をいっしょに<ruby>贈<rt>おく</rt></ruby>る。</p>
+      </div>
+      <div class="reform-card">
+        <span class="num">早めが鍵</span>
+        <h4><ruby>相続時精算課税<rt>そうぞくじせいさんかぜい</rt></ruby>の<ruby>活用<rt>かつよう</rt></ruby></h4>
+        <p><ruby>累計<rt>るいけい</rt></ruby>2,500<ruby>万円<rt>まんえん</rt></ruby>まで<ruby>贈与税<rt>ぞうよぜい</rt></ruby>が<ruby>非課税<rt>ひかぜい</rt></ruby>（<ruby>相続時<rt>そうぞくじ</rt></ruby>に<ruby>精算<rt>せいさん</rt></ruby>）。<ruby>株式<rt>かぶしき</rt></ruby>・<ruby>投資信託<rt>とうししんたく</rt></ruby>などの<ruby>値上<rt>ねあ</rt></ruby>がり<ruby>益<rt>えき</rt></ruby>は<ruby>孫<rt>まご</rt></ruby>のものに。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="bubble-wrap">
+    <div class="vcface mone">🐱</div>
+    <div style="flex:1">
+      <div class="vc-name mone">VICKEY-MONE 💛</div>
+      <div class="vc-bubble mone"><ruby>税制改正<rt>ぜいせいかいせい</rt></ruby>は、おじいちゃん・おばあちゃんの「<ruby>想<rt>おも</rt></ruby>い」を<ruby>孫<rt>まご</rt></ruby>に<ruby>届<rt>とど</rt></ruby>けるチャンスだよ！<ruby>早<rt>はや</rt></ruby>めに<ruby>動<rt>うご</rt></ruby>くほど、<ruby>受<rt>う</rt></ruby>け<ruby>取<rt>と</rt></ruby>る<ruby>孫<rt>まご</rt></ruby>のお<ruby>金<rt>かね</rt></ruby>が<ruby>長<rt>なが</rt></ruby>く<ruby>働<rt>はたら</rt></ruby>いてくれるんだ🌱</div>
+    </div>
+  </div>
+  <div class="bubble-wrap bubble-right">
+    <div style="flex:1;text-align:right">
+      <div class="vc-name mane" style="text-align:right">VICKEY-MANE 🌿</div>
+      <div class="vc-bubble mane"><ruby>大切<rt>たいせつ</rt></ruby>なのはお<ruby>金<rt>かね</rt></ruby>だけじゃない。どんな<ruby>想<rt>おも</rt></ruby>いで<ruby>贈<rt>おく</rt></ruby>るか、どんな<ruby>地域<rt>ちいき</rt></ruby>を<ruby>次<rt>つぎ</rt></ruby>の<ruby>世代<rt>せだい</rt></ruby>に<ruby>残<rt>のこ</rt></ruby>したいか——それが「DNAの<ruby>継承<rt>けいしょう</rt></ruby>」だよ。</div>
+    </div>
+    <div class="vcface mane">🌿</div>
+  </div>
+</div>
+
+<!-- ══ ロール切り替え ══ -->
+<div class="section">
+  <div class="sec-title">あなたはどちらですか？</div>
+  <div class="role-tabs">
+    <div class="role-tab active" onclick="switchRole('sender')">
+      <span class="role-kanji" style="color:#1a6b5a">贈</span>
+      <span class="role-label">贈る人（シニア世代）</span>
+    </div>
+    <div class="role-tab" onclick="switchRole('receiver')">
+      <span class="role-kanji" style="color:#B45309">育</span>
+      <span class="role-label">受け取る人（若い世代）</span>
+    </div>
+  </div>
+
+  <!-- 贈る人パネル -->
+  <div class="role-panel active" id="panel-sender">
+    <div class="story-section">
+      <div class="story-title">🍃 贈る人のロードマップ ─ 「想い」を形に</div>
+      <div class="story-steps">
+        <div class="story-step">
+          <div class="step-icon">1</div>
+          <div class="step-text">
+            <div class="step-heading"><ruby>今<rt>いま</rt></ruby>の<ruby>資産<rt>しさん</rt></ruby>を「<ruby>見える化<rt>みえるか</rt></ruby>」する</div>
+            <div class="step-body">不動産・株式・預金・事業など、<ruby>持<rt>も</rt></ruby>っているものを整理。天然色漢字INDEX™で「<ruby>融<rt>ゆう</rt></ruby>・<ruby>地<rt>ち</rt></ruby>・<ruby>業<rt>ぎょう</rt></ruby>」と漢字タグをつければ、全体像が一目でわかります。</div>
+          </div>
+        </div>
+        <div class="story-step">
+          <div class="step-icon">2</div>
+          <div class="step-text">
+            <div class="step-heading"><ruby>孫<rt>まご</rt></ruby>の「<ruby>漢字<rt>かんじ</rt></ruby>」を<ruby>見<rt>み</rt></ruby>つける</div>
+            <div class="step-body">孫はどんなことに興味がある？「<ruby>技<rt>ぎ</rt></ruby>（テクノロジー）」「<ruby>芸<rt>げい</rt></ruby>（アート）」「<ruby>農<rt>のう</rt></ruby>（農業・食）」……その漢字が、贈与の使い道のヒントになります。</div>
+          </div>
+        </div>
+        <div class="story-step">
+          <div class="step-icon">3</div>
+          <div class="step-text">
+            <div class="step-heading">「<ruby>想<rt>おも</rt></ruby>い」を<ruby>手紙<rt>てがみ</rt></ruby>に<ruby>残<rt>のこ</rt></ruby>す</div>
+            <div class="step-body">お金に添えて、なぜ贈るのか・どう使ってほしいかを書いておく。それが本当の「DNA継承」。漢字1文字で思いを凝縮する習慣が、その言葉を長く生かします。</div>
+          </div>
+        </div>
+        <div class="story-step">
+          <div class="step-icon">4</div>
+          <div class="step-text">
+            <div class="step-heading"><ruby>地域<rt>ちいき</rt></ruby>のコミュニティに<ruby>根<rt>ね</rt></ruby>ざす</div>
+            <div class="step-body">ロータリークラブ・信用金庫・藍の会などの地域のつながりを活かして、孫世代と一緒に学ぶ場を作る。お金は個人を超えて、地域のDNAとして育ちます。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bubble-wrap">
+      <div class="vcface mane">🌿</div>
+      <div style="flex:1">
+        <div class="vc-name mane">VICKEY-MANE 🌿</div>
+        <div class="vc-bubble mane"><ruby>東京<rt>とうきょう</rt></ruby>に<ruby>出<rt>で</rt></ruby>て<ruby>築<rt>きず</rt></ruby>いた<ruby>資産<rt>しさん</rt></ruby>を、<ruby>故郷<rt>ふるさと</rt></ruby>の<ruby>孫<rt>まご</rt></ruby>に<ruby>贈<rt>おく</rt></ruby>ることで、<ruby>地域<rt>ちいき</rt></ruby>にお<ruby>金<rt>かね</rt></ruby>が<ruby>戻<rt>もど</rt></ruby>るんだ。それが<ruby>地域経済<rt>ちいきけいざい</rt></ruby>のサステナビリティにつながるよ。<ruby>藍<rt>あい</rt></ruby>の<ruby>種<rt>たね</rt></ruby>をまくように、<ruby>想<rt>おも</rt></ruby>いを<ruby>贈<rt>おく</rt></ruby>ろう🌱</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 受け取る人パネル -->
+  <div class="role-panel" id="panel-receiver">
+    <div class="story-section">
+      <div class="story-title">🌱 受け取る人のロードマップ ─ 「想い」を育てる</div>
+      <div class="story-steps">
+        <div class="story-step">
+          <div class="step-icon">1</div>
+          <div class="step-text">
+            <div class="step-heading"><ruby>贈<rt>おく</rt></ruby>られた<ruby>想<rt>おも</rt></ruby>いを<ruby>理解<rt>りかい</rt></ruby>する</div>
+            <div class="step-body">お金の背景にある「なぜ贈ってくれたか」を知ることから始める。祖父母・親世代がどんな時代を生きてきたか——そのDNAがお金に込められています。</div>
+          </div>
+        </div>
+        <div class="story-step">
+          <div class="step-icon">2</div>
+          <div class="step-text">
+            <div class="step-heading"><ruby>自分<rt>じぶん</rt></ruby>の「<ruby>漢字<rt>かんじ</rt></ruby>」を<ruby>決<rt>き</rt></ruby>める</div>
+            <div class="step-body">何に興味がある？何で社会に貢献したい？漢字1文字で表すことで、長期運用の「テーマ」が生まれます。「技（テクノロジー）」なら技術系企業へ、「農（農業）」なら食と地域へ。</div>
+          </div>
+        </div>
+        <div class="story-step">
+          <div class="step-icon">3</div>
+          <div class="step-text">
+            <div class="step-heading"><ruby>長期運用<rt>ちょうきうんよう</rt></ruby>で「<ruby>育<rt>そだ</rt></ruby>てる」</div>
+            <div class="step-body">もらったお金を消費ではなく投資へ。NISAを使って長期・分散で育てると、30年後には大きな木になる。藍を育てるように、じっくり待つことが最大の力です。</div>
+          </div>
+        </div>
+        <div class="story-step">
+          <div class="step-icon">4</div>
+          <div class="step-text">
+            <div class="step-heading"><ruby>地域<rt>ちいき</rt></ruby>に<ruby>還元<rt>かんげん</rt></ruby>する</div>
+            <div class="step-body">育ったお金を自分の好きな地域・コミュニティに投資する。それがまた次の世代への贈り物になる。DNAは世代を超えて循環します。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bubble-wrap">
+      <div class="vcface mone">🐱</div>
+      <div style="flex:1">
+        <div class="vc-name mone">VICKEY-MONE 💛</div>
+        <div class="vc-bubble mone"><ruby>贈<rt>おく</rt></ruby>られたお<ruby>金<rt>かね</rt></ruby>は「<ruby>種<rt>たね</rt></ruby>」だよ。すぐ<ruby>使<rt>つか</rt></ruby>うのはもったいない！NISAで<ruby>長期<rt>ちょうき</rt></ruby>に<ruby>育<rt>そだ</rt></ruby>てれば、30<ruby>年後<rt>ねんご</rt></ruby>には<ruby>何倍<rt>なんばい</rt></ruby>にもなって、<ruby>自分<rt>じぶん</rt></ruby>のやりたいことや<ruby>地域<rt>ちいき</rt></ruby>のためにも<ruby>使<rt>つか</rt></ruby>えるんだ✨</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ DNA継承ビジュアル ══ -->
+<div class="section">
+  <div class="dna-section">
+    <div class="dna-title">🧬 DNAの継承 ─ お金が世代を超えて育つ</div>
+    <div class="dna-flow">
+      <div class="dna-node">
+        <span class="dna-kanji" style="color:#a7f3d0">祖</span>
+        <span class="dna-label">祖父母世代<br>（シニア）</span>
+      </div>
+      <div class="dna-arrow">→</div>
+      <div class="dna-node">
+        <span class="dna-kanji" style="color:#fbbf24">贈</span>
+        <span class="dna-label">生前贈与<br>（想い＋お金）</span>
+      </div>
+      <div class="dna-arrow">→</div>
+      <div class="dna-node">
+        <span class="dna-kanji" style="color:#6ee7b7">育</span>
+        <span class="dna-label">孫世代<br>（長期運用）</span>
+      </div>
+      <div class="dna-arrow">→</div>
+      <div class="dna-node">
+        <span class="dna-kanji" style="color:#93c5fd">地</span>
+        <span class="dna-label">地域再生<br>（次の贈り物）</span>
+      </div>
+    </div>
+    <div class="dna-desc">
+      <strong style="color:#a7f3d0">藍は種から育ち、花を咲かせ、また種を残す。</strong><br>
+      お金も同じです。シニア世代が贈与した「種」が孫世代の手で長期運用という「畑」に植えられ、
+      30年後には地域という「土地」を豊かにする実を結ぶ。<br>
+      天然色漢字INDEX™は、その「種」に漢字という名前をつけ、世代を超えて想いを見える化します。
+    </div>
+  </div>
+</div>
+
+<!-- ══ 地域再生セクション ══ -->
+<div class="section">
+  <div class="region-section">
+    <div class="region-title">🏡 地域経済のサステナビリティ ─ Smart Life Styles™ の核心</div>
+    <div class="region-grid">
+      <div class="region-card">
+        <h4>🌿 藍のコミュニティモデル</h4>
+        <p>神田藍の会のように、地域に根ざした多世代共学の場が「お金の育て方」を自然に伝える器になる。神社・信金・大学・ロータリーが場を提供。</p>
+      </div>
+      <div class="region-card">
+        <h4>🏦 地域証券×Co-Learning</h4>
+        <p>地域の証券会社が「生前贈与の相談」と「孫世代のNISA」を同じ窓口でつなぐ。シニアと孫が一緒に来店するスタイルが、地域の信頼を育てる。</p>
+      </div>
+      <div class="region-card">
+        <h4>💚 東京→地方への資金循環</h4>
+        <p>東京で築いた資産が、ふるさとへの生前贈与を通じて地方に戻る。孫が地域の企業・農業・文化に投資することで、地域経済のサステナビリティが生まれる。</p>
+      </div>
+      <div class="region-card">
+        <h4>📖 本と漢字が橋渡し</h4>
+        <p>天然色漢字INDEX™が「農」「技」「芸」という漢字で地域の本・人・企業を繋ぐ。書棚の色が、投資先を選ぶときの羅針盤になる。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ 複利シミュレーター ══ -->
+<div class="section">
+  <div class="sim-section">
+    <div class="sim-title">🌱 贈与した「種」を育てるシミュレーター</div>
+
+    <div class="bubble-wrap" style="margin-bottom:16px">
+      <div class="vcface mone">🐱</div>
+      <div style="flex:1">
+        <div class="vc-name mone">VICKEY-MONE 💛</div>
+        <div class="vc-bubble mone"><ruby>贈<rt>おく</rt></ruby>られた<ruby>金額<rt>きんがく</rt></ruby>をNISAで<ruby>長期運用<rt>ちょうきうんよう</rt></ruby>したら<ruby>何倍<rt>なんばい</rt></ruby>になる？<ruby>動<rt>うご</rt></ruby>かして<ruby>確<rt>たし</rt></ruby>かめてみよう！</div>
+      </div>
+    </div>
+
+    <div class="slider-row">
+      <span class="slider-label"><ruby>贈与額<rt>ぞうよがく</rt></ruby></span>
+      <input type="range" id="principal" min="500000" max="10000000" step="500000" value="2000000" oninput="updateSim()">
+      <span class="slider-val" id="p-out">¥200万</span>
+    </div>
+    <div class="slider-row">
+      <span class="slider-label"><ruby>年利<rt>ねんり</rt></ruby>（想定）</span>
+      <input type="range" id="rate" min="2" max="8" step="1" value="5" oninput="updateSim()">
+      <span class="slider-val" id="r-out">5%</span>
+    </div>
+    <div class="slider-row">
+      <span class="slider-label"><ruby>運用年数<rt>うんようねんすう</rt></ruby></span>
+      <input type="range" id="years" min="5" max="35" step="5" value="20" oninput="updateSim()">
+      <span class="slider-val" id="y-out">20年</span>
+    </div>
+
+    <div class="result-grid">
+      <div class="result-card start">
+        <div class="result-label">🌱 <ruby>贈与額<rt>ぞうよがく</rt></ruby>（<ruby>種<rt>たね</rt></ruby>）</div>
+        <div class="result-val" id="r-start">¥200万</div>
+      </div>
+      <div class="result-card gain">
+        <div class="result-label">✨ <ruby>複利の力<rt>ふくりのちから</rt></ruby></div>
+        <div class="result-val" id="r-gain">—</div>
+      </div>
+      <div class="result-card total">
+        <div class="result-label">🌳 <ruby>育った<rt>そだった</rt></ruby>お<ruby>金<rt>かね</rt></ruby></div>
+        <div class="result-val" id="r-total">—</div>
+      </div>
+    </div>
+    <div class="sim-msg" id="sim-msg">スライダーを動かしてみよう！</div>
+  </div>
+</div>
+
+<footer>
+  ※ シミュレーターの数値は参考値です。実際の運用成果を保証するものではありません。投資判断は自己責任でお願いします。<br>
+  ※ 税制に関する内容は概要です。詳細は税理士・証券会社にご相談ください。<br>
+  天然色漢字INDEX™ COLORFUL KANJI INDEX® Smart Life Styles™<br>
+  株式会社ダンクソフト DUNKSOFT Co., Ltd. ／ 制作: Claude (Anthropic)
+</footer>
+
+<script>
+function switchRole(role) {
+  document.querySelectorAll('.role-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.role-panel').forEach(p => p.classList.remove('active'));
+  const idx = role === 'sender' ? 0 : 1;
+  document.querySelectorAll('.role-tab')[idx].classList.add('active');
+  document.getElementById('panel-' + role).classList.add('active');
+}
+
+function fmt(n) {
+  if (n >= 100000000) return '¥' + (Math.round(n / 1000000) / 100) + '億';
+  if (n >= 10000) return '¥' + Math.round(n / 10000) + '万';
+  return '¥' + Math.round(n).toLocaleString('ja-JP');
+}
+
+function updateSim() {
+  const p = parseInt(document.getElementById('principal').value);
+  const r = parseInt(document.getElementById('rate').value) / 100;
+  const y = parseInt(document.getElementById('years').value);
+
+  document.getElementById('p-out').textContent = fmt(p);
+  document.getElementById('r-out').textContent = (r * 100) + '%';
+  document.getElementById('y-out').textContent = y + '年';
+  document.getElementById('r-start').textContent = fmt(p);
+
+  const total = Math.round(p * Math.pow(1 + r, y));
+  const gain = total - p;
+  const mult = Math.round(total / p * 10) / 10;
+
+  document.getElementById('r-gain').textContent = fmt(gain);
+  document.getElementById('r-total').textContent = fmt(total);
+
+  let msg = '';
+  if (mult >= 3) msg = `${y}年で元の ${mult} 倍！贈られた「種」が大きな木に育ちました🌳 地域への還元もできる力が生まれます。`;
+  else if (mult >= 2) msg = `${y}年で ${mult} 倍に！複利の力が、祖父母の想いを2倍以上にして届けてくれます。`;
+  else msg = `${y}年で ${fmt(gain)} 増えます。コツコツ育てることが、次の世代への最大の贈り物です🌱`;
+  document.getElementById('sim-msg').textContent = msg;
+}
+
+updateSim();
+</script>
+</body>
+</html>
