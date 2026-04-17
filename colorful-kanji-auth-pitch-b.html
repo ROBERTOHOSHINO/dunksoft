@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>COLORFUL KANJI AUTH™ — Series B+ Pitch | DUNKSOFT Co., Ltd.</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700;900&family=Noto+Sans+JP:wght@300;400;500;700&family=DM+Mono:ital,wght@0,400;0,500;1,400&display=swap');
+
+:root {
+  --bg:    #05060e;
+  --bg2:   #0b0d1a;
+  --bg3:   #111428;
+  --line:  rgba(255,255,255,0.06);
+  --line2: rgba(255,255,255,0.14);
+  --txt:   #dde2f5;
+  --txt2:  #7e89b0;
+  --txt3:  #3c4460;
+  --gold:  #c8920a;
+  --gold2: #edb830;
+  --gold3: #fff0b0;
+  --cyan:  #1ed8d8;
+  --pur:   #9b7ff4;
+  --grn:   #3dd68c;
+  --red:   #f06060;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+
+body{
+  font-family:'Noto Sans JP',sans-serif;
+  background:var(--bg);
+  color:var(--txt);
+  font-size:14px;
+  line-height:1.75;
+}
+
+ruby{ruby-align:center;}
+rt{
+  font-size:.48em;
+  font-family:'Noto Sans JP',sans-serif;
+  font-weight:400;
+  letter-spacing:0;
+  opacity:.7;
+}
+
+/* LANG */
+.lang-bar{
+  position:fixed;top:14px;right:18px;z-index:200;
+  display:flex;background:var(--bg3);
+  border:1px solid var(--line2);border-radius:20px;overflow:hidden;
+}
+.lb{
+  padding:5px 14px;font-size:11px;font-weight:700;
+  font-family:'DM Mono',monospace;letter-spacing:1px;
+  border:none;background:transparent;color:var(--txt2);cursor:pointer;transition:.2s;
+}
+.lb.on{background:var(--gold);color:#000;}
+
+.ja{}
+.en{display:none;}
+body.en .ja{display:none;}
+body.en .en{display:block;}
+.jax{}
+.enx{display:none;}
+body.en .jax{display:none;}
+body.en .enx{display:inline;}
+
+/* COVER */
+.cover{
+  min-height:100vh;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:90px 56px 64px;
+  position:relative;overflow:hidden;
+  border-bottom:1px solid var(--line);
+}
+.cv-noise{
+  position:absolute;inset:0;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  background-size:200px 200px;
+  opacity:.4;
+}
+.cv-ring{
+  position:absolute;
+  width:800px;height:800px;border-radius:50%;
+  border:1px solid rgba(200,146,10,.08);
+  top:-300px;right:-300px;pointer-events:none;
+}
+.cv-ring2{
+  position:absolute;
+  width:500px;height:500px;border-radius:50%;
+  border:1px solid rgba(200,146,10,.05);
+  top:-150px;right:-150px;pointer-events:none;
+}
+
+.cv-stage{
+  font-family:'DM Mono',monospace;font-size:10px;
+  letter-spacing:4px;color:var(--gold);
+  border:1px solid rgba(200,146,10,.3);
+  border-radius:20px;padding:5px 16px;
+  display:inline-flex;align-items:center;gap:8px;
+  width:fit-content;margin-bottom:28px;
+}
+.cv-stage::before{
+  content:'';width:6px;height:6px;border-radius:50%;
+  background:var(--gold);animation:blink 2s infinite;
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+
+.cv-h1{
+  font-family:'Noto Serif JP',serif;
+  font-size:clamp(36px,6vw,64px);font-weight:900;
+  line-height:1.15;margin-bottom:6px;letter-spacing:-1px;
+}
+.cv-h1 .g{color:var(--gold2);}
+.cv-en{
+  font-family:'DM Mono',monospace;
+  font-size:clamp(13px,2vw,18px);
+  color:var(--txt3);letter-spacing:3px;margin-bottom:28px;
+}
+.cv-lead{font-size:15px;color:var(--txt2);max-width:600px;line-height:2;margin-bottom:10px;}
+.cv-lead-en{font-size:13px;color:var(--txt3);max-width:600px;line-height:1.9;margin-bottom:28px;}
+
+/* KANJI ROW */
+.krow{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0 32px;}
+.kc{
+  display:flex;flex-direction:column;align-items:center;gap:5px;
+  transition:transform .2s;cursor:default;
+}
+.kc:hover{transform:translateY(-3px);}
+.kc-ch{
+  font-family:'Noto Serif JP',serif;font-size:38px;font-weight:900;
+  width:60px;height:60px;display:flex;align-items:center;justify-content:center;
+  border-radius:12px;border:1px solid rgba(255,255,255,.08);
+}
+.kc-hex{font-family:'DM Mono',monospace;font-size:9px;color:var(--txt3);}
+
+.cv-meta{font-family:'DM Mono',monospace;font-size:10px;color:var(--txt3);letter-spacing:2px;}
+
+/* SECTION */
+.sec{padding:64px 56px;border-bottom:1px solid var(--line);position:relative;}
+.sn{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--txt3);margin-bottom:6px;}
+.sh{font-family:'Noto Serif JP',serif;font-size:clamp(20px,3vw,30px);font-weight:700;margin-bottom:3px;}
+.sh-en{font-family:'DM Mono',monospace;font-size:11px;color:var(--txt3);letter-spacing:3px;margin-bottom:32px;}
+
+/* STAT GRID */
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin:24px 0;}
+.stat{
+  background:var(--bg2);border:1px solid var(--line);border-radius:14px;
+  padding:20px 22px;position:relative;overflow:hidden;
+}
+.stat::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
+.st-gold::before{background:var(--gold);}
+.st-cyan::before{background:var(--cyan);}
+.st-pur::before{background:var(--pur);}
+.st-grn::before{background:var(--grn);}
+.stat-num{
+  font-family:'DM Mono',monospace;
+  font-size:clamp(26px,4vw,40px);font-weight:500;
+  color:var(--gold2);line-height:1;margin-bottom:6px;
+}
+.stat-lbl{font-size:12px;color:var(--txt2);margin-bottom:2px;}
+.stat-lbl-en{font-size:10px;color:var(--txt3);font-family:'DM Mono',monospace;}
+
+/* HIGHLIGHT BOX */
+.hbox{
+  background:var(--bg2);border:1px solid rgba(200,146,10,.25);
+  border-radius:14px;padding:22px 26px;margin:20px 0;
+  position:relative;overflow:hidden;
+}
+.hbox::before{
+  content:'';position:absolute;inset:0;border-radius:14px;
+  background:radial-gradient(ellipse at top left,rgba(200,146,10,.05) 0%,transparent 60%);
+  pointer-events:none;
+}
+.hbox-t{font-size:13px;font-weight:700;color:var(--gold2);margin-bottom:8px;}
+.hbox-b{font-size:12px;color:var(--txt2);line-height:2;}
+.hl{color:var(--gold2);font-weight:700;}
+.hl-c{color:var(--cyan);}
+.hl-g{color:var(--grn);}
+
+/* PROBLEM */
+.prob-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:24px 0;}
+.prob{
+  background:var(--bg2);border:1px solid var(--line);
+  border-radius:12px;padding:20px;
+}
+.prob-top{
+  font-size:11px;font-family:'DM Mono',monospace;
+  letter-spacing:2px;margin-bottom:10px;
+}
+.p-red{color:var(--red);}
+.p-yel{color:#facc15;}
+.p-pur{color:var(--pur);}
+.prob-h{font-size:13px;font-weight:700;color:var(--txt);margin-bottom:3px;}
+.prob-h-en{font-size:10px;color:var(--txt3);font-family:'DM Mono',monospace;letter-spacing:1px;margin-bottom:8px;}
+.prob-b{font-size:11px;color:var(--txt2);line-height:1.85;}
+
+/* PHASE TABLE */
+.pt{width:100%;border-collapse:collapse;margin:16px 0;}
+.pt th{
+  font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;
+  color:var(--txt3);text-align:left;padding:8px 12px;
+  border-bottom:1px solid var(--line2);font-weight:500;
+}
+.pt td{
+  font-size:12px;color:var(--txt);padding:11px 12px;
+  border-bottom:1px solid var(--line);vertical-align:top;line-height:1.7;
+}
+.pt tr:last-child td{border-bottom:none;}
+.ph{
+  display:inline-block;font-family:'DM Mono',monospace;
+  font-size:9px;font-weight:700;padding:3px 8px;border-radius:4px;letter-spacing:1px;
+}
+.pn{background:rgba(61,214,140,.12);color:var(--grn);border:1px solid rgba(61,214,140,.25);}
+.p2{background:rgba(30,216,216,.1);color:var(--cyan);border:1px solid rgba(30,216,216,.2);}
+.p3{background:rgba(155,127,244,.1);color:var(--pur);border:1px solid rgba(155,127,244,.2);}
+.p4{background:rgba(200,146,10,.12);color:var(--gold2);border:1px solid rgba(200,146,10,.25);}
+
+/* MOAT */
+.moat-list{display:flex;flex-direction:column;gap:12px;margin:24px 0;}
+.moat{
+  display:flex;gap:16px;align-items:flex-start;
+  background:var(--bg2);border:1px solid var(--line);
+  border-radius:12px;padding:16px 20px;
+}
+.moat-k{
+  font-family:'Noto Serif JP',serif;font-size:24px;font-weight:900;
+  width:44px;height:44px;display:flex;align-items:center;justify-content:center;
+  border-radius:8px;flex-shrink:0;
+}
+.moat-c{flex:1;}
+.moat-h{font-size:13px;font-weight:700;color:var(--txt);margin-bottom:2px;}
+.moat-h-en{font-size:10px;color:var(--txt3);font-family:'DM Mono',monospace;letter-spacing:1px;margin-bottom:4px;}
+.moat-b{font-size:11px;color:var(--txt2);line-height:1.85;}
+
+/* ROADMAP */
+.road{display:flex;flex-direction:column;gap:0;margin:24px 0;}
+.road-item{
+  display:flex;gap:0;align-items:stretch;
+}
+.road-left{
+  width:140px;flex-shrink:0;padding:14px 16px 14px 0;
+  text-align:right;border-right:2px solid var(--line2);
+  position:relative;
+}
+.road-left::after{
+  content:'';position:absolute;
+  right:-5px;top:50%;transform:translateY(-50%);
+  width:8px;height:8px;border-radius:50%;
+  background:var(--gold);
+}
+.road-right{padding:14px 0 14px 20px;flex:1;}
+.road-date{font-family:'DM Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:1px;}
+.road-title{font-size:13px;font-weight:700;color:var(--txt);margin-bottom:3px;}
+.road-title-en{font-size:10px;color:var(--txt3);font-family:'DM Mono',monospace;letter-spacing:1px;margin-bottom:4px;}
+.road-body{font-size:11px;color:var(--txt2);line-height:1.8;}
+
+/* ASK */
+.ask-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin:24px 0;}
+.ask-card{
+  background:var(--bg2);border:1px solid var(--line);
+  border-radius:14px;padding:20px;text-align:center;
+}
+.ask-n{
+  font-family:'DM Mono',monospace;
+  font-size:clamp(24px,4vw,36px);font-weight:500;
+  color:var(--gold2);margin-bottom:5px;line-height:1;
+}
+.ask-l{font-size:12px;color:var(--txt2);margin-bottom:3px;}
+.ask-le{font-size:10px;color:var(--txt3);font-family:'DM Mono',monospace;}
+
+.demo-a{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--bg3);border:1px solid var(--line2);
+  border-radius:8px;padding:10px 16px;
+  font-family:'DM Mono',monospace;font-size:11px;
+  color:var(--cyan);text-decoration:none;letter-spacing:1px;
+  transition:border-color .2s;margin:4px 4px 4px 0;
+}
+.demo-a:hover{border-color:var(--cyan);}
+
+/* FOOTER */
+.foot{
+  padding:22px 56px;display:flex;justify-content:space-between;align-items:center;
+  font-family:'DM Mono',monospace;font-size:10px;color:var(--txt3);
+  letter-spacing:1px;border-top:1px solid var(--line);
+}
+
+@media(max-width:640px){
+  .cover,.sec{padding:44px 24px;}
+  .foot{flex-direction:column;gap:6px;text-align:center;}
+  .road-left{width:90px;}
+}
+</style>
+</head>
+<body>
+
+<div class="lang-bar">
+  <button class="lb on" onclick="setLang('ja')">JA</button>
+  <button class="lb" onclick="setLang('en')">EN</button>
+</div>
+
+<!-- ═══ COVER ═══ -->
+<div class="cover">
+  <div class="cv-noise"></div>
+  <div class="cv-ring"></div>
+  <div class="cv-ring2"></div>
+
+  <div class="cv-stage">SERIES B+ &nbsp;·&nbsp; CONFIDENTIAL PITCH &nbsp;·&nbsp; 2026</div>
+
+  <div class="cv-h1">
+    <span class="jax"><ruby>色彩日本語<rt>しきさいにほんご</rt></ruby><br><span class="g"><ruby>認証<rt>にんしょう</rt></ruby>プラットフォーム</span></span>
+    <span class="enx">Chromatic Kanji<br><span class="g">Authentication Platform</span></span>
+  </div>
+  <div class="cv-en">COLORFUL KANJI AUTH™</div>
+
+  <div class="krow">
+    <div class="kc"><div class="kc-ch" style="background:#0d1f0d;color:#3dd68c">星</div><div class="kc-hex">#3DD68C</div></div>
+    <div class="kc"><div class="kc-ch" style="background:#1f0d0d;color:#f06060">山</div><div class="kc-hex">#F06060</div></div>
+    <div class="kc"><div class="kc-ch" style="background:#0d0d1f;color:#9b7ff4">川</div><div class="kc-hex">#9B7FF4</div></div>
+    <div class="kc"><div class="kc-ch" style="background:#1f1a00;color:#edb830">海</div><div class="kc-hex">#EDB830</div></div>
+    <div class="kc"><div class="kc-ch" style="background:#001f1f;color:#1ed8d8">空</div><div class="kc-hex">#1ED8D8</div></div>
+    <div class="kc"><div class="kc-ch" style="background:#1a0d1a;color:#e879f9">月</div><div class="kc-hex">#E879F9</div></div>
+  </div>
+
+  <div class="ja cv-lead"><ruby>漢字<rt>かんじ</rt></ruby>1〜2<ruby>文字<rt>もじ</rt></ruby>＋<ruby>色<rt>いろ</rt></ruby>（HEXカラー）の<ruby>組<rt>く</rt></ruby>み<ruby>合<rt>あ</rt></ruby>わせが<ruby>本人確認<rt>ほんにんかくにん</rt></ruby>になる——<ruby>特許出願中<rt>とっきょしゅつがんちゅう</rt></ruby>の<ruby>次世代認証<rt>じせだいにんしょう</rt></ruby>。<ruby>世界認証市場<rt>せかいにんしょうしじょう</rt></ruby>$40B+、<ruby>漢字圏<rt>かんじけん</rt></ruby>14<ruby>億人<rt>おくにん</rt></ruby>を<ruby>対象<rt>たいしょう</rt></ruby>に、<ruby>日本発<rt>にほんはつ</rt></ruby>の<ruby>認証標準<rt>にんしょうひょうじゅん</rt></ruby>を<ruby>確立<rt>かくりつ</rt></ruby>する。</div>
+  <div class="en cv-lead-en">A patented next-generation authentication system using 1–2 Kanji characters combined with color (HEX code). Targeting a $40B+ global auth market and 1.4 billion Kanji-zone users — establishing Japan's authentication standard.</div>
+
+  <div class="cv-meta">DUNKSOFT Co., Ltd. &nbsp;·&nbsp; Smart Life Styles™ &nbsp;·&nbsp; PATENT PENDING</div>
+</div>
+
+<!-- ═══ 01 PROBLEM ═══ -->
+<div class="sec">
+  <div class="sn">01 / 07</div>
+  <div class="sh ja"><ruby>認証<rt>にんしょう</rt></ruby>の<ruby>構造的危機<rt>こうぞうてききき</rt></ruby></div>
+  <div class="sh en">The Structural Crisis in Authentication</div>
+  <div class="sh-en">PROBLEM</div>
+
+  <div class="prob-row">
+    <div class="prob">
+      <div class="prob-top p-red">▲ DEVICE DEPENDENCY</div>
+      <div class="prob-h ja"><ruby>端末交換<rt>たんまつこうかん</rt></ruby>でゼロリセット</div>
+      <div class="prob-h en">Full Reset on Device Change</div>
+      <div class="prob-h-en">DEVICE LOCK-IN</div>
+      <div class="prob-b ja"><ruby>スマートフォン<rt>スマートフォン</rt></ruby>の<ruby>買<rt>か</rt></ruby>い<ruby>替<rt>か</rt></ruby>え・<ruby>紛失<rt>ふんしつ</rt></ruby>で<ruby>多要素認証<rt>たようそにんしょう</rt></ruby>がゼロに。<ruby>メール<rt>メール</rt></ruby>・<ruby>電話<rt>でんわ</rt></ruby>・SNS<ruby>認証<rt>にんしょう</rt></ruby>はすべて<ruby>端末<rt>たんまつ</rt></ruby>に<ruby>紐<rt>ひも</rt></ruby>づいており、<ruby>失<rt>うしな</rt></ruby>えば<ruby>全<rt>すべ</rt></ruby>てを<ruby>失<rt>うしな</rt></ruby>う。</div>
+      <div class="prob-b en">Switching or losing a smartphone resets multi-factor authentication to zero. Email, phone, and SNS verification are all device-bound — lose the device, lose everything.</div>
+    </div>
+    <div class="prob">
+      <div class="prob-top p-yel">▲ CYBERATTACK SURGE</div>
+      <div class="prob-h ja"><ruby>被害<rt>ひがい</rt></ruby>は<ruby>過去最大<rt>かこさいだい</rt></ruby>・<ruby>加速中<rt>かそくちゅう</rt></ruby></div>
+      <div class="prob-h en">Record Damage, Accelerating</div>
+      <div class="prob-h-en">SECURITY BREACH</div>
+      <div class="prob-b ja">2024<ruby>年<rt>ねん</rt></ruby>の<ruby>サイバー攻撃被害<rt>サイバーこうげきひがい</rt></ruby>は<ruby>過去最大規模<rt>かこさいだいきぼ</rt></ruby>。<ruby>パスワード漏洩<rt>パスワードろうえい</rt></ruby>・SIM<ruby>スワッピング<rt>スワッピング</rt></ruby>・<ruby>高度化<rt>こうどか</rt></ruby>するフィッシングで<ruby>従来型認証<rt>じゅうらいがたにんしょう</rt></ruby>の<ruby>信頼性<rt>しんらいせい</rt></ruby>が<ruby>根底<rt>こんてい</rt></ruby>から<ruby>揺<rt>ゆ</rt></ruby>らいでいる。</div>
+      <div class="prob-b en">2024 saw record-high cyberattack damage. Password breaches, SIM swapping, and increasingly sophisticated phishing have fundamentally undermined traditional authentication.</div>
+    </div>
+    <div class="prob">
+      <div class="prob-top p-pur">▲ BIOMETRIC PARADOX</div>
+      <div class="prob-h ja"><ruby>漏洩<rt>ろうえい</rt></ruby>しても<ruby>変更不可<rt>へんこうふか</rt></ruby></div>
+      <div class="prob-h en">Breached, Never Changeable</div>
+      <div class="prob-h-en">BIOMETRIC RISK</div>
+      <div class="prob-b ja"><ruby>指紋<rt>しもん</rt></ruby>・<ruby>顔認証<rt>かおにんしょう</rt></ruby>は<ruby>漏洩<rt>ろうえい</rt></ruby>しても「<ruby>変更不可能<rt>へんこうふかのう</rt></ruby>」。一度<ruby>盗<rt>ぬす</rt></ruby>まれたバイオメトリクスは<ruby>永久<rt>えいきゅう</rt></ruby>に<ruby>危険<rt>きけん</rt></ruby>にさらされる——<ruby>本人<rt>ほんにん</rt></ruby>に<ruby>紐<rt>ひも</rt></ruby>づく<ruby>故<rt>ゆえ</rt></ruby>の<ruby>致命的弱点<rt>ちめいてきじゃくてん</rt></ruby>。</div>
+      <div class="prob-b en">Fingerprints and facial data cannot be changed after compromise. Once stolen, biometrics are permanently exposed — an unfixable vulnerability inherent to the approach.</div>
+    </div>
+  </div>
+
+  <div class="hbox">
+    <div class="hbox-t ja"><ruby>第四<rt>だいよん</rt></ruby>の<ruby>認証要素<rt>にんしょうようそ</rt></ruby>が<ruby>必要<rt>ひつよう</rt></ruby>——「<ruby>文化的記憶<rt>ぶんかてききおく</rt></ruby>」</div>
+    <div class="hbox-t en">The Fourth Authentication Factor — "Cultural Memory"</div>
+    <div class="hbox-b ja"><ruby>知識<rt>ちしき</rt></ruby>（パスワード）でも<ruby>所持<rt>しょじ</rt></ruby>（<ruby>端末<rt>たんまつ</rt></ruby>）でも<ruby>生体<rt>せいたい</rt></ruby>でもない——<span class="hl">14<ruby>億人<rt>おくにん</rt></ruby>の<ruby>文化的DNA<rt>ぶんかてきDNA</rt></ruby>に<ruby>刻<rt>きざ</rt></ruby>まれた漢字と色の<ruby>記憶<rt>きおく</rt></ruby></span>。フィッシングでも<ruby>盗<rt>ぬす</rt></ruby>めない、<ruby>端末<rt>たんまつ</rt></ruby>を<ruby>失<rt>うしな</rt></ruby>っても<ruby>消<rt>き</rt></ruby>えない、<ruby>本人<rt>ほんにん</rt></ruby>の<ruby>中<rt>なか</rt></ruby>に<ruby>在<rt>あ</rt></ruby>り続ける<ruby>認証<rt>にんしょう</rt></ruby>。</div>
+    <div class="hbox-b en">Neither knowledge (password), possession (device), nor biometric — <span class="hl">the memory of Kanji and color encoded in the cultural DNA of 1.4 billion people</span>. Unphishable, survives device loss, lives permanently within the user.</div>
+  </div>
+</div>
+
+<!-- ═══ 02 SOLUTION ═══ -->
+<div class="sec">
+  <div class="sn">02 / 07</div>
+  <div class="sh ja"><ruby>解決策<rt>かいけつさく</rt></ruby>：COLORFUL KANJI AUTH™</div>
+  <div class="sh en">Solution: COLORFUL KANJI AUTH™</div>
+  <div class="sh-en">SOLUTION</div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:24px;">
+    <div>
+      <div style="font-size:11px;color:var(--txt3);font-family:'DM Mono',monospace;letter-spacing:2px;margin-bottom:14px;">3 AUTHENTICATION ELEMENTS</div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div style="display:flex;align-items:center;gap:12px;background:var(--bg2);border:1px solid var(--line);border-radius:8px;padding:11px 14px;">
+          <div style="font-family:'DM Mono',monospace;font-size:12px;color:var(--txt3);width:20px;">①</div>
+          <div>
+            <div style="font-size:12px;font-weight:700;color:var(--txt);" class="ja">ID（<ruby>部屋番号<rt>へやばんごう</rt></ruby>・ユーザーID）</div>
+            <div style="font-size:12px;font-weight:700;color:var(--txt);" class="en">ID (Room / User identifier)</div>
+            <div style="font-size:9px;color:var(--txt3);font-family:'DM Mono',monospace;">IDENTIFIER</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;background:var(--bg2);border:1px solid rgba(200,146,10,.3);border-radius:8px;padding:11px 14px;">
+          <div style="font-family:'DM Mono',monospace;font-size:12px;color:var(--gold);width:20px;">②</div>
+          <div>
+            <div style="font-size:12px;font-weight:700;color:var(--txt);" class="ja"><ruby>漢字<rt>かんじ</rt></ruby>1〜2<ruby>文字<rt>もじ</rt></ruby></div>
+            <div style="font-size:12px;font-weight:700;color:var(--txt);" class="en">1–2 Kanji characters</div>
+            <div style="font-size:9px;color:var(--txt3);font-family:'DM Mono',monospace;">KANJI FACTOR</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;background:var(--bg2);border:1px solid rgba(30,216,216,.2);border-radius:8px;padding:11px 14px;">
+          <div style="font-family:'DM Mono',monospace;font-size:12px;color:var(--cyan);width:20px;">③</div>
+          <div>
+            <div style="font-size:12px;font-weight:700;color:var(--txt);" class="ja"><ruby>色<rt>いろ</rt></ruby>（32〜128bit カラー）</div>
+            <div style="font-size:12px;font-weight:700;color:var(--txt);" class="en">Color (32–128-bit HEX)</div>
+            <div style="font-size:9px;color:var(--txt3);font-family:'DM Mono',monospace;">COLOR FACTOR</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:11px;color:var(--txt3);font-family:'DM Mono',monospace;letter-spacing:2px;margin-bottom:14px;">SECURITY ROADMAP</div>
+      <table class="pt">
+        <thead><tr>
+          <th>PHASE</th>
+          <th><span class="jax"><ruby>認証強度<rt>にんしょうきょうど</rt></ruby></span><span class="enx">STRENGTH</span></th>
+          <th><span class="jax"><ruby>対象<rt>たいしょう</rt></ruby></span><span class="enx">TARGET</span></th>
+        </tr></thead>
+        <tbody>
+          <tr><td><span class="ph pn">NOW</span></td><td><span class="jax"><ruby>苗字<rt>みょうじ</rt></ruby>1字×32色</span><span class="enx">1 Kanji × 32 colors</span></td><td><span class="jax"><ruby>業務<rt>ぎょうむ</rt></ruby>アプリ</span><span class="enx">Business apps</span></td></tr>
+          <tr><td><span class="ph p2">PH.2</span></td><td><span class="jax">2字×32色</span><span class="enx">2 Kanji × 32 colors</span></td><td><span class="jax"><ruby>中規模<rt>ちゅうきぼ</rt></ruby>SaaS</span><span class="enx">Mid-scale SaaS</span></td></tr>
+          <tr><td><span class="ph p3">PH.3</span></td><td><span class="jax">2字×64bit</span><span class="enx">2 Kanji × 64-bit</span></td><td><span class="jax"><ruby>金融<rt>きんゆう</rt></ruby>・<ruby>商用<rt>しょうよう</rt></ruby></span><span class="enx">Finance & commercial</span></td></tr>
+          <tr><td><span class="ph p4">PH.4</span></td><td><span class="jax">2字×128bit</span><span class="enx">2 Kanji × 128-bit</span></td><td><span class="jax"><ruby>高セキュリティ<rt>こうセキュリティ</rt></ruby></span><span class="enx">High-security</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <a class="demo-a" href="https://robertohoshino.github.io/parking-reservation/" target="_blank">▶ LIVE DEMO — <span class="jax"><ruby>駐車場予約<rt>ちゅうしゃじょうよやく</rt></ruby>システム</span><span class="enx">Parking Reservation System</span></a>
+</div>
+
+<!-- ═══ 03 MARKET ═══ -->
+<div class="sec">
+  <div class="sn">03 / 07</div>
+  <div class="sh ja"><ruby>市場規模<rt>しじょうきぼ</rt></ruby>と<ruby>成長機会<rt>せいちょうきかい</rt></ruby></div>
+  <div class="sh en">Market Size & Growth Opportunity</div>
+  <div class="sh-en">MARKET</div>
+
+  <div class="stat-grid">
+    <div class="stat st-gold">
+      <div class="stat-num">$40B+</div>
+      <div class="stat-lbl ja"><ruby>世界認証市場<rt>せかいにんしょうしじょう</rt></ruby>（2024）</div>
+      <div class="stat-lbl en">Global Auth Market (2024)</div>
+      <div class="stat-lbl-en">GLOBAL TAM</div>
+    </div>
+    <div class="stat st-cyan">
+      <div class="stat-num">14<span style="font-size:.6em">億人</span></div>
+      <div class="stat-lbl ja"><ruby>漢字圏<rt>かんじけん</rt></ruby>ユーザー（日中台韓）</div>
+      <div class="stat-lbl en">Kanji-zone users (JP/CN/TW/KR)</div>
+      <div class="stat-lbl-en">ADDRESSABLE USERS</div>
+    </div>
+    <div class="stat st-pur">
+      <div class="stat-num">2,696<span style="font-size:.5em">万</span></div>
+      <div class="stat-lbl ja">NISA<ruby>口座<rt>こうざ</rt></ruby>（<ruby>即時<rt>そくじ</rt></ruby>ターゲット）</div>
+      <div class="stat-lbl en">NISA accounts (immediate target)</div>
+      <div class="stat-lbl-en">FINANCIAL ENTRY POINT</div>
+    </div>
+    <div class="stat st-grn">
+      <div class="stat-num">¥100B+</div>
+      <div class="stat-lbl ja"><ruby>中期売上<rt>ちゅうきうりあげ</rt></ruby>ポテンシャル</div>
+      <div class="stat-lbl en">Mid-term revenue potential</div>
+      <div class="stat-lbl-en">REVENUE TARGET</div>
+    </div>
+  </div>
+
+  <div class="hbox">
+    <div class="hbox-t ja">Smart Life Styles™ との<ruby>相乗効果<rt>そうじょうこうか</rt></ruby>——<ruby>認証<rt>にんしょう</rt></ruby>が<ruby>全事業<rt>ぜんじぎょう</rt></ruby>の<ruby>基盤<rt>きばん</rt></ruby>になる</div>
+    <div class="hbox-t en">Smart Life Styles™ Synergy — Auth becomes the foundation of every business</div>
+    <div class="hbox-b ja"><ruby>出版<rt>しゅっぱん</rt></ruby>・<ruby>書店<rt>しょてん</rt></ruby>・<ruby>図書館<rt>としょかん</rt></ruby>（Zone 1）、<ruby>金融<rt>きんゆう</rt></ruby>・NISA（Zone 2）、<ruby>成長物語<rt>せいちょうものがたり</rt></ruby>×<ruby>地域<rt>ちいき</rt></ruby>（Zone 3）——<span class="hl">3ゾーンすべてのログイン基盤</span>として<ruby>色彩日本語認証<rt>しきさいにほんごにんしょう</rt></ruby>が<ruby>機能<rt>きのう</rt></ruby>する。<ruby>読者<rt>どくしゃ</rt></ruby>・<ruby>投資家<rt>とうしか</rt></ruby>・<ruby>地域住民<rt>ちいきじゅうみん</rt></ruby>が同一の<span class="hl-c">漢字×色の記憶</span>でアクセスする<ruby>統合認証圏<rt>とうごうにんしょうけん</rt></ruby>を構築する。</div>
+    <div class="hbox-b en">Publishing/bookstore/library (Zone 1), Finance/NISA (Zone 2), Growth narrative × region (Zone 3) — <span class="hl">Chromatic Kanji Auth serves as the login backbone for all 3 zones</span>. Building an integrated authentication sphere where readers, investors, and local citizens access everything through the same <span class="hl-c">Kanji × color memory</span>.</div>
+  </div>
+</div>
+
+<!-- ═══ 04 MOAT ═══ -->
+<div class="sec">
+  <div class="sn">04 / 07</div>
+  <div class="sh ja"><ruby>参入障壁<rt>さんにゅうしょうへき</rt></ruby>と<ruby>競合優位性<rt>きょうごうゆういせい</rt></ruby></div>
+  <div class="sh en">Competitive Moat</div>
+  <div class="sh-en">WHY US — WHY NOW</div>
+
+  <div class="moat-list">
+    <div class="moat">
+      <div class="moat-k" style="background:rgba(200,146,10,.12);color:var(--gold2)">特</div>
+      <div class="moat-c">
+        <div class="moat-h ja"><ruby>特許出願済<rt>とっきょしゅつがんずみ</rt></ruby>——<ruby>優先日確保<rt>ゆうせんびかくほ</rt></ruby>、<ruby>後発<rt>こうはつ</rt></ruby>ブロック</div>
+        <div class="moat-h en">Patent Filed — Priority Date Secured, Latecomers Blocked</div>
+        <div class="moat-h-en">IP FORTRESS</div>
+        <div class="moat-b ja"><ruby>色彩日本語認証<rt>しきさいにほんごにんしょう</rt></ruby>・<ruby>天然色漢字INDEX<rt>てんねんしょくかんじINDEX</rt></ruby>™ともに<ruby>特許出願中<rt>とっきょしゅつがんちゅう</rt></ruby>。<ruby>優先日<rt>ゆうせんび</rt></ruby>が<ruby>確保<rt>かくほ</rt></ruby>されており、<ruby>類似技術<rt>るいじぎじゅつ</rt></ruby>での<ruby>後発参入者<rt>こうはつさんにゅうしゃ</rt></ruby>をブロックできる。<ruby>特許<rt>とっきょ</rt></ruby>ポートフォリオが<ruby>事業価値<rt>じぎょうかち</rt></ruby>の<ruby>中核<rt>ちゅうかく</rt></ruby>。</div>
+        <div class="moat-b en">Both Chromatic Japanese Authentication and Colorful Kanji Index™ are patent-pending. Priority dates secured, blocking competitors with similar technology. The patent portfolio is the core of enterprise value.</div>
+      </div>
+    </div>
+    <div class="moat">
+      <div class="moat-k" style="background:rgba(61,214,140,.1);color:var(--grn)">証</div>
+      <div class="moat-c">
+        <div class="moat-h ja"><ruby>動<rt>うご</rt></ruby>くデモが<ruby>今日<rt>きょう</rt></ruby>ある——アイデアではなく<ruby>実装済<rt>じっそうず</rt></ruby>み</div>
+        <div class="moat-h en">Live Demo Today — Implemented, Not Just an Idea</div>
+        <div class="moat-h-en">WORKING PROTOTYPE</div>
+        <div class="moat-b ja"><ruby>駐車場予約<rt>ちゅうしゃじょうよやく</rt></ruby>システムとして<ruby>実際<rt>じっさい</rt></ruby>に<ruby>稼働中<rt>かどうちゅう</rt></ruby>。<ruby>会議室予約<rt>かいぎしつよやく</rt></ruby>・<ruby>勤怠打刻<rt>きんたいだこく</rt></ruby>・<ruby>備品管理<rt>びひんかんり</rt></ruby>・<ruby>金融機関<rt>きんゆうきかん</rt></ruby>ログインへの<ruby>横展開<rt>よこてんかい</rt></ruby>が<ruby>同一<rt>どういつ</rt></ruby>コアで<ruby>即座<rt>そくざ</rt></ruby>に可能。</div>
+        <div class="moat-b en">Currently operational as a parking reservation system. The same core enables immediate cross-deployment to: meeting rooms, attendance, asset management, and financial institution login.</div>
+      </div>
+    </div>
+    <div class="moat">
+      <div class="moat-k" style="background:rgba(30,216,216,.1);color:var(--cyan)">文</div>
+      <div class="moat-c">
+        <div class="moat-h ja"><ruby>文化的記憶<rt>ぶんかてききおく</rt></ruby>は<ruby>複製不可<rt>ふくせいふか</rt></ruby></div>
+        <div class="moat-h en">Cultural Memory Cannot Be Replicated</div>
+        <div class="moat-h-en">CULTURAL MOAT</div>
+        <div class="moat-b ja"><ruby>漢字<rt>かんじ</rt></ruby>は14<ruby>億人<rt>おくにん</rt></ruby>の<ruby>文化的DNA<rt>ぶんかてきDNA</rt></ruby>に<ruby>刻<rt>きざ</rt></ruby>まれた<ruby>記憶体系<rt>きおくたいけい</rt></ruby>。「<ruby>星<rt>ほし</rt></ruby>」という<ruby>文字<rt>もじ</rt></ruby>に「<ruby>緑<rt>みどり</rt></ruby>」を<ruby>結<rt>むす</rt></ruby>びつける<ruby>記憶<rt>きおく</rt></ruby>は<ruby>技術<rt>ぎじゅつ</rt></ruby>では<ruby>模倣<rt>もほう</rt></ruby>できない。<ruby>欧米発<rt>おうべいはつ</rt></ruby>のビッグテックが<ruby>追随<rt>ついずい</rt></ruby>できない<ruby>文化的障壁<rt>ぶんかてきしょうへき</rt></ruby>。</div>
+        <div class="moat-b en">Kanji is a memory system encoded in the cultural DNA of 1.4 billion people. The memory of associating "星" with green cannot be replicated by technology. A cultural barrier that Western Big Tech cannot follow.</div>
+      </div>
+    </div>
+    <div class="moat">
+      <div class="moat-k" style="background:rgba(155,127,244,.1);color:var(--pur)">網</div>
+      <div class="moat-c">
+        <div class="moat-h ja">30<ruby>年<rt>ねん</rt></ruby>の<ruby>顧客基盤<rt>こきゃくきばん</rt></ruby>×<ruby>既存信頼関係<rt>きぞんしんらいかんけい</rt></ruby>で<ruby>即展開<rt>そくてんかい</rt></ruby></div>
+        <div class="moat-h en">30-Year Customer Base × Instant Deployment via Trust</div>
+        <div class="moat-h-en">DISTRIBUTION ADVANTAGE</div>
+        <div class="moat-b ja"><ruby>証券<rt>しょうけん</rt></ruby>・<ruby>金融<rt>きんゆう</rt></ruby>・<ruby>業務系<rt>ぎょうむけい</rt></ruby>SaaSへの30<ruby>年<rt>ねん</rt></ruby>の<ruby>実績<rt>じっせき</rt></ruby>。<ruby>徳島合同証券<rt>とくしまごうどうしょうけん</rt></ruby>V<ruby>字回復<rt>じかいふく</rt></ruby>の<ruby>実績<rt>じっせき</rt></ruby>が示すように、<ruby>既存顧客<rt>きぞんこきゃく</rt></ruby>への<ruby>展開速度<rt>てんかいそくど</rt></ruby>は<ruby>新規参入者<rt>しんきさんにゅうしゃ</rt></ruby>の<ruby>比<rt>ひ</rt></ruby>ではない。<ruby>大和証券<rt>だいわしょうけん</rt></ruby>・<ruby>証券業協会<rt>しょうけんぎょうきょうかい</rt></ruby>との<ruby>連携<rt>れんけい</rt></ruby>が<ruby>最初<rt>さいしょ</rt></ruby>のフライホイール。</div>
+        <div class="moat-b en">30 years of track record in securities, finance, and B2B SaaS. As demonstrated by Tokushima Godo Securities' V-shaped recovery, deployment speed to existing customers is incomparable to new entrants. Daiwa Securities Group and the Securities Dealers Association as the first flywheel.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 05 TRACTION ═══ -->
+<div class="sec">
+  <div class="sn">05 / 07</div>
+  <div class="sh ja"><ruby>実績<rt>じっせき</rt></ruby>と<ruby>進捗<rt>しんちょく</rt></ruby></div>
+  <div class="sh en">Traction & Progress</div>
+  <div class="sh-en">TRACTION</div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:24px 0;">
+    <div>
+      <div style="font-size:11px;color:var(--grn);font-family:'DM Mono',monospace;letter-spacing:2px;margin-bottom:14px;">✓ COMPLETED</div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div style="display:flex;gap:10px;font-size:12px;color:var(--txt2);">
+          <span style="color:var(--grn);flex-shrink:0;">✓</span>
+          <span class="ja"><ruby>色彩日本語認証<rt>しきさいにほんごにんしょう</rt></ruby>　<ruby>特許出願<rt>とっきょしゅつがん</rt></ruby></span>
+          <span class="en">Chromatic Kanji Auth — patent filed</span>
+        </div>
+        <div style="display:flex;gap:10px;font-size:12px;color:var(--txt2);">
+          <span style="color:var(--grn);flex-shrink:0;">✓</span>
+          <span class="ja">Phase 1 プロトタイプ<ruby>公開<rt>こうかい</rt></ruby>（<ruby>駐車場予約<rt>ちゅうしゃじょうよやく</rt></ruby>）</span>
+          <span class="en">Phase 1 prototype live (parking reservation)</span>
+        </div>
+        <div style="display:flex;gap:10px;font-size:12px;color:var(--txt2);">
+          <span style="color:var(--grn);flex-shrink:0;">✓</span>
+          <span class="ja"><ruby>天然色漢字INDEX<rt>てんねんしょくかんじINDEX</rt></ruby>™　<ruby>特許出願<rt>とっきょしゅつがん</rt></ruby></span>
+          <span class="en">Colorful Kanji Index™ — patent filed</span>
+        </div>
+        <div style="display:flex;gap:10px;font-size:12px;color:var(--txt2);">
+          <span style="color:var(--grn);flex-shrink:0;">✓</span>
+          <span class="ja"><ruby>出版社<rt>しゅっぱんしゃ</rt></ruby>6<ruby>社<rt>しゃ</rt></ruby>デモ<ruby>公開<rt>こうかい</rt></ruby>・GitHub Pages<ruby>稼働<rt>かどう</rt></ruby></span>
+          <span class="en">6 publisher demos live on GitHub Pages</span>
+        </div>
+        <div style="display:flex;gap:10px;font-size:12px;color:var(--txt2);">
+          <span style="color:var(--grn);flex-shrink:0;">✓</span>
+          <span class="ja"><ruby>徳島合同証券<rt>とくしまごうどうしょうけん</rt></ruby>V<ruby>字回復<rt>じかいふく</rt></ruby>——12<ruby>年来<rt>ねんらい</rt></ruby>の<ruby>信頼実績<rt>しんらいじっせき</rt></ruby></span>
+          <span class="en">Tokushima Godo Securities V-recovery — 12yr trust record</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:11px;color:var(--gold);font-family:'DM Mono',monospace;letter-spacing:2px;margin-bottom:14px;">→ NEXT 18 MONTHS</div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div style="display:flex;gap:10px;font-size:12px;color:var(--txt2);">
+          <span style="color:var(--gold);flex-shrink:0;">→</span>
+          <span class="ja"><ruby>金融機関<rt>きんゆうきかん</rt></ruby>パイロット導入（〜2026<ruby>年<rt>ねん</rt></ruby>6<ruby>月<rt>がつ</rt></ruby>）</span>
+          <span class="en">Financial institution pilot launch (by Jun 2026)</span>
+        </div>
+        <div style="display:flex;gap:10px;font-size:12px;color:var(--txt2);">
+          <span style="color:var(--gold);flex-shrink:0;">→</span>
+          <span class="ja"><ruby>証券業協会<rt>しょうけんぎょうきょうかい</rt></ruby>への<ruby>業界提案<rt>ぎょうかいていあん</rt></ruby></span>
+          <span class="en">Industry proposal to Japan Securities Dealers Assoc.</span>
+        </div>
+        <div style="display:flex;gap:10px;font-size:12px;color:var(--txt2);">
+          <span style="color:var(--gold);flex-shrink:0;">→</span>
+          <span class="ja">Phase 2〜3 <ruby>実装<rt>じっそう</rt></ruby>・SaaS<ruby>化<rt>か</rt></ruby></span>
+          <span class="en">Phase 2–3 implementation & SaaS launch</span>
+        </div>
+        <div style="display:flex;gap:10px;font-size:12px;color:var(--txt2);">
+          <span style="color:var(--gold);flex-shrink:0;">→</span>
+          <span class="ja"><ruby>漢字圏<rt>かんじけん</rt></ruby>（<ruby>中<rt>ちゅう</rt></ruby>・<ruby>台<rt>たい</rt></ruby>・<ruby>韓<rt>かん</rt></ruby>）<ruby>国際展開<rt>こくさいてんかい</rt></ruby></span>
+          <span class="en">International expansion to CN / TW / KR</span>
+        </div>
+        <div style="display:flex;gap:10px;font-size:12px;color:var(--txt2);">
+          <span style="color:var(--gold);flex-shrink:0;">→</span>
+          <span class="ja"><ruby>野村財団<rt>のむらざいだん</rt></ruby><ruby>研究助成<rt>けんきゅうじょせい</rt></ruby>採択（2026<ruby>年度<rt>ねんど</rt></ruby>）</span>
+          <span class="en">Nomura Foundation research grant adoption (FY2026)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 06 ROADMAP ═══ -->
+<div class="sec">
+  <div class="sn">06 / 07</div>
+  <div class="sh ja"><ruby>成長<rt>せいちょう</rt></ruby>ロードマップ</div>
+  <div class="sh en">Growth Roadmap</div>
+  <div class="sh-en">ROADMAP TO DOMINANCE</div>
+
+  <div class="road">
+    <div class="road-item">
+      <div class="road-left"><div class="road-date">2026 Q2</div></div>
+      <div class="road-right">
+        <div class="road-title ja"><ruby>徳島合同証券<rt>とくしまごうどうしょうけん</rt></ruby>パイロット導入・<ruby>証券業協会<rt>しょうけんぎょうきょうかい</rt></ruby>提案</div>
+        <div class="road-title en">Tokushima Godo pilot + Securities Dealers Assoc. proposal</div>
+        <div class="road-title-en">FIRST FLYWHEEL</div>
+        <div class="road-body ja"><ruby>実証実績<rt>じっしょうじっせき</rt></ruby>を<ruby>獲得<rt>かくとく</rt></ruby>し、<ruby>業界団体<rt>ぎょうかいだんたい</rt></ruby>への<ruby>提案力<rt>ていあんりょく</rt></ruby>を<ruby>確立<rt>かくりつ</rt></ruby>。<ruby>野村財団<rt>のむらざいだん</rt></ruby>研究助成申請も並行。</div>
+        <div class="road-body en">Secure proof-of-concept, establish proposal credibility with industry bodies. Nomura Foundation grant application in parallel.</div>
+      </div>
+    </div>
+    <div class="road-item">
+      <div class="road-left"><div class="road-date">2026 Q4</div></div>
+      <div class="road-right">
+        <div class="road-title ja">Phase 2 SaaS<ruby>化<rt>か</rt></ruby>・<ruby>地方証券<rt>ちほうしょうけん</rt></ruby>20<ruby>社<rt>しゃ</rt></ruby>展開</div>
+        <div class="road-title en">Phase 2 SaaS + 20 regional securities firms</div>
+        <div class="road-title-en">SCALE</div>
+        <div class="road-body ja"><ruby>会議室<rt>かいぎしつ</rt></ruby>・<ruby>勤怠<rt>きんたい</rt></ruby>・<ruby>備品<rt>びひん</rt></ruby>管理への<ruby>横展開<rt>よこてんかい</rt></ruby>。<ruby>月額<rt>げつがく</rt></ruby>SaaSとして<ruby>安定収益化<rt>あんていしゅうえきか</rt></ruby>。</div>
+        <div class="road-body en">Cross-deploy to meeting rooms, attendance, asset management. Stabilize recurring SaaS revenue.</div>
+      </div>
+    </div>
+    <div class="road-item">
+      <div class="road-left"><div class="road-date">2027</div></div>
+      <div class="road-right">
+        <div class="road-title ja"><ruby>証券業協会<rt>しょうけんぎょうきょうかい</rt></ruby>全体採用・Phase 3<ruby>商用<rt>しょうよう</rt></ruby>サービス</div>
+        <div class="road-title en">Full Securities Assoc. adoption + Phase 3 commercial</div>
+        <div class="road-title-en">INDUSTRY STANDARD</div>
+        <div class="road-body ja"><ruby>業界標準<rt>ぎょうかいひょうじゅん</rt></ruby>としての<ruby>地位確立<rt>ちいかくりつ</rt></ruby>。<ruby>金融機関<rt>きんゆうきかん</rt></ruby>ログイン・こどもNISA<ruby>認証<rt>にんしょう</rt></ruby>基盤へ。</div>
+        <div class="road-body en">Establish position as industry standard. Financial institution login and Children's NISA authentication backbone.</div>
+      </div>
+    </div>
+    <div class="road-item">
+      <div class="road-left"><div class="road-date">2028〜</div></div>
+      <div class="road-right">
+        <div class="road-title ja"><ruby>漢字圏<rt>かんじけん</rt></ruby>14<ruby>億人<rt>おくにん</rt></ruby>への<ruby>国際展開<rt>こくさいてんかい</rt></ruby>・Phase 4</div>
+        <div class="road-title en">International expansion to 1.4B Kanji users + Phase 4</div>
+        <div class="road-title-en">GLOBAL DOMINANCE</div>
+        <div class="road-body ja"><ruby>中国<rt>ちゅうごく</rt></ruby>・<ruby>台湾<rt>たいわん</rt></ruby>・<ruby>韓国<rt>かんこく</rt></ruby>への<ruby>展開<rt>てんかい</rt></ruby>。128bit<ruby>高セキュリティ<rt>こうセキュリティ</rt></ruby>認証で<ruby>政府<rt>せいふ</rt></ruby>・<ruby>医療<rt>いりょう</rt></ruby>・<ruby>金融<rt>きんゆう</rt></ruby>インフラへ。EXIT<ruby>シナリオ<rt>シナリオ</rt></ruby>：IPO または<ruby>戦略的M&A<rt>せんりゃくてきM&A</rt></ruby>。</div>
+        <div class="road-body en">Expand to China, Taiwan, Korea. 128-bit high-security auth for government, healthcare, and financial infrastructure. Exit scenario: IPO or strategic M&A.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 07 ASK ═══ -->
+<div class="sec">
+  <div class="sn">07 / 07</div>
+  <div class="sh ja"><ruby>資金調達<rt>しきんちょうたつ</rt></ruby>と<ruby>使途<rt>しと</rt></ruby>——Series B+</div>
+  <div class="sh en">Funding Ask & Use of Proceeds — Series B+</div>
+  <div class="sh-en">THE ASK</div>
+
+  <div class="ask-row">
+    <div class="ask-card" style="border-color:rgba(200,146,10,.35);">
+      <div class="ask-n">¥3B+</div>
+      <div class="ask-l ja"><ruby>想定調達額<rt>そうていちょうたつがく</rt></ruby></div>
+      <div class="ask-l en">Target raise</div>
+      <div class="ask-le">SERIES B+</div>
+    </div>
+    <div class="ask-card">
+      <div class="ask-n">40%</div>
+      <div class="ask-l ja">Phase 2〜4<ruby>開発<rt>かいはつ</rt></ruby></div>
+      <div class="ask-l en">Phase 2–4 development</div>
+      <div class="ask-le">R&D</div>
+    </div>
+    <div class="ask-card">
+      <div class="ask-n">30%</div>
+      <div class="ask-l ja"><ruby>国内外営業<rt>こくないがいえいぎょう</rt></ruby>・<ruby>提携<rt>ていけい</rt></ruby></div>
+      <div class="ask-l en">Sales & partnerships</div>
+      <div class="ask-le">GTM</div>
+    </div>
+    <div class="ask-card">
+      <div class="ask-n">20%</div>
+      <div class="ask-l ja"><ruby>国際特許<rt>こくさいとっきょ</rt></ruby>・IP<ruby>戦略<rt>せんりゃく</rt></ruby></div>
+      <div class="ask-l en">International IP strategy</div>
+      <div class="ask-le">IP</div>
+    </div>
+    <div class="ask-card">
+      <div class="ask-n">10%</div>
+      <div class="ask-l ja"><ruby>研究<rt>けんきゅう</rt></ruby>・<ruby>学術連携<rt>がくじゅつれんけい</rt></ruby></div>
+      <div class="ask-l en">Research & academia</div>
+      <div class="ask-le">RESEARCH</div>
+    </div>
+  </div>
+
+  <div class="hbox" style="border-color:rgba(200,146,10,.4);">
+    <div class="hbox-t ja">なぜ今、Series B+<ruby>規模<rt>きぼ</rt></ruby>か</div>
+    <div class="hbox-t en">Why Series B+ Scale — Why Now</div>
+    <div class="hbox-b ja">
+      <span class="hl">①<ruby>特許優先日確保済<rt>とっきょゆうせんびかくほずみ</rt></ruby></span>——<ruby>今<rt>いま</rt></ruby>が<ruby>市場<rt>しじょう</rt></ruby>を<ruby>取<rt>と</rt></ruby>りに<ruby>行<rt>い</rt></ruby>く<ruby>唯一<rt>ゆいいつ</rt></ruby>のタイミング。<br>
+      <span class="hl">②<ruby>動<rt>うご</rt></ruby>くデモと30<ruby>年<rt>ねん</rt></ruby>の<ruby>顧客基盤<rt>こきゃくきばん</rt></ruby></span>——<ruby>実証済<rt>じっしょうず</rt></ruby>みの<ruby>土台<rt>どだい</rt></ruby>の上に<ruby>乗<rt>の</rt></ruby>るだけ。<br>
+      <span class="hl">③<ruby>漢字圏<rt>かんじけん</rt></ruby>14<ruby>億人<rt>おくにん</rt></ruby>×$40B+<ruby>市場<rt>しじょう</rt></ruby></span>——<ruby>欧米<rt>おうべい</rt></ruby>ビッグテックが<ruby>複製<rt>ふくせい</rt></ruby>できない<ruby>唯一<rt>ゆいいつ</rt></ruby>のポジション。<br>
+      <span class="hl">④<ruby>証券業協会<rt>しょうけんぎょうきょうかい</rt></ruby>ルート</span>——<ruby>徳島<rt>とくしま</rt></ruby>から<ruby>業界標準<rt>ぎょうかいひょうじゅん</rt></ruby>への<ruby>最短経路<rt>さいたんけいろ</rt></ruby>がすでに<ruby>開<rt>ひら</rt></ruby>いている。
+    </div>
+    <div class="hbox-b en">
+      <span class="hl">① Patent priority secured</span> — the only window to capture the market is now.<br>
+      <span class="hl">② Working demo + 30-year customer base</span> — simply build on a proven foundation.<br>
+      <span class="hl">③ 1.4B Kanji users × $40B+ market</span> — the only position Western Big Tech cannot replicate.<br>
+      <span class="hl">④ Securities Dealers Association route</span> — the shortest path from Tokushima to industry standard is already open.
+    </div>
+  </div>
+
+  <div style="margin-top:20px;">
+    <a class="demo-a" href="https://robertohoshino.github.io/parking-reservation/" target="_blank">▶ DEMO — <span class="jax"><ruby>認証プロトタイプ<rt>にんしょうプロトタイプ</rt></ruby></span><span class="enx">Auth Prototype</span></a>
+    <a class="demo-a" href="https://robertohoshino.github.io/pubuisher-demo/" target="_blank">▶ DEMO — <span class="jax"><ruby>出版社別インデックス<rt>しゅっぱんしゃべつインデックス</rt></ruby></span><span class="enx">Publisher Kanji Index</span></a>
+    <a class="demo-a" href="https://note.com/roberto_hoshino/n/ne42ebd69872a" target="_blank">▶ NOTE — <span class="jax"><ruby>開発ログ<rt>かいはつログ</rt></ruby> #01</span><span class="enx">Dev Log #01</span></a>
+  </div>
+</div>
+
+<div class="foot">
+  <div>DUNKSOFT Co., Ltd. &nbsp;·&nbsp; COLORFUL KANJI AUTH™ &nbsp;·&nbsp; PATENT PENDING</div>
+  <div>Smart Life Styles™ &nbsp;·&nbsp; SERIES B+ &nbsp;·&nbsp; CONFIDENTIAL 2026</div>
+</div>
+
+<script>
+function setLang(l){
+  document.body.classList.toggle('en',l==='en');
+  document.querySelectorAll('.lb').forEach(b=>b.classList.toggle('on',b.textContent===l.toUpperCase()));
+}
+</script>
+</body>
+</html>
