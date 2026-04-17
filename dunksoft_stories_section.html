@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DUNKSOFT — Stories</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700;900&family=Noto+Sans+JP:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap');
+
+:root{
+  --bg:#faf9f6;
+  --bg2:#f2f0eb;
+  --txt:#1a1a18;
+  --txt2:#5a5850;
+  --txt3:#9a9890;
+  --gold:#b8820a;
+  --gold2:#d4a020;
+  --line:rgba(0,0,0,.08);
+  --line2:rgba(0,0,0,.15);
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+
+body{
+  font-family:'Noto Sans JP',sans-serif;
+  background:var(--bg);
+  color:var(--txt);
+  font-size:14px;
+  line-height:1.8;
+}
+
+/* ── SECTION ── */
+.stories{
+  max-width:900px;
+  margin:0 auto;
+  padding:80px 32px;
+}
+
+/* ── HEADER ── */
+.stories-header{
+  text-align:center;
+  margin-bottom:72px;
+}
+.stories-eyebrow{
+  font-family:'DM Mono',monospace;
+  font-size:10px;letter-spacing:4px;
+  color:var(--gold);
+  margin-bottom:16px;
+  display:flex;align-items:center;justify-content:center;gap:12px;
+}
+.stories-eyebrow::before,.stories-eyebrow::after{
+  content:'';display:block;height:1px;width:32px;background:var(--gold);opacity:.5;
+}
+.stories-title{
+  font-family:'Noto Serif JP',serif;
+  font-size:clamp(26px,4vw,38px);
+  font-weight:900;letter-spacing:-1px;
+  line-height:1.3;margin-bottom:16px;
+}
+.stories-lead{
+  font-size:13px;color:var(--txt2);
+  max-width:480px;margin:0 auto;
+  line-height:2;
+}
+
+/* ── CARDS ── */
+.cards{display:flex;flex-direction:column;gap:2px;}
+
+.card{
+  background:#fff;
+  border:1px solid var(--line2);
+  border-radius:0;
+  overflow:hidden;
+  transition:all .3s;
+  position:relative;
+}
+.card:first-child{border-radius:16px 16px 0 0;}
+.card:last-child{border-radius:0 0 16px 16px;}
+.card:only-child{border-radius:16px;}
+
+.card::before{
+  content:'';
+  position:absolute;top:0;left:0;bottom:0;
+  width:3px;
+  background:var(--card-color,var(--gold));
+  opacity:0;
+  transition:opacity .3s;
+}
+.card:hover{
+  transform:translateX(4px);
+  box-shadow:0 8px 32px rgba(0,0,0,.08);
+}
+.card:hover::before{opacity:1;}
+
+.card-inner{
+  padding:32px 36px;
+  display:flex;gap:28px;align-items:flex-start;
+}
+
+/* Year badge */
+.card-year{
+  flex-shrink:0;
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+  padding-top:4px;
+}
+.year-num{
+  font-family:'DM Mono',monospace;
+  font-size:22px;font-weight:500;
+  color:var(--card-color,var(--gold));
+  line-height:1;
+}
+.year-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--card-color,var(--gold));
+  opacity:.3;
+}
+
+/* Content */
+.card-content{flex:1;}
+.card-tag{
+  font-family:'DM Mono',monospace;
+  font-size:8px;letter-spacing:3px;
+  color:var(--card-color,var(--gold));
+  margin-bottom:8px;
+  opacity:.8;
+}
+.card-title{
+  font-family:'Noto Serif JP',serif;
+  font-size:17px;font-weight:700;
+  letter-spacing:-.3px;
+  margin-bottom:10px;line-height:1.5;
+}
+.card-title-en{
+  font-family:'DM Mono',monospace;
+  font-size:10px;color:var(--txt3);
+  letter-spacing:2px;margin-bottom:14px;
+}
+.card-body{
+  font-size:13px;color:var(--txt2);
+  line-height:2;margin-bottom:18px;
+}
+.card-link{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:'DM Mono',monospace;
+  font-size:10px;letter-spacing:1px;
+  color:var(--card-color,var(--gold));
+  text-decoration:none;
+  border-bottom:1px solid currentColor;
+  padding-bottom:1px;
+  transition:opacity .2s;
+}
+.card-link:hover{opacity:.7;}
+.card-link::after{content:'→';font-size:11px;}
+
+/* Quote */
+.card-quote{
+  margin-top:16px;
+  padding:12px 16px;
+  background:var(--bg2);
+  border-left:2px solid var(--card-color,var(--gold));
+  border-radius:0 6px 6px 0;
+  font-family:'Noto Serif JP',serif;
+  font-size:12px;font-style:italic;
+  color:var(--txt2);line-height:1.9;
+}
+
+/* ── FOOTER PHRASE ── */
+.stories-footer{
+  text-align:center;
+  margin-top:64px;
+  padding-top:48px;
+  border-top:1px solid var(--line);
+}
+.footer-phrase{
+  font-family:'Noto Serif JP',serif;
+  font-size:clamp(15px,2.5vw,20px);
+  font-weight:700;
+  line-height:1.8;
+  color:var(--txt);
+  margin-bottom:12px;
+}
+.footer-phrase-en{
+  font-family:'DM Mono',monospace;
+  font-size:11px;letter-spacing:2px;
+  color:var(--txt3);
+}
+
+/* ── ANIMATE ── */
+.card{opacity:0;transform:translateY(16px);animation:fadeUp .6s ease forwards;}
+.card:nth-child(1){animation-delay:.1s;}
+.card:nth-child(2){animation-delay:.25s;}
+.card:nth-child(3){animation-delay:.4s;}
+@keyframes fadeUp{to{opacity:1;transform:translateY(0);}}
+
+.stories-header{opacity:0;animation:fadeUp .6s ease .05s forwards;}
+.stories-footer{opacity:0;animation:fadeUp .6s ease .55s forwards;}
+</style>
+</head>
+<body>
+
+<section class="stories">
+
+  <!-- HEADER -->
+  <div class="stories-header">
+    <div class="stories-eyebrow">DUNKSOFT STORIES</div>
+    <h2 class="stories-title">
+      色と記憶と、人のつながり。<br>
+      <span style="font-size:.7em;font-weight:400;color:var(--txt2);">43年の軌跡から生まれた、天然色文字AUTH™。</span>
+    </h2>
+    <p class="stories-lead">
+      テクノロジーは人間の記憶と感情を守るためにある。<br>
+      その信念を、私たちは現場で実証してきました。
+    </p>
+  </div>
+
+  <!-- CARDS -->
+  <div class="cards">
+
+    <!-- Card 1: Microsoft CM -->
+    <div class="card" style="--card-color:#1a6ab1;">
+      <div class="card-inner">
+        <div class="card-year">
+          <div class="year-num">2013</div>
+          <div class="year-dot"></div>
+        </div>
+        <div class="card-content">
+          <div class="card-tag">KAMIYAMA · MICROSOFT · TELEWORK</div>
+          <div class="card-title">神山町からテレビ朝日へ。<br>Microsoftが撮ったDUNKSOFTの物語。</div>
+          <div class="card-title-en">MICROSOFT JAPAN TV COMMERCIAL · TV ASAHI</div>
+          <div class="card-body">
+            東日本大震災の直後、私たちは東京から徳島県神山町へ向かいました。日本で2番目のサテライトオフィスを開設し、Skypeだけを使って東京・徳島・全国をつないだ。その活動をMicrosoft社長室が映像に収め、テレビ朝日のCMとして全国に届けてくれました。<br><br>
+            <em style="font-size:12px;color:#9a9890;">「リモートワークのインフラが整う前に、私たちは動いていた。」</em>
+          </div>
+          <a class="card-link" href="https://www.youtube.com/watch?v=AiaYF_HA1VA" target="_blank">YouTube で見る</a>
+          <div class="card-quote">
+            2012年3月、神山町の公民館でMicrosoft樋口社長・神山グリーンバレー大南信也氏とのパネルディスカッションを開催。100名超が参加し、東京・徳島にもリモートで中継されました。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2: 萩市レポート -->
+    <div class="card" style="--card-color:#2a7a4a;">
+      <div class="card-inner">
+        <div class="card-year">
+          <div class="year-num" style="font-size:16px;padding-top:3px;">萩市</div>
+          <div class="year-dot"></div>
+        </div>
+        <div class="card-content">
+          <div class="card-tag">HAGI CITY · SATELLITE OFFICE · REPORT</div>
+          <div class="card-title">山口県萩市。<br>サテライトオフィス実証実験レポート。</div>
+          <div class="card-title-en">SATELLITE OFFICE PROOF-OF-CONCEPT · HAGI CITY</div>
+          <div class="card-body">
+            地方創生の最前線へ。DUNKSOFTが全編制作した萩市でのサテライトオフィス実証実験レポートが、萩市の公式サイトで公開されています。神山町での経験をもとに、全国各地でリモートワークの可能性を実証してきた記録です。
+          </div>
+          <a class="card-link" href="https://www.hagi-society5.org/book/33351/html5.html#page=32" target="_blank">レポートを読む</a>
+          <div class="card-quote">
+            総務省「テレワーク先駆者百選」、厚生労働大臣表彰「輝くテレワーク賞」——国が認めた、現場からの実証。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3: セザンヌ -->
+    <div class="card" style="--card-color:#8b4a9c;">
+      <div class="card-inner">
+        <div class="card-year">
+          <div class="year-num">2022</div>
+          <div class="year-dot"></div>
+        </div>
+        <div class="card-content">
+          <div class="card-tag">CÉZANNE · FRANCE · WEAREE! · COVID-19</div>
+          <div class="card-title">南仏プロヴァンスから、色彩の革命家へ。<br>WeARee!でつなぐセザンヌのアトリエ。</div>
+          <div class="card-title-en">VIRTUAL TOUR OF ATELIER DE CÉZANNE · AIX-EN-PROVENCE</div>
+          <div class="card-body">
+            コロナ禍で日本人観光客が激減した南仏エクス＝アン＝プロヴァンス。DUNKSOFTのWeARee!を使い、フランス人インターンシップ生がセザンヌのアトリエをバーチャルツアーで世界に届けました。色彩で近代絵画を革命したセザンヌの聖地を、色彩で人を認証するDUNKSOFTがつないだ——偶然ではない必然の出会い。
+          </div>
+          <a class="card-link" href="https://cezanne.wearee.jp/index/content/2577" target="_blank">バーチャルツアーへ</a>
+          <div class="card-quote">
+            "Cézanne formed the bridge between Impressionism and Cubism through planes of colour." ——色で世界を再構築した画家と、色で人を認証するシステム。
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER PHRASE -->
+  <div class="stories-footer">
+    <div class="footer-phrase">
+      私はこの問題を「発見」したのではない。<br>43年間、目撃してきたのだ。
+    </div>
+    <div class="footer-phrase-en">
+      "I did not discover this problem. I witnessed it for 43 years."<br>
+      — Koichiro Hoshino, President &amp; CEO, DUNKSOFT Co., Ltd.
+    </div>
+  </div>
+
+</section>
+
+</body>
+</html>
