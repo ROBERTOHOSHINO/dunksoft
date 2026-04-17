@@ -228,7 +228,200 @@ nav a:hover { color: var(--accent); }
   width: 32px;
   margin-bottom: .25rem;
 }
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DUNKSOFT Stories — Link Button</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700;900&family=Noto+Sans+JP:wght@400;500&family=DM+Mono:wght@400;500&display=swap');
 
+*{box-sizing:border-box;margin:0;padding:0;}
+
+body{
+  font-family:'Noto Sans JP',sans-serif;
+  background:#faf9f6;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:100vh;
+  padding:40px 24px;
+}
+
+/* ── STORIES LINK BANNER ── */
+.stories-banner{
+  max-width:640px;
+  width:100%;
+  background:#fff;
+  border:1px solid rgba(0,0,0,.12);
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 4px 24px rgba(0,0,0,.06);
+  transition:transform .3s, box-shadow .3s;
+}
+.stories-banner:hover{
+  transform:translateY(-3px);
+  box-shadow:0 12px 40px rgba(0,0,0,.1);
+}
+
+/* Top color bar — 3色グラデーション */
+.banner-bar{
+  height:4px;
+  background:linear-gradient(90deg, #1a6ab1 0%, #2a7a4a 50%, #8b4a9c 100%);
+}
+
+.banner-inner{
+  padding:28px 32px;
+  display:flex;
+  align-items:center;
+  gap:24px;
+  text-decoration:none;
+  color:inherit;
+}
+
+/* Icon dots */
+.banner-dots{
+  flex-shrink:0;
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+.dot{
+  width:10px;height:10px;border-radius:50%;
+}
+
+/* Text */
+.banner-text{flex:1;}
+.banner-eyebrow{
+  font-family:'DM Mono',monospace;
+  font-size:9px;letter-spacing:3px;
+  color:#9a9890;
+  margin-bottom:6px;
+}
+.banner-title{
+  font-family:'Noto Serif JP',serif;
+  font-size:16px;font-weight:700;
+  line-height:1.5;
+  color:#1a1a18;
+  margin-bottom:4px;
+  letter-spacing:-.3px;
+}
+.banner-sub{
+  font-size:11px;
+  color:#7a7870;
+  line-height:1.7;
+}
+
+/* Arrow */
+.banner-arrow{
+  flex-shrink:0;
+  font-family:'DM Mono',monospace;
+  font-size:18px;
+  color:#b8820a;
+  transition:transform .2s;
+}
+.stories-banner:hover .banner-arrow{
+  transform:translateX(4px);
+}
+
+/* ── 3 MINI CARDS (preview) ── */
+.banner-preview{
+  border-top:1px solid rgba(0,0,0,.06);
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+}
+.preview-item{
+  padding:14px 16px;
+  border-right:1px solid rgba(0,0,0,.06);
+  transition:background .2s;
+}
+.preview-item:last-child{border-right:none;}
+.preview-item:hover{background:#f8f7f4;}
+.pi-dot{
+  width:6px;height:6px;border-radius:50%;
+  margin-bottom:7px;
+}
+.pi-label{
+  font-family:'DM Mono',monospace;
+  font-size:8px;letter-spacing:2px;
+  line-height:1.6;
+  color:#9a9890;
+}
+.pi-title{
+  font-size:11px;
+  font-weight:500;
+  color:#3a3a38;
+  margin-top:3px;
+  line-height:1.5;
+}
+
+/* Animate */
+.stories-banner{
+  opacity:0;
+  transform:translateY(12px);
+  animation:fadeUp .5s ease .1s forwards;
+}
+@keyframes fadeUp{to{opacity:1;transform:translateY(0);}}
+</style>
+</head>
+<body>
+
+<!--
+  =====================================================
+  dunksoft.jp TOPページ用 — Storiesセクションへのリンク
+  このHTMLブロックをそのままサイトに埋め込んでください。
+  href="./stories.html" の部分をStoriesページのURLに変更してください。
+  =====================================================
+-->
+
+<a class="stories-banner" href="./dunksoft_stories_section.html" target="_self">
+
+  <div class="banner-bar"></div>
+
+  <div class="banner-inner">
+    <div class="banner-dots">
+      <div class="dot" style="background:#1a6ab1;"></div>
+      <div class="dot" style="background:#2a7a4a;"></div>
+      <div class="dot" style="background:#8b4a9c;"></div>
+    </div>
+
+    <div class="banner-text">
+      <div class="banner-eyebrow">DUNKSOFT STORIES</div>
+      <div class="banner-title">
+        色と記憶と、人のつながり。<br>
+        43年の軌跡から生まれた、天然色文字AUTH™。
+      </div>
+      <div class="banner-sub">
+        Microsoft TV-CM · 萩市レポート · セザンヌのアトリエ
+      </div>
+    </div>
+
+    <div class="banner-arrow">→</div>
+  </div>
+
+  <div class="banner-preview">
+    <div class="preview-item">
+      <div class="pi-dot" style="background:#1a6ab1;"></div>
+      <div class="pi-label">2013 · MICROSOFT</div>
+      <div class="pi-title">神山町から<br>テレビ朝日へ</div>
+    </div>
+    <div class="preview-item">
+      <div class="pi-dot" style="background:#2a7a4a;"></div>
+      <div class="pi-label">HAGI CITY · REPORT</div>
+      <div class="pi-title">萩市サテライト<br>オフィス実証</div>
+    </div>
+    <div class="preview-item">
+      <div class="pi-dot" style="background:#8b4a9c;"></div>
+      <div class="pi-label">2022 · FRANCE</div>
+      <div class="pi-title">セザンヌの<br>アトリエへ</div>
+    </div>
+  </div>
+
+</a>
+
+</body>
+</html>
 /* ── ABOUT ── */
 .about {
   max-width: 860px;
