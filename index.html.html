@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Life Styles® | Dunksoft</title>
+<meta name="description" content="色彩日本語・天然色漢字INDEX・歴史継承デモ。言語と記憶をつなぐプロジェクト群。">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&family=Noto+Serif+JP:wght@400;600&display=swap');
+
+:root {
+  --ink: #1a1814;
+  --ink2: #4a4640;
+  --ink3: #8a8680;
+  --paper: #faf8f4;
+  --paper2: #f2efe8;
+  --gold: #b8960c;
+  --vermilion: #c0392b;
+  --indigo: #1a3a5c;
+  --teal: #0f6e56;
+  --accent: #c0550a;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+  line-height: 1.8;
+}
+
+/* ── HEADER ── */
+header {
+  border-bottom: 0.5px solid rgba(0,0,0,0.12);
+  padding: 1.25rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  background: rgba(250,248,244,0.95);
+  backdrop-filter: blur(8px);
+  z-index: 100;
+}
+.logo {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  color: var(--ink);
+  text-decoration: none;
+}
+.logo span { color: var(--accent); }
+nav { display: flex; gap: 2rem; }
+nav a {
+  font-size: 12px;
+  letter-spacing: .08em;
+  color: var(--ink2);
+  text-decoration: none;
+  transition: color .2s;
+}
+nav a:hover { color: var(--accent); }
+
+/* ── HERO ── */
+.hero {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 5rem 2rem 4rem;
+}
+.hero-label {
+  font-size: 11px;
+  letter-spacing: .15em;
+  color: var(--ink3);
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+}
+.hero h1 {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(28px, 5vw, 52px);
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: .04em;
+  margin-bottom: 1rem;
+}
+.hero h1 ruby rt { font-size: 11px; font-weight: 400; color: var(--ink3); font-family: 'Noto Sans JP', sans-serif; }
+.hero-sub {
+  font-size: 15px;
+  color: var(--ink2);
+  max-width: 560px;
+  margin-bottom: 2.5rem;
+  line-height: 2;
+}
+.hero-stats {
+  display: flex;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+}
+.stat-item { }
+.stat-num {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--ink);
+  display: block;
+}
+.stat-num ruby rt { font-size: 10px; font-weight: 400; color: var(--ink3); font-family: 'Noto Sans JP', sans-serif; }
+.stat-label { font-size: 11px; color: var(--ink3); letter-spacing: .06em; }
+
+/* ── DIVIDER ── */
+.divider {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  border-top: 0.5px solid rgba(0,0,0,0.1);
+}
+
+/* ── VISION LAYERS ── */
+.vision {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 3.5rem 2rem;
+}
+.section-label {
+  font-size: 11px;
+  letter-spacing: .15em;
+  color: var(--ink3);
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+}
+.layers { display: flex; flex-direction: column; gap: 1px; }
+.layer {
+  display: grid;
+  grid-template-columns: 3rem 1fr auto;
+  align-items: start;
+  gap: 1.5rem;
+  padding: 1.5rem 0;
+  border-top: 0.5px solid rgba(0,0,0,0.08);
+  text-decoration: none;
+  color: inherit;
+  transition: background .15s;
+  cursor: pointer;
+}
+.layer:hover { background: var(--paper2); margin: 0 -1rem; padding-left: 1rem; padding-right: 1rem; }
+.layer-num {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 11px;
+  color: var(--ink3);
+  padding-top: 4px;
+  letter-spacing: .06em;
+}
+.layer-body {}
+.layer-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: .3rem;
+  line-height: 1.5;
+}
+.layer-title ruby rt { font-size: 9px; font-weight: 400; color: var(--ink3); font-family: 'Noto Sans JP', sans-serif; }
+.layer-en { font-size: 11px; color: var(--ink3); letter-spacing: .06em; margin-bottom: .6rem; }
+.layer-desc { font-size: 13px; color: var(--ink2); line-height: 1.9; }
+.layer-tag {
+  font-size: 10px;
+  letter-spacing: .08em;
+  padding: 3px 10px;
+  border: 0.5px solid currentColor;
+  border-radius: 2px;
+  white-space: nowrap;
+  margin-top: 4px;
+}
+.tag-live { color: var(--teal); }
+.tag-demo { color: var(--indigo); }
+.tag-soon { color: var(--ink3); }
+
+/* ── DEMOS GRID ── */
+.demos {
+  background: var(--paper2);
+  padding: 3.5rem 0;
+}
+.demos-inner {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+.demos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1px;
+  background: rgba(0,0,0,0.08);
+  border: 0.5px solid rgba(0,0,0,0.08);
+}
+.demo-card {
+  background: var(--paper);
+  padding: 1.75rem;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+  transition: background .15s;
+}
+.demo-card:hover { background: #fff; }
+.demo-card-cat {
+  font-size: 10px;
+  letter-spacing: .12em;
+  color: var(--ink3);
+  text-transform: uppercase;
+}
+.demo-card-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+.demo-card-title ruby rt { font-size: 9px; font-weight: 400; color: var(--ink3); font-family: 'Noto Sans JP', sans-serif; }
+.demo-card-en { font-size: 11px; color: var(--ink3); }
+.demo-card-desc { font-size: 12px; color: var(--ink2); line-height: 1.8; flex: 1; }
+.demo-card-arrow {
+  font-size: 11px;
+  color: var(--accent);
+  letter-spacing: .06em;
+  margin-top: auto;
+}
+.demo-accent-bar {
+  height: 2px;
+  width: 32px;
+  margin-bottom: .25rem;
+}
+
+/* ── ABOUT ── */
+.about {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+@media (max-width: 600px) { .about { grid-template-columns: 1fr; gap: 2rem; } }
+.about h2 {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+  line-height: 1.5;
+}
+.about h2 ruby rt { font-size: 10px; font-weight: 400; color: var(--ink3); font-family: 'Noto Sans JP', sans-serif; }
+.about p { font-size: 13px; color: var(--ink2); line-height: 2.1; margin-bottom: 1rem; }
+.tools-list { display: flex; flex-direction: column; gap: .5rem; margin-top: .5rem; }
+.tool-item {
+  display: flex;
+  align-items: baseline;
+  gap: .75rem;
+  font-size: 13px;
+  padding: .6rem 0;
+  border-bottom: 0.5px solid rgba(0,0,0,0.07);
+}
+.tool-name {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 14px;
+  font-weight: 600;
+  min-width: 130px;
+}
+.tool-name ruby rt { font-size: 8px; font-weight: 400; color: var(--ink3); font-family: 'Noto Sans JP', sans-serif; }
+.tool-desc { font-size: 11px; color: var(--ink3); }
+
+/* ── FOOTER ── */
+footer {
+  border-top: 0.5px solid rgba(0,0,0,0.1);
+  padding: 2rem;
+  text-align: center;
+}
+footer p { font-size: 11px; color: var(--ink3); letter-spacing: .06em; line-height: 2; }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero h1, .hero-sub, .hero-stats {
+  animation: fadeUp .7s ease both;
+}
+.hero-sub  { animation-delay: .12s; }
+.hero-stats { animation-delay: .24s; }
+
+/* ── COLOR LEGEND STRIP ── */
+.color-strip {
+  display: flex;
+  height: 4px;
+  overflow: hidden;
+}
+.cs { flex: 1; }
+
+@media (max-width: 600px) {
+  nav { display: none; }
+  .hero { padding: 3rem 1.25rem 2.5rem; }
+  .hero-stats { gap: 1.5rem; }
+  .vision, .demos-inner, .about { padding-left: 1.25rem; padding-right: 1.25rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- Color strip -->
+<div class="color-strip">
+  <div class="cs" style="background:#c0392b"></div>
+  <div class="cs" style="background:#1a5276"></div>
+  <div class="cs" style="background:#1e5c2f"></div>
+  <div class="cs" style="background:#6c3483"></div>
+  <div class="cs" style="background:#b8960c"></div>
+  <div class="cs" style="background:#0e7b82"></div>
+  <div class="cs" style="background:#c0550a"></div>
+</div>
+
+<header>
+  <a href="/" class="logo" style="display:flex;align-items:center;">
+    <object type="image/svg+xml" data="https://dunksoft.jp/logo-raku-anime.svg"
+      style="width:120px;height:36px;pointer-events:none;"
+      aria-label="DUNKSOFT">
+      Dunk<span>soft</span>.jp
+    </object>
+  </a>
+  <nav>
+    <a href="https://robertohoshino.github.io/Smart-LIfe-Styles/" target="_blank">ビジョン</a>
+    <a href="#demos">デモ</a>
+    <a href="#about">について</a>
+    <a href="https://note.com/roberto_hoshino" target="_blank">note</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-label">Smart Life Styles® — Love your life, love your time®</div>
+  <h1 id="hero-h1">
+    <ruby><span style="color:#F9A825">時</span><span style="color:#A1887F">代</span><rt>じだい</rt></ruby>を<ruby><span style="color:#EC407A">繋</span><rt>つな</rt></ruby>ぐ、<br>
+    <ruby><span style="color:#AB47BC">自</span><span style="color:#AB47BC">己</span><span style="color:#66BB6A">成</span><span style="color:#A1887F">長</span><rt>じこせいちょう</rt></ruby>の<ruby><span style="color:#EC407A">連</span><span style="color:#EC407A">鎖</span><rt>れんさ</rt></ruby>
+  </h1>
+  <p class="hero-sub">
+    <ruby>言語<rt>げんご</rt></ruby>と<ruby>記憶<rt>きおく</rt></ruby>と<ruby>歴史<rt>れきし</rt></ruby>を<ruby>色<rt>いろ</rt></ruby>でつなぐ。<br>
+    Connecting language, memory and history through colour.
+  </p>
+  <div class="hero-stats">
+    <div class="stat-item">
+      <span class="stat-num">32</span>
+      <span class="stat-label"><ruby>世代<rt>せだい</rt></ruby> / Generations</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">42<ruby>億人<rt>おくにん</rt></ruby></span>
+      <span class="stat-label">DNA のつながり</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num"><ruby>複利<rt>ふくり</rt></ruby></span>
+      <span class="stat-label"><ruby>成長<rt>せいちょう</rt></ruby>モデル</span>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- VISION LAYERS -->
+<section class="vision" id="vision">
+  <div class="section-label">Vision Layers — <ruby>全体像<rt>ぜんたいぞう</rt></ruby></div>
+
+  <!-- 色彩日本語コントロール -->
+  <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:1.5rem;padding:12px 16px;background:var(--paper2);border-radius:4px">
+    <span style="font-size:10px;letter-spacing:.1em;color:var(--ink3);margin-right:4px">色彩日本語™</span>
+    <button class="cj-btn cj-on" id="btn-color" onclick="toggleColor()">カラー ON</button>
+    <button class="cj-btn cj-on" id="btn-ruby" onclick="toggleRuby()">ふりがな ON</button>
+  </div>
+
+  <div class="layers">
+
+    <a href="vickey-project.html" style="text-decoration:none;color:inherit;display:contents;">
+    <div class="layer" style="cursor:pointer;">
+      <div class="layer-num">01</div>
+      <div class="layer-body">
+        <div class="layer-title"><ruby><span class="kc" style="color:#AB47BC">個</span><span class="kc" style="color:#AB47BC">人</span><rt>こじん</rt></ruby>の<ruby><span class="kc" style="color:#66BB6A">成</span><span class="kc" style="color:#A1887F">長</span><rt>せいちょう</rt></ruby> — Vicky Project</div>
+        <div class="layer-en">Self-growth · Personal narrative · Compound model</div>
+        <div class="layer-desc"><ruby><span class="kc" style="color:#F9A825">若</span><span class="kc" style="color:#66BB6A">者</span><rt>わかもの</rt></ruby>が<ruby><span class="kc" style="color:#AB47BC">自</span><span class="kc" style="color:#AB47BC">分</span><rt>じぶん</rt></ruby>の<ruby><span class="kc" style="color:#A1887F">物</span><span class="kc" style="color:#A1887F">語</span><rt>ものがたり</rt></ruby>を<ruby><span class="kc" style="color:#EC407A">共</span><span class="kc" style="color:#4DD0E1">有</span><rt>きょうゆう</rt></ruby>し、<ruby><span class="kc" style="color:#EC407A">複</span><span class="kc" style="color:#EC407A">利</span><rt>ふくり</rt></ruby>のように<ruby><span class="kc" style="color:#66BB6A">成</span><span class="kc" style="color:#A1887F">長</span><rt>せいちょう</rt></ruby>するモデル。</div>
+      </div>
+      <div class="layer-tag tag-live">LIVE</div>
+    </div>
+    </a>
+
+    <a href="https://robertohoshino.github.io/kanda-ai/quiz_questions.html" target="_blank" style="text-decoration:none;color:inherit;display:contents;">
+    <div class="layer" style="cursor:pointer;">
+      <div class="layer-num">02</div>
+      <div class="layer-body">
+        <div class="layer-title"><ruby><span class="kc" style="color:#4DD0E1">言</span><span class="kc" style="color:#4DD0E1">語</span><rt>げんご</rt></ruby>の<ruby><span class="kc" style="color:#A1887F">壁</span><rt>かべ</rt></ruby>を<ruby><span class="kc" style="color:#4DB6AC">越</span><rt>こ</rt></ruby>える — <ruby><span class="kc" style="color:#EC407A">色</span><span class="kc" style="color:#EC407A">彩</span><span class="kc" style="color:#F9A825">日</span><span class="kc" style="color:#66BB6A">本</span><span class="kc" style="color:#4DD0E1">語</span><rt>しきさいにほんご</rt></ruby>™</div>
+        <div class="layer-en">Colorful Japanese · Furigana · Grammar colour-coding</div>
+        <div class="layer-desc"><ruby><span class="kc" style="color:#4DD0E1">品</span><span class="kc" style="color:#4DD0E1">詞</span><rt>ひんし</rt></ruby>カラーとふりがなで、<ruby><span class="kc" style="color:#AB47BC">子</span><rt>こ</rt></ruby>どもから<ruby><span class="kc" style="color:#AB47BC">外</span><span class="kc" style="color:#FFA726">国</span><span class="kc" style="color:#AB47BC">人</span><rt>がいこくじん</rt></ruby>まで<ruby><span class="kc" style="color:#4DD0E1">読</span><rt>よ</rt></ruby>める<ruby><span class="kc" style="color:#F9A825">日</span><span class="kc" style="color:#66BB6A">本</span><span class="kc" style="color:#4DD0E1">語</span><rt>にほんご</rt></ruby>に。</div>
+      </div>
+      <div class="layer-tag tag-live">DEMO</div>
+    </div>
+    </a>
+
+    <div class="layer">
+      <div class="layer-num">03</div>
+      <div class="layer-body">
+        <div class="layer-title"><ruby><span class="kc" style="color:#F9A825">歴</span><span class="kc" style="color:#4DD0E1">史</span><rt>れきし</rt></ruby>の<ruby><span class="kc" style="color:#EC407A">継</span><span class="kc" style="color:#EC407A">承</span><rt>けいしょう</rt></ruby> — <ruby><span class="kc" style="color:#A1887F">首</span><span class="kc" style="color:#A1887F">里</span><span class="kc" style="color:#A1887F">城</span><rt>しゅりじょう</rt></ruby>・<ruby><span class="kc" style="color:#F9A825">旧</span><span class="kc" style="color:#7986CB">海</span><span class="kc" style="color:#4DD0E1">軍</span><rt>きゅうかいぐん</rt></ruby></div>
+        <div class="layer-en">Memory continuity · Okinawa · Revival</div>
+        <div class="layer-desc"><ruby><span class="kc" style="color:#4DB6AC">過</span><span class="kc" style="color:#4DB6AC">去</span><rt>かこ</rt></ruby>の<ruby><span class="kc" style="color:#EC407A">記</span><span class="kc" style="color:#4DD0E1">憶</span><rt>きおく</rt></ruby>を<ruby><span class="kc" style="color:#EC407A">共</span><span class="kc" style="color:#4DD0E1">有</span><rt>きょうゆう</rt></ruby>し<ruby><span class="kc" style="color:#F9A825">時</span><span class="kc" style="color:#A1887F">代</span><rt>じだい</rt></ruby>を<ruby><span class="kc" style="color:#EC407A">繋</span><rt>つな</rt></ruby>ぐ。<ruby><span class="kc" style="color:#A1887F">首</span><span class="kc" style="color:#A1887F">里</span><span class="kc" style="color:#A1887F">城</span><rt>しゅりじょう</rt></ruby>は5<ruby><span class="kc" style="color:#F9A825">度</span><rt>ど</rt></ruby><ruby><span class="kc" style="color:#8BC34A">蘇</span><rt>よみがえ</rt></ruby>った。</div>
+      </div>
+      <div class="layer-tag tag-demo">DEMO</div>
+    </div>
+
+    <a href="vickey-zoyo-chiiki.html" target="_blank" style="text-decoration:none;color:inherit;display:contents;">
+    <div class="layer" style="cursor:pointer;">
+      <div class="layer-num">04</div>
+      <div class="layer-body">
+        <div class="layer-title"><ruby><span class="kc" style="color:#4DD0E1">文</span><span class="kc" style="color:#AB47BC">化</span><rt>ぶんか</rt></ruby>・<ruby><span class="kc" style="color:#AB47BC">伝</span><span class="kc" style="color:#EC407A">統</span><rt>でんとう</rt></ruby>の<ruby><span class="kc" style="color:#90A4AE">再</span><span class="kc" style="color:#66BB6A">生</span><rt>さいせい</rt></ruby> — <ruby><span class="kc" style="color:#E57373">神</span><span class="kc" style="color:#A1887F">田</span><span class="kc" style="color:#4FC3F7">藍</span><rt>かんだあい</rt></ruby>の<ruby><span class="kc" style="color:#AB47BC">会</span><rt>かい</rt></ruby> × <ruby><span class="kc" style="color:#66BB6A">地</span><span class="kc" style="color:#66BB6A">域</span><span class="kc" style="color:#66BB6A">再</span><span class="kc" style="color:#66BB6A">生</span><rt>ちいきさいせい</rt></ruby></div>
+        <div class="layer-en">Co-Learning · DNA inheritance · Community revival · Paella</div>
+        <div class="layer-desc"><ruby><span class="kc" style="color:#66BB6A">生</span><span class="kc" style="color:#66BB6A">前</span><span class="kc" style="color:#66BB6A">贈</span><span class="kc" style="color:#66BB6A">与</span><rt>せいぜんぞうよ</rt></ruby>×<ruby><span class="kc" style="color:#EC407A">D</span><span class="kc" style="color:#EC407A">N</span><span class="kc" style="color:#EC407A">A</span><span class="kc" style="color:#EC407A">継</span><span class="kc" style="color:#EC407A">承</span><rt>けいしょう</rt></ruby>で<ruby><span class="kc" style="color:#A1887F">地</span><span class="kc" style="color:#A1887F">域</span><rt>ちいき</rt></ruby>を<ruby><span class="kc" style="color:#66BB6A">豊</span><rt>ゆた</rt></ruby>かに。<ruby><span class="kc" style="color:#F9A825">若</span><span class="kc" style="color:#66BB6A">者</span><rt>わかもの</rt></ruby>×<ruby><span class="kc" style="color:#A1887F">地</span><span class="kc" style="color:#A1887F">域</span><rt>ちいき</rt></ruby>の<ruby><span class="kc" style="color:#EC407A">媒</span><span class="kc" style="color:#EC407A">介</span><rt>ばいかい</rt></ruby>に<ruby><span class="kc" style="color:#FF7043">ご</span><span class="kc" style="color:#FF7043">当</span><span class="kc" style="color:#FF7043">地</span><span class="kc" style="color:#FF7043">パ</span><span class="kc" style="color:#FF7043">エ</span><span class="kc" style="color:#FF7043">リ</span><span class="kc" style="color:#FF7043">ア</span><rt>ごとうちぱえりあ</rt></ruby>も。</div>
+      </div>
+      <div class="layer-tag tag-live">LIVE</div>
+    </div>
+    </a>
+
+    <div class="layer">
+      <div class="layer-num">05</div>
+      <div class="layer-body">
+        <div class="layer-title"><ruby><span class="kc" style="color:#90A4AE">天</span><span class="kc" style="color:#FF5722">然</span><span class="kc" style="color:#EC407A">色</span><span class="kc" style="color:#4FC3F7">漢</span><span class="kc" style="color:#80DEEA">字</span><rt>てんねんしょくかんじ</rt></ruby>INDEX™ — <ruby><span class="kc" style="color:#4DD0E1">認</span><span class="kc" style="color:#4DD0E1">証</span><rt>にんしょう</rt></ruby></div>
+        <div class="layer-en">Colorful Kanji · Visual authentication · Community gate</div>
+        <div class="layer-desc"><ruby><span class="kc" style="color:#4FC3F7">漢</span><span class="kc" style="color:#80DEEA">字</span><rt>かんじ</rt></ruby>×<ruby><span class="kc" style="color:#EC407A">色</span><rt>いろ</rt></ruby>で<ruby><span class="kc" style="color:#4DD0E1">認</span><span class="kc" style="color:#4DD0E1">証</span><rt>にんしょう</rt></ruby>。<ruby><span class="kc" style="color:#AB47BC">誰</span><rt>だれ</rt></ruby>でも<ruby><span class="kc" style="color:#FFA726">良</span><rt>よ</rt></ruby>いわけではない——<ruby><span class="kc" style="color:#4DD0E1">文</span><span class="kc" style="color:#AB47BC">化</span><rt>ぶんか</rt></ruby>の<ruby><span class="kc" style="color:#4DB6AC">門</span><rt>もん</rt></ruby>を<ruby><span class="kc" style="color:#90A4AE">美</span><rt>うつく</rt></ruby>しく<ruby><span class="kc" style="color:#80DEEA">守</span><rt>まも</rt></ruby>る。</div>
+      </div>
+      <div class="layer-tag tag-demo">PROTO</div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+.cj-btn{font-size:10px;padding:5px 14px;border-radius:10px;border:1px solid #ddd;background:#f5f5f5;color:#999;cursor:pointer;transition:all .15s;font-family:'Noto Sans JP',sans-serif}
+.cj-btn.cj-on{border-color:var(--accent);color:var(--accent);background:#fdf0e8}
+</style>
+
+<script>
+let colorOn=true, rubyOn=true;
+
+// ページ読み込み時に元の色を保存
+document.addEventListener("DOMContentLoaded", function(){
+  document.querySelectorAll("span.kc").forEach(sp=>{
+    sp.dataset.col = sp.style.color;
+  });
+});
+
+function toggleColor(){
+  colorOn=!colorOn;
+  const btn=document.getElementById("btn-color");
+  btn.textContent=colorOn?"カラー ON":"カラー OFF";
+  btn.classList.toggle("cj-on",colorOn);
+  document.querySelectorAll("span.kc").forEach(sp=>{
+    sp.style.color = colorOn ? sp.dataset.col : "#aaa";
+  });
+}
+
+function toggleRuby(){
+  rubyOn=!rubyOn;
+  const btn=document.getElementById("btn-ruby");
+  btn.textContent=rubyOn?"ふりがな ON":"ふりがな OFF";
+  btn.classList.toggle("cj-on",rubyOn);
+  document.querySelectorAll("ruby rt").forEach(rt=>{
+    rt.style.display=rubyOn?"":"none";
+  });
+}
+</script>
+
+<div class="divider"></div>
+
+<!-- DEMOS -->
+<section class="demos" id="demos">
+  <div class="demos-inner">
+    <div class="section-label" style="margin-bottom:1.75rem">Demos — <ruby>公開<rt>こうかい</rt></ruby>デモ</div>
+    <div class="demos-grid">
+
+      <a class="demo-card" href="https://robertohoshino.github.io/kanji-index/nisa-infographic20260313.html" target="_blank">
+        <div class="demo-accent-bar" style="background:#534AB7"></div>
+        <div class="demo-card-cat">個人の成長 · Growth</div>
+        <div class="demo-card-title">Vicky Project</div>
+        <div class="demo-card-en">Self-growth · Personal narrative</div>
+        <div class="demo-card-desc"><ruby>若者<rt>わかもの</rt></ruby>が<ruby>自分<rt>じぶん</rt></ruby>の<ruby>物語<rt>ものがたり</rt></ruby>を<ruby>共有<rt>きょうゆう</rt></ruby>し、<ruby>複利<rt>ふくり</rt></ruby>のように<ruby>成長<rt>せいちょう</rt></ruby>するモデル。</div>
+        <div class="demo-card-arrow">開く（外部）↗</div>
+      </a>
+
+      <a class="demo-card" href="demos/shurijo.html">
+        <div class="demo-accent-bar" style="background:#c0550a"></div>
+        <div class="demo-card-cat">歴史継承 · History</div>
+        <div class="demo-card-title"><ruby>首里城<rt>しゅりじょう</rt></ruby></div>
+        <div class="demo-card-en">Shuri Castle Revival</div>
+        <div class="demo-card-desc"><ruby>火災消失<rt>かさいしょうしつ</rt></ruby>から<ruby>正殿復興<rt>せいでんふっこう</rt></ruby>の<ruby>意義<rt>いぎ</rt></ruby>を<ruby>色彩日本語<rt>しきさいにほんご</rt></ruby>で。</div>
+        <div class="demo-card-arrow">デモを見る →</div>
+      </a>
+
+      <a class="demo-card" href="https://claude.ai/public/artifacts/ff3fa6a5-8dbb-43da-9fdc-1933081839d0" target="_blank">
+        <div class="demo-accent-bar" style="background:#1a3a5c"></div>
+        <div class="demo-card-cat">歴史継承 · History</div>
+        <div class="demo-card-title"><ruby>旧海軍司令部壕<rt>きゅうかいぐんしれいぶごう</rt></ruby></div>
+        <div class="demo-card-en">Former Navy HQ Bunker</div>
+        <div class="demo-card-desc"><ruby>沖縄戦<rt>おきなわせん</rt></ruby>の<ruby>記憶<rt>きおく</rt></ruby>を<ruby>次世代<rt>じせだい</rt></ruby>へ。ふりがな×<ruby>品詞<rt>ひんし</rt></ruby>カラーで。</div>
+        <div class="demo-card-arrow">開く（外部）↗</div>
+      </a>
+
+      <a class="demo-card" href="https://robertohoshino.github.io/parking-reservation/" target="_blank">
+        <div class="demo-accent-bar" style="background:#0f6e56"></div>
+        <div class="demo-card-cat">天然色漢字 · Auth</div>
+        <div class="demo-card-title"><ruby>駐車場予約<rt>ちゅうしゃじょうよやく</rt></ruby></div>
+        <div class="demo-card-en">Parking Reservation</div>
+        <div class="demo-card-desc"><ruby>漢字<rt>かんじ</rt></ruby>×<ruby>色<rt>いろ</rt></ruby>の<ruby>認証<rt>にんしょう</rt></ruby>システム<ruby>実装例<rt>じっそうれい</rt></ruby>。GitHub Pages<ruby>公開中<rt>こうかいちゅう</rt></ruby>。</div>
+        <div class="demo-card-arrow">開く（外部）↗</div>
+      </a>
+
+      <a class="demo-card" href="https://robertohoshino.github.io/miraikanri-demo/" target="_blank">
+        <div class="demo-accent-bar" style="background:#185FA5"></div>
+        <div class="demo-card-cat">Smart Life Styles · Management</div>
+        <div class="demo-card-title"><ruby>未来管理<rt>みらいかんり</rt></ruby>デモ</div>
+        <div class="demo-card-en">Future Management Demo</div>
+        <div class="demo-card-desc"><ruby>時間<rt>じかん</rt></ruby>を<ruby>豊<rt>ゆた</rt></ruby>かに<ruby>使<rt>つか</rt></ruby>うための<ruby>管理<rt>かんり</rt></ruby>ツール。Smart Life Styles® の<ruby>実践<rt>じっせん</rt></ruby>デモ。</div>
+        <div class="demo-card-arrow">開く（外部）↗</div>
+      </a>
+
+      <a class="demo-card" href="https://robertohoshino.github.io/nippo-demo/" target="_blank">
+        <div class="demo-accent-bar" style="background:#BA7517"></div>
+        <div class="demo-card-cat">Smart Life Styles · Daily Log</div>
+        <div class="demo-card-title"><ruby>日報<rt>にっぽう</rt></ruby>デモ</div>
+        <div class="demo-card-en">Daily Report Demo</div>
+        <div class="demo-card-desc"><ruby>毎日<rt>まいにち</rt></ruby>の<ruby>記録<rt>きろく</rt></ruby>を<ruby>積<rt>つ</rt></ruby>み<ruby>重<rt>かさ</rt></ruby>ねる。<ruby>複利<rt>ふくり</rt></ruby>の<ruby>成長<rt>せいちょう</rt></ruby>を<ruby>支<rt>ささ</rt></ruby>える<ruby>日報<rt>にっぽう</rt></ruby>ツール。</div>
+        <div class="demo-card-arrow">開く（外部）↗</div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div>
+    <h2>
+      <ruby>私<rt>わたし</rt></ruby>たちについて<br>
+      <span style="font-size:14px;font-weight:400;color:var(--ink3)">About us</span>
+    </h2>
+    <p>株式会社ダンクソフト × Roberto Hoshino が進める <strong>Smart Life Styles®</strong> プロジェクト。<ruby>言語<rt>げんご</rt></ruby>・<ruby>文化<rt>ぶんか</rt></ruby>・<ruby>歴史<rt>れきし</rt></ruby>の<ruby>継承<rt>けいしょう</rt></ruby>を、<ruby>色<rt>いろ</rt></ruby>と<ruby>技術<rt>ぎじゅつ</rt></ruby>で<ruby>次世代<rt>じせだい</rt></ruby>へ。</p>
+    <p>Claude.ai とのコラボレーションでプロトタイプを毎日開発中。成果は note に公開しています。</p>
+    <p style="font-size:12px;color:var(--ink3);margin-top:1rem;line-height:2">
+      <a href="https://note.com/roberto_hoshino" target="_blank" style="color:var(--accent);text-decoration:none">note を読む →</a><br>
+      <a href="demos/auto-publish-flow.html" style="color:var(--ink3);text-decoration:none;font-size:11px">
+        📋 <ruby>自動公開<rt>じどうこうかい</rt></ruby>フロー図（Claude.ai → GitHub → Cloudflare → dunksoft.jp）
+      </a>
+    </p>
+  </div>
+  <div>
+    <h2>
+      <ruby>活用<rt>かつよう</rt></ruby>ツール<br>
+      <span style="font-size:14px;font-weight:400;color:var(--ink3)">Tools &amp; projects</span>
+    </h2>
+    <div class="tools-list">
+      <div class="tool-item">
+        <div class="tool-name"><ruby>色彩日本語<rt>しきさいにほんご</rt></ruby>™</div>
+        <div class="tool-desc">Colorful Japanese</div>
+      </div>
+      <div class="tool-item">
+        <div class="tool-name"><ruby>天然色漢字<rt>てんねんしょくかんじ</rt></ruby>™</div>
+        <div class="tool-desc">Colorful Kanji INDEX</div>
+      </div>
+      <div class="tool-item">
+        <div class="tool-name">English Colorizer</div>
+        <div class="tool-desc">Grammar colour — 開発中</div>
+      </div>
+      <div class="tool-item">
+        <div class="tool-name">Claude.ai Demo</div>
+        <div class="tool-desc">AI prototype × daily</div>
+      </div>
+      <div class="tool-item">
+        <div class="tool-name">dunksoft.jp</div>
+        <div class="tool-desc">This site — Cloudflare Pages</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>
+    色彩日本語 COLORFUL JAPANESE™ &nbsp;|&nbsp; 天然色漢字 INDEX™ &nbsp;|&nbsp; Smart Life Styles®<br>
+    Love your life, love your time® &nbsp;|&nbsp; © Dunksoft / Roberto Hoshino
+  </p>
+</footer>
+
+</body>
+</html>
