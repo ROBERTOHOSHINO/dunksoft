@@ -267,6 +267,78 @@ nav a:hover { color: var(--accent); }
 .tool-name ruby rt { font-size: 8px; font-weight: 400; color: var(--ink3); font-family: 'Noto Sans JP', sans-serif; }
 .tool-desc { font-size: 11px; color: var(--ink3); }
 
+
+/* ── STORIES ── */
+.stories-section {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  border-top: 0.5px solid rgba(0,0,0,0.08);
+}
+.stories-eyebrow {
+  font-size: 10px; letter-spacing: .15em; color: var(--ink3);
+  margin-bottom: 1rem; text-transform: uppercase;
+  display: flex; align-items: center; gap: 10px;
+}
+.stories-eyebrow::before, .stories-eyebrow::after {
+  content: ''; display: block; height: 1px; width: 24px;
+  background: var(--gold); opacity: .5;
+}
+.stories-heading {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(20px, 3.5vw, 30px); font-weight: 600;
+  line-height: 1.5; margin-bottom: .75rem; letter-spacing: .02em;
+}
+.stories-lead { font-size: 13px; color: var(--ink2); margin-bottom: 2.5rem; line-height: 2; }
+.story-cards { display: flex; flex-direction: column; gap: 2px; }
+.story-card {
+  background: #fff; border: 0.5px solid rgba(0,0,0,0.12);
+  border-radius: 0; overflow: hidden;
+  transition: transform .25s, box-shadow .25s;
+  position: relative; text-decoration: none; color: inherit; display: block;
+}
+.story-card:first-child { border-radius: 14px 14px 0 0; }
+.story-card:last-child  { border-radius: 0 0 14px 14px; }
+.story-card::before {
+  content: ''; position: absolute; top: 0; left: 0; bottom: 0;
+  width: 3px; background: var(--sc-color, var(--gold)); opacity: 0; transition: opacity .25s;
+}
+.story-card:hover { transform: translateX(4px); box-shadow: 0 6px 24px rgba(0,0,0,.07); }
+.story-card:hover::before { opacity: 1; }
+.sc-inner { padding: 24px 28px; display: flex; gap: 20px; align-items: flex-start; }
+.sc-dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--sc-color, var(--gold));
+  flex-shrink: 0; margin-top: 6px; opacity: .7;
+}
+.sc-body { flex: 1; }
+.sc-tag {
+  font-size: 9px; letter-spacing: .12em;
+  color: var(--sc-color, var(--gold));
+  margin-bottom: 5px; opacity: .85; text-transform: uppercase;
+}
+.sc-title {
+  font-family: 'Noto Serif JP', serif; font-size: 15px; font-weight: 600;
+  line-height: 1.55; margin-bottom: 6px; letter-spacing: .01em;
+}
+.sc-desc { font-size: 12px; color: var(--ink2); line-height: 1.85; }
+.sc-link {
+  font-size: 10px; letter-spacing: .08em;
+  color: var(--sc-color, var(--gold));
+  margin-top: 10px; display: inline-flex; align-items: center; gap: 4px;
+}
+.sc-link::after { content: "→"; }
+.stories-footer-phrase {
+  margin-top: 2.5rem; padding-top: 2rem;
+  border-top: 0.5px solid rgba(0,0,0,0.07); text-align: center;
+}
+.sfp-ja {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(13px, 2vw, 16px); font-weight: 600;
+  line-height: 1.9; margin-bottom: 8px;
+}
+.sfp-en { font-size: 10px; letter-spacing: .08em; color: var(--ink3); line-height: 1.8; }
+
 /* ── FOOTER ── */
 footer {
   border-top: 0.5px solid rgba(0,0,0,0.1);
@@ -326,6 +398,7 @@ footer p { font-size: 11px; color: var(--ink3); letter-spacing: .06em; line-heig
   <nav>
     <a href="https://robertohoshino.github.io/Smart-LIfe-Styles/" target="_blank">ビジョン</a>
     <a href="#demos">デモ</a>
+    <a href="#stories">Stories</a>
     <a href="#about">について</a>
     <a href="https://note.com/roberto_hoshino" target="_blank">note</a>
   </nav>
@@ -534,6 +607,65 @@ function toggleRuby(){
   </div>
 </section>
 
+
+<!-- STORIES -->
+<section class="stories-section" id="stories">
+  <div class="stories-eyebrow">DUNKSOFT STORIES</div>
+  <h2 class="stories-heading">
+    色と記憶と、人のつながり。<br>
+    <span style="font-size:.75em;font-weight:400;color:var(--ink3)">43年の軌跡から生まれた、天然色文字AUTH™。</span>
+  </h2>
+  <p class="stories-lead">テクノロジーは人間の記憶と感情を守るためにある。<br>その信念を、私たちは現場で実証してきました。</p>
+
+  <div class="story-cards">
+
+    <a class="story-card" style="--sc-color:#1a6ab1" href="https://www.youtube.com/watch?v=AiaYF_HA1VA" target="_blank">
+      <div class="sc-inner">
+        <div class="sc-dot"></div>
+        <div class="sc-body">
+          <div class="sc-tag">2013 · KAMIYAMA · MICROSOFT · TELEWORK</div>
+          <div class="sc-title">神山町からテレビ朝日へ。Microsoftが撮ったDUNKSOFTの物語。</div>
+          <div class="sc-desc">東日本大震災の直後、東京から徳島県神山町へ。日本で2番目のサテライトオフィスを開設し、Skypeだけで全国をつないだ活動をMicrosoft社長室が映像に収め、テレビ朝日のCMとして全国に届けてくれました。</div>
+          <div class="sc-link">YouTube で見る</div>
+        </div>
+      </div>
+    </a>
+
+    <a class="story-card" style="--sc-color:#2a7a4a" href="https://www.hagi-society5.org/book/33351/html5.html#page=32" target="_blank">
+      <div class="sc-inner">
+        <div class="sc-dot"></div>
+        <div class="sc-body">
+          <div class="sc-tag">HAGI CITY · SATELLITE OFFICE · REPORT</div>
+          <div class="sc-title">山口県萩市。サテライトオフィス実証実験レポート。</div>
+          <div class="sc-desc">DUNKSOFTが全編制作した萩市でのサテライトオフィス実証実験レポートが、萩市の公式サイトで公開されています。総務省「テレワーク先駆者百選」、厚生労働大臣表彰「輝くテレワーク賞」——国が認めた、現場からの実証。</div>
+          <div class="sc-link">レポートを読む</div>
+        </div>
+      </div>
+    </a>
+
+    <a class="story-card" style="--sc-color:#7b3f9e" href="https://cezanne.wearee.jp/index/content/2577" target="_blank">
+      <div class="sc-inner">
+        <div class="sc-dot"></div>
+        <div class="sc-body">
+          <div class="sc-tag">2022 · CÉZANNE · FRANCE · WEAREE!</div>
+          <div class="sc-title">南仏プロヴァンスから、色彩の革命家へ。WeARee!でつなぐセザンヌのアトリエ。</div>
+          <div class="sc-desc">コロナ禍で日本人観光客が激減した南仏エクス＝アン＝プロヴァンス。DUNKSOFTのWeARee!を使い、フランス人インターンシップ生がセザンヌのアトリエをバーチャルツアーで世界に届けました。色で世界を再構築した画家と、色で人を認証するシステム。</div>
+          <div class="sc-link">バーチャルツアーへ</div>
+        </div>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="stories-footer-phrase">
+    <div class="sfp-ja">私はこの問題を「発見」したのではない。<br>43年間、目撃してきたのだ。</div>
+    <div class="sfp-en">
+      "I did not discover this problem. I witnessed it for 43 years."<br>
+      — Koichiro Hoshino, President &amp; CEO, DUNKSOFT Co., Ltd.
+    </div>
+  </div>
+</section>
+
 <!-- ABOUT -->
 <section class="about" id="about">
   <div>
@@ -541,7 +673,7 @@ function toggleRuby(){
       <ruby>私<rt>わたし</rt></ruby>たちについて<br>
       <span style="font-size:14px;font-weight:400;color:var(--ink3)">About us</span>
     </h2>
-    <p>株式会社ダンクソフト × Roberto Hoshino が進める <strong>Smart Life Styles®</strong> プロジェクト。<ruby>言語<rt>げんご</rt></ruby>・<ruby>文化<rt>ぶんか</rt></ruby>・<ruby>歴史<rt>れきし</rt></ruby>の<ruby>継承<rt>けいしょう</rt></ruby>を、<ruby>色<rt>いろ</rt></ruby>と<ruby>技術<rt>ぎじゅつ</rt></ruby>で<ruby>次世代<rt>じせだい</rt></ruby>へ。</p>
+    <p>株式会社ダンクソフト × Koichiro Hoshino が進める <strong>Smart Life Styles®</strong> プロジェクト。<ruby>言語<rt>げんご</rt></ruby>・<ruby>文化<rt>ぶんか</rt></ruby>・<ruby>歴史<rt>れきし</rt></ruby>の<ruby>継承<rt>けいしょう</rt></ruby>を、<ruby>色<rt>いろ</rt></ruby>と<ruby>技術<rt>ぎじゅつ</rt></ruby>で<ruby>次世代<rt>じせだい</rt></ruby>へ。</p>
     <p>Claude.ai とのコラボレーションでプロトタイプを毎日開発中。成果は note に公開しています。</p>
     <p style="font-size:12px;color:var(--ink3);margin-top:1rem;line-height:2">
       <a href="https://note.com/roberto_hoshino" target="_blank" style="color:var(--accent);text-decoration:none">note を読む →</a><br>
@@ -583,7 +715,7 @@ function toggleRuby(){
 <footer>
   <p>
     色彩日本語 COLORFUL JAPANESE™ &nbsp;|&nbsp; 天然色漢字 INDEX™ &nbsp;|&nbsp; Smart Life Styles®<br>
-    Love your life, love your time® &nbsp;|&nbsp; © Dunksoft / Roberto Hoshino
+    Love your life, love your time® &nbsp;|&nbsp; © Dunksoft / Koichiro Hoshino
   </p>
 </footer>
 
