@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DUNKSOFT NEXT — チームへのビジョン共有 2026</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700;900&family=Noto+Sans+JP:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap');
+
+:root{
+  --bg:#06070f;--bg2:#0c0e1d;--bg3:#12152c;
+  --line:rgba(255,255,255,.07);--line2:rgba(255,255,255,.15);
+  --txt:#dde2f5;--txt2:#7e89b0;--txt3:#3c4468;
+  --gold:#c8920a;--gold2:#edb830;--gold3:#fff0b0;
+  --hoshi:#3949AB;--aki:#F9A825;
+  --grn:#3dd68c;--red:#f06060;--cyan:#1ed8d8;--pur:#9b7ff4;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:'Noto Sans JP',sans-serif;
+  background:var(--bg);color:var(--txt);
+  font-size:14px;line-height:1.8;
+  overflow-x:hidden;
+}
+
+/* BG */
+.bg-grid{
+  position:fixed;inset:0;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(255,255,255,.015) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.015) 1px,transparent 1px);
+  background-size:60px 60px;
+}
+
+/* PROGRESS */
+.progress{
+  position:fixed;top:0;left:0;right:0;z-index:300;
+  height:3px;
+  background:linear-gradient(90deg,var(--hoshi),var(--gold),var(--aki));
+  transform-origin:left;transform:scaleX(0);transition:transform .2s;
+}
+
+/* HEADER */
+.header{
+  position:fixed;top:3px;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 32px;
+  background:rgba(6,7,15,.92);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);
+}
+.brand{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:3px;color:var(--gold2);}
+.brand small{color:var(--txt3);font-size:9px;letter-spacing:2px;display:block;margin-top:1px;}
+.confidential{
+  font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;
+  color:var(--red);border:1px solid rgba(240,96,96,.3);
+  border-radius:20px;padding:3px 12px;
+  display:flex;align-items:center;gap:5px;
+}
+.confidential::before{content:'●';font-size:6px;animation:blink 2s infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+
+/* SCENES */
+.scene{
+  min-height:100vh;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:100px 32px 60px;
+  border-bottom:1px solid var(--line);
+  position:relative;
+}
+
+/* ── SCENE 0: COVER ── */
+.cover-eyebrow{
+  font-family:'DM Mono',monospace;
+  font-size:10px;letter-spacing:5px;color:var(--txt3);
+  margin-bottom:24px;text-align:center;
+}
+.cover-title{
+  font-family:'Noto Serif JP',serif;
+  font-size:clamp(36px,8vw,80px);font-weight:900;
+  line-height:1.1;text-align:center;letter-spacing:-2px;
+  margin-bottom:16px;
+}
+.cover-title .next{color:var(--gold2);}
+.cover-title .star{color:var(--hoshi);}
+.cover-title .sun{color:var(--aki);}
+
+.cover-sub{
+  font-size:13px;color:var(--txt2);text-align:center;
+  max-width:520px;line-height:2;margin-bottom:48px;
+  font-style:italic;
+}
+
+.cover-badges{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:48px;}
+.badge{
+  font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;
+  border:1px solid var(--line2);border-radius:20px;padding:5px 14px;
+  display:flex;align-items:center;gap:6px;
+}
+.badge.gold{color:var(--gold2);border-color:rgba(200,146,10,.4);}
+.badge.grn{color:var(--grn);border-color:rgba(61,214,140,.4);}
+.badge.pur{color:var(--pur);border-color:rgba(155,127,244,.4);}
+.badge::before{content:'✓';font-size:10px;}
+
+.scroll-hint{
+  font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;
+  color:var(--txt3);text-align:center;
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  animation:bounce 2s infinite;cursor:pointer;
+}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+
+/* ── SECTION HEADER ── */
+.sec-eyebrow{
+  font-family:'DM Mono',monospace;font-size:9px;letter-spacing:4px;
+  color:var(--txt3);margin-bottom:12px;text-align:center;
+}
+.sec-title{
+  font-family:'Noto Serif JP',serif;
+  font-size:clamp(24px,4vw,40px);font-weight:900;
+  letter-spacing:-1px;text-align:center;margin-bottom:8px;
+}
+.sec-sub{
+  font-size:13px;color:var(--txt2);text-align:center;
+  max-width:560px;line-height:2;margin-bottom:48px;
+  font-style:italic;
+}
+
+/* ── SCENE 1: MONEY ── */
+.money-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:14px;max-width:800px;width:100%;margin-bottom:32px;
+}
+.money-card{
+  background:var(--bg2);border:1px solid var(--line);
+  border-radius:16px;padding:24px;
+  position:relative;overflow:hidden;
+  transition:transform .2s;
+}
+.money-card:hover{transform:translateY(-3px);}
+.money-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:var(--mc,var(--gold));
+}
+.money-label{
+  font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;
+  color:var(--txt3);margin-bottom:8px;
+}
+.money-amount{
+  font-family:'DM Mono',monospace;
+  font-size:clamp(28px,5vw,44px);font-weight:500;
+  color:var(--mc,var(--gold2));line-height:1;margin-bottom:6px;
+}
+.money-desc{font-size:12px;color:var(--txt2);line-height:1.8;}
+.money-when{
+  font-family:'DM Mono',monospace;font-size:9px;
+  color:var(--txt3);margin-top:10px;letter-spacing:1px;
+}
+
+.money-total{
+  max-width:800px;width:100%;
+  background:var(--bg3);border:1px solid rgba(200,146,10,.3);
+  border-radius:14px;padding:20px 28px;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:12px;
+}
+.money-total-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--txt3);}
+.money-total-num{
+  font-family:'DM Mono',monospace;font-size:32px;color:var(--gold2);
+  font-weight:500;line-height:1;
+}
+
+/* ── SCENE 2: REVENUE SIMULATOR ── */
+.simulator{
+  max-width:680px;width:100%;
+  background:var(--bg2);border:1px solid var(--line2);
+  border-radius:20px;overflow:hidden;
+}
+.sim-header{
+  background:var(--bg3);border-bottom:1px solid var(--line);
+  padding:14px 24px;
+  font-family:'DM Mono',monospace;font-size:10px;
+  letter-spacing:3px;color:var(--txt3);
+}
+.sim-body{padding:28px;}
+.sim-row{margin-bottom:20px;}
+.sim-row label{
+  font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;
+  color:var(--txt3);display:flex;justify-content:space-between;
+  margin-bottom:8px;
+}
+.sim-row label span{color:var(--gold2);}
+input[type=range]{
+  width:100%;height:4px;
+  background:var(--bg3);border-radius:2px;outline:none;
+  -webkit-appearance:none;cursor:pointer;
+}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;
+  width:18px;height:18px;border-radius:50%;
+  background:var(--gold2);cursor:pointer;
+  transition:.15s;
+}
+input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2);}
+
+.sim-result{
+  margin-top:24px;padding:20px;
+  background:var(--bg3);border-radius:14px;
+  display:grid;grid-template-columns:1fr 1fr;gap:16px;
+}
+.sim-num{text-align:center;}
+.sim-num-val{
+  font-family:'DM Mono',monospace;
+  font-size:clamp(22px,4vw,36px);
+  color:var(--gold2);line-height:1;margin-bottom:4px;
+}
+.sim-num-label{font-size:11px;color:var(--txt2);}
+
+/* Bar chart */
+.sim-bars{margin-top:20px;display:flex;flex-direction:column;gap:8px;}
+.sim-bar-row{display:flex;align-items:center;gap:10px;}
+.sim-bar-label{font-family:'DM Mono',monospace;font-size:9px;color:var(--txt3);width:60px;flex-shrink:0;}
+.sim-bar-track{flex:1;background:var(--bg);border-radius:3px;height:8px;overflow:hidden;}
+.sim-bar-fill{height:100%;border-radius:3px;transition:width .5s cubic-bezier(.34,1.56,.64,1);}
+.sim-bar-val{font-family:'DM Mono',monospace;font-size:9px;color:var(--txt2);width:60px;text-align:right;flex-shrink:0;}
+
+/* ── SCENE 3: ROADMAP ── */
+.roadmap{max-width:680px;width:100%;display:flex;flex-direction:column;gap:0;}
+.rm-item{
+  display:flex;gap:0;
+  opacity:0;transform:translateY(16px);
+  transition:opacity .5s ease,transform .5s ease;
+}
+.rm-item.visible{opacity:1;transform:translateY(0);}
+.rm-item:nth-child(2){transition-delay:.1s;}
+.rm-item:nth-child(3){transition-delay:.2s;}
+.rm-item:nth-child(4){transition-delay:.3s;}
+.rm-item:nth-child(5){transition-delay:.4s;}
+.rm-item:nth-child(6){transition-delay:.5s;}
+
+.rm-left{
+  width:100px;flex-shrink:0;
+  padding:20px 16px 20px 0;
+  text-align:right;
+}
+.rm-date{
+  font-family:'DM Mono',monospace;
+  font-size:13px;font-weight:500;
+  color:var(--gold2);line-height:1;
+}
+.rm-date-sub{
+  font-size:10px;color:var(--txt3);
+  font-family:'DM Mono',monospace;
+  letter-spacing:1px;margin-top:3px;
+}
+
+.rm-center{
+  width:24px;flex-shrink:0;
+  display:flex;flex-direction:column;align-items:center;
+}
+.rm-dot{
+  width:14px;height:14px;border-radius:50%;
+  background:var(--rd-color,var(--gold));
+  flex-shrink:0;margin-top:24px;
+  box-shadow:0 0 12px var(--rd-color,var(--gold));
+}
+.rm-line{flex:1;width:2px;background:var(--line);margin-top:4px;}
+.rm-item:last-child .rm-line{display:none;}
+
+.rm-right{
+  flex:1;padding:16px 0 32px 20px;
+  border-left:none;
+}
+.rm-tag{
+  font-family:'DM Mono',monospace;font-size:8px;letter-spacing:3px;
+  color:var(--rd-color,var(--gold));margin-bottom:6px;
+  opacity:.8;
+}
+.rm-title{
+  font-family:'Noto Serif JP',serif;
+  font-size:15px;font-weight:700;margin-bottom:8px;
+  line-height:1.5;letter-spacing:-.3px;
+}
+.rm-body{font-size:12px;color:var(--txt2);line-height:1.9;}
+.rm-money{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:'DM Mono',monospace;font-size:10px;
+  color:var(--grn);border:1px solid rgba(61,214,140,.3);
+  border-radius:20px;padding:3px 10px;
+  margin-top:10px;
+}
+.rm-money::before{content:'¥';}
+
+/* ── SCENE 4: GLOBAL ── */
+.global-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:14px;max-width:800px;width:100%;margin-bottom:32px;
+}
+.global-card{
+  background:var(--bg2);border:1px solid var(--line);
+  border-radius:14px;padding:20px;
+  transition:transform .2s;
+}
+.global-card:hover{transform:translateY(-2px);}
+.global-phase{
+  font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;
+  color:var(--gc,var(--txt3));margin-bottom:10px;
+}
+.global-title{
+  font-family:'Noto Serif JP',serif;
+  font-size:14px;font-weight:700;margin-bottom:8px;line-height:1.5;
+}
+.global-title span{color:var(--gc,var(--gold));}
+.global-body{font-size:11px;color:var(--txt2);line-height:1.9;}
+
+/* ── SCENE 5: AIDA + VISION ── */
+.vision-quote{
+  max-width:600px;
+  font-family:'Noto Serif JP',serif;
+  font-size:clamp(16px,3vw,26px);font-weight:700;
+  line-height:1.8;text-align:center;
+  margin-bottom:32px;letter-spacing:-.3px;
+}
+.vision-quote .star{color:var(--hoshi);}
+.vision-quote .sun{color:var(--aki);}
+.vision-quote .gold{color:var(--gold2);}
+
+.aida-card{
+  max-width:560px;width:100%;
+  background:var(--bg2);border:1px solid var(--line2);
+  border-radius:18px;padding:28px 32px;
+  margin-bottom:32px;
+  position:relative;overflow:hidden;
+}
+.aida-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--hoshi),var(--gold2),var(--aki));
+}
+.aida-title{
+  font-family:'Noto Serif JP',serif;
+  font-size:16px;font-weight:700;margin-bottom:16px;
+}
+.aida-text{font-size:13px;color:var(--txt2);line-height:2;font-style:italic;}
+.aida-text strong{color:var(--txt);font-style:normal;}
+
+/* ── SCENE 6: TEAM ── */
+.team-cards{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:14px;max-width:800px;width:100%;margin-bottom:32px;
+}
+.team-card{
+  background:var(--bg2);border:1px solid var(--line);
+  border-radius:14px;padding:22px;
+  position:relative;overflow:hidden;
+}
+.team-card::before{
+  content:'';position:absolute;top:0;left:0;bottom:0;width:3px;
+  background:var(--tc,var(--gold));
+}
+.team-num{
+  font-family:'DM Mono',monospace;font-size:28px;
+  color:var(--tc,var(--gold));opacity:.2;
+  position:absolute;top:14px;right:16px;line-height:1;
+}
+.team-title{font-size:13px;font-weight:700;margin-bottom:8px;}
+.team-body{font-size:12px;color:var(--txt2);line-height:1.9;}
+
+.final-quote{
+  max-width:540px;width:100%;
+  text-align:center;
+  font-family:'DM Mono',monospace;
+  font-size:11px;letter-spacing:2px;
+  color:var(--txt3);
+  padding:24px;border:1px solid var(--line);
+  border-radius:16px;line-height:2.2;
+}
+.final-quote strong{color:var(--gold2);font-weight:500;}
+
+/* FOOTER */
+.footer{
+  padding:28px 32px;border-top:1px solid var(--line);
+  text-align:center;font-family:'DM Mono',monospace;
+  font-size:10px;letter-spacing:2px;color:var(--txt3);
+  line-height:2;
+}
+
+/* SCROLL REVEAL */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<div class="bg-grid"></div>
+<div class="progress" id="prog"></div>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="brand">
+    DUNKSOFT NEXT
+    <small>INTERNAL · 社内限定</small>
+  </div>
+  <div class="confidential">CONFIDENTIAL</div>
+</div>
+
+<!-- ══ SCENE 0: COVER ══ -->
+<section class="scene" id="s0">
+  <div class="cover-eyebrow">DUNKSOFT Co., Ltd. · 2026〜2028 VISION</div>
+  <div class="cover-title">
+    <span class="star">星</span>と<span class="sun">晃</span>が<br>
+    世界を<span class="next">NEXT</span>へ。
+  </div>
+  <div class="cover-sub">
+    43年間目撃してきた問題の解決へ。<br>
+    チームへのビジョン共有 — 2026年4月20日
+  </div>
+  <div class="cover-badges">
+    <div class="badge gold">YC Summer 2026 SUBMITTED</div>
+    <div class="badge grn">Antler Japan JPN6 SUBMITTED</div>
+    <div class="badge pur">特許出願予定 · PCT予定</div>
+  </div>
+  <div class="scroll-hint" onclick="document.getElementById('s1').scrollIntoView({behavior:'smooth'})">
+    SCROLL TO READ
+    <span style="font-size:20px;">↓</span>
+  </div>
+</section>
+
+<!-- ══ SCENE 1: MONEY ══ -->
+<section class="scene" id="s1">
+  <div class="sec-eyebrow reveal">01 / 05 · お金の動き</div>
+  <div class="sec-title reveal">採択されたら、何が起きるか。</div>
+  <div class="sec-sub reveal">
+    2つのプログラムが動き出すと、<br>初めて外部資本がDUNKSOFTに入る。
+  </div>
+
+  <div class="money-grid reveal">
+    <div class="money-card" style="--mc:var(--gold2);">
+      <div class="money-label">Y COMBINATOR · 採択時</div>
+      <div class="money-amount">$500K</div>
+      <div class="money-desc">
+        採択日即日に投資実行。<br>
+        $125k = 7%エクイティ<br>
+        $375k = アンキャップSAFE
+      </div>
+      <div class="money-when">→ 2026年7月〜（採択の場合）</div>
+    </div>
+
+    <div class="money-card" style="--mc:var(--cyan);">
+      <div class="money-label">ANTLER JAPAN · 採択時</div>
+      <div class="money-amount">$400K</div>
+      <div class="money-desc">
+        6週間後に投資実行。<br>
+        $100k = 10%エクイティ<br>
+        $50k SAFE + 最大$250k追加
+      </div>
+      <div class="money-when">→ 2026年5月11日〜（採択の場合）</div>
+    </div>
+
+    <div class="money-card" style="--mc:var(--grn);">
+      <div class="money-label">徳島合同証券 · パイロット</div>
+      <div class="money-amount">初収益</div>
+      <div class="money-desc">
+        ¥500/ユーザー/月<br>
+        5,000ユーザー想定<br>
+        = ¥2.5M〜5M ARR
+      </div>
+      <div class="money-when">→ 2026年Q2 オンボーディング</div>
+    </div>
+
+    <div class="money-card" style="--mc:var(--pur);">
+      <div class="money-label">SERIES B+ · 目標</div>
+      <div class="money-amount">¥3B+</div>
+      <div class="money-desc">
+        YC Demo Day後に<br>
+        本格的な資金調達ラウンド。<br>
+        国際展開の基盤として。
+      </div>
+      <div class="money-when">→ 2026年秋〜冬（目標）</div>
+    </div>
+  </div>
+
+  <div class="money-total reveal">
+    <div>
+      <div class="money-total-label">TOTAL · 最大調達目標（Phase 1）</div>
+      <div style="font-size:11px;color:var(--txt3);font-family:'DM Mono',monospace;margin-top:3px;">YC + Antler + Series B+ 合計</div>
+    </div>
+    <div class="money-total-num">¥3B+</div>
+  </div>
+</section>
+
+<!-- ══ SCENE 2: REVENUE SIMULATOR ══ -->
+<section class="scene" id="s2">
+  <div class="sec-eyebrow reveal">02 / 05 · マネタイズ</div>
+  <div class="sec-title reveal">SaaS収益シミュレーター</div>
+  <div class="sec-sub reveal">
+    スライダーを動かして、収益の積み上がりを見てください。<br>
+    ¥500/ユーザー/月 × 契約社数 × ユーザー数。
+  </div>
+
+  <div class="simulator reveal">
+    <div class="sim-header">REVENUE SIMULATOR · 天然色文字AUTH™ SaaS</div>
+    <div class="sim-body">
+
+      <div class="sim-row">
+        <label>契約金融機関数 <span id="v-firms">5社</span></label>
+        <input type="range" id="firms" min="1" max="200" value="5" oninput="calc()">
+      </div>
+
+      <div class="sim-row">
+        <label>1社あたりユーザー数 <span id="v-users">5,000人</span></label>
+        <input type="range" id="users" min="1000" max="50000" step="1000" value="5000" oninput="calc()">
+      </div>
+
+      <div class="sim-row">
+        <label>月額単価 <span id="v-price">¥500/人</span></label>
+        <input type="range" id="price" min="100" max="2000" step="100" value="500" oninput="calc()">
+      </div>
+
+      <div class="sim-result">
+        <div class="sim-num">
+          <div class="sim-num-val" id="r-monthly">¥12.5M</div>
+          <div class="sim-num-label">月間収益</div>
+        </div>
+        <div class="sim-num">
+          <div class="sim-num-val" id="r-annual">¥150M</div>
+          <div class="sim-num-label">年間ARR</div>
+        </div>
+      </div>
+
+      <div class="sim-bars" id="sim-bars">
+        <div class="sim-bar-row">
+          <div class="sim-bar-label">Phase 1</div>
+          <div class="sim-bar-track"><div class="sim-bar-fill" id="bar1" style="background:var(--grn);width:0%"></div></div>
+          <div class="sim-bar-val" id="bv1">—</div>
+        </div>
+        <div class="sim-bar-row">
+          <div class="sim-bar-label">×10社</div>
+          <div class="sim-bar-track"><div class="sim-bar-fill" id="bar2" style="background:var(--cyan);width:0%"></div></div>
+          <div class="sim-bar-val" id="bv2">—</div>
+        </div>
+        <div class="sim-bar-row">
+          <div class="sim-bar-label">×50社</div>
+          <div class="sim-bar-track"><div class="sim-bar-fill" id="bar3" style="background:var(--pur);width:0%"></div></div>
+          <div class="sim-bar-val" id="bv3">—</div>
+        </div>
+        <div class="sim-bar-row">
+          <div class="sim-bar-label">×200社</div>
+          <div class="sim-bar-track"><div class="sim-bar-fill" id="bar4" style="background:var(--gold2);width:0%"></div></div>
+          <div class="sim-bar-val" id="bv4">—</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ SCENE 3: ROADMAP ══ -->
+<section class="scene" id="s3">
+  <div class="sec-eyebrow reveal">03 / 05 · ロードマップ</div>
+  <div class="sec-title reveal">1〜2年で見えてくる世界</div>
+  <div class="sec-sub reveal">
+    徳島から始まり、東京へ、そして欧米へ。<br>
+    DUNKSOFTが積み上げてきた43年が、全部活きる。
+  </div>
+
+  <div class="roadmap">
+
+    <div class="rm-item" style="--rd-color:var(--grn);">
+      <div class="rm-left">
+        <div class="rm-date">2026<br>Q2</div>
+        <div class="rm-date-sub">NOW</div>
+      </div>
+      <div class="rm-center"><div class="rm-dot"></div><div class="rm-line"></div></div>
+      <div class="rm-right">
+        <div class="rm-tag">FIRST FLYWHEEL</div>
+        <div class="rm-title">徳島合同証券パイロット始動</div>
+        <div class="rm-body">43年の信頼が初めて収益になる。実証実績を持って証券業協会への提案へ。</div>
+        <div class="rm-money">2.5M〜5M ARR</div>
+      </div>
+    </div>
+
+    <div class="rm-item" style="--rd-color:var(--cyan);">
+      <div class="rm-left">
+        <div class="rm-date">2026<br>Q3</div>
+      </div>
+      <div class="rm-center"><div class="rm-dot"></div><div class="rm-line"></div></div>
+      <div class="rm-right">
+        <div class="rm-tag">YC DEMO DAY</div>
+        <div class="rm-title">世界の投資家の前でデモ</div>
+        <div class="rm-body">YC Demo Dayで世界へ露出。Series B+の交渉開始。国際IPO・M&Aシナリオが視野に入る。</div>
+        <div class="rm-money">Series B+ 交渉開始</div>
+      </div>
+    </div>
+
+    <div class="rm-item" style="--rd-color:var(--gold2);">
+      <div class="rm-left">
+        <div class="rm-date">2026<br>Q4</div>
+      </div>
+      <div class="rm-center"><div class="rm-dot"></div><div class="rm-line"></div></div>
+      <div class="rm-right">
+        <div class="rm-tag">SCALE JAPAN</div>
+        <div class="rm-title">地方証券20社・SaaS化</div>
+        <div class="rm-body">会議室・勤怠・備品管理への横展開。月額SaaSとして安定収益化。三省堂など出版・教育へも展開。</div>
+        <div class="rm-money">50M〜100M ARR</div>
+      </div>
+    </div>
+
+    <div class="rm-item" style="--rd-color:var(--pur);">
+      <div class="rm-left">
+        <div class="rm-date">2027</div>
+      </div>
+      <div class="rm-center"><div class="rm-dot"></div><div class="rm-line"></div></div>
+      <div class="rm-right">
+        <div class="rm-tag">INDUSTRY STANDARD</div>
+        <div class="rm-title">証券業協会標準採用</div>
+        <div class="rm-body">日本の証券業界全体の認証基盤へ。こどもNISA認証・金融機関ログイン標準に。PCT特許が国際的に効力を持ち始める。</div>
+        <div class="rm-money">500M〜1B ARR</div>
+      </div>
+    </div>
+
+    <div class="rm-item" style="--rd-color:var(--hoshi);">
+      <div class="rm-left">
+        <div class="rm-date">2027〜<br>2028</div>
+      </div>
+      <div class="rm-center"><div class="rm-dot"></div><div class="rm-line"></div></div>
+      <div class="rm-right">
+        <div class="rm-tag">GLOBAL · 欧米実装</div>
+        <div class="rm-title">ラテン文字圏への色彩言語認証</div>
+        <div class="rm-body">JOHNのシステムへ。欧米の金融・医療・教育システムに天然色文字AUTH™をインプリメント。APIライセンスモデルで収益化。漢字圏（中・台・韓）も並行展開。</div>
+        <div class="rm-money">国際ライセンス収益 開始</div>
+      </div>
+    </div>
+
+    <div class="rm-item" style="--rd-color:var(--aki);">
+      <div class="rm-left">
+        <div class="rm-date">2028〜</div>
+      </div>
+      <div class="rm-center"><div class="rm-dot"></div><div class="rm-line"></div></div>
+      <div class="rm-right">
+        <div class="rm-tag">GLOBAL DOMINANCE</div>
+        <div class="rm-title">44億人・全文字体系へ</div>
+        <div class="rm-body">アラビア文字・デーヴァナーガリーへ拡張。$147B TAMの世界市場。EXIT：IPOまたは戦略的M&A。</div>
+        <div class="rm-money">$147B TAM</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ SCENE 4: GLOBAL IMPL ══ -->
+<section class="scene" id="s4">
+  <div class="sec-eyebrow reveal">04 / 05 · グローバル実装</div>
+  <div class="sec-title reveal">欧米システムへの<br>色彩言語・認証インプリメント</div>
+  <div class="sec-sub reveal">
+    JOHNのシステムに、天然色文字AUTH™を組み込む。<br>
+    これがDUNKSOFTの次の主戦場。
+  </div>
+
+  <div class="global-grid reveal">
+    <div class="global-card" style="--gc:var(--cyan);">
+      <div class="global-phase">PHASE · 金融</div>
+      <div class="global-title"><span>Banking & Securities</span><br>金融機関認証</div>
+      <div class="global-body">欧米の銀行・証券APIに天然色文字AUTH™をSDKとして提供。高齢者・障害者対応の認証レイヤーとして。</div>
+    </div>
+    <div class="global-card" style="--gc:var(--grn);">
+      <div class="global-phase">PHASE · 教育</div>
+      <div class="global-title"><span>EdTech & Publishing</span><br>教育・出版</div>
+      <div class="global-body">三省堂・海外教科書出版社と連携。ふりがな×色彩で多言語対応テキスト認証。子ども・外国人・高齢者向け。</div>
+    </div>
+    <div class="global-card" style="--gc:var(--pur);">
+      <div class="global-phase">PHASE · 医療</div>
+      <div class="global-title"><span>Healthcare</span><br>医療機関</div>
+      <div class="global-body">患者認証・電子カルテアクセスに。デバイス不要・記憶ベース認証で高齢患者・低リテラシー層に最適。</div>
+    </div>
+    <div class="global-card" style="--gc:var(--gold2);">
+      <div class="global-phase">PHASE · IP</div>
+      <div class="global-title"><span>Patent Licensing</span><br>国際特許ライセンス</div>
+      <div class="global-body">PCT出願後、全文字体系をカバーする特許でグローバルライセンス収益を獲得。Big Techへのライセンスも視野に。</div>
+    </div>
+  </div>
+
+  <div class="reveal" style="max-width:680px;width:100%;background:var(--bg2);border:1px solid rgba(57,73,171,.4);border-radius:14px;padding:20px 24px;font-size:13px;color:var(--txt2);line-height:2;text-align:center;">
+    <strong style="color:var(--hoshi);">構造的な堀：</strong>
+    西側のBig Techは「漢字という文字が持つ文化的記憶」を複製できない。
+    そして同じメカニズムがラテン文字でも機能する。
+    <strong style="color:var(--gold2);">それがDUNKSOFTの唯一の立ち位置。</strong>
+  </div>
+</section>
+
+<!-- ══ SCENE 5: VISION + TEAM ══ -->
+<section class="scene" id="s5">
+  <div class="sec-eyebrow reveal">05 / 05 · 星野が目指すもの</div>
+
+  <div class="vision-quote reveal">
+    AIDAさんが夢見た<br>
+    「<span class="star">人を守る</span>ロボット」。<br>
+    私は<span class="gold">認証</span>という形で<br>
+    その夢を<span class="sun">引き継ぐ。</span>
+  </div>
+
+  <div class="aida-card reveal">
+    <div class="aida-title">1986年からの約束</div>
+    <div class="aida-text">
+      1983年、AIDAというエンジニアが鉄腕アトムのようなロボットを夢見てDUNKSOFTを創業した。
+      3年後、彼は手術に失敗して急逝した。<br><br>
+      私は1984年入社の2年目だった。アメリカに行こうとしていた。
+      でも彼の家族に頼まれて、後を継いだ。<br><br>
+      <strong>43年後、私はYCとAntlerに応募した。</strong><br><br>
+      アメリカへの夢は、38年越しに、最高の形で実現しようとしている。
+      AIDAさんが目指した「人を守る」——私は認証という形でその約束を果たす。
+    </div>
+  </div>
+
+  <div class="sec-title reveal" style="margin-bottom:16px;">チームへ</div>
+  <div class="sec-sub reveal">皆さんへのお願いと、感謝。</div>
+
+  <div class="team-cards reveal">
+    <div class="team-card" style="--tc:var(--grn);">
+      <div class="team-num">01</div>
+      <div class="team-title">自律して回してください</div>
+      <div class="team-body">DUNKSOFTは43年間セルフマネジメントで動いてきた。私がSFや東京のプログラムに集中する間も、各自のプロジェクトを自律的に進めてください。それが会社の強みであり、世界進出の基盤です。</div>
+    </div>
+    <div class="team-card" style="--tc:var(--gold2);">
+      <div class="team-num">02</div>
+      <div class="team-title">Claudeを使ってください</div>
+      <div class="team-body">私がこの5日間でやったことは、Claudeなしでは1ヶ月かかった。YCとAntlerに両方応募できたのもClaudeがあったから。各自のプロジェクトにもぜひ活用を。PowerPointの時代は終わった。</div>
+    </div>
+    <div class="team-card" style="--tc:var(--hoshi);">
+      <div class="team-num">03</div>
+      <div class="team-title">この歴史的瞬間にいる</div>
+      <div class="team-body">日本の小さなソフトウェア会社が、世界の認証標準を変えようとしている。その最前線にいるのが皆さんです。徳島から始まり、東京へ、そして世界へ——その物語の一部になってください。</div>
+    </div>
+    <div class="team-card" style="--tc:var(--aki);">
+      <div class="team-num">04</div>
+      <div class="team-title">ありがとう</div>
+      <div class="team-body">43年間、信頼関係を積み上げてきた。それが徳島合同証券パイロットを「一会話」で取れた理由。皆さんが誠実に仕事をしてきたから、今のDUNKSOFTがある。それが今、世界に出る力になっています。</div>
+    </div>
+  </div>
+
+  <div class="final-quote reveal">
+    <strong>「私はこの問題を発見したのではない。<br>43年間、目撃してきたのだ。」</strong><br><br>
+    "I did not discover this problem. I witnessed it for 43 years."<br><br>
+    — 星野晃一郎 · Koichiro Hoshino<br>
+    President & CEO, DUNKSOFT Co., Ltd.<br><br>
+    Love your life, love your time®
+  </div>
+</section>
+
+<div class="footer">
+  DUNKSOFT Co., Ltd. · COLOURFUL JAPAN™ · Smart Life Styles™<br>
+  INTERNAL DOCUMENT · 社内限定 · © 2026 Koichiro Hoshino
+</div>
+
+<script>
+// ── PROGRESS & SCROLL ──
+window.addEventListener('scroll', () => {
+  const total = document.documentElement.scrollHeight - window.innerHeight;
+  document.getElementById('prog').style.transform = `scaleX(${window.scrollY/total})`;
+
+  document.querySelectorAll('.reveal, .rm-item').forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if(rect.top < window.innerHeight * 0.88) el.classList.add('visible');
+  });
+}, {passive:true});
+
+// ── REVENUE CALCULATOR ──
+function fmt(n) {
+  if(n >= 1000000000) return '¥' + (n/1000000000).toFixed(1) + 'B';
+  if(n >= 100000000)  return '¥' + Math.round(n/100000000) + '00M';
+  if(n >= 10000000)   return '¥' + Math.round(n/10000000)  + '0M';
+  if(n >= 1000000)    return '¥' + Math.round(n/1000000)   + 'M';
+  if(n >= 10000)      return '¥' + Math.round(n/10000)     + '万';
+  return '¥' + n.toLocaleString();
+}
+
+function calc() {
+  const firms = parseInt(document.getElementById('firms').value);
+  const users = parseInt(document.getElementById('users').value);
+  const price = parseInt(document.getElementById('price').value);
+
+  document.getElementById('v-firms').textContent = firms + '社';
+  document.getElementById('v-users').textContent = (users/1000).toFixed(0) + ',000人';
+  document.getElementById('v-price').textContent = '¥' + price + '/人';
+
+  const monthly = firms * users * price;
+  const annual  = monthly * 12;
+
+  document.getElementById('r-monthly').textContent = fmt(monthly);
+  document.getElementById('r-annual').textContent  = fmt(annual);
+
+  // Bars: current, ×10, ×50, ×200
+  const maxAnnual = users * price * 200 * 12;
+  const vals = [
+    { id:'bar1', vid:'bv1', mult: firms },
+    { id:'bar2', vid:'bv2', mult: 10 },
+    { id:'bar3', vid:'bv3', mult: 50 },
+    { id:'bar4', vid:'bv4', mult: 200 },
+  ];
+  vals.forEach(v => {
+    const a = v.mult * users * price * 12;
+    const pct = Math.min(100, (a / maxAnnual) * 100);
+    document.getElementById(v.id).style.width = pct + '%';
+    document.getElementById(v.vid).textContent = fmt(a);
+  });
+}
+
+calc();
+
+// Initial reveal
+setTimeout(() => {
+  document.querySelectorAll('.reveal, .rm-item').forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if(rect.top < window.innerHeight * 0.88) el.classList.add('visible');
+  });
+}, 100);
+</script>
+</body>
+</html>
