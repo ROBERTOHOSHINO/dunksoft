@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>天然色文字AUTH™ × kintone学童保育サポートシステム</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700;900&family=Noto+Sans+JP:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap');
+
+:root{
+  --bg:#f5f7fb;--bg2:#ffffff;--bg3:#eef1f8;
+  --blue:#1A3A7A;--blue-l:#D6E4F7;--blue-m:#3a6bbf;
+  --teal:#0F6E56;--teal-l:#D4F0E8;
+  --amber:#B87800;--amber-l:#FFF0D0;
+  --green:#27800A;--green-l:#E6F5D6;
+  --purple:#4A2FA0;--purple-l:#EDE8FB;
+  --red:#B02020;
+  --txt:#1a1a2e;--txt2:#4a4a6a;--txt3:#9999bb;
+  --border:#dde2ee;
+  --ok:#1D9E75;--ng:#C0392B;--warn:#B87800;
+  --shadow:0 2px 16px rgba(26,58,122,.07);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--txt);font-size:14px;line-height:1.8;}
+
+.header{background:var(--blue);color:#fff;padding:14px 28px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+.header-brand{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:2px;}
+.header-brand small{display:block;font-size:10px;opacity:.6;margin-top:1px;}
+.demo-badge{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:20px;padding:4px 12px;white-space:nowrap;}
+
+.hero{background:var(--blue);color:#fff;padding:44px 28px 48px;text-align:center;}
+.hero-eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:4px;opacity:.65;margin-bottom:10px;}
+.hero-title{font-family:'Noto Serif JP',serif;font-size:clamp(24px,4.5vw,44px);font-weight:900;line-height:1.25;margin-bottom:14px;}
+.hero-title .acc{color:#FAC775;}
+.hero-sub{font-size:13px;opacity:.8;max-width:560px;margin:0 auto 28px;line-height:2.1;}
+.hero-tags{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;}
+.hero-tag{font-size:12px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:20px;padding:5px 13px;}
+
+.main{max-width:960px;margin:0 auto;padding:32px 20px 48px;}
+
+.sec{margin-bottom:40px;}
+.sec-head{display:flex;align-items:baseline;gap:10px;margin-bottom:6px;}
+.sec-num{font-family:'DM Mono',monospace;font-size:10px;color:var(--txt3);}
+.sec-title{font-family:'Noto Serif JP',serif;font-size:19px;font-weight:700;color:var(--blue);padding-left:10px;border-left:3px solid var(--blue);}
+.sec-sub{font-size:13px;color:var(--txt2);margin-bottom:18px;padding-left:13px;}
+
+/* FUNCTION MAP */
+.fn-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-bottom:16px;}
+.fn-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:14px 12px;text-align:center;}
+.fn-icon{font-size:22px;margin-bottom:6px;}
+.fn-name{font-size:13px;font-weight:700;color:var(--txt);margin-bottom:4px;}
+.fn-desc{font-size:11px;color:var(--txt2);line-height:1.7;}
+.fn-badge{display:inline-block;font-size:10px;padding:2px 8px;border-radius:20px;margin-top:6px;}
+.fn-new{background:var(--amber-l);color:var(--amber);}
+.fn-base{background:var(--blue-l);color:var(--blue);}
+
+/* TABS */
+.tabs{display:flex;gap:8px;margin-bottom:22px;flex-wrap:wrap;}
+.tab{padding:8px 16px;border:1px solid var(--border);border-radius:24px;font-size:13px;cursor:pointer;background:var(--bg2);color:var(--txt2);transition:.15s;}
+.tab.active{background:var(--blue);color:#fff;border-color:var(--blue);font-weight:500;}
+.panel{display:none;}.panel.active{display:block;}
+
+/* DEVICE */
+.scene{display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start;}
+.device{background:var(--bg2);border:1px solid var(--border);border-radius:18px;padding:22px;width:100%;max-width:340px;box-shadow:var(--shadow);flex-shrink:0;}
+.device-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--txt3);text-align:center;margin-bottom:3px;}
+.device-title{font-size:15px;font-weight:700;color:var(--blue);text-align:center;margin-bottom:18px;}
+.side-info{flex:1;min-width:220px;display:flex;flex-direction:column;gap:10px;}
+
+/* STEP */
+.step-card{background:var(--bg3);border-radius:10px;padding:13px 15px;margin-bottom:9px;border:1px solid var(--border);}
+.step-badge{display:inline-block;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--blue);background:var(--blue-l);border-radius:20px;padding:2px 10px;margin-bottom:6px;}
+.step-name{font-size:13px;font-weight:500;margin-bottom:7px;}
+
+input[type=text],select{width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-size:14px;background:var(--bg2);color:var(--txt);font-family:'Noto Sans JP',sans-serif;}
+input[type=text]{text-align:center;font-size:15px;}
+input:focus,select:focus{outline:none;border-color:var(--blue);}
+
+.auth-chars{display:flex;gap:7px;justify-content:center;flex-wrap:wrap;margin-bottom:9px;}
+.achar{width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:21px;font-weight:700;cursor:pointer;border:2px solid transparent;transition:.15s;user-select:none;font-family:'Noto Serif JP',serif;}
+.achar:hover{transform:scale(1.1);box-shadow:0 3px 10px rgba(0,0,0,.12);}
+.achar.sel{border-color:var(--blue);box-shadow:0 0 0 3px rgba(26,58,122,.18);}
+.achar.disabled{opacity:.35;pointer-events:none;}
+
+.dots{display:flex;gap:5px;justify-content:center;margin:5px 0 3px;}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--border);transition:.2s;}
+.dot.on{background:var(--blue);}
+.hint{font-size:11px;color:var(--txt3);text-align:center;}
+
+.btn{display:block;width:100%;padding:10px;background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:500;cursor:pointer;font-family:'Noto Sans JP',sans-serif;margin-top:8px;transition:.15s;}
+.btn:hover{background:var(--blue-m);}
+.btn-outline{background:transparent;color:var(--blue);border:1px solid var(--blue);}
+.btn-outline:hover{background:var(--blue-l);}
+.btn-sm{font-size:12px;padding:7px 14px;border-radius:8px;display:inline-block;width:auto;margin-top:0;}
+.btn-child{padding:9px;font-size:13px;border-radius:8px;}
+
+.status-box{text-align:center;padding:11px;border-radius:8px;font-size:13px;font-weight:500;margin-top:6px;}
+.s-wait{background:var(--bg3);color:var(--txt2);}
+.s-ok{background:var(--teal-l);color:var(--teal);}
+.s-err{background:#FDECEA;color:var(--ng);}
+
+/* KINTONE MOCK */
+.kintone-win{border-radius:10px;overflow:hidden;box-shadow:var(--shadow);}
+.kintone-bar{background:#274fa5;color:#fff;padding:8px 14px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;display:flex;align-items:center;justify-content:space-between;}
+.kintone-body{background:var(--bg2);border:1px solid var(--border);border-top:none;padding:14px;}
+.kintone-app-bar{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;}
+.kapp{font-size:11px;padding:4px 10px;border-radius:6px;background:var(--bg3);color:var(--txt2);border:1px solid var(--border);cursor:pointer;transition:.12s;}
+.kapp.active-app{background:var(--blue-l);color:var(--blue);border-color:#b5d4f4;font-weight:500;}
+
+.kintone-record{background:var(--bg3);border-radius:8px;padding:12px 14px;margin-bottom:8px;border-left:3px solid var(--blue);}
+.kintone-record.new-rec{border-left-color:var(--ok);background:var(--teal-l);}
+.kr-row{display:flex;justify-content:space-between;font-size:12px;padding:3px 0;}
+.kr-key{color:var(--txt2);}
+.kr-val{font-weight:500;color:var(--txt);}
+.kr-time{font-family:'DM Mono',monospace;font-size:11px;color:var(--txt3);}
+
+/* SHIFT / TIMECARD */
+.shift-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:10px;}
+.shift-day{text-align:center;font-size:11px;}
+.shift-day-name{color:var(--txt3);font-size:10px;margin-bottom:3px;}
+.shift-cell{background:var(--bg3);border-radius:6px;padding:5px 3px;font-size:10px;color:var(--txt2);border:1px solid var(--border);min-height:40px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;}
+.shift-cell.has-shift{background:var(--blue-l);color:var(--blue);border-color:#b5d4f4;}
+.shift-cell.auth-stamp{background:var(--teal-l);color:var(--teal);border-color:#9FE1CB;}
+.shift-time{font-family:'DM Mono',monospace;font-size:9px;}
+
+/* INFO BOX */
+.info-box{border-radius:10px;padding:13px 17px;font-size:13px;line-height:1.9;}
+.info-blue{background:var(--blue-l);border:1px solid #b5d4f4;color:var(--txt2);}
+.info-blue strong{color:var(--blue);}
+.info-teal{background:var(--teal-l);border:1px solid #9FE1CB;color:#085041;}
+.info-teal strong{color:var(--teal);}
+.info-amber{background:var(--amber-l);border:1px solid #FAC775;color:#5a3a00;}
+.info-amber strong{color:var(--amber);}
+.info-green{background:var(--green-l);border:1px solid #C0DD97;color:#1a5200;}
+.info-green strong{color:var(--green);}
+
+/* KV */
+.kv-row{display:flex;justify-content:space-between;align-items:center;font-size:13px;padding:7px 0;border-bottom:1px solid var(--bg3);}
+.kv-row:last-child{border-bottom:none;}
+.kv-key{color:var(--txt2);}
+.kv-val{font-weight:500;}
+.auth-active{display:inline-flex;align-items:center;gap:4px;font-size:11px;background:var(--teal-l);color:var(--teal);border-radius:20px;padding:2px 10px;}
+
+/* ROLE TABLE */
+.role-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:8px;}
+.role-table th{text-align:left;font-weight:500;color:var(--txt2);padding:6px 8px;border-bottom:1px solid var(--border);font-size:11px;}
+.role-table td{padding:7px 8px;border-bottom:1px solid var(--bg3);}
+.ok-b{display:inline-block;font-size:10px;padding:2px 8px;border-radius:20px;background:var(--teal-l);color:var(--teal);}
+.ng-b{display:inline-block;font-size:10px;padding:2px 8px;border-radius:20px;background:#FDECEA;color:var(--ng);}
+.warn-b{display:inline-block;font-size:10px;padding:2px 8px;border-radius:20px;background:var(--amber-l);color:var(--amber);}
+
+/* ALERT */
+.alert-box{background:#FDECEA;border:1px solid #f7c1c1;border-radius:10px;padding:12px 16px;font-size:13px;color:var(--red);display:none;}
+.alert-box.show{display:block;}
+
+/* COMPARISON */
+.cmp-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
+.cmp-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:14px;}
+.cmp-head{font-size:11px;font-weight:700;letter-spacing:.5px;margin-bottom:8px;}
+.cmp-head.before{color:var(--ng);}
+.cmp-head.after{color:var(--ok);}
+.cmp-item{font-size:12px;color:var(--txt2);padding:3px 0;border-bottom:1px solid var(--bg3);line-height:1.7;}
+.cmp-item:last-child{border-bottom:none;}
+
+/* PRICING */
+.price-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;}
+.price-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:18px;text-align:center;}
+.price-card.featured{border-color:#b5d4f4;border-width:2px;}
+.price-label{font-size:11px;color:var(--txt2);margin-bottom:6px;}
+.price-amount{font-family:'DM Mono',monospace;font-size:26px;font-weight:500;color:var(--blue);line-height:1;margin-bottom:4px;}
+.price-unit{font-size:11px;color:var(--txt3);}
+.price-desc{font-size:12px;color:var(--txt2);margin-top:8px;line-height:1.7;}
+
+hr.div{border:none;border-top:1px solid var(--border);margin:32px 0;}
+
+.footer{background:var(--blue);color:rgba(255,255,255,.6);text-align:center;padding:20px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;line-height:2;}
+.footer strong{color:#fff;}
+
+.now-tag{display:inline-block;font-size:10px;font-family:'DM Mono',monospace;padding:1px 8px;border-radius:20px;background:#FDECEA;color:var(--red);margin-left:6px;vertical-align:middle;}
+.new-tag{display:inline-block;font-size:10px;font-family:'DM Mono',monospace;padding:1px 8px;border-radius:20px;background:var(--amber-l);color:var(--amber);margin-left:6px;vertical-align:middle;}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-brand">天然色文字AUTH™ × kintone学童保育サポートシステム<small>DUNKSOFT Co., Ltd. · 営業提案デモ</small></div>
+  <div class="demo-badge">CONFIDENTIAL</div>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">TENSOKU AUTH™ × KINTONE GAKUDO SUPPORT SYSTEM</div>
+  <div class="hero-title">kintone学童保育に<br><span class="acc">認証レイヤー</span>を重ねる。</div>
+  <div class="hero-sub">
+    ダンクソフトが提供するkintone学童保育サポートシステムの<br>
+    出席簿・お迎え管理・勤務管理に、天然色文字AUTH™を追加するだけ。<br>
+    保護者・スタッフ・子ども——三者すべての認証を一気に解決します。
+  </div>
+  <div class="hero-tags">
+    <span class="hero-tag">✓ 出席簿と直結</span>
+    <span class="hero-tag">✓ お迎えアラームと連動</span>
+    <span class="hero-tag">✓ 勤務打刻を強化</span>
+    <span class="hero-tag">✓ 保護者kintoneログイン</span>
+    <span class="hero-tag">✓ PCT特許出願予定</span>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- ── 1. 既存機能マップ ── -->
+  <div class="sec">
+    <div class="sec-head"><span class="sec-num">01</span><div class="sec-title">kintone学童保育サポートシステム × AUTH™ 機能マップ</div></div>
+    <div class="sec-sub">既存の9機能に、天然色文字AUTH™がどう乗るか</div>
+
+    <div class="fn-grid">
+      <div class="fn-card">
+        <div class="fn-icon">📋</div>
+        <div class="fn-name">出席簿</div>
+        <div class="fn-desc">子どもが色タップで入室 → 出席簿に自動反映</div>
+        <span class="fn-badge fn-new">AUTH™ 連携</span>
+      </div>
+      <div class="fn-card">
+        <div class="fn-icon">🔔</div>
+        <div class="fn-name">児童利用予定</div>
+        <div class="fn-desc">お迎えアラームと連動。保護者認証で退所記録が完結</div>
+        <span class="fn-badge fn-new">AUTH™ 連携</span>
+      </div>
+      <div class="fn-card">
+        <div class="fn-icon">📝</div>
+        <div class="fn-name">児童日報</div>
+        <div class="fn-desc">スタッフログイン強化で記録者を確実に特定</div>
+        <span class="fn-badge fn-new">AUTH™ 連携</span>
+      </div>
+      <div class="fn-card">
+        <div class="fn-icon">💰</div>
+        <div class="fn-name">集金管理</div>
+        <div class="fn-desc">管理者のみアクセス可能な多要素認証で保護</div>
+        <span class="fn-badge fn-new">AUTH™ 連携</span>
+      </div>
+      <div class="fn-card">
+        <div class="fn-icon">📅</div>
+        <div class="fn-name">勤務シフト</div>
+        <div class="fn-desc">既存kintone機能をそのまま利用</div>
+        <span class="fn-badge fn-base">既存機能</span>
+      </div>
+      <div class="fn-card">
+        <div class="fn-icon">🔄</div>
+        <div class="fn-name">シフト調整</div>
+        <div class="fn-desc">既存kintone機能をそのまま利用</div>
+        <span class="fn-badge fn-base">既存機能</span>
+      </div>
+      <div class="fn-card">
+        <div class="fn-icon">⏱️</div>
+        <div class="fn-name">勤務管理</div>
+        <div class="fn-desc">タイムカード打刻に天然色文字AUTH™を追加</div>
+        <span class="fn-badge fn-new">AUTH™ 連携</span>
+      </div>
+      <div class="fn-card">
+        <div class="fn-icon">📊</div>
+        <div class="fn-name">収支計算</div>
+        <div class="fn-desc">管理者ロール認証で閲覧・編集権限を厳格管理</div>
+        <span class="fn-badge fn-new">AUTH™ 連携</span>
+      </div>
+      <div class="fn-card">
+        <div class="fn-icon">🗓️</div>
+        <div class="fn-name">スケジュール</div>
+        <div class="fn-desc">保護者kintoneアカウントのログインをAUTH™で強化</div>
+        <span class="fn-badge fn-new">AUTH™ 連携</span>
+      </div>
+    </div>
+
+    <div class="info-box info-blue">
+      <strong>ポイント：</strong>kintone学童保育サポートシステムはそのまま使い続けられます。天然色文字AUTH™は「認証レイヤーを追加するだけ」——既存の運用を変えません。
+    </div>
+  </div>
+
+  <hr class="div">
+
+  <!-- ── 2. デモ ── -->
+  <div class="sec">
+    <div class="sec-head"><span class="sec-num">02</span><div class="sec-title">インタラクティブ デモ</div></div>
+    <div class="sec-sub">実際の操作感をお試しください</div>
+
+    <div class="tabs">
+      <button class="tab active" onclick="sw('p1',this)">🧒 出席簿 × 子ども入室</button>
+      <button class="tab" onclick="sw('p2',this)">👴 お迎え × 保護者認証</button>
+      <button class="tab" onclick="sw('p3',this)">⏱️ 勤務打刻 × スタッフ</button>
+      <button class="tab" onclick="sw('p4',this)">🔐 管理者ログイン</button>
+    </div>
+
+    <!-- ── PANEL 1: 出席簿 × 子ども入室 ── -->
+    <div class="panel active" id="p1">
+      <div class="scene">
+        <div class="device">
+          <div class="device-label">教室入口タブレット · 出席簿アプリ</div>
+          <div class="device-title">入室確認</div>
+
+          <div class="step-card">
+            <div class="step-badge">STEP 1</div>
+            <div class="step-name">名前をタップ</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+              <button class="btn btn-outline btn-child" onclick="selChild('田中 こうた',this)">田中 こうた</button>
+              <button class="btn btn-outline btn-child" onclick="selChild('佐藤 はな',this)">佐藤 はな</button>
+              <button class="btn btn-outline btn-child" onclick="selChild('伊藤 りく',this)">伊藤 りく</button>
+              <button class="btn btn-outline btn-child" onclick="selChild('山本 あおい',this)">山本 あおい</button>
+            </div>
+          </div>
+
+          <div class="step-card" id="c_s2" style="opacity:.4;pointer-events:none;">
+            <div class="step-badge">STEP 2</div>
+            <div class="step-name">好きな色を3つ選ぼう！</div>
+            <p class="hint" style="margin-bottom:8px;">自分だけの秘密の色</p>
+            <div class="auth-chars" id="c_chars">
+              <div class="achar" style="background:#B5D4F4;color:#0C447C;font-size:18px;" onclick="cpick(this)">⭐</div>
+              <div class="achar" style="background:#C0DD97;color:#27500A;font-size:18px;" onclick="cpick(this)">🌸</div>
+              <div class="achar" style="background:#FAC775;color:#633806;font-size:18px;" onclick="cpick(this)">🌙</div>
+              <div class="achar" style="background:#F4C0D1;color:#72243E;font-size:18px;" onclick="cpick(this)">🌈</div>
+              <div class="achar" style="background:#CECBF6;color:#3C3489;font-size:18px;" onclick="cpick(this)">🔥</div>
+              <div class="achar" style="background:#F5C4B3;color:#712B13;font-size:18px;" onclick="cpick(this)">💎</div>
+            </div>
+            <div class="dots"><div class="dot" id="cd1"></div><div class="dot" id="cd2"></div><div class="dot" id="cd3"></div></div>
+          </div>
+
+          <div class="status-box s-wait" id="c_st">名前をタップしてください</div>
+          <button class="btn btn-outline" style="margin-top:8px;font-size:12px;" onclick="resetChild()">リセット</button>
+        </div>
+
+        <div class="side-info">
+          <!-- kintone出席簿モック -->
+          <div class="kintone-win">
+            <div class="kintone-bar">
+              <span>kintone · 出席簿アプリ</span>
+              <span id="c_kauth" style="font-size:9px;opacity:.6;">リアルタイム連携中</span>
+            </div>
+            <div class="kintone-body">
+              <div style="font-size:11px;color:var(--txt3);margin-bottom:8px;font-family:'DM Mono',monospace;">本日の出席記録 — <span id="c_today"></span></div>
+              <div id="c_records">
+                <div class="kintone-record">
+                  <div class="kr-row"><span class="kr-key">氏名</span><span class="kr-val">伊藤 りく</span></div>
+                  <div class="kr-row"><span class="kr-key">入室</span><span class="kr-time">14:02</span></div>
+                  <div class="kr-row"><span class="kr-key">認証</span><span class="kr-val" style="color:var(--ok);font-size:12px;">AUTH™ ✓</span></div>
+                </div>
+                <div class="kintone-record">
+                  <div class="kr-row"><span class="kr-key">氏名</span><span class="kr-val">山本 あおい</span></div>
+                  <div class="kr-row"><span class="kr-key">入室</span><span class="kr-time">14:15</span></div>
+                  <div class="kr-row"><span class="kr-key">認証</span><span class="kr-val" style="color:var(--ok);font-size:12px;">AUTH™ ✓</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="info-box info-teal">
+            <strong>出席簿アプリと直結</strong><br>
+            子どもが色を選ぶと、kintone出席簿にリアルタイムで入室記録が追加されます。スタッフの手作業はゼロです。
+          </div>
+          <div class="info-box info-amber">
+            <strong>ICカード不要・忘れ物ゼロ</strong><br>
+            ICカードの忘れ・紛失で出席記録が崩れる問題を解消。小学1年生でも操作できるシンプルなUIです。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── PANEL 2: お迎え × 保護者認証 ── -->
+    <div class="panel" id="p2">
+      <div class="scene">
+        <div class="device">
+          <div class="device-label">入口タブレット · 児童利用予定アプリ</div>
+          <div class="device-title">お迎え本人確認</div>
+
+          <div class="step-card">
+            <div class="step-badge">STEP 1</div>
+            <div class="step-name">お子さまを選択</div>
+            <select id="p_child" onchange="chkParent()">
+              <option value="">— 選択してください —</option>
+              <option value="tanaka">田中 こうた（1年1組）</option>
+              <option value="sato">佐藤 はな（2年3組）</option>
+              <option value="ito">伊藤 りく（3年2組）</option>
+            </select>
+          </div>
+
+          <div class="step-card" id="p_s2" style="opacity:.4;pointer-events:none;">
+            <div class="step-badge">STEP 2</div>
+            <div class="step-name">登録済みの色を3つ選択</div>
+            <p class="hint" style="margin-bottom:8px;">事前登録した保護者の色彩パターン</p>
+            <div class="auth-chars" id="p_chars">
+              <div class="achar" style="background:#B5D4F4;color:#0C447C;" onclick="ppick(this)">春</div>
+              <div class="achar" style="background:#C0DD97;color:#27500A;" onclick="ppick(this)">夏</div>
+              <div class="achar" style="background:#FAC775;color:#633806;" onclick="ppick(this)">秋</div>
+              <div class="achar" style="background:#F4C0D1;color:#72243E;" onclick="ppick(this)">冬</div>
+              <div class="achar" style="background:#CECBF6;color:#3C3489;" onclick="ppick(this)">花</div>
+              <div class="achar" style="background:#F5C4B3;color:#712B13;" onclick="ppick(this)">月</div>
+            </div>
+            <div class="dots"><div class="dot" id="pd1"></div><div class="dot" id="pd2"></div><div class="dot" id="pd3"></div></div>
+          </div>
+
+          <div class="status-box s-wait" id="p_st">お子さまを選択してください</div>
+          <button class="btn btn-outline" style="margin-top:8px;font-size:12px;" onclick="resetParent()">リセット</button>
+        </div>
+
+        <div class="side-info">
+          <!-- アラーム連動モック -->
+          <div class="kintone-win">
+            <div class="kintone-bar"><span>kintone · 児童利用予定アプリ</span></div>
+            <div class="kintone-body">
+              <div style="font-size:11px;color:var(--txt3);margin-bottom:8px;font-family:'DM Mono',monospace;">お迎えアラーム設定</div>
+              <div class="kintone-record" id="p_alarm_card">
+                <div class="kr-row"><span class="kr-key">児童名</span><span class="kr-val" id="p_alarm_name">—</span></div>
+                <div class="kr-row"><span class="kr-key">退所予定</span><span class="kr-time">17:30</span></div>
+                <div class="kr-row"><span class="kr-key">アラーム</span><span class="kr-val" style="color:var(--warn);font-size:12px;" id="p_alarm_status">17:15 に通知予定</span></div>
+              </div>
+              <div class="alert-box" id="p_alert">
+                ✓ 退所確認済み — kintone出席簿に自動記録されました
+              </div>
+            </div>
+          </div>
+          <div class="info-box info-blue">
+            <strong>お迎えアラームと連動</strong><br>
+            退所予定時刻の前に保護者へ通知。到着時に天然色文字AUTH™で本人確認 → 退所記録が自動完結します。
+          </div>
+          <div class="info-box info-teal">
+            <strong>祖父母でも使える設計</strong><br>
+            暗証番号・QRコード不要。色付き文字をタップするだけ。高齢の祖父母が代わりにお迎えする場面でも安心です。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── PANEL 3: 勤務打刻 ── -->
+    <div class="panel" id="p3">
+      <div class="scene">
+        <div class="device">
+          <div class="device-label">スタッフ用端末 · 勤務管理アプリ</div>
+          <div class="device-title">タイムカード打刻</div>
+
+          <div class="step-card">
+            <div class="step-badge">STEP 1</div>
+            <div class="step-name">スタッフを選択</div>
+            <select id="s_staff" onchange="chkStaff()">
+              <option value="">— 選択してください —</option>
+              <option value="suzuki">鈴木 みゆき（担任）</option>
+              <option value="nakamura">中村 たかし（学童スタッフ）</option>
+              <option value="takahashi">高橋 けいこ（事務）</option>
+            </select>
+          </div>
+
+          <div class="step-card" id="s_s2" style="opacity:.4;pointer-events:none;">
+            <div class="step-badge">STEP 2</div>
+            <div class="step-name">打刻種別を選択</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px;">
+              <button class="btn btn-outline btn-child" id="s_in_btn" onclick="setPunch('in',this)" style="font-size:12px;">出勤</button>
+              <button class="btn btn-outline btn-child" id="s_out_btn" onclick="setPunch('out',this)" style="font-size:12px;">退勤</button>
+            </div>
+          </div>
+
+          <div class="step-card" id="s_s3" style="opacity:.4;pointer-events:none;">
+            <div class="step-badge">STEP 3</div>
+            <div class="step-name">天然色文字で本人確認</div>
+            <div class="auth-chars" id="s_chars">
+              <div class="achar" style="background:#B5D4F4;color:#0C447C;" onclick="spick(this)">仕</div>
+              <div class="achar" style="background:#C0DD97;color:#27500A;" onclick="spick(this)">事</div>
+              <div class="achar" style="background:#FAC775;color:#633806;" onclick="spick(this)">休</div>
+              <div class="achar" style="background:#F4C0D1;color:#72243E;" onclick="spick(this)">憩</div>
+              <div class="achar" style="background:#CECBF6;color:#3C3489;" onclick="spick(this)">出</div>
+              <div class="achar" style="background:#F5C4B3;color:#712B13;" onclick="spick(this)">退</div>
+            </div>
+            <div class="dots"><div class="dot" id="sd1"></div><div class="dot" id="sd2"></div><div class="dot" id="sd3"></div></div>
+          </div>
+
+          <div class="status-box s-wait" id="s_st">スタッフを選択してください</div>
+          <button class="btn btn-outline" style="margin-top:8px;font-size:12px;" onclick="resetStaff()">リセット</button>
+        </div>
+
+        <div class="side-info">
+          <!-- シフト週間表示モック -->
+          <div class="kintone-win">
+            <div class="kintone-bar"><span>kintone · 勤務管理アプリ</span></div>
+            <div class="kintone-body">
+              <div style="font-size:11px;color:var(--txt3);margin-bottom:8px;font-family:'DM Mono',monospace;">今週のシフト（鈴木 みゆき）</div>
+              <div class="shift-grid" id="s_shift_grid"></div>
+              <div id="s_punch_record" style="display:none;">
+                <div class="kintone-record new-rec" id="s_new_rec">
+                  <div class="kr-row"><span class="kr-key">スタッフ</span><span class="kr-val" id="s_rec_name">—</span></div>
+                  <div class="kr-row"><span class="kr-key">打刻</span><span class="kr-val" id="s_rec_type">—</span></div>
+                  <div class="kr-row"><span class="kr-key">時刻</span><span class="kr-time" id="s_rec_time">—</span></div>
+                  <div class="kr-row"><span class="kr-key">認証</span><span class="kr-val" style="color:var(--ok);font-size:12px;">AUTH™ ✓</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="info-box info-teal">
+            <strong>勤務管理アプリとシームレス連携</strong><br>
+            打刻時に天然色文字AUTH™で本人確認 → タイムカードにリアルタイム記録。代打刻・なりすましを防止します。
+          </div>
+          <div class="info-box info-amber">
+            <strong>スマートフォンでも完結</strong><br>
+            既存の「スマートフォンで打刻できる」仕組みはそのまま。そこにAUTH™が加わるだけです。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── PANEL 4: 管理者ログイン ── -->
+    <div class="panel" id="p4">
+      <div style="max-width:560px;margin:0 auto;">
+        <div style="margin-bottom:14px;">
+          <p style="font-size:13px;color:var(--txt2);margin-bottom:8px;">ロールを選択</p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <button class="tab active" style="font-size:12px;padding:6px 14px;" onclick="setRole('staff',this)">学童スタッフ</button>
+            <button class="tab" style="font-size:12px;padding:6px 14px;" onclick="setRole('teacher',this)">担任教員</button>
+            <button class="tab" style="font-size:12px;padding:6px 14px;" onclick="setRole('admin',this)">管理者</button>
+          </div>
+        </div>
+
+        <div class="kintone-win">
+          <div class="kintone-bar">
+            <span>kintone · 学童保育サポートシステム</span>
+            <span id="k_auth_badge" style="font-size:9px;opacity:.6;">未認証</span>
+          </div>
+          <div class="kintone-body">
+            <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
+              <div style="width:42px;height:42px;border-radius:50%;background:var(--blue-l);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--blue);flex-shrink:0;" id="k_av">中村</div>
+              <div>
+                <div style="font-size:14px;font-weight:700;" id="k_name">中村 たかし</div>
+                <div style="font-size:12px;color:var(--txt2);" id="k_dept">学童保育スタッフ</div>
+                <span style="display:inline-block;font-size:11px;padding:1px 8px;border-radius:20px;margin-top:2px;" id="k_role_badge" class="warn-b">学童スタッフ</span>
+              </div>
+            </div>
+            <div class="kv-row"><span class="kv-key">ログイン方式</span><span class="kv-val" id="k_login">ID + パスワード</span></div>
+            <div class="kv-row"><span class="kv-key">天然色文字AUTH™</span><span id="k_auth_cell"><span style="font-size:12px;color:var(--txt3);">未設定</span></span></div>
+
+            <div style="margin-top:12px;">
+              <button class="btn" onclick="activateAdmin()">天然色文字AUTH™ を有効化する</button>
+            </div>
+
+            <div style="margin-top:14px;font-size:12px;font-weight:500;color:var(--txt2);margin-bottom:6px;">kintoneアプリ別アクセス権限</div>
+            <table class="role-table" id="k_rtbl">
+              <tr><th>アプリ</th><th>権限</th></tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="info-box info-blue" style="margin-top:12px;">
+          <strong>集金管理・収支計算は管理者のみ</strong><br>
+          天然色文字AUTH™のロール制御で、集金・収支データへのアクセスを管理者だけに厳格に限定。情報漏洩リスクを最小化します。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="div">
+
+  <!-- ── 3. 現状との比較 ── -->
+  <div class="sec">
+    <div class="sec-head"><span class="sec-num">03</span><div class="sec-title">導入前後の比較</div></div>
+    <div class="sec-sub">kintone学童保育サポートシステムがさらに進化する</div>
+    <div class="cmp-grid">
+      <div class="cmp-card">
+        <div class="cmp-head before">▲ 現状（kintoneのみ）</div>
+        <div class="cmp-item">出席記録はスタッフが手入力</div>
+        <div class="cmp-item">お迎え確認は口頭・台帳のみ</div>
+        <div class="cmp-item">勤務打刻に本人確認なし</div>
+        <div class="cmp-item">保護者ログインはPW管理が属人的</div>
+        <div class="cmp-item">集金・収支データの閲覧制御が難しい</div>
+      </div>
+      <div class="cmp-card">
+        <div class="cmp-head after">✓ AUTH™ 追加後</div>
+        <div class="cmp-item">子どもの色タップで出席簿に自動記録</div>
+        <div class="cmp-item">保護者認証で退所記録が自動完結</div>
+        <div class="cmp-item">打刻時にAUTH™で本人確認・代打刻防止</div>
+        <div class="cmp-item">保護者kintoneログインを多要素認証で強化</div>
+        <div class="cmp-item">ロール別で集金・収支を厳格アクセス制御</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="div">
+
+  <!-- ── 4. 費用感 ── -->
+  <div class="sec">
+    <div class="sec-head"><span class="sec-num">04</span><div class="sec-title">費用感（目安）</div></div>
+    <div class="sec-sub">kintone学童保育サポートシステムに追加する形で導入</div>
+    <div class="price-grid">
+      <div class="price-card">
+        <div class="price-label">kintone学童保育サポートシステム<br>（既存）</div>
+        <div class="price-amount">110,000</div>
+        <div class="price-unit">円（税込）初期費用</div>
+        <div style="font-family:'DM Mono',monospace;font-size:18px;color:var(--blue);margin-top:6px;">22,000</div>
+        <div class="price-unit">円 / 月（税込）</div>
+        <div class="price-desc">kintone料金は別途</div>
+      </div>
+      <div class="price-card featured">
+        <div class="price-label">天然色文字AUTH™<br>追加オプション</div>
+        <div class="price-amount">¥500</div>
+        <div class="price-unit">/ ユーザー / 月（目安）</div>
+        <div class="price-desc">スタッフ・保護者・児童を含む全ユーザー数で算出。初期設定費は別途お見積もり。</div>
+      </div>
+      <div class="price-card">
+        <div class="price-label">30名児童・5名スタッフの場合<br>AUTH™追加コスト（目安）</div>
+        <div class="price-amount">~17,500</div>
+        <div class="price-unit">円 / 月（35ユーザー × ¥500）</div>
+        <div class="price-desc">kintone学童システム月額の約8割で、全員分の認証を強化できます。</div>
+      </div>
+    </div>
+    <div class="info-box info-teal" style="margin-top:14px;">
+      <strong>ダンクソフトのワンストップ提供</strong><br>
+      kintone学童保育サポートシステムと天然色文字AUTH™を同じダンクソフトから導入できます。窓口が一つなので、導入後のサポートも一元化されます。
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <strong>株式会社ダンクソフト</strong>　天然色文字AUTH™ × kintone学童保育サポートシステム<br>
+  CONFIDENTIAL · 営業提案デモ · © 2026 Koichiro Hoshino / DUNKSOFT Co., Ltd.<br>
+  Love your life, love your time®
+</div>
+
+<script>
+// ── 今日の日付 ──
+var today = new Date();
+var dateStr = (today.getMonth()+1) + '月' + today.getDate() + '日（' + ['日','月','火','水','木','金','土'][today.getDay()] + '）';
+var el = document.getElementById('c_today');
+if(el) el.textContent = dateStr;
+
+// ── シフトグリッド生成 ──
+var days = ['月','火','水','木','金','土','日'];
+var grid = document.getElementById('s_shift_grid');
+if(grid){
+  days.forEach(function(d,i){
+    var div = document.createElement('div');
+    div.className = 'shift-day';
+    var hasShift = i < 5;
+    div.innerHTML = '<div class="shift-day-name">' + d + '</div>' +
+      '<div class="shift-cell' + (hasShift ? ' has-shift' : '') + '" id="sg_' + i + '">' +
+      (hasShift ? '<span class="shift-time">9:00</span><span class="shift-time">17:00</span>' : '休') +
+      '</div>';
+    grid.appendChild(div);
+  });
+}
+
+// ── タブ切替 ──
+function sw(id, btn){
+  document.querySelectorAll('.panel').forEach(function(p){ p.classList.remove('active'); });
+  document.querySelectorAll('.tabs .tab').forEach(function(b){ b.classList.remove('active'); });
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ── Panel1: 子ども出席 ──
+var cpicks = 0, selChildName = '';
+function selChild(name, btn){
+  selChildName = name; cpicks = 0;
+  document.querySelectorAll('#p1 .btn-child').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  document.querySelectorAll('#c_chars .achar').forEach(function(c){ c.classList.remove('sel'); });
+  ['cd1','cd2','cd3'].forEach(function(d){ document.getElementById(d).classList.remove('on'); });
+  document.getElementById('c_s2').style.opacity = '1';
+  document.getElementById('c_s2').style.pointerEvents = 'auto';
+  cst(name + 'さん、好きな色を3つ選んでね！', 'wait');
+}
+function cpick(el){
+  if(el.classList.contains('sel') || cpicks >= 3) return;
+  el.classList.add('sel'); cpicks++;
+  document.getElementById('cd' + cpicks).classList.add('on');
+  if(cpicks === 3){
+    var now = new Date();
+    var t = now.getHours() + ':' + String(now.getMinutes()).padStart(2,'0');
+    setTimeout(function(){
+      cst('✓ ' + selChildName + 'さん、入室完了！', 'ok');
+      var rec = document.createElement('div');
+      rec.className = 'kintone-record new-rec';
+      rec.innerHTML = '<div class="kr-row"><span class="kr-key">氏名</span><span class="kr-val">' + selChildName + '</span></div>' +
+        '<div class="kr-row"><span class="kr-key">入室</span><span class="kr-time">' + t + '</span></div>' +
+        '<div class="kr-row"><span class="kr-key">認証</span><span class="kr-val" style="color:var(--ok);font-size:12px;">AUTH™ ✓</span></div>';
+      document.getElementById('c_records').prepend(rec);
+    }, 400);
+  }
+}
+function cst(m, t){ var e = document.getElementById('c_st'); e.textContent = m; e.className = 'status-box s-' + t; }
+function resetChild(){
+  cpicks = 0; selChildName = '';
+  document.querySelectorAll('#p1 .btn-child').forEach(function(b){ b.classList.remove('active'); });
+  document.querySelectorAll('#c_chars .achar').forEach(function(c){ c.classList.remove('sel'); });
+  ['cd1','cd2','cd3'].forEach(function(d){ document.getElementById(d).classList.remove('on'); });
+  document.getElementById('c_s2').style.opacity = '.4';
+  document.getElementById('c_s2').style.pointerEvents = 'none';
+  cst('名前をタップしてください', 'wait');
+}
+
+// ── Panel2: 保護者お迎え ──
+var ppicks = 0;
+function chkParent(){
+  var v = document.getElementById('p_child').value;
+  ppicks = 0;
+  document.querySelectorAll('#p_chars .achar').forEach(function(c){ c.classList.remove('sel'); });
+  ['pd1','pd2','pd3'].forEach(function(d){ document.getElementById(d).classList.remove('on'); });
+  document.getElementById('p_alert').classList.remove('show');
+  var names = {tanaka:'田中 こうた', sato:'佐藤 はな', ito:'伊藤 りく'};
+  if(v){
+    document.getElementById('p_s2').style.opacity = '1';
+    document.getElementById('p_s2').style.pointerEvents = 'auto';
+    document.getElementById('p_alarm_name').textContent = names[v] || '—';
+    document.getElementById('p_alarm_status').textContent = '17:15 に通知予定';
+    pst('色彩パターンを選択してください', 'wait');
+  } else {
+    document.getElementById('p_s2').style.opacity = '.4';
+    document.getElementById('p_s2').style.pointerEvents = 'none';
+    document.getElementById('p_alarm_name').textContent = '—';
+    pst('お子さまを選択してください', 'wait');
+  }
+}
+function ppick(el){
+  if(el.classList.contains('sel') || ppicks >= 3) return;
+  el.classList.add('sel'); ppicks++;
+  document.getElementById('pd' + ppicks).classList.add('on');
+  if(ppicks === 3){
+    setTimeout(function(){
+      pst('✓ 認証成功 — 退所記録をkintoneに登録しました', 'ok');
+      document.getElementById('p_alarm_status').textContent = '退所確認済み ✓';
+      document.getElementById('p_alarm_status').style.color = 'var(--ok)';
+      document.getElementById('p_alert').classList.add('show');
+    }, 400);
+  }
+}
+function pst(m, t){ var e = document.getElementById('p_st'); e.textContent = m; e.className = 'status-box s-' + t; }
+function resetParent(){
+  ppicks = 0;
+  document.getElementById('p_child').value = '';
+  document.getElementById('p_s2').style.opacity = '.4';
+  document.getElementById('p_s2').style.pointerEvents = 'none';
+  document.querySelectorAll('#p_chars .achar').forEach(function(c){ c.classList.remove('sel'); });
+  ['pd1','pd2','pd3'].forEach(function(d){ document.getElementById(d).classList.remove('on'); });
+  document.getElementById('p_alarm_name').textContent = '—';
+  document.getElementById('p_alarm_status').textContent = '17:15 に通知予定';
+  document.getElementById('p_alarm_status').style.color = 'var(--warn)';
+  document.getElementById('p_alert').classList.remove('show');
+  pst('お子さまを選択してください', 'wait');
+}
+
+// ── Panel3: スタッフ勤務打刻 ──
+var spicks = 0, punchType = '';
+var staffNames = {suzuki:'鈴木 みゆき', nakamura:'中村 たかし', takahashi:'高橋 けいこ'};
+function chkStaff(){
+  var v = document.getElementById('s_staff').value;
+  spicks = 0; punchType = '';
+  document.querySelectorAll('#s_chars .achar').forEach(function(c){ c.classList.remove('sel'); });
+  ['sd1','sd2','sd3'].forEach(function(d){ document.getElementById(d).classList.remove('on'); });
+  document.getElementById('s_punch_record').style.display = 'none';
+  ['s_in_btn','s_out_btn'].forEach(function(id){ document.getElementById(id).classList.remove('active'); });
+  if(v){
+    document.getElementById('s_s2').style.opacity = '1';
+    document.getElementById('s_s2').style.pointerEvents = 'auto';
+    sst('出勤 / 退勤を選択してください', 'wait');
+  } else {
+    document.getElementById('s_s2').style.opacity = '.4';
+    document.getElementById('s_s2').style.pointerEvents = 'none';
+    document.getElementById('s_s3').style.opacity = '.4';
+    document.getElementById('s_s3').style.pointerEvents = 'none';
+    sst('スタッフを選択してください', 'wait');
+  }
+}
+function setPunch(type, btn){
+  punchType = type; spicks = 0;
+  document.querySelectorAll('#s_chars .achar').forEach(function(c){ c.classList.remove('sel'); });
+  ['sd1','sd2','sd3'].forEach(function(d){ document.getElementById(d).classList.remove('on'); });
+  ['s_in_btn','s_out_btn'].forEach(function(id){ document.getElementById(id).classList.remove('active'); });
+  btn.classList.add('active');
+  document.getElementById('s_s3').style.opacity = '1';
+  document.getElementById('s_s3').style.pointerEvents = 'auto';
+  sst('天然色文字で本人確認してください', 'wait');
+}
+function spick(el){
+  if(el.classList.contains('sel') || spicks >= 3) return;
+  el.classList.add('sel'); spicks++;
+  document.getElementById('sd' + spicks).classList.add('on');
+  if(spicks === 3){
+    var now = new Date();
+    var t = now.getHours() + ':' + String(now.getMinutes()).padStart(2,'0');
+    var sName = staffNames[document.getElementById('s_staff').value] || '—';
+    var typeLabel = punchType === 'in' ? '出勤' : '退勤';
+    setTimeout(function(){
+      sst('✓ ' + typeLabel + '打刻完了 — kintoneに記録されました', 'ok');
+      document.getElementById('s_rec_name').textContent = sName;
+      document.getElementById('s_rec_type').textContent = typeLabel;
+      document.getElementById('s_rec_time').textContent = t;
+      document.getElementById('s_punch_record').style.display = 'block';
+      // 今日のセルをauth-stampに
+      var todayIdx = new Date().getDay();
+      var mapped = [6,0,1,2,3,4,5][todayIdx];
+      var cell = document.getElementById('sg_' + mapped);
+      if(cell){ cell.className = 'shift-cell auth-stamp'; cell.innerHTML = '<span class="shift-time">' + t + '</span><span style="font-size:9px;">' + typeLabel + '</span>'; }
+    }, 400);
+  }
+}
+function sst(m, t){ var e = document.getElementById('s_st'); e.textContent = m; e.className = 'status-box s-' + t; }
+function resetStaff(){
+  spicks = 0; punchType = '';
+  document.getElementById('s_staff').value = '';
+  ['s_s2','s_s3'].forEach(function(id){ document.getElementById(id).style.opacity='.4'; document.getElementById(id).style.pointerEvents='none'; });
+  document.querySelectorAll('#s_chars .achar').forEach(function(c){ c.classList.remove('sel'); });
+  ['sd1','sd2','sd3'].forEach(function(d){ document.getElementById(d).classList.remove('on'); });
+  ['s_in_btn','s_out_btn'].forEach(function(id){ document.getElementById(id).classList.remove('active'); });
+  document.getElementById('s_punch_record').style.display = 'none';
+  sst('スタッフを選択してください', 'wait');
+}
+
+// ── Panel4: 管理者ログイン ──
+var roleDB = {
+  staff:{name:'中村 たかし',dept:'学童保育スタッフ',initials:'中村',roleLabel:'学童スタッフ',roleClass:'warn-b',
+    access:[['出席簿','ok'],['児童日報','ok'],['勤務管理','ok'],['集金管理','ng'],['収支計算','ng'],['管理者設定','ng']]},
+  teacher:{name:'鈴木 みゆき',dept:'2年1組 担任',initials:'鈴木',roleLabel:'担任教員',roleClass:'ok-b',
+    access:[['出席簿','ok'],['児童日報','ok'],['勤務管理','ok'],['集金管理','warn'],['収支計算','ng'],['管理者設定','ng']]},
+  admin:{name:'高橋 けいこ',dept:'事務局・管理者',initials:'高橋',roleLabel:'管理者',roleClass:'ng-b',
+    access:[['出席簿','ok'],['児童日報','ok'],['勤務管理','ok'],['集金管理','ok'],['収支計算','ok'],['管理者設定','ok']]}
+};
+function setRole(type, btn){
+  document.querySelectorAll('#p4 .tab').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  var d = roleDB[type];
+  document.getElementById('k_av').textContent = d.initials;
+  document.getElementById('k_name').textContent = d.name;
+  document.getElementById('k_dept').textContent = d.dept;
+  var rb = document.getElementById('k_role_badge');
+  rb.textContent = d.roleLabel; rb.className = d.roleClass;
+  document.getElementById('k_login').textContent = 'ID + パスワード';
+  document.getElementById('k_auth_cell').innerHTML = '<span style="font-size:12px;color:var(--txt3);">未設定</span>';
+  document.getElementById('k_auth_badge').textContent = '未認証';
+  document.getElementById('k_auth_badge').style.opacity = '.6';
+  renderRole(d.access);
+}
+function activateAdmin(){
+  document.getElementById('k_login').textContent = '天然色文字AUTH™';
+  document.getElementById('k_auth_cell').innerHTML = '<span class="auth-active">有効 ✓</span>';
+  document.getElementById('k_auth_badge').textContent = 'AUTH™ 有効';
+  document.getElementById('k_auth_badge').style.opacity = '1';
+}
+function renderRole(rows){
+  var h = '<tr><th>kintoneアプリ</th><th>権限</th></tr>';
+  rows.forEach(function(r){
+    var label = r[1]==='ok'?'許可':r[1]==='warn'?'閲覧のみ':'制限';
+    var cls = r[1]==='ok'?'ok-b':r[1]==='warn'?'warn-b':'ng-b';
+    h += '<tr><td>' + r[0] + '</td><td><span class="' + cls + '">' + label + '</span></td></tr>';
+  });
+  document.getElementById('k_rtbl').innerHTML = h;
+}
+
+setRole('staff', document.querySelector('#p4 .tab'));
+</script>
+</body>
+</html>
