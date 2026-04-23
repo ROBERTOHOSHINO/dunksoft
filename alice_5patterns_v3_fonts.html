@@ -1,0 +1,220 @@
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Dancing+Script:wght@600&family=Roboto+Mono:wght@500&family=Raleway:wght@600&family=Merriweather:wght@700&display=swap" rel="stylesheet">
+<style>
+.wrap{padding:1rem 0;font-family:var(--font-sans);}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:1.5rem;}
+.li{display:flex;align-items:center;gap:5px;font-size:13px;color:var(--color-text-secondary);}
+.dot{width:11px;height:11px;border-radius:50%;flex-shrink:0;}
+.block{margin-bottom:1.1rem;border-radius:var(--border-radius-lg);padding:.9rem 1.1rem;border:0.5px solid transparent;}
+.bg1{background:#f0f7eb;border-color:#c0dd97;}
+.bg2{background:#fef5e7;border-color:#fac775;}
+.bg3{background:#fdf0eb;border-color:#f0997b;}
+.bg4{background:#f0eefe;border-color:#afa9ec;}
+.bg5{background:#fdf0f5;border-color:#ed93b1;}
+.plabel{display:flex;align-items:baseline;gap:8px;margin-bottom:.5rem;flex-wrap:wrap;}
+.pnum{font-size:28px;font-weight:500;line-height:1;}
+.pname{font-size:20px;font-weight:500;line-height:1;}
+.pdesc{font-size:11px;color:var(--color-text-secondary);}
+.pfont{font-size:11px;font-style:italic;color:var(--color-text-tertiary);}
+.c1{color:#3B6D11;}.c2{color:#854F0B;}.c3{color:#993C1D;}.c4{color:#534AB7;}.c5{color:#993356;}
+.spk{font-size:11px;font-weight:500;padding:1px 7px;border-radius:20px;margin-left:6px;vertical-align:middle;}
+.tr{font-size:13px;color:var(--color-text-secondary);margin-top:3px;}
+.stru{font-size:12px;margin-top:7px;display:flex;flex-wrap:wrap;gap:5px;}
+.si{padding:2px 8px;border-radius:20px;font-size:12px;font-weight:500;}
+.S{color:#185FA5;background:#deeef9;border-radius:3px;padding:1px 4px;}
+.V{color:#3B6D11;background:#e4f0d2;border-radius:3px;padding:1px 4px;}
+.O{color:#993C1D;background:#faeae3;border-radius:3px;padding:1px 4px;}
+.O2{color:#712B13;background:#f5d5c8;border-radius:3px;padding:1px 4px;}
+.C{color:#854F0B;background:#faeeda;border-radius:3px;padding:1px 4px;}
+.A{color:#444441;background:#e8e6df;border-radius:3px;padding:1px 4px;}
+.P{color:#534AB7;background:#eeedfe;border-radius:3px;padding:1px 4px;}
+.qm{color:var(--color-text-tertiary);font-size:14px;}
+hr.div{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:.8rem 0;}
+
+.f1{font-family:'Playfair Display', serif; font-size:18px; line-height:2.2;}
+.f2{font-family:'Dancing Script', cursive; font-size:20px; line-height:2.2;}
+.f3{font-family:'Roboto Mono', monospace; font-size:15px; line-height:2.2;}
+.f4{font-family:'Raleway', sans-serif; font-size:17px; line-height:2.2; letter-spacing:0.05em;}
+.f5{font-family:'Merriweather', serif; font-size:15px; line-height:2.4;}
+</style>
+
+<div class="wrap">
+<h2 class="sr-only">アリス 5文型 フォント別カラーデモ v3</h2>
+
+<div class="legend">
+  <div class="li"><div class="dot" style="background:#185FA5;"></div>S 主語</div>
+  <div class="li"><div class="dot" style="background:#3B6D11;"></div>V 動詞</div>
+  <div class="li"><div class="dot" style="background:#993C1D;"></div>O 目的語</div>
+  <div class="li"><div class="dot" style="background:#854F0B;"></div>C 補語</div>
+  <div class="li"><div class="dot" style="background:#534AB7;"></div>前置詞句</div>
+  <div class="li"><div class="dot" style="background:#444;"></div>副詞</div>
+</div>
+
+<!-- 第1文型 SV : Playfair Display — 格調あるセリフ体 -->
+<div class="block bg1">
+  <div class="plabel">
+    <span class="pnum c1">第1文型</span><span class="pname c1">SV</span>
+    <span class="pdesc">主語＋動詞</span>
+    <span class="pfont">Playfair Display</span>
+  </div>
+  <div class="f1"><span class="S">Alice</span> <span class="V">fell</span> <span class="P">down the rabbit-hole</span>.</div>
+  <div class="tr">アリスはウサギの穴に落ちた。</div>
+  <div class="stru">
+    <span class="si" style="background:#deeef9;color:#185FA5;">S: Alice</span>
+    <span class="si" style="background:#e4f0d2;color:#27500A;">V: fell</span>
+    <span class="si" style="background:#eeedfe;color:#3C3489;">修飾: down the rabbit-hole</span>
+  </div>
+</div>
+
+<div class="block bg1">
+  <div class="plabel">
+    <span class="pnum c1">第1文型</span><span class="pname c1">SV</span>
+    <span class="spk" style="background:#e4f0d2;color:#27500A;">😺 チェシャ猫</span>
+    <span class="pfont">Playfair Display</span>
+  </div>
+  <div class="f1"><span class="qm">"</span><span class="S">We</span> <span class="V">'re</span> <span class="C">all mad</span> <span class="P">here</span>.<span class="qm">"</span></div>
+  <div class="tr">「ここにいるのはみんな狂ってるよ。」</div>
+  <div class="stru">
+    <span class="si" style="background:#deeef9;color:#185FA5;">S: We</span>
+    <span class="si" style="background:#e4f0d2;color:#27500A;">V: are</span>
+    <span class="si" style="background:#faeeda;color:#633806;">C: all mad</span>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- 第2文型 SVC : Dancing Script — 流れるような筆記体 -->
+<div class="block bg2">
+  <div class="plabel">
+    <span class="pnum c2">第2文型</span><span class="pname c2">SVC</span>
+    <span class="pdesc">主語＋動詞＋補語</span>
+    <span class="pfont">Dancing Script</span>
+  </div>
+  <div class="f2"><span class="S">The rabbit-hole</span> <span class="V">went</span> <span class="C">straight</span> <span class="P">like a tunnel</span>.</div>
+  <div class="tr">ウサギの穴はトンネルのようにまっすぐ続いていた。</div>
+  <div class="stru">
+    <span class="si" style="background:#deeef9;color:#185FA5;">S: The rabbit-hole</span>
+    <span class="si" style="background:#e4f0d2;color:#27500A;">V: went</span>
+    <span class="si" style="background:#faeeda;color:#633806;">C: straight</span>
+  </div>
+</div>
+
+<div class="block bg2">
+  <div class="plabel">
+    <span class="pnum c2">第2文型</span><span class="pname c2">SVC</span>
+    <span class="spk" style="background:#faeeda;color:#633806;">🥚 ハンプティー</span>
+    <span class="pfont">Dancing Script</span>
+  </div>
+  <div class="f2"><span class="qm">"</span><span class="S">I</span> <span class="V">'m</span> <span class="C">very comfortable</span> <span class="P">on this wall</span>.<span class="qm">"</span></div>
+  <div class="tr">「この壁の上はとても居心地がいい。」</div>
+  <div class="stru">
+    <span class="si" style="background:#deeef9;color:#185FA5;">S: I</span>
+    <span class="si" style="background:#e4f0d2;color:#27500A;">V: am</span>
+    <span class="si" style="background:#faeeda;color:#633806;">C: very comfortable</span>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- 第3文型 SVO : Roboto Mono — クリアで分析的 -->
+<div class="block bg3">
+  <div class="plabel">
+    <span class="pnum c3">第3文型</span><span class="pname c3">SVO</span>
+    <span class="pdesc">主語＋動詞＋目的語</span>
+    <span class="pfont">Roboto Mono</span>
+  </div>
+  <div class="f3"><span class="S">Alice</span> <span class="V">opened</span> <span class="O">the door</span> <span class="P">into that lovely garden</span>.</div>
+  <div class="tr">アリスはあの美しい庭園へのドアを開けた。</div>
+  <div class="stru">
+    <span class="si" style="background:#deeef9;color:#185FA5;">S: Alice</span>
+    <span class="si" style="background:#e4f0d2;color:#27500A;">V: opened</span>
+    <span class="si" style="background:#faeae3;color:#712B13;">O: the door</span>
+  </div>
+</div>
+
+<div class="block bg3">
+  <div class="plabel">
+    <span class="pnum c3">第3文型</span><span class="pname c3">SVO</span>
+    <span class="spk" style="background:#faeae3;color:#712B13;">👧 アリス（チェシャ猫へ）</span>
+    <span class="pfont">Roboto Mono</span>
+  </div>
+  <div class="f3"><span class="qm">"</span><span class="S">I</span> <span class="V">don't know</span> <span class="O">which way to go</span>.<span class="qm">"</span></div>
+  <div class="tr">「どっちへ行けばいいかわからない。」</div>
+  <div class="stru">
+    <span class="si" style="background:#deeef9;color:#185FA5;">S: I</span>
+    <span class="si" style="background:#e4f0d2;color:#27500A;">V: don't know</span>
+    <span class="si" style="background:#faeae3;color:#712B13;">O: which way to go</span>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- 第4文型 SVOO : Raleway — すっきりモダン -->
+<div class="block bg4">
+  <div class="plabel">
+    <span class="pnum c4">第4文型</span><span class="pname c4">SVOO</span>
+    <span class="pdesc">主語＋動詞＋目的語＋目的語</span>
+    <span class="pfont">Raleway</span>
+  </div>
+  <div class="f4"><span class="S">The Caterpillar</span> <span class="V">gave</span> <span class="O">Alice</span> <span class="O2">some good advice</span>.</div>
+  <div class="tr">イモムシはアリスにいくつかの良い助言を与えた。</div>
+  <div class="stru">
+    <span class="si" style="background:#deeef9;color:#185FA5;">S: The Caterpillar</span>
+    <span class="si" style="background:#e4f0d2;color:#27500A;">V: gave</span>
+    <span class="si" style="background:#faeae3;color:#712B13;">O1: Alice</span>
+    <span class="si" style="background:#f5d5c8;color:#712B13;">O2: some good advice</span>
+  </div>
+</div>
+
+<div class="block bg4">
+  <div class="plabel">
+    <span class="pnum c4">第4文型</span><span class="pname c4">SVOO</span>
+    <span class="spk" style="background:#eeedfe;color:#3C3489;">🥚 ハンプティー</span>
+    <span class="pfont">Raleway</span>
+  </div>
+  <div class="f4"><span class="qm">"</span><span class="S">I</span> <span class="V">pay</span> <span class="O">them</span> <span class="O2">extra wages</span> <span class="P">on Saturdays</span>.<span class="qm">"</span></div>
+  <div class="tr">「土曜日には彼らに割増賃金を払うんだ。」</div>
+  <div class="stru">
+    <span class="si" style="background:#deeef9;color:#185FA5;">S: I</span>
+    <span class="si" style="background:#e4f0d2;color:#27500A;">V: pay</span>
+    <span class="si" style="background:#faeae3;color:#712B13;">O1: them</span>
+    <span class="si" style="background:#f5d5c8;color:#712B13;">O2: extra wages</span>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- 第5文型 SVOC : Merriweather — どっしり落ち着いたセリフ -->
+<div class="block bg5">
+  <div class="plabel">
+    <span class="pnum c5">第5文型</span><span class="pname c5">SVOC</span>
+    <span class="pdesc">主語＋動詞＋目的語＋補語</span>
+    <span class="pfont">Merriweather</span>
+  </div>
+  <div class="f5"><span class="S">They</span> <span class="V">called</span> <span class="O">him</span> <span class="C">Tortoise</span> <span class="A">because he taught us</span>.</div>
+  <div class="tr">彼らは彼をトータスと呼んだ（教えてくれたから）。</div>
+  <div class="stru">
+    <span class="si" style="background:#deeef9;color:#185FA5;">S: They</span>
+    <span class="si" style="background:#e4f0d2;color:#27500A;">V: called</span>
+    <span class="si" style="background:#faeae3;color:#712B13;">O: him</span>
+    <span class="si" style="background:#faeeda;color:#633806;">C: Tortoise</span>
+  </div>
+</div>
+
+<div class="block bg5">
+  <div class="plabel">
+    <span class="pnum c5">第5文型</span><span class="pname c5">SVOC</span>
+    <span class="spk" style="background:#fdf0f5;color:#993356;">🥚 ハンプティー</span>
+    <span class="pfont">Merriweather</span>
+  </div>
+  <div class="f5"><span class="qm">"</span><span class="S">I</span> <span class="V">can make</span> <span class="O">a word</span> <span class="C">mean different things</span>.<span class="qm">"</span></div>
+  <div class="tr">「一つの言葉にいろんな意味を持たせることができる。」</div>
+  <div class="stru">
+    <span class="si" style="background:#deeef9;color:#185FA5;">S: I</span>
+    <span class="si" style="background:#e4f0d2;color:#27500A;">V: can make</span>
+    <span class="si" style="background:#faeae3;color:#712B13;">O: a word</span>
+    <span class="si" style="background:#faeeda;color:#633806;">C: mean different things</span>
+  </div>
+</div>
+
+</div>

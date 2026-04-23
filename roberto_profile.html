@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ROBERTO HOSHINO — Smart Life Styles™</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #04080f;
+  --fg: #c8d8e8;
+  --fg2: #5a7a9a;
+  --fg3: #2a4a6a;
+  --accent: #60b8f0;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'Space Mono', monospace;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── SPHERE BG ── */
+#sphere-bg {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+  opacity: 0.55;
+}
+
+/* ── LAYOUT ── */
+#page {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 60px 28px 80px;
+}
+
+/* ── HEADER ── */
+#header {
+  margin-bottom: 56px;
+}
+
+.name-ja {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(13px, 2vw, 16px);
+  font-weight: 300;
+  color: var(--fg2);
+  letter-spacing: 0.25em;
+  margin-bottom: 4px;
+}
+
+.name-en {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(42px, 8vw, 68px);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: #e8f4ff;
+  margin-bottom: 12px;
+}
+
+.tagline {
+  font-size: 10px;
+  color: var(--fg3);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.tagline a {
+  color: var(--fg3);
+  text-decoration: none;
+  border-bottom: 1px solid var(--fg3);
+  transition: color 0.2s, border-color 0.2s;
+}
+.tagline a:hover { color: var(--accent); border-color: var(--accent); }
+
+/* ── DIVIDER ── */
+.rule {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, var(--fg3) 0%, transparent 100%);
+  margin: 36px 0;
+}
+
+/* ── ROLES ── */
+#roles {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.role-item {
+  display: grid;
+  grid-template-columns: 12px 1fr;
+  gap: 16px;
+  align-items: start;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(42,74,106,0.4);
+  opacity: 0;
+  transform: translateX(-12px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.role-item.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.role-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-top: 5px;
+  flex-shrink: 0;
+}
+
+.role-org {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 300;
+  color: #d8eaf8;
+  line-height: 1.3;
+  margin-bottom: 3px;
+}
+
+.role-title {
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: var(--fg2);
+  line-height: 1.6;
+}
+
+.role-item.past .role-org,
+.role-item.past .role-org {
+  color: #4a6a7a;
+}
+.role-item.past .role-title {
+  color: #3a5a6a;
+}
+.role-item.past .role-dot {
+  opacity: 0.35;
+}
+.role-item.past {
+  border-bottom-color: rgba(42,74,106,0.2);
+}
+
+/* ── PAST LABEL ── */
+.section-label {
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--fg3);
+  margin: 32px 0 8px;
+}
+
+/* ── FOOTER ── */
+#footer {
+  margin-top: 56px;
+  font-size: 9px;
+  color: var(--fg3);
+  letter-spacing: 0.15em;
+  line-height: 2;
+}
+#footer a {
+  color: var(--fg3);
+  text-decoration: none;
+  border-bottom: 1px solid var(--fg3);
+}
+#footer a:hover { color: var(--accent); border-color: var(--accent); }
+
+.sig {
+  margin-top: 32px;
+  font-size: 10px;
+  color: var(--fg3);
+  letter-spacing: 0.1em;
+  font-style: italic;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px;
+}
+</style>
+</head>
+<body>
+
+<canvas id="sphere-bg"></canvas>
+
+<div id="page">
+
+  <div id="header">
+    <div class="name-ja">星野 晃一郎</div>
+    <div class="name-en">Roberto Hoshino</div>
+    <div class="tagline">
+      CEO, <a href="https://www.dunksoft.com" target="_blank">DUNKSOFT Co., Ltd.</a>
+      &nbsp;—&nbsp; Smart Life Styles™
+    </div>
+  </div>
+
+  <div class="rule"></div>
+
+  <div id="roles">
+
+    <div class="role-item" data-color="80,200,255">
+      <div class="role-dot" style="background:rgb(80,200,255)"></div>
+      <div>
+        <div class="role-org">デジタル庁</div>
+        <div class="role-title">デジタル推進委員</div>
+      </div>
+    </div>
+
+    <div class="role-item" data-color="160,255,160">
+      <div class="role-dot" style="background:rgb(160,255,160)"></div>
+      <div>
+        <div class="role-org">総務省</div>
+        <div class="role-title">地域情報化アドバイザー</div>
+      </div>
+    </div>
+
+    <div class="role-item" data-color="255,210,60">
+      <div class="role-dot" style="background:rgb(255,210,60)"></div>
+      <div>
+        <div class="role-org">株式会社ダンクソフト</div>
+        <div class="role-title">代表取締役</div>
+      </div>
+    </div>
+
+    <div class="role-item" data-color="220,120,255">
+      <div class="role-dot" style="background:rgb(220,120,255)"></div>
+      <div>
+        <div class="role-org">中央エフエム</div>
+        <div class="role-title">取締役 / パーソナリティー</div>
+      </div>
+    </div>
+
+    <div class="role-item" data-color="255,130,80">
+      <div class="role-dot" style="background:rgb(255,130,80)"></div>
+      <div>
+        <div class="role-org">公益社団法人 日本ニュービジネス協議会連合会</div>
+        <div class="role-title">代議員</div>
+      </div>
+    </div>
+
+    <div class="role-item" data-color="255,200,80">
+      <div class="role-dot" style="background:rgb(255,200,80)"></div>
+      <div>
+        <div class="role-org">日本ITソフトウェア企業年金基金</div>
+        <div class="role-title">代議員</div>
+      </div>
+    </div>
+
+    <div class="role-item" data-color="100,220,180">
+      <div class="role-dot" style="background:rgb(100,220,180)"></div>
+      <div>
+        <div class="role-org">日本パエリア協会</div>
+        <div class="role-title">理事</div>
+      </div>
+    </div>
+
+    <div class="role-item" data-color="180,220,255">
+      <div class="role-dot" style="background:rgb(180,220,255)"></div>
+      <div>
+        <div class="role-org">神田 藍プロジェクト</div>
+        <div class="role-title">コミュニケーション・マーケティング / まちづくり担当<br>藍を育て、コミュニティを再生する</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section-label">以前の役割</div>
+
+  <div id="roles-past">
+
+    <div class="role-item past" data-color="90,110,130">
+      <div class="role-dot" style="background:rgb(90,110,130)"></div>
+      <div>
+        <div class="role-org">東京オリンピック 2020</div>
+        <div class="role-title">幕張MMB プレスオペレーション ボランティアリーダー</div>
+      </div>
+    </div>
+
+    <div class="role-item past" data-color="90,110,130">
+      <div class="role-dot" style="background:rgb(90,110,130)"></div>
+      <div>
+        <div class="role-org">公益社団法人 日本ニュービジネス協議会連合会</div>
+        <div class="role-title">JNBバザールバザール 推進リーダー</div>
+      </div>
+    </div>
+
+    <div class="role-item past" data-color="90,110,130">
+      <div class="role-dot" style="background:rgb(90,110,130)"></div>
+      <div>
+        <div class="role-org">一般社団法人 東京ニュービジネス協議会</div>
+        <div class="role-title">理事 / 2012–2013 定例会委員長</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="rule"></div>
+
+  <div id="footer">
+    <div>note &nbsp;→&nbsp; <a href="https://note.com/roberto_hoshino" target="_blank">note.com/roberto_hoshino</a></div>
+    <div>blog &nbsp;→&nbsp; <a href="https://blog.roberto-system.jp/" target="_blank">blog.roberto-system.jp</a> &nbsp;<span style="opacity:0.5">（tennis）</span></div>
+    <div>sphere &nbsp;→&nbsp; <a href="https://robertohoshino.github.io/kanji-index/future_ledger_sphere_prototype.html" target="_blank">future-ledger-sphere-prototype</a></div>
+  </div>
+
+  <div class="sig">Love your life, love your time.<br>
+  <span style="font-size:11px; font-family:'Space Mono',monospace; font-style:normal; letter-spacing:0.1em;">Smart Life Styles™ &nbsp;© DUNKSOFT Co., Ltd.</span>
+  </div>
+
+</div>
+
+<script>
+// ── MINI SPHERE (background) ──
+const canvas = document.getElementById('sphere-bg');
+const ctx = canvas.getContext('2d');
+
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+const TRAVELER_DEFS = [
+  { color: [80,200,255],  trail: [40,160,220]  },
+  { color: [255,210,60],  trail: [200,160,20]  },
+  { color: [255,130,80],  trail: [200,80,30]   },
+  { color: [160,255,160], trail: [80,200,80]   },
+  { color: [220,120,255], trail: [160,60,210]  },
+  { color: [100,220,180], trail: [40,160,120]  },
+  { color: [200,240,255], trail: [100,180,220] },
+  { color: [255,200,80],  trail: [200,150,20]  },
+];
+
+let points = [];
+function buildPoints() {
+  points = [];
+  const N = 700;
+  const phi = Math.PI * (3 - Math.sqrt(5));
+  for (let i = 0; i < N; i++) {
+    const y = 1 - (i / (N - 1)) * 2;
+    const r = Math.sqrt(Math.max(0, 1 - y * y));
+    const theta = phi * i;
+    points.push({ x: Math.cos(theta) * r, y, z: Math.sin(theta) * r });
+  }
+}
+buildPoints();
+
+function makeTraveler(def, idx, total) {
+  const axisTheta = (idx / total) * Math.PI * 2;
+  const axisPhi   = (idx / total) * Math.PI * 1.3 + 0.4;
+  const ax = Math.sin(axisPhi) * Math.cos(axisTheta);
+  const ay = Math.cos(axisPhi);
+  const az = Math.sin(axisPhi) * Math.sin(axisTheta);
+  let ux, uy, uz;
+  if (Math.abs(ax) < 0.9) { ux=0; uy=-az; uz=ay; }
+  else { ux=-az; uy=0; uz=ax; }
+  const ulen = Math.sqrt(ux*ux+uy*uy+uz*uz);
+  ux/=ulen; uy/=ulen; uz/=ulen;
+  const vx = ay*uz - az*uy;
+  const vy = az*ux - ax*uz;
+  const vz = ax*uy - ay*ux;
+  return { ...def, ax,ay,az, ux,uy,uz, vx,vy,vz,
+    phase: (idx/total)*Math.PI*2, speed: 0.7+idx*0.13, trailHistory: [] };
+}
+
+const travelers = TRAVELER_DEFS.map((d,i) => makeTraveler(d,i,TRAVELER_DEFS.length));
+
+function lerp(a,b,t){return a+(b-a)*t;}
+
+let angle=0, frame=0;
+
+function draw() {
+  const W = canvas.width, H = canvas.height;
+  const cx = W/2, cy = H/2;
+  const scale = Math.min(W,H) * 0.42;
+
+  ctx.clearRect(0,0,W,H);
+
+  const cosA = Math.cos(angle);
+  const sinA = Math.sin(angle);
+  angle += 0.003;
+  frame++;
+
+  function project(px,py,pz) {
+    const rx = px*cosA - pz*sinA;
+    const rz = px*sinA + pz*cosA;
+    return { sx: cx+rx*scale, sy: cy-py*scale, z: rz };
+  }
+
+  const travelerPos = travelers.map(t => {
+    const a = t.phase + frame * t.speed * 0.012;
+    const p3 = {
+      x: Math.cos(a)*t.ux + Math.sin(a)*t.vx,
+      y: Math.cos(a)*t.uy + Math.sin(a)*t.vy,
+      z: Math.cos(a)*t.uz + Math.sin(a)*t.vz
+    };
+    t.trailHistory.push({...p3});
+    if (t.trailHistory.length > 28) t.trailHistory.shift();
+    return p3;
+  });
+
+  const projected = points.map(p => {
+    const {sx,sy,z} = project(p.x,p.y,p.z);
+    return {sx,sy,z};
+  });
+  projected.sort((a,b) => a.z-b.z);
+
+  const travelerProj = travelerPos.map(p => project(p.x,p.y,p.z));
+  const trailProj = travelers.map(t => t.trailHistory.map(p => project(p.x,p.y,p.z)));
+
+  projected.forEach(p => {
+    const depth = (p.z+1)/2;
+    const brightness = 0.15 + depth*0.72;
+    let cr = 15+brightness*35, cg = 50+brightness*90, cb = 120+brightness*80;
+    let totalInf = 0;
+    travelers.forEach((t,ti) => {
+      const tp = travelerProj[ti];
+      const dx = p.sx-tp.sx, dy = p.sy-tp.sy;
+      const dist = Math.sqrt(dx*dx+dy*dy);
+      const inf = Math.max(0, 1-dist/(scale*0.32));
+      if (inf>0) {
+        cr = lerp(cr,t.color[0],inf*0.85);
+        cg = lerp(cg,t.color[1],inf*0.85);
+        cb = lerp(cb,t.color[2],inf*0.85);
+        totalInf += inf;
+      }
+    });
+    const alpha = 0.18 + brightness*0.55;
+    const dotSize = 1.0 + depth*1.7 + Math.min(totalInf,1)*2.0;
+    ctx.beginPath();
+    ctx.arc(p.sx,p.sy,dotSize,0,Math.PI*2);
+    ctx.fillStyle = `rgba(${Math.round(cr)},${Math.round(cg)},${Math.round(cb)},${alpha.toFixed(2)})`;
+    ctx.fill();
+  });
+
+  travelers.forEach((t,ti) => {
+    const trail = trailProj[ti];
+    const tp = travelerProj[ti];
+    const [r,g,b] = t.color;
+    const [tr2,tg2,tb2] = t.trail;
+    trail.forEach((tp2,i) => {
+      if (tp2.z < -0.1) return;
+      const frac = i/trail.length;
+      ctx.beginPath();
+      ctx.arc(tp2.sx,tp2.sy,1.0+frac*2.0,0,Math.PI*2);
+      ctx.fillStyle = `rgba(${tr2},${tg2},${tb2},${(frac*0.4).toFixed(2)})`;
+      ctx.fill();
+    });
+    if (tp.z > -0.05) {
+      const gr = ctx.createRadialGradient(tp.sx,tp.sy,0,tp.sx,tp.sy,scale*0.07);
+      gr.addColorStop(0,`rgba(${r},${g},${b},0.7)`);
+      gr.addColorStop(0.45,`rgba(${r},${g},${b},0.15)`);
+      gr.addColorStop(1,`rgba(${r},${g},${b},0)`);
+      ctx.beginPath();
+      ctx.arc(tp.sx,tp.sy,scale*0.07,0,Math.PI*2);
+      ctx.fillStyle = gr;
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(tp.sx,tp.sy,2.5,0,Math.PI*2);
+      ctx.fillStyle = `rgb(${Math.min(255,r+60)},${Math.min(255,g+60)},${Math.min(255,b+60)})`;
+      ctx.fill();
+    }
+  });
+
+  requestAnimationFrame(draw);
+}
+draw();
+
+// ── STAGGERED REVEAL ──
+const items = document.querySelectorAll('.role-item');
+items.forEach((el, i) => {
+  setTimeout(() => el.classList.add('visible'), 200 + i * 80);
+});
+</script>
+</body>
+</html>
