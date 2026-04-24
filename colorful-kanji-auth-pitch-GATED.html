@@ -290,7 +290,236 @@ rt{
 }
 </style>
 </head>
+<style>
+/* ── AUTH GATE ── */
+#auth-gate {
+  position:fixed;inset:0;z-index:9999;
+  background:#05060e;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:2rem;
+  transition:opacity 0.8s ease, visibility 0.8s ease;
+}
+#auth-gate.hidden {
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+}
+.gate-noise {
+  position:absolute;inset:0;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  background-size:200px 200px;
+  opacity:0.5;
+}
+.gate-ring {
+  position:absolute;width:600px;height:600px;border-radius:50%;
+  border:1px solid rgba(200,146,10,0.06);
+  top:50%;left:50%;transform:translate(-50%,-50%);
+  pointer-events:none;animation:ringpulse 4s ease-in-out infinite;
+}
+.gate-ring2 {
+  position:absolute;width:380px;height:380px;border-radius:50%;
+  border:1px solid rgba(200,146,10,0.04);
+  top:50%;left:50%;transform:translate(-50%,-50%);
+  pointer-events:none;animation:ringpulse 4s ease-in-out infinite 1s;
+}
+@keyframes ringpulse {
+  0%,100%{opacity:0.5;} 50%{opacity:1;}
+}
+.gate-label {
+  font-family:'DM Mono',monospace;font-size:10px;letter-spacing:4px;
+  color:rgba(200,146,10,0.6);margin-bottom:2.5rem;text-align:center;
+}
+.gate-instruction {
+  font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;
+  color:#3c4460;margin-bottom:0.6rem;text-align:center;
+}
+.gate-instruction-ja {
+  font-family:'Noto Sans JP',sans-serif;font-size:12px;
+  color:#3c4460;margin-bottom:2.5rem;text-align:center;font-weight:300;
+}
+
+/* KANJI CARDS */
+.gate-kanji-row {
+  display:flex;gap:3rem;margin-bottom:3rem;
+  flex-wrap:wrap;justify-content:center;
+}
+.kanji-card {
+  display:flex;flex-direction:column;align-items:center;gap:1rem;
+}
+.kanji-char {
+  font-family:'Noto Serif JP',serif;font-size:72px;font-weight:900;
+  width:110px;height:110px;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,0.06);
+  background:#0b0d1a;
+  color:#dde2f5;
+  transition:all 0.3s ease;
+  position:relative;overflow:hidden;
+}
+.kanji-char::after {
+  content:'';position:absolute;inset:0;border-radius:18px;
+  opacity:0;transition:opacity 0.3s;
+  background:radial-gradient(circle at center, currentColor 0%, transparent 70%);
+  opacity:0.07;
+}
+.kanji-reading {
+  font-family:'DM Mono',monospace;font-size:10px;
+  color:#3c4460;letter-spacing:2px;text-align:center;
+}
+.kanji-meaning {
+  font-family:'DM Mono',monospace;font-size:9px;
+  color:#2a2e40;letter-spacing:1px;text-align:center;
+}
+
+/* COLOR SWATCHES */
+.swatch-row {
+  display:flex;gap:0.7rem;flex-wrap:wrap;justify-content:center;
+  margin-top:0.5rem;
+}
+.swatch {
+  width:40px;height:40px;border-radius:8px;
+  border:2px solid transparent;
+  cursor:pointer;
+  transition:all 0.2s ease;
+  position:relative;
+}
+.swatch:hover {
+  transform:scale(1.15);
+  border-color:rgba(255,255,255,0.3);
+}
+.swatch.selected {
+  border-color:rgba(255,255,255,0.8);
+  transform:scale(1.1);
+  box-shadow:0 0 0 1px rgba(255,255,255,0.2);
+}
+.swatch-label {
+  font-family:'DM Mono',monospace;font-size:8px;
+  color:#2a2e40;letter-spacing:1px;text-align:center;
+  margin-top:4px;
+}
+
+/* SUBMIT */
+.gate-submit {
+  margin-top:2rem;
+  font-family:'DM Mono',monospace;font-size:11px;letter-spacing:3px;
+  padding:12px 32px;
+  background:transparent;
+  border:1px solid rgba(200,146,10,0.3);
+  color:rgba(200,146,10,0.5);
+  border-radius:4px;
+  cursor:pointer;
+  transition:all 0.25s;
+}
+.gate-submit.ready {
+  border-color:var(--gold);
+  color:var(--gold);
+}
+.gate-submit.ready:hover {
+  background:rgba(200,146,10,0.1);
+}
+
+/* ERROR */
+.gate-error {
+  margin-top:1.2rem;
+  font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;
+  color:#f06060;opacity:0;
+  transition:opacity 0.3s;
+  text-align:center;min-height:1.2rem;
+}
+.gate-error.show { opacity:1; }
+
+/* SUCCESS FLASH */
+.gate-success-flash {
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse at center, rgba(200,146,10,0.15) 0%, transparent 70%);
+  opacity:0;pointer-events:none;
+  transition:opacity 0.5s;
+}
+.gate-success-flash.show { opacity:1; }
+
+/* HINT */
+.gate-hint {
+  position:absolute;bottom:2rem;
+  font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;
+  color:#1e2030;text-align:center;
+}
+</style>
+
 <body class="en">
+
+<!-- ══════════════ KANJI AUTH GATE ══════════════ -->
+<div id="auth-gate">
+  <div class="gate-noise"></div>
+  <div class="gate-ring"></div>
+  <div class="gate-ring2"></div>
+  <div class="gate-success-flash" id="success-flash"></div>
+
+  <div class="gate-label">COLORFUL KANJI AUTH™ — DUNKSOFT</div>
+
+  <div class="gate-instruction">SELECT THE COLOR OF EACH KANJI</div>
+  <div class="gate-instruction-ja">それぞれの漢字に対応する色を選んでください</div>
+
+  <div class="gate-kanji-row">
+
+    <!-- 星 : indigo / 藍色 -->
+    <div class="kanji-card" id="card-hoshi">
+      <div class="kanji-char" id="char-hoshi">星</div>
+      <div class="kanji-reading">HOSHI · ほし</div>
+      <div class="kanji-meaning">STAR</div>
+      <div class="swatch-row" id="swatches-hoshi">
+        <div>
+          <div class="swatch" style="background:#edb830;" data-kanji="hoshi" data-val="gold" onclick="pickColor(this)"></div>
+          <div class="swatch-label">GOLD</div>
+        </div>
+        <div>
+          <div class="swatch" style="background:#2c3e6b;" data-kanji="hoshi" data-val="indigo" onclick="pickColor(this)"></div>
+          <div class="swatch-label">INDIGO</div>
+        </div>
+        <div>
+          <div class="swatch" style="background:#3dd68c;" data-kanji="hoshi" data-val="green" onclick="pickColor(this)"></div>
+          <div class="swatch-label">GREEN</div>
+        </div>
+        <div>
+          <div class="swatch" style="background:#f06060;" data-kanji="hoshi" data-val="red" onclick="pickColor(this)"></div>
+          <div class="swatch-label">RED</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 晃 : yellow / Sunshine / 薔薇 -->
+    <div class="kanji-card" id="card-ko">
+      <div class="kanji-char" id="char-ko">晃</div>
+      <div class="kanji-reading">KŌ · こう</div>
+      <div class="kanji-meaning">SUNSHINE</div>
+      <div class="swatch-row" id="swatches-ko">
+        <div>
+          <div class="swatch" style="background:#1ed8d8;" data-kanji="ko" data-val="cyan" onclick="pickColor(this)"></div>
+          <div class="swatch-label">CYAN</div>
+        </div>
+        <div>
+          <div class="swatch" style="background:#9b7ff4;" data-kanji="ko" data-val="purple" onclick="pickColor(this)"></div>
+          <div class="swatch-label">PURPLE</div>
+        </div>
+        <div>
+          <div class="swatch" style="background:#edb830;" data-kanji="ko" data-val="yellow" onclick="pickColor(this)"></div>
+          <div class="swatch-label">YELLOW</div>
+        </div>
+        <div>
+          <div class="swatch" style="background:#f06060;" data-kanji="ko" data-val="red" onclick="pickColor(this)"></div>
+          <div class="swatch-label">RED</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <button class="gate-submit" id="gate-btn" onclick="submitAuth()">AUTHENTICATE →</button>
+  <div class="gate-error" id="gate-error">✕ &nbsp; COLOR MISMATCH — TRY AGAIN</div>
+
+  <div class="gate-hint">KOICHIRO HOSHINO &nbsp;·&nbsp; 星 = INDIGO &nbsp;·&nbsp; 晃 = YELLOW (SUNSHINE)</div>
+</div>
+<!-- ══════════════ END AUTH GATE ══════════════ -->
 
 <div class="lang-bar">
   <button class="lb on" onclick="setLang('ja')">JA</button>
@@ -715,6 +944,108 @@ function setLang(l){
   document.body.classList.toggle('en',l==='en');
   document.querySelectorAll('.lb').forEach(b=>b.classList.toggle('on',b.textContent===l.toUpperCase()));
 }
+
+/* ── KANJI AUTH LOGIC ── */
+const ANSWERS = { hoshi: 'indigo', ko: 'yellow' };
+const COLORS = {
+  indigo: '#2c3e6b',
+  yellow: '#edb830',
+  gold:   '#edb830',
+  green:  '#3dd68c',
+  red:    '#f06060',
+  cyan:   '#1ed8d8',
+  purple: '#9b7ff4',
+};
+let selected = { hoshi: null, ko: null };
+
+function pickColor(el) {
+  const kanji = el.dataset.kanji;
+  const val   = el.dataset.val;
+
+  // deselect others in same group
+  el.closest('.swatch-row').querySelectorAll('.swatch').forEach(s => s.classList.remove('selected'));
+  el.classList.add('selected');
+  selected[kanji] = val;
+
+  // tint the kanji character
+  const charEl = document.getElementById('char-' + kanji);
+  charEl.style.color    = COLORS[val] || '#dde2f5';
+  charEl.style.borderColor = (COLORS[val] || 'transparent') + '44';
+  charEl.style.background  = '#0b0d1a';
+
+  // check if both selected → activate button
+  const btn = document.getElementById('gate-btn');
+  if (selected.hoshi && selected.ko) {
+    btn.classList.add('ready');
+  }
+
+  // clear error on new pick
+  document.getElementById('gate-error').classList.remove('show');
+}
+
+function submitAuth() {
+  if (!selected.hoshi || !selected.ko) return;
+
+  const hoshiOk = selected.hoshi === ANSWERS.hoshi;
+  const koOk    = selected.ko    === ANSWERS.ko;
+
+  if (hoshiOk && koOk) {
+    // SUCCESS
+    const flash = document.getElementById('success-flash');
+    flash.classList.add('show');
+    document.getElementById('gate-btn').textContent = '✓  AUTHENTICATED';
+    document.getElementById('gate-btn').style.color = '#3dd68c';
+    document.getElementById('gate-btn').style.borderColor = '#3dd68c';
+
+    setTimeout(() => {
+      document.getElementById('auth-gate').classList.add('hidden');
+      document.body.style.overflow = '';
+    }, 900);
+
+  } else {
+    // FAILURE — shake + error
+    const err = document.getElementById('gate-error');
+    err.classList.add('show');
+
+    // shake wrong kanji
+    if (!hoshiOk) shakeChar('hoshi');
+    if (!koOk)    shakeChar('ko');
+
+    // reset wrong selection
+    setTimeout(() => {
+      if (!hoshiOk) resetCard('hoshi');
+      if (!koOk)    resetCard('ko');
+    }, 600);
+  }
+}
+
+function shakeChar(kanji) {
+  const el = document.getElementById('char-' + kanji);
+  el.style.transition = 'transform 0.08s';
+  let i = 0;
+  const shakes = ['-6px','6px','-5px','5px','-3px','3px','0px'];
+  const iv = setInterval(() => {
+    el.style.transform = `translateX(${shakes[i]})`;
+    i++;
+    if (i >= shakes.length) {
+      clearInterval(iv);
+      el.style.transform = '';
+    }
+  }, 60);
+}
+
+function resetCard(kanji) {
+  selected[kanji] = null;
+  const charEl = document.getElementById('char-' + kanji);
+  charEl.style.color = '#dde2f5';
+  charEl.style.borderColor = 'rgba(255,255,255,0.06)';
+  document.getElementById('char-' + kanji).closest('.kanji-card')
+    .querySelectorAll('.swatch').forEach(s => s.classList.remove('selected'));
+  document.getElementById('gate-btn').classList.remove('ready');
+}
+
+// lock scroll while gate is open
+document.body.style.overflow = 'hidden';
 </script>
 </body>
 </html>
