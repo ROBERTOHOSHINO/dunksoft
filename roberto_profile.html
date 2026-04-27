@@ -160,6 +160,14 @@ body {
   margin: 32px 0 8px;
 }
 
+
+/* ── TECH TIMELINE ── */
+#tech-timeline { display: flex; flex-direction: column; gap: 0; margin-top: 8px; }
+.tech-item { display: grid; grid-template-columns: 72px 1fr; gap: 16px; align-items: start; padding: 12px 0; border-bottom: 1px solid rgba(42,74,106,0.25); opacity: 0; transform: translateX(-10px); transition: opacity 0.5s ease, transform 0.5s ease; }
+.tech-item.visible { opacity: 1; transform: translateX(0); }
+.tech-era { font-size: 10px; color: var(--fg2); letter-spacing: 0.1em; padding-top: 3px; line-height: 1.5; }
+.tech-layer { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 300; color: #c8dff0; line-height: 1.3; margin-bottom: 3px; }
+.tech-detail { font-size: 10px; color: var(--fg2); letter-spacing: 0.05em; line-height: 1.7; }
 /* ── FOOTER ── */
 #footer {
   margin-top: 56px;
@@ -309,6 +317,77 @@ body {
       <div>
         <div class="role-org">一般社団法人 東京ニュービジネス協議会</div>
         <div class="role-title">理事 / 2012–2013 定例会委員長</div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- ── 技術遍歴 ── -->
+  <div class="section-label" style="margin-top:0; margin-bottom:4px;">技術遍歴 / Technical Journey</div>
+  <div id="tech-timeline">
+
+    <div class="tech-item">
+      <div class="tech-era">1982–</div>
+      <div>
+        <div class="tech-layer">PASCAL独学 → BASIC / MBASIC80</div>
+        <div class="tech-detail">Intel ISIS-II クローン、NEC PC-9801。雑誌のコードを打ち込む日々。球体アルゴリズムとの出会い。</div>
+      </div>
+    </div>
+
+    <div class="tech-item">
+      <div class="tech-era">1983–</div>
+      <div>
+        <div class="tech-layer">アセンブラ / 低レイヤー全般</div>
+        <div class="tech-detail">BIOS・IPL・DIAG・モニター・OS・コンパイラ。デバイスドライバー（FAX・プリンター・ディスプレイ・ライトペン）。8ビット⇔16ビットを往復しながら機械の言葉を身体で覚えた。</div>
+      </div>
+    </div>
+
+    <div class="tech-item">
+      <div class="tech-era">1984–</div>
+      <div>
+        <div class="tech-layer">通信プログラミング</div>
+        <div class="tech-detail">BSCコンテンション（気象庁）、全銀協手順（ATM）、μPD7201との熱問題。マイクロ秒単位の応答を要求される世界。</div>
+      </div>
+    </div>
+
+    <div class="tech-item">
+      <div class="tech-era">1986–</div>
+      <div>
+        <div class="tech-layer">アプリケーション / 全自動倉庫</div>
+        <div class="tech-detail">低レイヤーからアプリへ移行。大規模物流システム構築。NIFTY-SERVEを使った東京との分業開発——リモートワークの原体験。</div>
+      </div>
+    </div>
+
+    <div class="tech-item">
+      <div class="tech-era">1990s</div>
+      <div>
+        <div class="tech-layer">AI（第2次ブーム）/ データベース</div>
+        <div class="tech-detail">AIの前回ブームを経験。ACCESS → SQL へ。プロジェクト管理ツール（アルテミス）導入・運用。</div>
+      </div>
+    </div>
+
+    <div class="tech-item">
+      <div class="tech-era">1990s–</div>
+      <div>
+        <div class="tech-layer">資格 / セキュリティ</div>
+        <div class="tech-detail">国家試験：特種情報処理技術者。Novell Netware 管理者・技術者。米 SunGard セキュリティ 管理者・技術者。</div>
+      </div>
+    </div>
+
+    <div class="tech-item">
+      <div class="tech-era">1995–</div>
+      <div>
+        <div class="tech-layer">インターネット / WEB</div>
+        <div class="tech-detail">CompuServe 経由でインターネットへ。WEB開発へ本格移行。1982年の夢想が現実になった瞬間。</div>
+      </div>
+    </div>
+
+    <div class="tech-item">
+      <div class="tech-era">2020s</div>
+      <div>
+        <div class="tech-layer">AI（現在）/ Claude</div>
+        <div class="tech-detail">基本技術は不変。表層は常に変化する。Claude の登場で、キャッチアップのコストが劇的に下がった——それ自体が、また一つの奇跡。</div>
       </div>
     </div>
 
@@ -490,6 +569,10 @@ draw();
 const items = document.querySelectorAll('.role-item');
 items.forEach((el, i) => {
   setTimeout(() => el.classList.add('visible'), 200 + i * 80);
+});
+const techItems = document.querySelectorAll('.tech-item');
+techItems.forEach((el, i) => {
+  setTimeout(() => el.classList.add('visible'), 400 + i * 60);
 });
 </script>
 </body>
