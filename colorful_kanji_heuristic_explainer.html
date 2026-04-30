@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>COLORFUL KANJI AUTH™ — Color Heuristic Logic</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=DM+Mono:wght@400;500&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --indigo: #3B4FB8;
+    --indigo-deep: #26215C;
+    --indigo-light: #EEEDFE;
+    --sunny-core: #E8B84B;
+    --sunny-deep: #D4A032;
+    --sunny-light: #F2CA6B;
+    --pitch-yellow: #EDB830;
+    --bg: #0D0D0F;
+    --bg2: #161618;
+    --bg3: #1E1E22;
+    --border: rgba(255,255,255,0.08);
+    --text: #F0EEE8;
+    --text2: rgba(240,238,232,0.55);
+    --text3: rgba(240,238,232,0.3);
+    --green: #3DD68C;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    min-height: 100vh;
+    padding: 48px 24px 80px;
+    max-width: 780px;
+    margin: 0 auto;
+  }
+
+  header {
+    margin-bottom: 56px;
+    border-bottom: 0.5px solid var(--border);
+    padding-bottom: 32px;
+  }
+
+  .eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--text3);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  h1 {
+    font-size: clamp(28px, 5vw, 44px);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+  }
+
+  h1 span.accent { color: var(--sunny-core); }
+
+  .subtitle {
+    font-size: 14px;
+    color: var(--text2);
+    font-family: 'Noto Serif JP', serif;
+    line-height: 1.8;
+  }
+
+  section { margin-bottom: 56px; }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--text3);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  /* Rose photo + extraction */
+  .photo-extract {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    align-items: stretch;
+  }
+
+  @media (max-width: 560px) {
+    .photo-extract { grid-template-columns: 1fr; }
+  }
+
+  .photo-panel {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 0.5px solid var(--border);
+    position: relative;
+    min-height: 280px;
+    background: var(--bg3);
+  }
+
+  .photo-panel img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 40%;
+    display: block;
+    opacity: 0.9;
+  }
+
+  .photo-tag {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: rgba(255,255,255,0.7);
+    background: rgba(0,0,0,0.55);
+    padding: 4px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.1em;
+  }
+
+  .extract-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .swatch-card {
+    background: var(--bg2);
+    border: 0.5px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    transition: border-color 0.2s;
+  }
+
+  .swatch-card:hover { border-color: rgba(255,255,255,0.2); }
+
+  .swatch-card.core { border-color: var(--sunny-core); border-width: 1.5px; }
+
+  .swatch-dot {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .swatch-info { flex: 1; }
+
+  .swatch-name {
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+
+  .swatch-hex {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--text2);
+  }
+
+  .swatch-role {
+    font-size: 10px;
+    color: var(--text3);
+    margin-top: 2px;
+    font-family: 'Noto Serif JP', serif;
+  }
+
+  .core-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: var(--sunny-core);
+    color: #3A2800;
+    padding: 3px 8px;
+    border-radius: 20px;
+    font-weight: 500;
+  }
+
+  /* Heuristic zone */
+  .heuristic-box {
+    background: var(--bg2);
+    border: 0.5px solid var(--border);
+    border-radius: 14px;
+    padding: 28px 28px 24px;
+  }
+
+  .heuristic-title {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .heuristic-desc {
+    font-size: 13px;
+    color: var(--text2);
+    font-family: 'Noto Serif JP', serif;
+    line-height: 1.8;
+    margin-bottom: 24px;
+  }
+
+  .hsl-range {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+
+  .hsl-item {
+    background: var(--bg3);
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+  }
+
+  .hsl-axis {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text3);
+    letter-spacing: 0.1em;
+    margin-bottom: 6px;
+  }
+
+  .hsl-value {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--sunny-core);
+  }
+
+  .hsl-label {
+    font-size: 10px;
+    color: var(--text3);
+    margin-top: 4px;
+    font-family: 'Noto Serif JP', serif;
+  }
+
+  /* Spectrum bar */
+  .spectrum-wrap { margin: 20px 0; }
+
+  .spectrum-label-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+
+  .spectrum-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text3);
+  }
+
+  .spectrum-bar {
+    height: 36px;
+    border-radius: 8px;
+    background: linear-gradient(to right,
+      #A07820 0%,
+      #D4A032 20%,
+      #E8B84B 45%,
+      #EDB830 55%,
+      #F2CA6B 80%,
+      #F7DFA0 100%
+    );
+    position: relative;
+    margin-bottom: 6px;
+  }
+
+  .spectrum-marker {
+    position: absolute;
+    top: -8px;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .marker-line {
+    width: 1.5px;
+    height: 52px;
+    background: white;
+    opacity: 0.9;
+  }
+
+  .marker-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: white;
+    white-space: nowrap;
+    background: rgba(0,0,0,0.6);
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-top: 4px;
+  }
+
+  /* Check list */
+  .check-list { display: flex; flex-direction: column; gap: 8px; }
+
+  .check-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    background: var(--bg3);
+    border-radius: 8px;
+    border: 0.5px solid var(--border);
+  }
+
+  .mini-dot {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    flex-shrink: 0;
+  }
+
+  .check-hex {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    flex: 1;
+  }
+
+  .check-note {
+    font-size: 11px;
+    color: var(--text2);
+    font-family: 'Noto Serif JP', serif;
+  }
+
+  .pass-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--green);
+    background: rgba(61,214,140,0.12);
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+
+  /* Pitch match */
+  .pitch-match {
+    background: var(--bg2);
+    border: 1.5px solid var(--sunny-core);
+    border-radius: 14px;
+    padding: 24px 28px;
+  }
+
+  .match-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--sunny-core);
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .match-visual {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 16px 0;
+    flex-wrap: wrap;
+  }
+
+  .match-item { text-align: center; }
+
+  .match-dot {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    margin: 0 auto 6px;
+  }
+
+  .match-name {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text2);
+  }
+
+  .match-hex-sm {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: var(--text3);
+  }
+
+  .arrow-symbol {
+    font-size: 20px;
+    color: var(--text3);
+    flex-shrink: 0;
+  }
+
+  .delta-box {
+    background: rgba(61,214,140,0.1);
+    border: 0.5px solid rgba(61,214,140,0.3);
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--green);
+    flex: 1;
+    min-width: 160px;
+  }
+
+  /* Auth preview */
+  .auth-preview {
+    background: var(--bg2);
+    border: 0.5px solid var(--border);
+    border-radius: 14px;
+    padding: 28px;
+    text-align: center;
+  }
+
+  .kanji-pair {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin: 24px 0;
+  }
+
+  .kanji-item { text-align: center; }
+
+  .kanji-glyph {
+    width: 80px;
+    height: 80px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Noto Serif JP', serif;
+    font-size: 40px;
+    font-weight: 700;
+    margin: 0 auto 8px;
+  }
+
+  .kanji-reading {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text3);
+    letter-spacing: 0.1em;
+  }
+
+  .kanji-color-name {
+    font-size: 12px;
+    font-weight: 700;
+    margin-top: 4px;
+  }
+
+  .auth-tagline {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 13px;
+    color: var(--text2);
+    line-height: 1.8;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  footer {
+    border-top: 0.5px solid var(--border);
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: gap;
+    gap: 12px;
+  }
+
+  .footer-brand {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--text3);
+    letter-spacing: 0.1em;
+  }
+
+  .footer-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--text3);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">DUNKSOFT Co., Ltd. — COLORFUL KANJI AUTH™</div>
+  <h1>Color <span class="accent">Heuristic</span><br>Logic</h1>
+  <p class="subtitle">
+    人間がHEXを正確に覚えることは不可能。<br>
+    だから、記憶の「範囲」を正解にする。<br>
+    柳森神社のサニービーチ薔薇から、そのロジックを解説する。
+  </p>
+</header>
+
+<!-- STEP 1: Photo + Extraction -->
+<section>
+  <div class="section-label">Step 01 — Photo to HEX extraction</div>
+  <div class="photo-extract">
+    <div class="photo-panel">
+      <img src="ROSES_YANAGIMORI0430.jpg" alt="柳森神社 サニービーチ薔薇 2026.04.30">
+      <div class="photo-tag">YANAGIMORI SHRINE · 2026.04.30</div>
+    </div>
+    <div class="extract-panel">
+      <div class="swatch-card">
+        <div class="swatch-dot" style="background: #D4A032;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">ディープ アンバー</div>
+          <div class="swatch-hex">#D4A032</div>
+          <div class="swatch-role">花びら深部・影の色</div>
+        </div>
+      </div>
+      <div class="swatch-card core">
+        <div class="swatch-dot" style="background: #E8B84B;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">サニービーチ コア</div>
+          <div class="swatch-hex">#E8B84B</div>
+          <div class="swatch-role">咲きかけ・認証基準色</div>
+        </div>
+        <span class="core-badge">CORE</span>
+      </div>
+      <div class="swatch-card">
+        <div class="swatch-dot" style="background: #F2CA6B;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">ライト サニー</div>
+          <div class="swatch-hex">#F2CA6B</div>
+          <div class="swatch-role">蕾の外側・光の当たる部分</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STEP 2: Heuristic Logic -->
+<section>
+  <div class="section-label">Step 02 — Heuristic tolerance zone</div>
+  <div class="heuristic-box">
+    <div class="heuristic-title">なぜ「範囲」が正解なのか</div>
+    <div class="heuristic-desc">
+      人間の色の記憶は「黄色っぽい」という感覚的カテゴリで動く。<br>
+      HSL色空間で±の許容範囲を定義することで、<br>
+      記憶の自然なゆらぎをそのまま認証に使える。
+    </div>
+
+    <div class="hsl-range">
+      <div class="hsl-item">
+        <div class="hsl-axis">HUE</div>
+        <div class="hsl-value">±15°</div>
+        <div class="hsl-label">色相の許容幅</div>
+      </div>
+      <div class="hsl-item">
+        <div class="hsl-axis">LIGHTNESS</div>
+        <div class="hsl-value">±20%</div>
+        <div class="hsl-label">明度の許容幅</div>
+      </div>
+      <div class="hsl-item">
+        <div class="hsl-axis">SATURATION</div>
+        <div class="hsl-value">±25%</div>
+        <div class="hsl-label">彩度の許容幅</div>
+      </div>
+    </div>
+
+    <div class="spectrum-wrap">
+      <div class="spectrum-label-row">
+        <span class="spectrum-label">← 暗い（下限）</span>
+        <span class="spectrum-label">明るい（上限）→</span>
+      </div>
+      <div class="spectrum-bar">
+        <div class="spectrum-marker" style="left: 20%;">
+          <div class="marker-line"></div>
+          <div class="marker-label">#D4A032</div>
+        </div>
+        <div class="spectrum-marker" style="left: 45%;">
+          <div class="marker-line" style="background: #FFE680;"></div>
+          <div class="marker-label" style="background: rgba(232,184,75,0.8); color: #3A2800;">CORE #E8B84B</div>
+        </div>
+        <div class="spectrum-marker" style="left: 55%;">
+          <div class="marker-line" style="opacity: 0.5;"></div>
+          <div class="marker-label">#EDB830 ← pitch</div>
+        </div>
+        <div class="spectrum-marker" style="left: 80%;">
+          <div class="marker-line"></div>
+          <div class="marker-label">#F2CA6B</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="check-list">
+      <div class="check-row">
+        <div class="mini-dot" style="background: #D4A032;"></div>
+        <div class="check-hex">#D4A032</div>
+        <div class="check-note">花びら深部</div>
+        <span class="pass-badge">✓ 正解</span>
+      </div>
+      <div class="check-row" style="border-color: var(--sunny-core);">
+        <div class="mini-dot" style="background: #E8B84B;"></div>
+        <div class="check-hex">#E8B84B</div>
+        <div class="check-note">コア（認証基準）</div>
+        <span class="pass-badge">✓ 正解</span>
+      </div>
+      <div class="check-row" style="border-color: rgba(237,184,48,0.5);">
+        <div class="mini-dot" style="background: #EDB830;"></div>
+        <div class="check-hex">#EDB830</div>
+        <div class="check-note">ピッチデッキの「海」</div>
+        <span class="pass-badge">✓ 正解</span>
+      </div>
+      <div class="check-row">
+        <div class="mini-dot" style="background: #F2CA6B;"></div>
+        <div class="check-hex">#F2CA6B</div>
+        <div class="check-note">蕾の光側</div>
+        <span class="pass-badge">✓ 正解</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STEP 3: Pitch Match -->
+<section>
+  <div class="section-label">Step 03 — Pitch deck coincidence</div>
+  <div class="pitch-match">
+    <div class="match-title">★ Pitch deck との一致</div>
+    <p style="font-size: 13px; color: var(--text2); font-family: 'Noto Serif JP', serif; line-height: 1.8; margin-bottom: 16px;">
+      dunksoft.jp のピッチページに掲載されていた漢字カラーチップ「海 = #EDB830」と、
+      柳森神社の薔薇から今朝Claudeが抽出したコアHEX「#E8B84B」を比較。
+      色相差はわずか <strong style="color: var(--sunny-core);">4°</strong>。
+      星野さんが直感で選んだ「晃の色」は、設計段階のパレットと独立して一致していた。
+    </p>
+    <div class="match-visual">
+      <div class="match-item">
+        <div class="match-dot" style="background: #EDB830;"></div>
+        <div class="match-name">PITCH DECK</div>
+        <div class="match-hex-sm">#EDB830 · 海</div>
+      </div>
+      <div class="arrow-symbol">≈</div>
+      <div class="match-item">
+        <div class="match-dot" style="background: #E8B84B;"></div>
+        <div class="match-name">薔薇から抽出</div>
+        <div class="match-hex-sm">#E8B84B · サニービーチ</div>
+      </div>
+      <div class="delta-box">
+        Hue delta: 4°<br>
+        Lightness delta: 3%<br>
+        同一ヒューリスティック帯
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STEP 4: Auth Result -->
+<section>
+  <div class="section-label">Step 04 — Authentication result</div>
+  <div class="auth-preview">
+    <div class="eyebrow" style="margin-bottom: 0; color: var(--text3);">KOICHIRO HOSHINO — 星野晃一郎</div>
+    <div class="kanji-pair">
+      <div class="kanji-item">
+        <div class="kanji-glyph" style="background: var(--indigo-deep); color: #CECBF6;">星</div>
+        <div class="kanji-reading">HOSHI · ほし</div>
+        <div class="kanji-color-name" style="color: #9B9FE8;">INDIGO</div>
+        <div style="font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text3);">#3B4FB8</div>
+        <div style="font-size: 10px; color: var(--text3); margin-top: 2px; font-family: 'Noto Serif JP', serif;">父の剣道着の藍色</div>
+      </div>
+      <div class="kanji-item">
+        <div class="kanji-glyph" style="background: #3A2800; color: var(--sunny-core);">晃</div>
+        <div class="kanji-reading">KŌ · こう</div>
+        <div class="kanji-color-name" style="color: var(--sunny-core);">SUNNY BEACH</div>
+        <div style="font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text3);">#E8B84B</div>
+        <div style="font-size: 10px; color: var(--text3); margin-top: 2px; font-family: 'Noto Serif JP', serif;">柳森神社の薔薇</div>
+      </div>
+    </div>
+    <div class="auth-tagline">
+      知識でも、端末でも、生体でもない。<br>
+      14億人の文化的DNAに刻まれた「記憶」が、認証になる。
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand">DUNKSOFT Co., Ltd. · COLORFUL KANJI AUTH™ · PATENT PENDING</div>
+  <div class="footer-date">2026.04.30 · Alter Meeting</div>
+</footer>
+
+</body>
+</html>
