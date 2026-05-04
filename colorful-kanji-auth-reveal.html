@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>答え合わせ — 天然色文字AUTH™ | DUNKSOFT</title>
+<meta name="description" content="あなたは今、パスワードなしで扉を開けました。それが答えです。天然色文字AUTH™の種明かし。">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&family=Noto+Serif+JP:wght@400;600&display=swap');
+
+:root {
+  --ink: #1a1814;
+  --ink2: #4a4640;
+  --ink3: #8a8680;
+  --paper: #faf8f4;
+  --paper2: #f2efe8;
+  --gold: #b8960c;
+  --vermilion: #c0392b;
+  --indigo: #1a3a5c;
+  --teal: #0f6e56;
+  --accent: #c0550a;
+
+  /* 星野晃の色 */
+  --hoshi: #1a3a5c;   /* 星 — 夜空の藍 */
+  --no:    #2d6a2d;   /* 野 — 草原の緑 */
+  --kou:   #c8920a;   /* 晃 — 朝の光・金 */
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+  line-height: 1.8;
+}
+
+/* ── HEADER ── */
+header {
+  border-bottom: 0.5px solid rgba(0,0,0,0.12);
+  padding: 1.25rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  background: rgba(250,248,244,0.95);
+  backdrop-filter: blur(8px);
+  z-index: 100;
+}
+.logo {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  color: var(--ink);
+  text-decoration: none;
+}
+.logo span { color: var(--accent); }
+nav a {
+  font-size: 12px;
+  letter-spacing: .08em;
+  color: var(--ink2);
+  text-decoration: none;
+}
+nav a:hover { color: var(--accent); }
+
+/* ── REVEAL HERO ── */
+.reveal-hero {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 6rem 2rem 4rem;
+  text-align: center;
+}
+
+.reveal-eyebrow {
+  font-size: 11px;
+  letter-spacing: .2em;
+  color: var(--ink3);
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  opacity: 0;
+  animation: fadeUp .6s ease forwards .2s;
+}
+
+.reveal-headline {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(22px, 4vw, 40px);
+  font-weight: 600;
+  line-height: 1.6;
+  letter-spacing: .04em;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: fadeUp .6s ease forwards .4s;
+}
+
+.reveal-headline .ans {
+  color: var(--teal);
+  border-bottom: 2px solid var(--teal);
+  padding-bottom: 2px;
+}
+
+.reveal-sub {
+  font-size: 15px;
+  color: var(--ink2);
+  max-width: 540px;
+  margin: 0 auto 3rem;
+  line-height: 2;
+  opacity: 0;
+  animation: fadeUp .6s ease forwards .6s;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── KANJI DEMO ── */
+.kanji-demo {
+  max-width: 860px;
+  margin: 0 auto 5rem;
+  padding: 0 2rem;
+}
+
+.kanji-demo-label {
+  font-size: 11px;
+  letter-spacing: .15em;
+  color: var(--ink3);
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.kanji-cards {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.kanji-card {
+  background: var(--paper2);
+  border: 0.5px solid rgba(0,0,0,0.1);
+  border-radius: 4px;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  flex: 1;
+  min-width: 200px;
+  max-width: 240px;
+  opacity: 0;
+  animation: fadeUp .6s ease forwards;
+  transition: transform .2s, box-shadow .2s;
+}
+.kanji-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+}
+.kanji-card:nth-child(1) { animation-delay: .8s; }
+.kanji-card:nth-child(2) { animation-delay: 1.0s; }
+.kanji-card:nth-child(3) { animation-delay: 1.2s; }
+
+.kanji-char {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 72px;
+  font-weight: 600;
+  line-height: 1;
+  margin-bottom: 1rem;
+  display: block;
+}
+.kanji-reading {
+  font-size: 11px;
+  letter-spacing: .15em;
+  color: var(--ink3);
+  margin-bottom: .5rem;
+}
+.kanji-meaning {
+  font-size: 13px;
+  color: var(--ink2);
+  line-height: 1.6;
+}
+.color-swatch {
+  width: 48px;
+  height: 6px;
+  border-radius: 3px;
+  margin: 1rem auto 0;
+}
+
+/* ── SECTIONS ── */
+.section {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 0 2rem 5rem;
+}
+
+.section-label {
+  font-size: 11px;
+  letter-spacing: .15em;
+  color: var(--ink3);
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  padding-bottom: .75rem;
+  border-bottom: 0.5px solid rgba(0,0,0,0.1);
+}
+
+.section h2 {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(20px, 3vw, 28px);
+  font-weight: 600;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  letter-spacing: .03em;
+}
+
+.section p {
+  font-size: 15px;
+  color: var(--ink2);
+  line-height: 2;
+  margin-bottom: 1.5rem;
+}
+
+.section p strong {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+/* ── COMPARISON TABLE ── */
+.compare {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+  font-size: 14px;
+}
+.compare th {
+  font-size: 11px;
+  letter-spacing: .1em;
+  color: var(--ink3);
+  font-weight: 400;
+  padding: .75rem 1rem;
+  border-bottom: 0.5px solid rgba(0,0,0,0.12);
+  text-align: left;
+}
+.compare td {
+  padding: .75rem 1rem;
+  border-bottom: 0.5px solid rgba(0,0,0,0.06);
+  color: var(--ink2);
+  vertical-align: top;
+}
+.compare td:first-child {
+  color: var(--ink3);
+  font-size: 12px;
+  letter-spacing: .05em;
+  width: 30%;
+}
+.compare .bad  { color: var(--vermilion); }
+.compare .good { color: var(--teal); font-weight: 500; }
+
+/* ── SENSE GRID ── */
+.sense-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+.sense-item {
+  background: var(--paper2);
+  border: 0.5px solid rgba(0,0,0,0.08);
+  border-radius: 4px;
+  padding: 1.25rem;
+}
+.sense-icon {
+  font-size: 24px;
+  margin-bottom: .5rem;
+  display: block;
+}
+.sense-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: .25rem;
+}
+.sense-desc {
+  font-size: 12px;
+  color: var(--ink3);
+  line-height: 1.6;
+}
+
+/* ── QUOTE ── */
+.quote-block {
+  border-left: 3px solid var(--accent);
+  padding: 1.5rem 2rem;
+  margin: 2.5rem 0;
+  background: var(--paper2);
+}
+.quote-block p {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 17px;
+  color: var(--ink);
+  line-height: 1.8;
+  margin-bottom: .5rem;
+}
+.quote-block p ruby rt { font-size: 10px; color: var(--ink3); font-family: 'Noto Sans JP', sans-serif; }
+.quote-en {
+  font-size: 13px;
+  color: var(--ink3);
+  font-style: italic;
+  margin-top: .5rem !important;
+}
+
+/* ── FUTURE DOOR ── */
+.future-door {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 2rem 6rem;
+  text-align: center;
+}
+
+.door-visual {
+  width: 120px;
+  height: 160px;
+  margin: 0 auto 2.5rem;
+  position: relative;
+}
+
+.door-frame {
+  width: 100%;
+  height: 100%;
+  border: 2px solid var(--ink2);
+  border-radius: 60px 60px 0 0;
+  position: absolute;
+  top: 0; left: 0;
+}
+
+.door-panel {
+  width: calc(100% - 16px);
+  height: calc(100% - 16px);
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 54px 54px 0 0;
+  position: absolute;
+  top: 8px; left: 8px;
+  background: linear-gradient(135deg, var(--paper2), var(--paper));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.door-kanji {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 36px;
+  color: var(--accent);
+  opacity: .6;
+}
+
+.door-open {
+  animation: doorSwing 2s ease-in-out infinite alternate;
+  transform-origin: left center;
+}
+
+@keyframes doorSwing {
+  from { transform: perspective(400px) rotateY(0deg); }
+  to   { transform: perspective(400px) rotateY(-25deg); }
+}
+
+.future-heading {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(20px, 3vw, 32px);
+  font-weight: 600;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.future-body {
+  font-size: 15px;
+  color: var(--ink2);
+  max-width: 540px;
+  margin: 0 auto 3rem;
+  line-height: 2;
+}
+
+/* ── CTA ── */
+.cta-row {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: .875rem 2.5rem;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 13px;
+  letter-spacing: .1em;
+  cursor: pointer;
+  border-radius: 2px;
+  text-decoration: none;
+  transition: background .2s;
+}
+.btn-primary:hover { background: #a0440a; }
+.btn-secondary {
+  background: transparent;
+  color: var(--ink2);
+  border: 0.5px solid rgba(0,0,0,0.2);
+  padding: .875rem 2.5rem;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 13px;
+  letter-spacing: .1em;
+  cursor: pointer;
+  border-radius: 2px;
+  text-decoration: none;
+  transition: border-color .2s, color .2s;
+}
+.btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ── DIVIDER ── */
+.divider {
+  max-width: 860px;
+  margin: 0 auto 5rem;
+  padding: 0 2rem;
+  border-top: 0.5px solid rgba(0,0,0,0.1);
+}
+
+/* ── FOOTER ── */
+footer {
+  border-top: 0.5px solid rgba(0,0,0,0.1);
+  padding: 2rem;
+  text-align: center;
+  font-size: 11px;
+  color: var(--ink3);
+  letter-spacing: .08em;
+  line-height: 2;
+}
+
+/* ── RUBY ── */
+ruby rt {
+  font-size: 10px;
+  font-weight: 400;
+  color: var(--ink3);
+  font-family: 'Noto Sans JP', sans-serif;
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a class="logo" href="https://dunksoft.jp"><span>DUNK</span>SOFT</a>
+  <nav>
+    <a href="https://dunksoft.jp">← Home</a>
+  </nav>
+</header>
+
+<!-- REVEAL HERO -->
+<section class="reveal-hero">
+  <div class="reveal-eyebrow">天然色文字AUTH™ — 答え合わせ / Reveal</div>
+  <h1 class="reveal-headline">
+    <ruby>あなたは今、パスワードなしで<rt>　</rt></ruby><br>
+    <ruby>扉<rt>とびら</rt></ruby>を<ruby>開<rt>あ</rt></ruby>けました。<br>
+    <span class="ans">それが<ruby>答<rt>こた</rt></ruby>えです。</span>
+  </h1>
+  <p class="reveal-sub">
+    色と漢字で認証した、あの体験——<br>
+    それがそのまま、プロダクトの全てです。<br>
+    <span style="font-size:13px;color:var(--ink3)">
+      The experience of entering <em>is</em> the product.
+    </span>
+  </p>
+</section>
+
+<!-- KANJI DEMO: 星野晃 -->
+<section class="kanji-demo">
+  <div class="kanji-demo-label">Sample · 星野晃一郎 / Roberto Hoshino</div>
+  <div class="kanji-cards">
+
+    <div class="kanji-card">
+      <span class="kanji-char" style="color:var(--hoshi)">星</span>
+      <div class="kanji-reading">HOSHI · ほし</div>
+      <div class="kanji-meaning">夜空の深い藍<br>揺れない光</div>
+      <div class="color-swatch" style="background:var(--hoshi)"></div>
+    </div>
+
+    <div class="kanji-card">
+      <span class="kanji-char" style="color:var(--no)">野</span>
+      <div class="kanji-reading">NO · の</div>
+      <div class="kanji-meaning">草原の緑<br>広がる大地</div>
+      <div class="color-swatch" style="background:var(--no)"></div>
+    </div>
+
+    <div class="kanji-card">
+      <span class="kanji-char" style="color:var(--kou)">晃</span>
+      <div class="kanji-reading">KOU · こう</div>
+      <div class="kanji-meaning">朝の光、輝き<br>金色の夜明け</div>
+      <div class="color-swatch" style="background:var(--kou)"></div>
+    </div>
+
+  </div>
+  <p style="text-align:center;font-size:13px;color:var(--ink3);margin-top:1.5rem;letter-spacing:.05em">
+    誰もこの組み合わせを持っていない。あなたの色の記憶は、あなたの外には存在しない。<br>
+    <em style="font-style:italic">No one else remembers your colors the way you do.</em>
+  </p>
+</section>
+
+<div class="divider"></div>
+
+<!-- WHY PASSWORDS FAIL -->
+<section class="section">
+  <div class="section-label">Problem · なぜパスワードは失敗し続けるのか</div>
+  <h2>
+    <ruby>パスワードは<rt>　</rt></ruby><ruby>構造的<rt>こうぞうてき</rt></ruby>に<ruby>欠陥<rt>けっかん</rt></ruby>がある。
+  </h2>
+
+  <p>
+    パスワードは「<strong>覚えるもの</strong>」として設計されています。
+    しかし人間の記憶は、任意の文字列を長期保存するようにできていない。
+    だから私たちは忘れ、使い回し、単純化し——そして破られる。
+  </p>
+
+  <table class="compare">
+    <tr>
+      <th></th>
+      <th>パスワード</th>
+      <th>天然色文字AUTH™</th>
+    </tr>
+    <tr>
+      <td>認証の根拠</td>
+      <td class="bad">任意の文字列（知識）</td>
+      <td class="good">色と記憶（感覚）</td>
+    </tr>
+    <tr>
+      <td>フィッシング</td>
+      <td class="bad">容易に盗める</td>
+      <td class="good">盗めない・再現不可</td>
+    </tr>
+    <tr>
+      <td>忘却</td>
+      <td class="bad">頻繁に忘れる</td>
+      <td class="good">自分の色は忘れない</td>
+    </tr>
+    <tr>
+      <td>サーバー漏洩</td>
+      <td class="bad">ハッシュが流出</td>
+      <td class="good">感覚はサーバーにない</td>
+    </tr>
+    <tr>
+      <td>シニア・障害者</td>
+      <td class="bad">複雑さが壁になる</td>
+      <td class="good">色と文字で直感的</td>
+    </tr>
+  </table>
+
+  <div class="quote-block">
+    <p>
+      「<ruby>私<rt>わたし</rt></ruby>はこの<ruby>問題<rt>もんだい</rt></ruby>を『<ruby>発見<rt>はっけん</rt></ruby>』したのではない。<br>
+      <strong>43<ruby>年間<rt>ねんかん</rt></ruby>、<ruby>目撃<rt>もくげき</rt></ruby>してきたのだ。</strong>」
+    </p>
+    <p class="quote-en">"I did not discover this problem. I witnessed it for 43 years."<br>
+    — Roberto Hoshino / 星野晃一郎, Founder, DUNKSOFT</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- HOW IT WORKS -->
+<section class="section">
+  <div class="section-label">How it works · 仕組み</div>
+  <h2>
+    <ruby>色<rt>いろ</rt></ruby>は<ruby>知識<rt>ちしき</rt></ruby>ではない。<ruby>感覚<rt>かんかく</rt></ruby>だ。
+  </h2>
+
+  <p>
+    天然色文字AUTH™は、あなたの<strong>姓名の漢字</strong>と、
+    あなたが持つ<strong>その漢字への色の感覚</strong>を組み合わせて認証します。
+  </p>
+
+  <p>
+    「星」が夜空の藍に見えるか、金色に見えるか——
+    それはあなたの記憶、育ち、感性によって異なる。
+    <strong>その「ずれ」こそが、あなただけの鍵になる。</strong>
+  </p>
+
+  <p>
+    漢字は約5万字存在し、色はHEXで1677万通り。
+    その組み合わせは天文学的な数になる。
+    そしてその組み合わせを決めるのは、コンピューターではなく——<strong>あなたの記憶</strong>です。
+  </p>
+</section>
+
+<div class="divider"></div>
+
+<!-- SENSORY KEYS -->
+<section class="section">
+  <div class="section-label">Vision · 五感認証の世界へ</div>
+  <h2>
+    <ruby>色<rt>いろ</rt></ruby>は<ruby>始<rt>はじ</rt></ruby>まりに<ruby>過<rt>す</rt></ruby>ぎない。
+  </h2>
+
+  <p>
+    忘れられない記憶には、必ず感覚が伴う。
+    幼い頃の夕焼け、好きな人の声、祖母の台所の香り。
+    これらは「知識」ではなく「体験」として刻まれている。
+  </p>
+
+  <div class="sense-grid">
+    <div class="sense-item">
+      <span class="sense-icon">🎨</span>
+      <div class="sense-name">色 · Color</div>
+      <div class="sense-desc">漢字に宿る個人の色感覚。今ここで実装済み。</div>
+    </div>
+    <div class="sense-item">
+      <span class="sense-icon">🌸</span>
+      <div class="sense-name">香り · Scent</div>
+      <div class="sense-desc">記憶と最も強く結びつく感覚。次世代認証へ。</div>
+    </div>
+    <div class="sense-item">
+      <span class="sense-icon">🎵</span>
+      <div class="sense-name">音 · Sound</div>
+      <div class="sense-desc">メロディーの断片が呼び起こす固有の記憶。</div>
+    </div>
+    <div class="sense-item">
+      <span class="sense-icon">✋</span>
+      <div class="sense-name">感触 · Touch</div>
+      <div class="sense-desc">素材の記憶——木の温もり、布の柔らかさ。</div>
+    </div>
+    <div class="sense-item">
+      <span class="sense-icon">👅</span>
+      <div class="sense-name">味 · Taste</div>
+      <div class="sense-desc">味覚は最も個人的な記憶のひとつ。</div>
+    </div>
+    <div class="sense-item">
+      <span class="sense-icon">🌍</span>
+      <div class="sense-name">全文字体系へ</div>
+      <div class="sense-desc">漢字圏14億人から、世界のすべての文字へ。</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FUTURE DOOR -->
+<section class="future-door">
+
+  <div class="door-visual">
+    <div class="door-frame"></div>
+    <div class="door-panel door-open">
+      <span class="door-kanji">晃</span>
+    </div>
+  </div>
+
+  <h2 class="future-heading">
+    <ruby>より<rt>　</rt></ruby><ruby>良<rt>よ</rt></ruby>いインターネットへの<ruby>入口<rt>いりぐち</rt></ruby>を、<br>
+    <strong style="color:var(--teal)"><ruby>明<rt>あか</rt></ruby>るく、<ruby>楽<rt>たの</rt></ruby>しく、<ruby>美<rt>うつく</rt></ruby>しく</strong>。
+  </h2>
+
+  <p class="future-body">
+    COLOURFUL JAPAN™は、インターネットにより良いものをのせていく
+    プラットフォームの入口です。<br>
+    シニアも、子どもも、障がいのある方も——<br>
+    色と漢字で、デジタルの扉を自分の手で開ける。<br><br>
+    <span style="font-size:13px;color:var(--ink3);font-style:italic">
+      "A brighter, more joyful gateway to the internet — for everyone."
+    </span>
+  </p>
+
+  <div class="cta-row">
+    <a class="btn-primary" href="https://dunksoft.jp/colorful-kanji-auth-pitch-GATED.html">
+      ← ピッチデッキに戻る
+    </a>
+    <a class="btn-secondary" href="https://dunksoft.jp">
+      DUNKSOFT Home
+    </a>
+  </div>
+
+  <p style="margin-top:3rem;font-size:12px;color:var(--ink3);letter-spacing:.08em;line-height:2">
+    天然色文字AUTH™ · 特許出願中 · Patent Pending<br>
+    DUNKSOFT / Smart Life Styles® — Love your life, love your time®<br>
+    <a href="mailto:roberto@dunksoft.jp" style="color:var(--accent);text-decoration:none">roberto@dunksoft.jp</a>
+    &nbsp;·&nbsp;
+    <a href="https://dunksoft.jp" style="color:var(--ink3);text-decoration:none">dunksoft.jp</a>
+  </p>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>
+    天然色文字AUTH™ · COLOURFUL JAPAN™ · Smart Life Styles®<br>
+    Love your life, love your time®️ · © DUNKSOFT / 星野晃一郎
+  </p>
+  <p style="margin-top:.5rem;font-size:10px;color:var(--ink3)">
+    記録：Claude.ai collaboration · 2026
+  </p>
+</footer>
+
+</body>
+</html>
