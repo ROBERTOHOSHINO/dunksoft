@@ -873,6 +873,14 @@ buildEnSw('enFirstSw','first');buildEnSw('enLastSw','last');
 updEN('first');updEN('last');
 buildJaSw('jaFirstSw','first');buildJaSw('jaLastSw','last');
 updJA('first');updJA('last');
+
+// ── HASH → PANEL ──
+// colorful-kanji-auth-06.html#ja → JAパネルを自動表示
+// colorful-kanji-auth-06.html    → ENパネル（デフォルト）
+(function(){
+  const hash = location.hash.replace('#','').toLowerCase();
+  if(hash === 'ja') switchPanel('ja');
+})();
 </script>
 </body>
 </html>
