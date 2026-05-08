@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>天然色文字AUTH™ — 慈音・鍛冶 Demo</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700;900&family=DM+Mono:wght@400;500&family=Syne:wght@700;800&display=swap');
+
+:root{
+  --bg:#08070a;
+  --bg2:#100f14;
+  --bg3:#181620;
+  --line:rgba(255,255,255,.06);
+  --line2:rgba(255,255,255,.13);
+  --txt:#e8e0d0;
+  --txt2:#8a8070;
+  --txt3:#3a3530;
+  --ji:#C8920A;      /* 慈音 — 金 */
+  --ji2:#F0C040;     /* 慈音 highlight */
+  --ka:#8B1A1A;      /* 鍛冶 — 黒赤 */
+  --ka2:#CC3300;     /* 鍛冶 highlight */
+  --grn:#3dd68c;
+  --red:#f06060;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+
+body{
+  font-family:'Noto Serif JP',serif;
+  background:var(--bg);
+  color:var(--txt);
+  font-size:15px;
+  line-height:1.9;
+  overflow-x:hidden;
+}
+
+/* ── BG texture ── */
+.bg-noise{
+  position:fixed;inset:0;pointer-events:none;z-index:0;
+  opacity:.025;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:200px 200px;
+}
+.bg-embers{
+  position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(ellipse 600px 300px at 20% 80%, rgba(139,26,26,.12) 0%, transparent 60%),
+    radial-gradient(ellipse 400px 200px at 80% 20%, rgba(200,146,10,.07) 0%, transparent 60%);
+}
+
+/* ── PROGRESS ── */
+.progress{
+  position:fixed;top:0;left:0;right:0;z-index:300;
+  height:2px;
+  background:linear-gradient(90deg,var(--ka2),var(--ji2));
+  transform-origin:left;transform:scaleX(0);
+  transition:transform .3s;
+}
+
+/* ── HEADER ── */
+.header{
+  position:fixed;top:2px;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 40px;
+  background:rgba(8,7,10,.88);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--line);
+}
+.brand{
+  font-family:'DM Mono',monospace;
+  font-size:10px;letter-spacing:3px;color:var(--ji2);
+}
+.step-dots{display:flex;gap:10px;align-items:center;}
+.dot{
+  width:7px;height:7px;border-radius:50%;
+  background:var(--txt3);transition:all .3s;cursor:pointer;
+}
+.dot.active{background:var(--ji2);transform:scale(1.4);}
+.dot.done{background:var(--grn);}
+
+/* ── SCENES ── */
+.scene{
+  min-height:100vh;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:100px 32px 64px;
+  position:relative;
+  border-bottom:1px solid var(--line);
+  z-index:1;
+}
+
+/* ════════════════════════════
+   SCENE 1 — 問題提起
+════════════════════════════ */
+.s1-kamon{
+  font-size:48px;margin-bottom:28px;
+  opacity:.6;letter-spacing:8px;
+  animation:fadeIn .8s ease .1s both;
+}
+.s1-headline{
+  font-family:'Noto Serif JP',serif;
+  font-size:clamp(24px,5vw,46px);
+  font-weight:900;
+  text-align:center;
+  line-height:1.4;
+  letter-spacing:-.5px;
+  margin-bottom:16px;
+  animation:fadeIn .8s ease .2s both;
+}
+.s1-headline .hl{color:var(--red);}
+.s1-sub{
+  font-size:13px;color:var(--txt2);
+  text-align:center;max-width:460px;
+  line-height:2.1;font-style:italic;
+  margin-bottom:48px;
+  animation:fadeIn .8s ease .3s both;
+}
+.problem-list{
+  display:flex;flex-direction:column;gap:8px;
+  max-width:460px;width:100%;
+  animation:fadeIn .8s ease .4s both;
+}
+.p-item{
+  display:flex;align-items:center;gap:14px;
+  background:var(--bg2);border:1px solid var(--line);
+  border-radius:10px;padding:13px 18px;
+}
+.p-x{font-family:'DM Mono',monospace;font-size:14px;color:var(--red);flex-shrink:0;}
+.p-txt{font-size:12px;color:var(--txt2);}
+.s1-arrow{
+  margin-top:44px;
+  font-family:'DM Mono',monospace;
+  font-size:9px;letter-spacing:4px;color:var(--txt3);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  cursor:pointer;transition:.2s;
+  animation:bounce 2.2s ease infinite, fadeIn .8s ease .6s both;
+}
+.s1-arrow:hover{color:var(--ji2);}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(7px)}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+
+/* ════════════════════════════
+   SCENE 2 — 慈音・鍛冶の物語
+════════════════════════════ */
+.s2-name-row{
+  display:flex;align-items:center;gap:20px;
+  margin-bottom:12px;
+  text-align:center;
+}
+.s2-kanji{
+  font-family:'Noto Serif JP',serif;
+  font-size:clamp(72px,16vw,128px);
+  font-weight:900;
+  line-height:1;
+  letter-spacing:-4px;
+}
+.s2-kanji .ji{color:var(--ji2);}
+.s2-kanji .ka{color:var(--ka2);}
+.s2-reading{
+  font-family:'DM Mono',monospace;
+  font-size:11px;letter-spacing:4px;
+  color:var(--txt3);text-align:center;
+  margin-bottom:8px;
+}
+.s2-origin{
+  font-size:13px;color:var(--txt2);
+  font-style:italic;text-align:center;
+  margin-bottom:44px;
+}
+.s2-origin .arrow{color:var(--ji);margin:0 6px;}
+
+/* Cards */
+.narr-row{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:14px;max-width:640px;width:100%;
+  margin-bottom:28px;
+}
+@media(max-width:580px){.narr-row{grid-template-columns:1fr;}}
+.narr-card{
+  background:var(--bg2);border:1px solid var(--line);
+  border-radius:16px;padding:24px;
+  position:relative;overflow:hidden;
+  transition:transform .2s;
+}
+.narr-card:hover{transform:translateY(-3px);}
+.narr-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:var(--nc);
+}
+.narr-kanji-big{
+  font-family:'Noto Serif JP',serif;
+  font-size:52px;font-weight:900;
+  line-height:1;margin-bottom:12px;
+}
+.narr-reading{
+  font-family:'DM Mono',monospace;
+  font-size:8px;letter-spacing:3px;
+  margin-bottom:4px;opacity:.6;
+}
+.narr-origin-tag{
+  font-family:'DM Mono',monospace;
+  font-size:8px;letter-spacing:2px;
+  margin-bottom:12px;
+}
+.narr-hex{
+  font-family:'DM Mono',monospace;
+  font-size:10px;letter-spacing:2px;
+  margin-bottom:12px;
+}
+.narr-story{
+  font-size:12px;color:var(--txt2);
+  line-height:2;font-style:italic;
+}
+.narr-anchor{
+  margin-top:12px;
+  font-family:'DM Mono',monospace;
+  font-size:8px;letter-spacing:2px;color:var(--txt3);
+  border-top:1px solid var(--line);padding-top:10px;
+}
+
+.s2-note{
+  max-width:520px;text-align:center;
+  font-family:'DM Mono',monospace;
+  font-size:9px;letter-spacing:3px;color:var(--txt3);
+  line-height:2;
+}
+
+/* ════════════════════════════
+   SCENE 3 — 認証
+════════════════════════════ */
+.auth-card{
+  background:var(--bg2);border:1px solid var(--line2);
+  border-radius:20px;width:100%;max-width:440px;
+  overflow:hidden;
+}
+.auth-bar{
+  background:var(--bg3);border-bottom:1px solid var(--line);
+  padding:12px 20px;display:flex;align-items:center;gap:10px;
+}
+.auth-bar-dots{display:flex;gap:5px;}
+.auth-bar-dot{width:9px;height:9px;border-radius:50%;}
+.auth-bar-title{
+  font-family:'DM Mono',monospace;font-size:9px;
+  color:var(--txt3);letter-spacing:2px;margin:0 auto;
+}
+.auth-body{padding:28px 24px 24px;}
+.auth-title{
+  font-family:'Noto Serif JP',serif;
+  font-size:19px;font-weight:700;
+  text-align:center;margin-bottom:4px;
+}
+.auth-sub{
+  font-size:11px;color:var(--txt2);
+  text-align:center;font-style:italic;
+  margin-bottom:24px;line-height:1.9;
+}
+
+/* Kanji selector */
+.kanji-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px;}
+.kanji-field label{
+  font-family:'DM Mono',monospace;
+  font-size:8px;letter-spacing:3px;color:var(--txt3);
+  display:block;margin-bottom:6px;
+}
+.kanji-box{
+  height:80px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Noto Serif JP',serif;
+  font-size:44px;font-weight:900;
+  border:1px solid rgba(255,255,255,.1);
+  cursor:pointer;transition:all .2s;user-select:none;
+  position:relative;
+}
+.kanji-box:hover{transform:translateY(-2px);}
+.kanji-box .tap-hint{
+  position:absolute;bottom:4px;right:8px;
+  font-family:'DM Mono',monospace;font-size:7px;
+  color:rgba(255,255,255,.2);letter-spacing:1px;
+}
+.hex-tag{
+  font-family:'DM Mono',monospace;font-size:9px;
+  text-align:center;letter-spacing:2px;margin-top:5px;
+}
+
+.sw-section{margin-bottom:16px;}
+.sw-label{
+  font-family:'DM Mono',monospace;
+  font-size:8px;letter-spacing:3px;color:var(--txt3);margin-bottom:7px;
+}
+.swatches{display:flex;flex-wrap:wrap;gap:5px;}
+.sw{
+  width:22px;height:22px;border-radius:6px;
+  cursor:pointer;border:2px solid transparent;
+  transition:transform .1s,border-color .1s;flex-shrink:0;
+}
+.sw:hover{transform:scale(1.2);}
+.sw.on{border-color:#fff;transform:scale(1.15);box-shadow:0 0 8px rgba(255,255,255,.3);}
+
+/* Memory hint */
+.mem-hint{
+  background:var(--bg3);border:1px solid var(--line);
+  border-radius:10px;padding:11px 14px;
+  margin-bottom:16px;
+  font-style:italic;font-size:12px;color:var(--txt2);
+  line-height:1.9;transition:opacity .3s;min-height:52px;
+}
+
+.auth-btn{
+  width:100%;padding:14px;
+  background:linear-gradient(135deg,var(--ka) 0%,var(--ka2) 40%,var(--ji) 70%,var(--ji2) 100%);
+  border:none;border-radius:11px;
+  font-family:'Noto Serif JP',serif;font-size:13px;font-weight:700;
+  letter-spacing:2px;color:#fff;
+  cursor:pointer;transition:.2s;
+  text-shadow:0 1px 3px rgba(0,0,0,.5);
+}
+.auth-btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(139,26,26,.4);}
+
+.result{
+  margin-top:14px;border-radius:12px;overflow:hidden;
+  display:none;animation:popIn .4s ease;
+}
+.result.show{display:block;}
+@keyframes popIn{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}
+
+.result-ok{
+  display:flex;align-items:flex-start;gap:14px;
+  padding:18px 20px;
+  background:rgba(61,214,140,.08);
+  border:1px solid rgba(61,214,140,.3);border-radius:12px;
+}
+.result-ok-icon{font-size:26px;flex-shrink:0;margin-top:2px;}
+.result-ok-text{
+  font-family:'DM Mono',monospace;font-size:10px;
+  letter-spacing:1.5px;color:var(--grn);line-height:2;
+}
+.result-ok-text strong{font-size:13px;display:block;margin-bottom:2px;}
+
+.result-fail{
+  display:flex;align-items:flex-start;gap:14px;
+  padding:18px 20px;
+  background:rgba(240,96,96,.07);
+  border:1px solid rgba(240,96,96,.28);border-radius:12px;
+}
+.result-fail-icon{font-size:26px;flex-shrink:0;margin-top:2px;}
+.result-fail-text{
+  font-family:'DM Mono',monospace;font-size:10px;
+  letter-spacing:1.5px;color:var(--red);line-height:2;
+}
+.result-fail-text strong{font-size:13px;display:block;margin-bottom:2px;}
+
+/* ════════════════════════════
+   SCENE 4 — コンセプト
+════════════════════════════ */
+.s4-title{
+  font-family:'Noto Serif JP',serif;
+  font-size:clamp(22px,4vw,40px);font-weight:900;
+  text-align:center;line-height:1.5;
+  margin-bottom:12px;
+}
+.s4-title .ji{color:var(--ji2);}
+.s4-title .ka{color:var(--ka2);}
+.s4-sub{
+  font-size:13px;color:var(--txt2);font-style:italic;
+  text-align:center;max-width:460px;line-height:2.1;
+  margin-bottom:40px;
+}
+.concept-steps{
+  display:flex;flex-direction:column;gap:14px;
+  max-width:480px;width:100%;margin-bottom:36px;
+}
+.c-step{
+  display:flex;gap:16px;align-items:flex-start;
+  background:var(--bg2);border:1px solid var(--line);
+  border-radius:14px;padding:18px;
+}
+.c-num{
+  font-family:'Noto Serif JP',serif;
+  font-size:28px;font-weight:900;
+  flex-shrink:0;line-height:1;margin-top:2px;
+}
+.c-text{font-size:13px;color:var(--txt2);line-height:1.9;}
+.c-text strong{color:var(--txt);font-weight:700;}
+
+.s4-closing{
+  max-width:460px;width:100%;
+  text-align:center;
+  border:1px solid var(--line2);border-radius:16px;
+  padding:24px;
+  background:var(--bg2);
+}
+.s4-closing-kanji{
+  font-family:'Noto Serif JP',serif;
+  font-size:36px;font-weight:900;
+  margin-bottom:10px;
+  background:linear-gradient(135deg,var(--ka2),var(--ji2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.s4-closing-text{
+  font-family:'DM Mono',monospace;
+  font-size:9px;letter-spacing:2px;color:var(--txt3);
+  line-height:2.2;
+}
+.s4-closing-text strong{color:var(--ji);font-weight:500;}
+
+/* ── FOOTER ── */
+.footer{
+  padding:24px 40px;border-top:1px solid var(--line);
+  text-align:center;z-index:1;position:relative;
+  font-family:'DM Mono',monospace;font-size:9px;
+  letter-spacing:2px;color:var(--txt3);line-height:2;
+}
+</style>
+</head>
+<body>
+
+<div class="bg-noise"></div>
+<div class="bg-embers"></div>
+<div class="progress" id="progress"></div>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="brand">天然色文字AUTH™</div>
+  <div class="step-dots">
+    <div class="dot active" id="dot0" onclick="scrollTo(0,0)"></div>
+    <div class="dot" id="dot1" onclick="document.getElementById('s2').scrollIntoView({behavior:'smooth'})"></div>
+    <div class="dot" id="dot2" onclick="document.getElementById('s3').scrollIntoView({behavior:'smooth'})"></div>
+    <div class="dot" id="dot3" onclick="document.getElementById('s4').scrollIntoView({behavior:'smooth'})"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════
+     SCENE 1 — 問題
+═══════════════════════════════ -->
+<section class="scene" id="s1">
+  <div class="s1-kamon">家 紋 鍵</div>
+  <div class="s1-headline">
+    あなたの名前に、<br>
+    <span class="hl">色</span>はありますか？
+  </div>
+  <div class="s1-sub">
+    パスワードは機械のために設計された。<br>
+    人間の記憶のためではない。<br>
+    漢字には、色がある。音がある。物語がある。
+  </div>
+  <div class="problem-list">
+    <div class="p-item">
+      <div class="p-x">✗</div>
+      <div class="p-txt">パスワード — 60歳以上の60%以上が忘れる</div>
+    </div>
+    <div class="p-item">
+      <div class="p-x">✗</div>
+      <div class="p-txt">生体認証 — ハードウェアが必要、障害者を排除</div>
+    </div>
+    <div class="p-item">
+      <div class="p-x">✗</div>
+      <div class="p-txt">パスキー — デバイスを失うと終わり</div>
+    </div>
+    <div class="p-item">
+      <div class="p-x">✗</div>
+      <div class="p-txt">PIN / OTP — フィッシング可能、電話が必要</div>
+    </div>
+  </div>
+  <div class="s1-arrow" onclick="document.getElementById('s2').scrollIntoView({behavior:'smooth'})">
+    慈音 鍛冶 の物語へ
+    <span style="font-size:22px;">↓</span>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════
+     SCENE 2 — 慈音・鍛冶の物語
+═══════════════════════════════ -->
+<section class="scene" id="s2">
+  <div style="text-align:center;margin-bottom:8px;">
+    <div class="s2-kanji">
+      <span class="ji">慈</span><span class="ka">鍛</span>
+    </div>
+    <div style="font-size:clamp(32px,8vw,64px);font-family:'Noto Serif JP',serif;font-weight:900;line-height:1;margin-bottom:4px;">
+      <span style="color:var(--ji2);">音</span><span style="color:var(--ka2);">冶</span>
+    </div>
+  </div>
+  <div class="s2-reading">JION · KAJI</div>
+  <div class="s2-origin">
+    John <span class="arrow">→</span> 慈音（ジョン）
+    &nbsp;&nbsp;·&nbsp;&nbsp;
+    Smith <span class="arrow">→</span> 鍛冶（スミス）
+  </div>
+
+  <div class="narr-row">
+    <!-- 慈音 -->
+    <div class="narr-card" style="--nc:var(--ji2);">
+      <div class="narr-kanji-big" style="color:var(--ji2);">慈音</div>
+      <div class="narr-reading">JION · ジョン</div>
+      <div class="narr-origin-tag" style="color:var(--ji);">John → 慈しみの音</div>
+      <div class="narr-hex" style="color:var(--ji2);">#C8920A · #F0C040</div>
+      <div class="narr-story">
+        「透き通って遠くに届く、<br>
+        小さな鐘の音が聞こえる。<br>
+        金色——慈しみが響く色。」
+      </div>
+      <div class="narr-anchor">記憶の錨 · 音 · 慈しみ · 金</div>
+    </div>
+
+    <!-- 鍛冶 -->
+    <div class="narr-card" style="--nc:var(--ka2);">
+      <div class="narr-kanji-big" style="color:var(--ka2);">鍛冶</div>
+      <div class="narr-reading">KAJI · スミス</div>
+      <div class="narr-origin-tag" style="color:var(--ka);">Smith → 鍛冶場の職人</div>
+      <div class="narr-hex" style="color:var(--ka2);">#8B1A1A · #CC3300</div>
+      <div class="narr-story">
+        「炉の火、鉄を打つ音、<br>
+        父の手、飛び散る火花。<br>
+        黒赤——鍛える者の色。」
+      </div>
+      <div class="narr-anchor">記憶の錨 · 炎 · 鍛錬 · 黒赤</div>
+    </div>
+  </div>
+
+  <!-- PCT concept note -->
+  <div class="s2-note">
+    アルファベット名 → 漢字変換 → 色の記憶<br>
+    「文化的翻訳認証」— PCT特許拡張クレーム候補<br>
+    <span style="color:var(--ji);margin-top:4px;display:block;">COLOURFUL JAPAN™ · DUNKSOFT Co., Ltd.</span>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════
+     SCENE 3 — 認証
+═══════════════════════════════ -->
+<section class="scene" id="s3">
+  <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:4px;color:var(--txt3);margin-bottom:28px;text-align:center;">
+    慈音鍛冶 — ログイン
+  </div>
+
+  <div class="auth-card">
+    <div class="auth-bar">
+      <div class="auth-bar-dots">
+        <div class="auth-bar-dot" style="background:#f06060"></div>
+        <div class="auth-bar-dot" style="background:#edb830"></div>
+        <div class="auth-bar-dot" style="background:#3dd68c"></div>
+      </div>
+      <div class="auth-bar-title">天然色文字AUTH™ — PROTOTYPE</div>
+    </div>
+
+    <div class="auth-body">
+      <div class="auth-title">認証</div>
+      <div class="auth-sub">漢字と、その漢字があなたに呼び起こす色を選んでください。</div>
+
+      <div class="kanji-row">
+        <div class="kanji-field">
+          <label>名（なまえ）</label>
+          <div class="kanji-box" id="firstBox" onclick="cycleFirst()">
+            慈<span class="tap-hint">tap</span>
+          </div>
+          <div class="hex-tag" id="firstHex" style="color:var(--ji2);">#C8920A</div>
+          <div class="swatches" id="firstSw" style="margin-top:6px;"></div>
+        </div>
+        <div class="kanji-field">
+          <label>姓（みょうじ）</label>
+          <div class="kanji-box" id="lastBox" onclick="cycleLast()">
+            鍛<span class="tap-hint">tap</span>
+          </div>
+          <div class="hex-tag" id="lastHex" style="color:var(--ka2);">#8B1A1A</div>
+          <div class="swatches" id="lastSw" style="margin-top:6px;"></div>
+        </div>
+      </div>
+
+      <div class="mem-hint" id="memHint">
+        「透き通って遠くに届く、小さな鐘の音が聞こえる——<em>金色</em>。慈しみの響き。」
+      </div>
+
+      <button class="auth-btn" onclick="doAuth()">認証する →</button>
+
+      <div class="result" id="result"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════
+     SCENE 4 — コンセプト
+═══════════════════════════════ -->
+<section class="scene" id="s4">
+  <div class="s4-title">
+    あなたの名前の色は<br>
+    <span class="ji">慈</span><span class="ka">鍛</span>ですか？
+  </div>
+  <div class="s4-sub">
+    天然色文字AUTH™は、名前の意味と記憶を<br>
+    認証の鍵に変える。パスワードは不要。<br>
+    あなたの文化的記憶が、あなた自身を証明する。
+  </div>
+
+  <div class="concept-steps">
+    <div class="c-step">
+      <div class="c-num" style="color:var(--ji2);">壱</div>
+      <div class="c-text">
+        <strong>アルファベット名を漢字に翻訳する。</strong><br>
+        John → 慈音、Smith → 鍛冶。音・意味・文化が重なる。
+      </div>
+    </div>
+    <div class="c-step">
+      <div class="c-num" style="color:var(--ka2);">弐</div>
+      <div class="c-text">
+        <strong>漢字があなたに呼び起こす色を選ぶ。</strong><br>
+        慈音なら金色か？鍛冶なら黒赤か？<br>それはあなたの記憶だけが知っている。
+      </div>
+    </div>
+    <div class="c-step">
+      <div class="c-num" style="color:var(--ji);">参</div>
+      <div class="c-text">
+        <strong>それがあなたの鍵になる。</strong><br>
+        128ビットトークン。忘れられない。偽造できない。
+      </div>
+    </div>
+  </div>
+
+  <div class="s4-closing">
+    <div class="s4-closing-kanji">慈音 鍛冶</div>
+    <div class="s4-closing-text">
+      <strong>「名前の色が、あなたの物語。</strong><br>
+      物語が、あなたの鍵になる。」<br><br>
+      天然色文字AUTH™ · COLOURFUL JAPAN™<br>
+      DUNKSOFT Co., Ltd. · 特許出願中 · 2026
+    </div>
+  </div>
+</section>
+
+<div class="footer">
+  天然色文字AUTH™ · COLOURFUL JAPAN™ · DUNKSOFT Co., Ltd.<br>
+  JOHN SMITH → 慈音 鍛冶 · 文化的翻訳認証 · PCT特許拡張クレーム候補
+</div>
+
+<script>
+// ── Palette ──
+const PAL = [
+  '#FF6B35','#FFD166','#06D6A0','#118AB2','#EF476F','#26547C',
+  '#FFB703','#FB8500','#8338EC','#3A86FF','#FF006E','#1E88E5',
+  '#9B7FF4','#3DD68C','#F06060','#C8920A','#8B1A1A','#CC3300',
+  '#F0C040','#00BCD4','#FF7043','#66BB6A','#5C6BC0','#CE93D8'
+];
+
+// 漢字セット（名・姓）
+const KANJI_F = ['慈','音','恵','光','誠','雅','清','仁','義','智','龍','凛','碧','葵','蓮'];
+const KANJI_L = ['鍛','冶','田','山','川','木','森','石','竹','村','藤','橋','井','渡','中'];
+
+// ── 正解 ──
+const REG = {
+  first: { kanji: '慈', color: '#C8920A' },
+  last:  { kanji: '鍛', color: '#8B1A1A' }
+};
+
+// 記憶のヒント（名の漢字別）
+const HINTS = {
+  '慈': '「透き通って遠くに届く、小さな鐘の音が聞こえる——<em>金色</em>。慈しみの響き。」',
+  '音': '「音楽が流れる部屋。午後の光の中で、母が歌っていた——<em>その色</em>はなんだろう。」',
+  '鍛': '「炉の火、鉄を打つ音、父の手——<em>黒赤</em>。鍛える者の色。」',
+  '恵': '「春の光の中で、恵みを受けた朝——<em>柔らかな白金</em>が浮かぶ。」',
+  'DEFAULT': '「この漢字があなたに呼び起こす色は何ですか？<br>記憶の奥を探してみてください。」'
+};
+
+let st = {
+  first: { ki: 0, ci: 15 },   // 慈, #C8920A
+  last:  { ki: 0, ci: 16 }    // 鍛, #8B1A1A
+};
+
+function contrast(h) {
+  const r=parseInt(h.slice(1,3),16),g=parseInt(h.slice(3,5),16),b=parseInt(h.slice(5,7),16);
+  return(.299*r+.587*g+.114*b)/255>.55?'#000':'#fff';
+}
+
+function buildSw(id, key) {
+  const el = document.getElementById(id);
+  el.innerHTML = '';
+  PAL.forEach((c,i) => {
+    const s = document.createElement('div');
+    s.className = 'sw' + (st[key].ci===i?' on':'');
+    s.style.background = c;
+    s.title = c;
+    s.onclick = () => { st[key].ci = i; upd(key); };
+    el.appendChild(s);
+  });
+}
+
+function upd(key) {
+  const s = st[key];
+  const c = PAL[s.ci];
+  const k = key==='first' ? KANJI_F[s.ki] : KANJI_L[s.ki];
+  const box = document.getElementById(key==='first'?'firstBox':'lastBox');
+  const hex = document.getElementById(key==='first'?'firstHex':'lastHex');
+  box.style.background = c;
+  box.style.color = contrast(c);
+  box.style.borderColor = c+'55';
+  box.innerHTML = k + '<span class="tap-hint">tap</span>';
+  hex.textContent = c;
+  hex.style.color = c;
+  document.querySelectorAll(`#${key==='first'?'firstSw':'lastSw'} .sw`)
+    .forEach((sw,i) => sw.classList.toggle('on', i===s.ci));
+
+  if (key === 'first') {
+    const hint = HINTS[k] || HINTS.DEFAULT;
+    const hb = document.getElementById('memHint');
+    hb.style.opacity = '0';
+    setTimeout(() => { hb.innerHTML = hint; hb.style.opacity='1'; }, 200);
+  }
+
+  document.getElementById('result').classList.remove('show');
+}
+
+function cycleFirst() { st.first.ki = (st.first.ki+1) % KANJI_F.length; upd('first'); }
+function cycleLast()  { st.last.ki  = (st.last.ki+1)  % KANJI_L.length; upd('last'); }
+
+function doAuth() {
+  const fk = KANJI_F[st.first.ki], fc = PAL[st.first.ci];
+  const lk = KANJI_L[st.last.ki],  lc = PAL[st.last.ci];
+
+  const ok =
+    fk === REG.first.kanji && fc.toLowerCase()===REG.first.color.toLowerCase() &&
+    lk === REG.last.kanji  && lc.toLowerCase()===REG.last.color.toLowerCase();
+
+  const r = document.getElementById('result');
+
+  if (ok) {
+    let h = 0;
+    for (const c of `${fk}${fc}${lk}${lc}${Date.now()}`) {
+      h = ((h<<5)-h) + c.charCodeAt(0); h|=0;
+    }
+    const token = `CKA-${(h>>>0).toString(16).toUpperCase().padStart(8,'0')}-${fk+lk}-v1`;
+    r.innerHTML = `
+      <div class="result-ok">
+        <div class="result-ok-icon">✦</div>
+        <div class="result-ok-text">
+          <strong>認証成功</strong>
+          慈音鍛冶 · ${fc} + ${lc}<br>
+          ${token}
+        </div>
+      </div>`;
+    // Shake card on success? No — pulse glow
+    r.classList.remove('show');
+    requestAnimationFrame(()=>r.classList.add('show'));
+  } else {
+    r.innerHTML = `
+      <div class="result-fail">
+        <div class="result-fail-icon">✗</div>
+        <div class="result-fail-text">
+          <strong>認証失敗</strong>
+          漢字または色が一致しません。<br>
+          あなたの記憶の色を確認してください。
+        </div>
+      </div>`;
+    r.classList.remove('show');
+    requestAnimationFrame(()=>r.classList.add('show'));
+    const card = document.querySelector('.auth-card');
+    card.style.animation = 'shake .4s ease';
+    setTimeout(()=>card.style.animation='',400);
+  }
+}
+
+// Shake
+const sty = document.createElement('style');
+sty.textContent = `@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}`;
+document.head.appendChild(sty);
+
+// Progress & dots
+function updateUI() {
+  const total = document.documentElement.scrollHeight - window.innerHeight;
+  document.getElementById('progress').style.transform = `scaleX(${window.scrollY/total})`;
+  ['s1','s2','s3','s4'].forEach((id,i) => {
+    const el = document.getElementById(id);
+    const rect = el.getBoundingClientRect();
+    const inView = rect.top<=window.innerHeight/2 && rect.bottom>=window.innerHeight/2;
+    document.getElementById('dot'+i).classList.toggle('active',inView);
+    document.getElementById('dot'+i).classList.toggle('done',rect.bottom<window.innerHeight/2);
+  });
+}
+window.addEventListener('scroll',updateUI,{passive:true});
+
+buildSw('firstSw','first');
+buildSw('lastSw','last');
+upd('first');
+upd('last');
+</script>
+</body>
+</html>
