@@ -1,0 +1,139 @@
+
+<style>
+  .wrap { padding: 2rem 1.5rem; max-width: 680px; }
+  .eyebrow { font-size: 11px; letter-spacing: 4px; color: #F9A825; font-family: monospace; margin-bottom: 8px; text-transform: uppercase; }
+  .headline { font-size: 22px; font-weight: 500; color: var(--color-text-primary); line-height: 1.3; margin-bottom: 6px; }
+  .sub { font-size: 14px; color: var(--color-text-secondary); margin-bottom: 28px; line-height: 1.7; }
+  .badge { display: inline-block; padding: 4px 12px; border-radius: 4px; font-size: 11px; font-family: monospace; letter-spacing: 1px; background: rgba(249,168,37,0.12); border: 0.5px solid rgba(249,168,37,0.4); color: #F9A825; margin-bottom: 24px; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 28px; }
+  .col-card { background: var(--color-background-secondary); border-radius: 8px; padding: 14px 16px; }
+  .col-label { font-size: 11px; letter-spacing: 2px; color: var(--color-text-tertiary); font-family: monospace; margin-bottom: 8px; text-transform: uppercase; }
+  .col-item { font-size: 13px; color: var(--color-text-secondary); padding: 3px 0; line-height: 1.6; }
+  .col-item::before { content: '▸ '; color: #F9A825; }
+  .timeline { display: flex; flex-direction: column; gap: 0; position: relative; }
+  .timeline::before { content: ''; position: absolute; left: 22px; top: 8px; bottom: 8px; width: 1px; background: var(--color-border-tertiary); }
+  .tl-item { display: flex; gap: 16px; align-items: flex-start; padding: 12px 0; }
+  .tl-dot { width: 10px; height: 10px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; margin-left: 18px; border: 2px solid var(--color-background-primary); }
+  .tl-body { flex: 1; }
+  .tl-date { font-size: 11px; font-family: monospace; letter-spacing: 1px; color: var(--color-text-tertiary); margin-bottom: 2px; display: flex; align-items: center; gap: 8px; }
+  .tl-title { font-size: 14px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 3px; }
+  .tl-desc { font-size: 13px; color: var(--color-text-secondary); line-height: 1.7; }
+  .tl-phrase { display: inline-block; margin-top: 6px; padding: 3px 10px; border-radius: 4px; font-size: 11px; font-family: monospace; background: var(--color-background-secondary); border: 0.5px solid var(--color-border-tertiary); color: var(--color-text-secondary); }
+  .tl-link { display: inline-block; margin-top: 4px; margin-left: 6px; font-size: 11px; color: #F9A825; font-family: monospace; text-decoration: none; opacity: 0.8; }
+  .origin-badge { padding: 1px 7px; border-radius: 3px; font-size: 10px; font-family: monospace; background: rgba(171,71,188,0.15); border: 0.5px solid rgba(171,71,188,0.4); color: #AB47BC; }
+  .key-badge { padding: 1px 7px; border-radius: 3px; font-size: 10px; font-family: monospace; background: rgba(229,57,53,0.12); border: 0.5px solid rgba(229,57,53,0.3); color: #E53935; }
+  .today-badge { padding: 1px 7px; border-radius: 3px; font-size: 10px; font-family: monospace; background: rgba(249,168,37,0.15); border: 0.5px solid rgba(249,168,37,0.4); color: #F9A825; }
+  .quote { margin: 8px 0 0; padding: 8px 12px; border-left: 2px solid #F9A825; font-size: 12px; color: var(--color-text-secondary); font-style: italic; line-height: 1.7; }
+  .divider { border: none; border-top: 0.5px solid var(--color-border-tertiary); margin: 24px 0; }
+  .sig { display: flex; justify-content: space-between; align-items: flex-end; }
+  .sig-left { font-size: 12px; color: var(--color-text-tertiary); line-height: 2; font-family: monospace; }
+  .sig-right { text-align: right; font-size: 12px; color: var(--color-text-tertiary); line-height: 2; }
+  .gold { color: #F9A825; }
+</style>
+<div class="wrap">
+  <div class="eyebrow">DUNKSOFT Co., Ltd. × Claude.ai — Collaboration Record v3</div>
+  <div class="headline">Roberto Hoshino × Claude<br>共同開発の軌跡 — 完全版</div>
+  <div class="sub">誰も知らない共同開発者の記録。社員も、奥様も。<br>2026年2月24日〜5月19日 — coined by Claude.ai · approved by Roberto Hoshino</div>
+  <div class="badge">CONFIDENTIAL — FOR VC USE</div>
+
+  <div class="cols">
+    <div class="col-card">
+      <div class="col-label">Coined phrases</div>
+      <div class="col-item">「視覚的な指紋」</div>
+      <div class="col-item">「日本語は、生まれながらにしてカラフルだった。」</div>
+      <div class="col-item">「日本語のカラフルさは、重ね着のカラフルさ。」</div>
+      <div class="col-item">「公開されていても、再現不能。」</div>
+    </div>
+    <div class="col-card">
+      <div class="col-label">Deliverables</div>
+      <div class="col-item">Smart Life Styles™ リブランディング</div>
+      <div class="col-item">天然色漢字INDEX™ コンセプト</div>
+      <div class="col-item">海軍号ふりがなデモ (HTML Artifact)</div>
+      <div class="col-item">Series B+ ピッチデック (PPTX + HTML)</div>
+      <div class="col-item">ライブ認証システム (auth-config.json)</div>
+    </div>
+  </div>
+
+  <div class="timeline">
+
+    <div class="tl-item">
+      <div class="tl-dot" style="background:#AB47BC;"></div>
+      <div class="tl-body">
+        <div class="tl-date">2026年2月24日 <span class="origin-badge">FIRST SESSION</span></div>
+        <div class="tl-title">最初の対話 — Smart Life Styles™ 誕生</div>
+        <div class="tl-desc">DUNKSOFTのWEBサイト見直しをきっかけに始まった最初の対話。未来通帳®、ビッキーマネ28年越しのリベンジ、COLORFUL KANJI INDEXのコンセプト、Smart Life Styles™ のリブランディング——すべてここから始まった。</div>
+        <div class="quote">「最初のクライアントと、28年後に同じ文脈で再会している。」— Claude</div>
+        <a class="tl-link" href="https://note.com/roberto_hoshino/n/nb5b341ea7fb6" target="_blank">→ Note「リブランディングへの対話」</a>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot" style="background:#7B1FA2;"></div>
+      <div class="tl-body">
+        <div class="tl-date">2026年2月〜3月 <span class="origin-badge">ORIGIN</span></div>
+        <div class="tl-title">天然色漢字INDEX™ の着想</div>
+        <div class="tl-desc">タイプライター時代の文字コード問題から出発。「漢字1文字＋色で分類する」コアアイデアが生まれた。義理かんり→バザールバザールの文脈と接続。COLORFUL KANJI AUTH™ の技術的起点。</div>
+        <span class="tl-phrase">T261018「天然色漢字INDEX™」</span>
+        <a class="tl-link" href="https://note.com/roberto_hoshino/n/n343cf18f5fcb" target="_blank">→ Note記事</a>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot" style="background:#29B6F6;"></div>
+      <div class="tl-body">
+        <div class="tl-date">2026年4月10日</div>
+        <div class="tl-title">沖縄 — 旅するDigital Recreator</div>
+        <div class="tl-desc">iPhoneだけで沖縄旅行中にWebサイトをゼロから公開。歴史の現場からAIと対話しながら情報発信する新スタイルを実証。海軍号ふりがなデモ（HTML Artifact）もこの日に生まれた。</div>
+        <span class="tl-phrase">kaigungou_furigana_demo.html</span>
+        <a class="tl-link" href="https://note.com/roberto_hoshino/n/nea27f693d638" target="_blank">→ Note記事</a>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot" style="background:#E53935;"></div>
+      <div class="tl-body">
+        <div class="tl-date">2026年5月13日 <span class="key-badge">BREAKTHROUGH</span></div>
+        <div class="tl-title">1画認証の着想 × MEMORY-BANK™ 設計</div>
+        <div class="tl-desc">税務署ミーティングの日。漢字の特定の1画だけに色をつける認証の発想。深層記憶×日々の記憶の二層構造。福岡伸一「動的平衡」と接続。「分岐点になりそうな日」。</div>
+        <span class="tl-phrase">coined: 「視覚的な指紋」「公開されていても、再現不能。」</span>
+        <a class="tl-link" href="https://note.com/roberto_hoshino/n/nafc6c6a8df29" target="_blank">→ Note記事</a>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot" style="background:#00796B;"></div>
+      <div class="tl-body">
+        <div class="tl-date">2026年5月18日</div>
+        <div class="tl-title">Series B+ ピッチデック完成 & VC戦略策定</div>
+        <div class="tl-desc">10スライドのPPTX + 漢字認証ゲート付きHTML提案書。M銀行 保支店・田支店トラクション言語化。auth-config.jsonで日々の記憶認証をライブ更新できる仕組みを実装。</div>
+        <span class="tl-phrase">coined: 「日本語のカラフルさは、重ね着のカラフルさ。」</span>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot" style="background:#F9A825;"></div>
+      <div class="tl-body">
+        <div class="tl-date">2026年5月19日 <span class="today-badge">TODAY</span></div>
+        <div class="tl-title">ライブ認証初日 × ラジオ収録</div>
+        <div class="tl-desc">柳森神社の黄色い薔薇が今日の認証キーに。晃 × #F9A825。MEMORY-BANKの概念が実際の生活に実装された初日。夕方、M銀行保支店長にラジオ収録でシステムを説明予定。</div>
+        <span class="tl-phrase">auth-config.json → 晃 × 黄金 #F9A825</span>
+      </div>
+    </div>
+
+  </div>
+
+  <hr class="divider">
+
+  <div class="sig">
+    <div class="sig-left">
+      <span class="gold">coined by Claude.ai</span><br>
+      Anthropic · Claude Sonnet 4.6<br>
+      DUNKSOFT Co., Ltd. Project
+    </div>
+    <div class="sig-right">
+      <span class="gold">approved by Roberto Hoshino</span><br>
+      Smart Life Styles™ / COLOURFUL JAPAN™<br>
+      2026年2月24日〜
+    </div>
+  </div>
+</div>
