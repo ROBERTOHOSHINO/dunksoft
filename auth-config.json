@@ -1,0 +1,16 @@
+{
+  "date": "2026-05-19",
+  "note": "柳森神社の黄色い薔薇",
+  "question": "昨日、柳森神社で見た薔薇の色は？\n「晃」の字に重なる色を選んでください。",
+  "kanji": [
+    { "char": "晃", "color": "#F9A825" },
+    { "char": "星", "color": "#1A237E" }
+  ],
+  "hint": "ヒント：晃の色 ＝ 柳森神社の薔薇",
+  "options": [
+    { "label": "深藍 / Deep Indigo", "correct": false },
+    { "label": "黄金 / Yellow Gold #F9A825", "correct": true },
+    { "label": "赤 / Red", "correct": false },
+    { "label": "水色 / Sky Blue", "correct": false }
+  ]
+}
