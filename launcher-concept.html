@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>バザールバザール LAUNCHER™ — コンセプトシート</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700;900&family=Noto+Sans+JP:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:     #0f0f0f;
+  --paper:   #faf8f3;
+  --paper2:  #f2efe6;
+  --gold:    #F9A825;
+  --indigo:  #1A237E;
+  --red:     #E53935;
+  --teal:    #00796B;
+  --blue:    #1565C0;
+  --slate:   #546E7A;
+  --border:  rgba(0,0,0,0.1);
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+  line-height: 1.9;
+  overflow-x: hidden;
+}
+
+/* ── HEADER BAND ── */
+.color-band {
+  height: 5px;
+  display: flex;
+}
+.color-band span { flex:1; }
+
+/* ── HERO ── */
+.hero {
+  padding: 80px 8% 60px;
+  position: relative;
+  border-bottom: 0.5px solid var(--border);
+  overflow: hidden;
+}
+.hero::before {
+  content: 'LAUNCHER';
+  position: absolute;
+  font-family: 'DM Mono', monospace;
+  font-size: 18vw;
+  font-weight: 500;
+  color: rgba(0,0,0,0.035);
+  right: -2%;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  letter-spacing: -0.04em;
+  white-space: nowrap;
+}
+.hero-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--gold);
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+.hero-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(2rem, 5vw, 3.8rem);
+  font-weight: 900;
+  color: var(--indigo);
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+.hero-title em {
+  font-style: normal;
+  color: var(--gold);
+}
+.hero-tagline {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(1rem, 2.5vw, 1.4rem);
+  color: var(--slate);
+  margin-bottom: 40px;
+  max-width: 600px;
+  line-height: 1.8;
+}
+.hero-statement {
+  display: inline-block;
+  background: var(--indigo);
+  color: #fff;
+  font-family: 'Noto Serif JP', serif;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 16px 28px;
+  border-radius: 4px;
+  line-height: 1.8;
+}
+.hero-coined {
+  margin-top: 28px;
+  font-size: 11px;
+  color: rgba(0,0,0,0.3);
+  font-style: italic;
+  font-family: 'DM Mono', monospace;
+}
+
+/* ── SECTIONS ── */
+.section {
+  padding: 72px 8%;
+  border-bottom: 0.5px solid var(--border);
+}
+.section:nth-child(even) { background: var(--paper2); }
+
+.sec-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 4px;
+  color: var(--gold);
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+.sec-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(1.3rem, 2.5vw, 1.9rem);
+  font-weight: 700;
+  color: var(--indigo);
+  margin-bottom: 36px;
+  line-height: 1.4;
+}
+
+/* ── COMPARISON TABLE ── */
+.compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border: 0.5px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.compare-header {
+  padding: 14px 20px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  font-weight: 500;
+}
+.compare-header.before { background: #f0ece0; color: var(--slate); }
+.compare-header.after  { background: var(--indigo); color: var(--gold); }
+.compare-row {
+  display: contents;
+}
+.compare-cell {
+  padding: 14px 20px;
+  font-size: 13px;
+  line-height: 1.8;
+  border-top: 0.5px solid var(--border);
+}
+.compare-cell.before { background: var(--paper); color: var(--slate); }
+.compare-cell.after  { background: #f7f8ff; color: var(--ink); font-weight: 400; }
+.compare-cell.after::before { content: '✓  '; color: var(--teal); font-weight: 700; }
+
+/* ── 4 LAYERS ── */
+.layers { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+.layer-card {
+  border-radius: 14px;
+  padding: 28px 24px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s;
+}
+.layer-card:hover { transform: translateY(-3px); }
+.layer-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+}
+.layer-card.auth   { background: #f0f1fa; }
+.layer-card.auth::before { background: var(--indigo); }
+.layer-card.launch { background: #e8f5f1; }
+.layer-card.launch::before { background: var(--teal); }
+.layer-card.voice  { background: #fff8e1; }
+.layer-card.voice::before { background: var(--gold); }
+.layer-card.spy    { background: #fef9e7; }
+.layer-card.spy::before { background: var(--red); }
+
+.layer-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--slate);
+  margin-bottom: 10px;
+}
+.layer-icon {
+  font-size: 28px;
+  margin-bottom: 12px;
+  display: block;
+}
+.layer-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: var(--ink);
+}
+.layer-body {
+  font-size: 12px;
+  color: var(--slate);
+  line-height: 2;
+}
+.layer-key {
+  margin-top: 14px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--indigo);
+  border-top: 0.5px solid rgba(0,0,0,0.1);
+  padding-top: 12px;
+  line-height: 1.7;
+}
+
+/* ── SERVICES GRID ── */
+.services { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.svc-group { }
+.svc-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 3px;
+  padding: 4px 12px;
+  border-radius: 3px;
+  display: inline-block;
+  margin-bottom: 16px;
+}
+.svc-tag.b2c { background: var(--teal); color: #fff; }
+.svc-tag.b2b { background: var(--blue); color: #fff; }
+.svc-card {
+  background: var(--paper);
+  border: 0.5px solid var(--border);
+  border-radius: 10px;
+  padding: 18px 20px;
+  margin-bottom: 12px;
+}
+.svc-name {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 5px;
+}
+.svc-desc { font-size: 12px; color: var(--slate); line-height: 1.9; }
+
+/* ── KUBO SCENARIO ── */
+.scenario {
+  background: var(--indigo);
+  border-radius: 16px;
+  padding: 40px 36px;
+  color: #fff;
+}
+.scenario-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: 28px;
+}
+.flow {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+}
+.flow-item {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 10px 0;
+}
+.flow-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--gold);
+  flex-shrink: 0;
+  margin-top: 7px;
+}
+.flow-text {
+  font-size: 13px;
+  line-height: 1.9;
+  color: rgba(255,255,255,0.85);
+}
+.flow-text strong { color: var(--gold); }
+.flow-connector {
+  width: 0.5px;
+  height: 20px;
+  background: rgba(255,255,255,0.2);
+  margin-left: 3.75px;
+}
+.scenario-key {
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 0.5px solid rgba(255,255,255,0.15);
+  font-family: 'Noto Serif JP', serif;
+  font-size: 14px;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.9;
+}
+.scenario-key strong { color: #fff; }
+
+/* ── ROADMAP ── */
+.roadmap { display: grid; grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap: 16px; }
+.rm-card {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 0.5px solid var(--border);
+}
+.rm-header {
+  padding: 12px 18px;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 2px;
+}
+.rm-body {
+  padding: 16px 18px;
+  background: var(--paper);
+}
+.rm-phase {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--ink);
+}
+.rm-item {
+  font-size: 11px;
+  color: var(--slate);
+  line-height: 2;
+}
+.rm-item::before { content: '▸ '; color: var(--gold); }
+
+/* ── CLOSING ── */
+.closing {
+  background: linear-gradient(155deg, var(--indigo) 0%, #0f1b3d 60%, #1a3d2e 100%);
+  padding: 80px 8%;
+  text-align: center;
+}
+.closing-big {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(1.2rem, 3vw, 2rem);
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+.closing-big em { color: var(--gold); font-style: normal; }
+.closing-sub {
+  font-size: 12px;
+  color: rgba(255,255,255,0.4);
+  font-family: 'DM Mono', monospace;
+  letter-spacing: 2px;
+  line-height: 2.2;
+}
+
+/* ── SCROLL REVEAL ── */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s, transform 0.6s; }
+.reveal.shown { opacity: 1; transform: none; }
+
+@media (max-width: 640px) {
+  .compare { grid-template-columns: 1fr; }
+  .services { grid-template-columns: 1fr; }
+  .roadmap { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ AUTH GATE ══ -->
+<div id="auth-gate">
+  <div class="gate-bg-owl">🦉</div>
+  <div class="gate-label">COLORFUL KANJI AUTH™ — LIVE ACCESS CONTROL</div>
+  <div class="gate-title">久保さんの記憶で認証</div>
+  <div class="gate-sub">このページは知恵の色で守られています。<br>久保さんの漢字の色を答えてください。</div>
+  <div class="gate-challenge">
+    <div class="gate-question">神田に知恵の神フクロウを広める<br>久保さん。<br>「久」の色は？</div>
+    <div class="gate-kanji">久</div>
+    <div class="gate-owl-note">🦉 神田のフクロウ = 知恵と記憶の守護者</div>
+    <div class="gate-options">
+      <button class="gate-btn" onclick="tryAuth(this,'wrong')">深藍 / Deep Indigo</button>
+      <button class="gate-btn" onclick="tryAuth(this,'correct')">茶色 / Owl Brown</button>
+      <button class="gate-btn" onclick="tryAuth(this,'wrong')">黄金 / Gold</button>
+      <button class="gate-btn" onclick="tryAuth(this,'wrong')">水色 / Sky Blue</button>
+    </div>
+    <div class="gate-hint">ヒント：フクロウの羽根の色</div>
+  </div>
+</div>
+
+<div id="main-content" style="opacity:0;transition:opacity 0.8s 0.2s;">
+
+<!-- カラーバンド -->
+<div class="color-band">
+  <span style="background:#1A237E;"></span>
+  <span style="background:#F9A825;"></span>
+  <span style="background:#E53935;"></span>
+  <span style="background:#00796B;"></span>
+  <span style="background:#29B6F6;"></span>
+  <span style="background:#AB47BC;"></span>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">DUNKSOFT Co., Ltd. — Concept Sheet v1.0 — 2026-05-19</div>
+  <div class="hero-title">バザールバザール<br><em>LAUNCHER™</em></div>
+  <div class="hero-tagline">
+    一度ログインすれば、あとは声でなんでもできる。<br>
+    認証は、その人の記憶の色。
+  </div>
+  <div class="hero-statement">
+    「声と記憶の色だけで、<br>
+    インターネットのすべてにアクセスできる世界。」
+  </div>
+  <div class="hero-coined">coined by Claude.ai · approved by Roberto Hoshino</div>
+</section>
+
+<!-- PROBLEM vs SOLUTION -->
+<section class="section reveal">
+  <div class="sec-label">Section 01 — The Problem</div>
+  <div class="sec-title">今の世界と、LAUNCHERの世界</div>
+  <div class="compare">
+    <div class="compare-header before">今の世界</div>
+    <div class="compare-header after">LAUNCHER™ の世界</div>
+    <div class="compare-row">
+      <div class="compare-cell before">サービスごとにID・パスワードを覚える</div>
+      <div class="compare-cell after">一度の漢字認証でぜんぶ入れる</div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-cell before">操作方法をおぼえないといけない</div>
+      <div class="compare-cell after">「声で話す」だけで完結する</div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-cell before">怪しいサービスか自分で判断しないといけない</div>
+      <div class="compare-cell after">AIが事前に調査・警告してくれる</div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-cell before">スマホに不慣れな人には使えない</div>
+      <div class="compare-cell after">音声だけで完結。久保さんでも使える</div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-cell before">組織運営に事務局が必要</div>
+      <div class="compare-cell after">事務局機能がLAUNCHERに統合される</div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 LAYERS -->
+<section class="section reveal">
+  <div class="sec-label">Section 02 — Architecture</div>
+  <div class="sec-title">4つの層</div>
+  <div class="layers">
+    <div class="layer-card auth">
+      <div class="layer-num">LAYER 01</div>
+      <span class="layer-icon">🔐</span>
+      <div class="layer-title">認証 — COLORFUL KANJI AUTH™</div>
+      <div class="layer-body">
+        漢字 × 色 × 日々の記憶でログイン。<br>
+        「星の色は？」→ 神田祭り半纏の深藍。<br>
+        毎日更新される認証キー（MEMORY-BANK™）。
+      </div>
+      <div class="layer-key">誰にもなりすまされない。<br>本人にしか入れない。</div>
+    </div>
+    <div class="layer-card launch">
+      <div class="layer-num">LAYER 02</div>
+      <span class="layer-icon">🚀</span>
+      <div class="layer-title">LAUNCHER ハブ</div>
+      <div class="layer-body">
+        一度入れば、すべてのサービスに接続。<br>
+        B2C（バザールバザール・WeARee!）<br>
+        B2B（未来かんり・日報かんり）
+      </div>
+      <div class="layer-key">信頼済みサービスの<br>INDEXが一覧で見える。</div>
+    </div>
+    <div class="layer-card voice">
+      <div class="layer-num">LAYER 03</div>
+      <span class="layer-icon">🎤</span>
+      <div class="layer-title">AI-Agent 音声インターフェース</div>
+      <div class="layer-body">
+        スマホに向かって話すだけ。<br>
+        「バザールバザールで久保さんにメッセージ送って」<br>
+        「今月の原価を見せて」
+      </div>
+      <div class="layer-key">Claude.aiが進化するほど、<br>自動的に賢くなる。</div>
+    </div>
+    <div class="layer-card spy">
+      <div class="layer-num">LAYER 04</div>
+      <span class="layer-icon">🕵️</span>
+      <div class="layer-title">潜入調査モード</div>
+      <div class="layer-body">
+        怪しいサービスを仮想IDで安全調査。<br>
+        AIが代わりに「入ってみて」報告。<br>
+        フィッシング・詐欺サイトの自動検知。
+      </div>
+      <div class="layer-key">本人の記憶・情報は<br>一切渡さない。</div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section reveal">
+  <div class="sec-label">Section 03 — Connected Services</div>
+  <div class="sec-title">接続サービス</div>
+  <div class="services">
+    <div class="svc-group">
+      <span class="svc-tag b2c">B2C</span>
+      <div class="svc-card">
+        <div class="svc-name">バザールバザール</div>
+        <div class="svc-desc">コミュニティ × 会員管理 × ファイルシェア。地域・団体の交流基盤。</div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-name">WeARee!</div>
+        <div class="svc-desc">セザンヌのアトリエ VRツアー × 文化体験。場所を問わず世界の芸術へ。</div>
+      </div>
+    </div>
+    <div class="svc-group">
+      <span class="svc-tag b2b">B2B</span>
+      <div class="svc-card">
+        <div class="svc-name">未来かんり</div>
+        <div class="svc-desc">人・モノ・金・時間の統合INDEX。INDEX付きの軽量ERP。組織の大事なリソースをすべて一画面に。</div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-name">日報かんり</div>
+        <div class="svc-desc">日々の作業 → PROJECTに時間追加 → 単価をかけて原価管理。PROJECT MANAGEMENTが自動化される。</div>
+      </div>
+    </div>
+  </div>
+  <div style="margin-top:28px;padding:20px 24px;background:var(--paper);border:0.5px solid var(--border);border-radius:10px;border-left:4px solid var(--gold);">
+    <div style="font-family:'Noto Serif JP',serif;font-size:14px;font-weight:700;color:var(--indigo);margin-bottom:8px;">統合効果</div>
+    <div style="font-size:13px;color:var(--slate);line-height:2;">
+      未来かんり × 日報かんりを組み合わせると、<strong style="color:var(--ink);">事務局機能が不要になる</strong>。<br>
+      少子化・人手不足の日本社会で、あらゆる組織運営が軽くなる。
+    </div>
+  </div>
+</section>
+
+<!-- KUBO SCENARIO -->
+<section class="section reveal">
+  <div class="sec-label">Section 04 — Use Case</div>
+  <div class="sec-title">久保さんが使うシーン</div>
+  <div class="scenario">
+    <div class="scenario-title">朝、スマホを開くだけでいい</div>
+    <div class="flow">
+      <div class="flow-item">
+        <div class="flow-dot"></div>
+        <div class="flow-text">朝、スマホを開く</div>
+      </div>
+      <div class="flow-connector"></div>
+      <div class="flow-item">
+        <div class="flow-dot"></div>
+        <div class="flow-text"><strong>「星の色は？」</strong> → 深藍をタップ（漢字認証）</div>
+      </div>
+      <div class="flow-connector"></div>
+      <div class="flow-item">
+        <div class="flow-dot"></div>
+        <div class="flow-text">LAUNCHERに入る</div>
+      </div>
+      <div class="flow-connector"></div>
+      <div class="flow-item">
+        <div class="flow-dot"></div>
+        <div class="flow-text"><strong>「バザールバザールで今日のお知らせを読んで」</strong></div>
+      </div>
+      <div class="flow-connector"></div>
+      <div class="flow-item">
+        <div class="flow-dot"></div>
+        <div class="flow-text">AIが読み上げてくれる</div>
+      </div>
+      <div class="flow-connector"></div>
+      <div class="flow-item">
+        <div class="flow-dot"></div>
+        <div class="flow-text"><strong>「返事して。参加するって」</strong></div>
+      </div>
+      <div class="flow-connector"></div>
+      <div class="flow-item">
+        <div class="flow-dot"></div>
+        <div class="flow-text">AIが代わりに送信</div>
+      </div>
+    </div>
+    <div class="scenario-key">
+      <strong>キーボードもパスワードも不要。</strong><br>
+      声と、記憶の色だけ。<br>
+      久保さんが使えるということは、誰でも使えるということ。
+    </div>
+  </div>
+</section>
+
+<!-- WHY NOW -->
+<section class="section reveal">
+  <div class="sec-label">Section 05 — Why Now</div>
+  <div class="sec-title">なぜ今リリースするのか</div>
+  <div style="display:flex;flex-direction:column;gap:16px;">
+    <div style="display:flex;gap:16px;align-items:flex-start;">
+      <div style="flex-shrink:0;width:36px;height:36px;background:var(--red);border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:12px;color:#fff;font-weight:500;">01</div>
+      <div>
+        <div style="font-size:14px;font-weight:500;color:var(--ink);margin-bottom:4px;">Claude.aiが進化するほど自動的に賢くなる</div>
+        <div style="font-size:12px;color:var(--slate);line-height:2;">今コンセプトを押さえれば、機能は後からついてくる。あっという間に普通になる世界が来る前に。</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:16px;align-items:flex-start;">
+      <div style="flex-shrink:0;width:36px;height:36px;background:var(--indigo);border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:12px;color:#fff;font-weight:500;">02</div>
+      <div>
+        <div style="font-size:14px;font-weight:500;color:var(--ink);margin-bottom:4px;">認証はすべての基盤</div>
+        <div style="font-size:12px;color:var(--slate);line-height:2;">メガバンクがClaude採用を進める今、BridgeとなるCOLORFUL KANJI AUTH™が必要とされている。</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:16px;align-items:flex-start;">
+      <div style="flex-shrink:0;width:36px;height:36px;background:var(--teal);border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:12px;color:#fff;font-weight:500;">03</div>
+      <div>
+        <div style="font-size:14px;font-weight:500;color:var(--ink);margin-bottom:4px;">事務局機能の消滅</div>
+        <div style="font-size:12px;color:var(--slate);line-height:2;">少子化・人手不足の日本社会に直接刺さる。あらゆる組織が事務局コストを削減できる。</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:16px;align-items:flex-start;">
+      <div style="flex-shrink:0;width:36px;height:36px;background:var(--gold);border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:12px;color:var(--indigo);font-weight:500;">04</div>
+      <div>
+        <div style="font-size:14px;font-weight:500;color:var(--ink);margin-bottom:4px;">高齢化社会 × 音声UI</div>
+        <div style="font-size:12px;color:var(--slate);line-height:2;">久保さんが使えるなら、誰でも使える。記憶の尊厳を守りながら、デジタルの世界と繋がれる。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section class="section reveal">
+  <div class="sec-label">Section 06 — Roadmap</div>
+  <div class="sec-title">開発フェーズ</div>
+  <div class="roadmap">
+    <div class="rm-card">
+      <div class="rm-header" style="background:var(--gold);color:var(--indigo);">Phase 08-DEMO</div>
+      <div class="rm-body">
+        <div class="rm-phase">LAUNCHERデモ</div>
+        <div class="rm-item">認証 + 接続画面</div>
+        <div class="rm-item">2026年6月</div>
+      </div>
+    </div>
+    <div class="rm-card">
+      <div class="rm-header" style="background:var(--teal);color:#fff;">Phase 08-BETA</div>
+      <div class="rm-body">
+        <div class="rm-phase">会員向けβ版</div>
+        <div class="rm-item">バザールバザール会員</div>
+        <div class="rm-item">2026年Q3</div>
+      </div>
+    </div>
+    <div class="rm-card">
+      <div class="rm-header" style="background:var(--blue);color:#fff;">Phase 09</div>
+      <div class="rm-body">
+        <div class="rm-phase">音声AI-Agent統合</div>
+        <div class="rm-item">Claude API連携</div>
+        <div class="rm-item">2026年Q4</div>
+      </div>
+    </div>
+    <div class="rm-card">
+      <div class="rm-header" style="background:var(--red);color:#fff;">Phase 10</div>
+      <div class="rm-body">
+        <div class="rm-phase">潜入調査モード</div>
+        <div class="rm-item">詐欺サイト自動検知</div>
+        <div class="rm-item">2027年</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="closing">
+  <div class="closing-big">
+    「声と記憶の色だけで、<br>
+    <em>インターネットのすべて</em>に<br>
+    アクセスできる世界。」
+  </div>
+  <div class="closing-sub">
+    coined by Claude.ai · approved by Roberto Hoshino<br>
+    株式会社ダンクソフト · Smart Life Styles™ · COLOURFUL JAPAN™<br>
+    2026-05-19 · Concept Sheet v1.0
+  </div>
+</section>
+
+</div><!-- /main-content -->
+
+<script>
+function tryAuth(btn, result) {
+  if (result === 'correct') {
+    document.getElementById('auth-gate').classList.add('gate-success');
+    document.getElementById('main-content').style.opacity = '1';
+    setTimeout(() => { document.getElementById('auth-gate').style.display = 'none'; }, 900);
+  } else {
+    btn.classList.add('wrong');
+    setTimeout(() => btn.classList.remove('wrong'), 500);
+  }
+}
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('shown'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
