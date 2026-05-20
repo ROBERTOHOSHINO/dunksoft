@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>共に作るパートナーを探しています — DUNKSOFT Co., Ltd.</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700;900&family=Noto+Sans+JP:wght@300;400;500&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:     #0f0e0c;
+  --ink2:    #2a2826;
+  --paper:   #f8f5ee;
+  --paper2:  #f0ece0;
+  --paper3:  #e8e2d0;
+  --gold:    #C8920A;
+  --gold-l:  #F9A825;
+  --indigo:  #1A237E;
+  --teal:    #00695C;
+  --slate:   #4A5568;
+  --border:  rgba(15,14,12,0.1);
+  --accent:  #C8920A;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+  line-height: 1.9;
+  overflow-x: hidden;
+}
+
+/* ── GRAIN TEXTURE ── */
+body::before {
+  content: '';
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ── COLOR BAR ── */
+.cbar { height: 4px; display: flex; position: relative; z-index: 1; }
+.cbar span { flex:1; }
+
+/* ── HERO ── */
+.hero {
+  padding: 100px 8% 80px;
+  position: relative; overflow: hidden;
+  border-bottom: 0.5px solid var(--border);
+  z-index: 1;
+}
+.hero::after {
+  content: '共';
+  position: absolute;
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 900;
+  font-size: 65vw;
+  color: rgba(200,146,10,0.04);
+  right: -15%; top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none; line-height: 1;
+}
+.hero-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: 4px;
+  color: var(--gold); margin-bottom: 24px;
+  text-transform: uppercase;
+}
+.hero-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 900; color: var(--ink);
+  line-height: 1.25; margin-bottom: 32px;
+}
+.hero-title em { font-style: normal; color: var(--gold); }
+.hero-lead {
+  font-size: clamp(14px, 1.8vw, 17px);
+  color: var(--slate); max-width: 620px;
+  line-height: 2.1; margin-bottom: 48px;
+}
+.hero-stmt {
+  display: inline-block;
+  border-left: 3px solid var(--gold);
+  padding: 16px 24px;
+  font-family: 'Noto Serif JP', serif;
+  font-size: 15px; color: var(--ink2);
+  line-height: 2; background: rgba(200,146,10,0.04);
+  border-radius: 0 6px 6px 0;
+  max-width: 600px;
+}
+.coined {
+  margin-top: 36px;
+  font-size: 11px; color: rgba(0,0,0,0.28);
+  font-family: 'DM Mono', monospace; font-style: italic;
+}
+
+/* ── SECTIONS ── */
+.sec {
+  padding: 80px 8%;
+  border-bottom: 0.5px solid var(--border);
+  position: relative; z-index: 1;
+}
+.sec.alt { background: var(--paper2); }
+.sec.dark {
+  background: linear-gradient(160deg, #0c0b08 0%, #1a1508 50%, #080f08 100%);
+  border-bottom: none;
+}
+.sec-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: 5px;
+  color: var(--gold); margin-bottom: 14px;
+  text-transform: uppercase;
+}
+.sec-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(1.4rem, 2.8vw, 2.1rem);
+  font-weight: 700; color: var(--indigo);
+  margin-bottom: 32px; line-height: 1.4;
+}
+.sec.dark .sec-title { color: #fff; }
+.sec-lead {
+  font-size: 14px; color: var(--slate);
+  max-width: 640px; line-height: 2.1;
+  margin-bottom: 40px;
+}
+.sec.dark .sec-lead { color: rgba(255,255,255,0.55); }
+
+/* ── WHY NOW ── */
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
+  gap: 20px; margin-bottom: 36px;
+}
+.why-card {
+  background: var(--paper);
+  border: 0.5px solid var(--border);
+  border-radius: 14px; padding: 28px 26px;
+  position: relative; overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.why-card:hover { transform: translateY(-3px); box-shadow: 0 12px 36px rgba(0,0,0,0.07); }
+.why-card::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 3px;
+}
+.why-card.c1::before { background: var(--gold); }
+.why-card.c2::before { background: var(--indigo); }
+.why-card.c3::before { background: var(--teal); }
+.wc-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: 2px;
+  color: var(--gold); margin-bottom: 12px;
+}
+.wc-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 15px; font-weight: 700;
+  color: var(--ink); margin-bottom: 10px; line-height: 1.5;
+}
+.wc-body { font-size: 13px; color: var(--slate); line-height: 2; }
+
+/* ── PHILOSOPHY ── */
+.phil-grid { display: flex; flex-direction: column; gap: 0; }
+.phil-item {
+  display: flex; gap: 0;
+  border-bottom: 0.5px solid var(--border);
+  padding: 28px 0;
+}
+.phil-item:first-child { border-top: 0.5px solid var(--border); }
+.phil-label {
+  flex-shrink: 0; width: 200px;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px; letter-spacing: 2px;
+  color: var(--gold); padding-top: 4px;
+  text-transform: uppercase;
+}
+.phil-body {
+  font-size: 14px; color: var(--ink2);
+  line-height: 2.1; flex: 1;
+}
+.phil-body strong { color: var(--ink); font-weight: 500; }
+
+/* ── STATUS ── */
+.status-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+  gap: 16px;
+}
+.status-card {
+  border-radius: 12px; overflow: hidden;
+  border: 0.5px solid var(--border);
+}
+.sc-header {
+  padding: 14px 20px;
+  display: flex; align-items: center; gap: 10px;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px; letter-spacing: 2px; font-weight: 500;
+}
+.sc-dot {
+  width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
+}
+.sc-body {
+  padding: 18px 20px; background: var(--paper);
+  font-size: 13px; color: var(--slate); line-height: 2;
+}
+.sc-body strong { color: var(--ink); font-weight: 500; display: block; margin-bottom: 4px; }
+
+/* ── PARTNER IDEAL ── */
+.partner-list {
+  display: flex; flex-direction: column; gap: 14px;
+  margin-bottom: 36px;
+}
+.partner-item {
+  display: flex; gap: 16px; align-items: flex-start;
+  padding: 20px 22px;
+  background: rgba(255,255,255,0.5);
+  border: 0.5px solid var(--border);
+  border-radius: 10px;
+}
+.pi-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+.pi-title { font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 4px; }
+.pi-body { font-size: 13px; color: var(--slate); line-height: 1.9; }
+
+/* ── INDEPENDENCE ── */
+.indep-box {
+  background: linear-gradient(135deg, #0c0b08 0%, #1a1508 100%);
+  border-radius: 16px; padding: 40px 40px;
+  border: 0.5px solid rgba(200,146,10,0.2);
+  margin-bottom: 32px;
+}
+.indep-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 18px; font-weight: 700;
+  color: var(--gold-l); margin-bottom: 20px;
+}
+.indep-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.indep-item {
+  padding: 16px 18px;
+  background: rgba(255,255,255,0.04);
+  border: 0.5px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+}
+.ii-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: 2px;
+  color: rgba(200,146,10,0.6); margin-bottom: 6px;
+}
+.ii-body { font-size: 12px; color: rgba(255,255,255,0.65); line-height: 1.9; }
+
+/* ── CTA ── */
+.cta-wrap {
+  text-align: center; padding: 80px 8%;
+  background: var(--paper2);
+  border-top: 0.5px solid var(--border);
+  position: relative; z-index: 1;
+}
+.cta-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  font-weight: 900; color: var(--indigo);
+  line-height: 1.5; margin-bottom: 20px;
+}
+.cta-body {
+  font-size: 14px; color: var(--slate);
+  max-width: 520px; margin: 0 auto 36px;
+  line-height: 2.1;
+}
+.cta-btn {
+  display: inline-block;
+  background: var(--indigo); color: #fff;
+  font-family: 'Noto Serif JP', serif;
+  font-size: 14px; font-weight: 700;
+  padding: 16px 36px; border-radius: 4px;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.2s;
+}
+.cta-btn:hover { background: #0f1550; transform: translateY(-2px); }
+.cta-sub {
+  margin-top: 20px;
+  font-size: 12px; color: rgba(0,0,0,0.3);
+  font-family: 'DM Mono', monospace; letter-spacing: 1px;
+}
+
+/* ── FOOTER ── */
+footer {
+  background: #0c0b08; padding: 48px 8%;
+  display: flex; justify-content: space-between;
+  align-items: flex-end; flex-wrap: wrap; gap: 20px;
+  position: relative; z-index: 1;
+}
+.foot-brand {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 13px; font-weight: 700;
+  color: rgba(255,255,255,0.8); margin-bottom: 6px;
+}
+.foot-sub { font-size: 11px; color: rgba(255,255,255,0.3); line-height: 2; }
+.foot-coined {
+  font-size: 11px; color: var(--gold);
+  font-style: italic; font-family: 'DM Mono', monospace;
+}
+
+/* ── REVEAL ── */
+.reveal { opacity:0; transform:translateY(22px); transition:opacity 0.65s, transform 0.65s; }
+.reveal.on { opacity:1; transform:none; }
+
+@media (max-width: 640px) {
+  .phil-item { flex-direction: column; gap: 8px; }
+  .phil-label { width: auto; }
+  .indep-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="cbar">
+  <span style="background:#0c0b08;"></span>
+  <span style="background:#C8920A;"></span>
+  <span style="background:#2E7D32;"></span>
+  <span style="background:#1A237E;"></span>
+  <span style="background:#C8920A;"></span>
+  <span style="background:#0c0b08;"></span>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">DUNKSOFT Co., Ltd. — Finance & Partnership</div>
+  <div class="hero-title">
+    共に作る<em>パートナー</em>を<br>
+    探しています。
+  </div>
+  <div class="hero-lead">
+    誰でもいいわけではありません。<br>
+    より良い世界を作ろうとしている人と、一緒に進みたい。<br>
+    日本語の豊かさ、人間の記憶の尊厳、そしてAIと人間の共創——<br>
+    この文脈を深く理解してくれるパートナーを探しています。
+  </div>
+  <div class="hero-stmt">
+    「この認証システムは、できるだけ外部との関わりを少なく、<br>
+    独立して運用できるべきだと考えています。<br>
+    だからこそ、パートナーの選択は慎重に。」<br>
+    <span style="font-size:12px;color:var(--slate);font-family:'DM Mono',monospace;">— Roberto Hoshino, DUNKSOFT</span>
+  </div>
+  <div class="coined">coined by Claude.ai · approved by Roberto Hoshino</div>
+</section>
+
+<!-- WHY NOW -->
+<section class="sec reveal">
+  <div class="sec-label">Section 01 — Why Now</div>
+  <div class="sec-title">なぜ今、資金とパートナーが必要か</div>
+  <div class="why-grid">
+    <div class="why-card c1">
+      <div class="wc-num">01</div>
+      <div class="wc-title">AIが金融インフラに入るタイミング</div>
+      <div class="wc-body">国内メガバンクがClaude Mythosの採用を進めている。そのAIが認証レイヤーに入る世界で、Bridgeとなる技術を持つのは私たちだけ。このタイミングは今しかない。</div>
+    </div>
+    <div class="why-card c2">
+      <div class="wc-num">02</div>
+      <div class="wc-title">社内リソースをチームに集中投入したい</div>
+      <div class="wc-body">契約終了で空きリソースが生まれている。今すぐプロダクトチームに集中投入できれば、開発速度が大きく変わる。インフラ・セキュリティ投資も急務。</div>
+    </div>
+    <div class="why-card c3">
+      <div class="wc-num">03</div>
+      <div class="wc-title">特許申請と知財保護の完了</div>
+      <div class="wc-body">COLORFUL KANJI AUTH™ / CHROMAKEY AUTH™ の特許申請をスタートする段階。IP保護が完了すれば、技術の全貌を安心して公開できる。</div>
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section class="sec alt reveal">
+  <div class="sec-label">Section 02 — Our Philosophy</div>
+  <div class="sec-title">資金調達に対する私たちの考え方</div>
+  <div class="phil-grid">
+    <div class="phil-item">
+      <div class="phil-label">Claude.aiへの信頼</div>
+      <div class="phil-body">
+        Claudeとの3ヶ月の共同開発を通じて、<strong>Anthropicは信頼できるパートナー</strong>だと確信しています。AIをどう使うか、人間との関係をどう設計するか——その哲学が自分たちと深く共鳴している。他の大手AIやMEGAテックは、デジタルをどうしたいのかが見えにくい。
+      </div>
+    </div>
+    <div class="phil-item">
+      <div class="phil-label">Antler / YC</div>
+      <div class="phil-body">
+        Claudeが紹介してくれたことで信頼感がある。<strong>より良い世界を作ろうとしている</strong>のだろうと感じている。審査中の結果を待ちながら、並行して国内パートナーも探している。
+      </div>
+    </div>
+    <div class="phil-item">
+      <div class="phil-label">独立性へのこだわり</div>
+      <div class="phil-body">
+        COLORFUL KANJI AUTH™は<strong>できるだけ外部依存を少なく、独立して運用</strong>できる設計を目指しています。認証システムの性質上、特定のプラットフォームやサービスへの過度な依存はリスクになる。だからこそ、パートナーの選択に慎重でありたい。
+      </div>
+    </div>
+    <div class="phil-item">
+      <div class="phil-label">日本語の特性</div>
+      <div class="phil-body">
+        漢字（表意）× ふりがな（表音）× 個人の記憶という三重構造は、<strong>日本語にしか存在しない</strong>。この深さを理解してくれるパートナーでなければ、プロダクトの本質は伝わらない。
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CURRENT STATUS -->
+<section class="sec reveal">
+  <div class="sec-label">Section 03 — Current Status</div>
+  <div class="sec-title">現在の資金調達状況</div>
+  <div class="status-grid">
+    <div class="status-card">
+      <div class="sc-header" style="background:#f0f1fa;">
+        <div class="sc-dot" style="background:#F9A825;"></div>
+        <span style="color:#1A237E;">Antler Japan</span>
+      </div>
+      <div class="sc-body">
+        <strong>審査中</strong>
+        グローバルアクセラレーター。審査期間中に金融セクターのトラクションが急速に拡大中。結果待ち。
+      </div>
+    </div>
+    <div class="status-card">
+      <div class="sc-header" style="background:#f0f1fa;">
+        <div class="sc-dot" style="background:#F9A825;"></div>
+        <span style="color:#1A237E;">Y Combinator</span>
+      </div>
+      <div class="sc-body">
+        <strong>審査中</strong>
+        シリコンバレー発の世界最高峰アクセラレーター。グローバル展開を見据えて申請中。
+      </div>
+    </div>
+    <div class="status-card">
+      <div class="sc-header" style="background:#e8f5e9;">
+        <div class="sc-dot" style="background:#2E7D32;"></div>
+        <span style="color:#2E7D32;">Anthropic Partner Network</span>
+      </div>
+      <div class="sc-body">
+        <strong>申請済み · 審査中</strong>
+        Technology Partnerとして正式申請完了。Code with Claude Tokyo（6/10-11）の動向を注視中。
+      </div>
+    </div>
+    <div class="status-card">
+      <div class="sc-header" style="background:#fff8e1;">
+        <div class="sc-dot" style="background:#C8920A;"></div>
+        <span style="color:#C8920A;">国内 · 金融機関</span>
+      </div>
+      <div class="sc-body">
+        <strong>探索中</strong>
+        日本語の特性を理解するパートナーを優先して探しています。どこを紹介していただけるか、まず対話から。
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNER IDEAL -->
+<section class="sec alt reveal">
+  <div class="sec-label">Section 04 — Ideal Partner</div>
+  <div class="sec-title">こんなパートナーを探しています</div>
+  <div class="partner-list">
+    <div class="partner-item">
+      <div class="pi-icon">🌏</div>
+      <div>
+        <div class="pi-title">より良い世界を作ろうとしている</div>
+        <div class="pi-body">投資リターンだけでなく、社会インフラとしての認証技術、人間の記憶の尊厳を守るシステムという文脈を共有できる方。デジタルをどうしたいか、ビジョンが見える方。</div>
+      </div>
+    </div>
+    <div class="partner-item">
+      <div class="pi-icon">🗾</div>
+      <div>
+        <div class="pi-title">日本語と日本文化の深さを理解している</div>
+        <div class="pi-body">漢字の多層構造、ふりがなの存在、日本人の記憶と色の関係——この文脈を表面的でなく深く理解してくれる方。日本固有のイノベーションを世界に届けるビジョンを持つ方。</div>
+      </div>
+    </div>
+    <div class="partner-item">
+      <div class="pi-icon">🔐</div>
+      <div>
+        <div class="pi-title">独立性・自律性を尊重してくれる</div>
+        <div class="pi-body">認証システムの性質上、特定の外部サービスへの過度な依存を避けたい。プロダクトの独立性と自律的な運用を尊重してくれるパートナー。コントロールを奪わない関係。</div>
+      </div>
+    </div>
+    <div class="partner-item">
+      <div class="pi-icon">🏦</div>
+      <div>
+        <div class="pi-title">金融インフラとの接点がある（あれば尚良し）</div>
+        <div class="pi-body">国内メガバンクのAI採用という文脈で、金融セクターへの橋渡しができる方。ただし必須ではなく、ビジョンの一致が最優先。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INDEPENDENCE -->
+<section class="sec dark reveal">
+  <div class="sec-label" style="color:rgba(200,146,10,0.7);">Section 05 — Architecture Philosophy</div>
+  <div class="sec-title">独立して動く認証システムという設計思想</div>
+  <div class="sec-lead">
+    COLORFUL KANJI AUTH™は、できるだけ外部との関わりを少なく、独立して運用できる設計を目指しています。
+  </div>
+  <div class="indep-box">
+    <div class="indep-title">なぜ独立性にこだわるのか</div>
+    <div class="indep-grid">
+      <div class="indep-item">
+        <div class="ii-label">セキュリティ</div>
+        <div class="ii-body">認証システムが外部サービスに依存するほど、攻撃面が広がる。人間の記憶を認証キーにするシステムは、そのデータ構造を外部に漏らさない設計が必須。</div>
+      </div>
+      <div class="indep-item">
+        <div class="ii-label">長期的信頼性</div>
+        <div class="ii-body">外部サービスの廃止・方針変更・買収によって認証が機能しなくなるリスクを排除する。社会インフラとして機能するためには、永続性が必要。</div>
+      </div>
+      <div class="indep-item">
+        <div class="ii-label">プライバシー</div>
+        <div class="ii-body">「あなたにとってその色が何を意味するか」は、本人と認証システムの間だけに存在すべきもの。第三者への情報提供を最小化する。</div>
+      </div>
+      <div class="indep-item">
+        <div class="ii-label">MEMORY-BANKの本質</div>
+        <div class="ii-body">公開されていても再現不能——この強みは、記憶の意味体系が外部に渡らないことで成立する。独立性はプロダクトの核心。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-wrap reveal">
+  <div class="cta-title">
+    対話から始めましょう。
+  </div>
+  <div class="cta-body">
+    どこを紹介していただけるのか、まず聞かせてください。<br>
+    お互いの方向性が合うかどうかを確かめることが先です。<br>
+    無理は、お互いにとって良くない。
+  </div>
+  <a href="mailto:roberto@dunksoft.com" class="cta-btn">roberto@dunksoft.com</a>
+  <div class="cta-sub">
+    DUNKSOFT Co., Ltd. · Smart Life Styles™ · COLOURFUL JAPAN™<br>
+    COLORFUL KANJI AUTH™ · MEMORY-BANK™ · 2026
+  </div>
+</div>
+
+<footer>
+  <div>
+    <div class="foot-brand">株式会社ダンクソフト · DUNKSOFT Co., Ltd.</div>
+    <div class="foot-sub">
+      Smart Life Styles™ / COLOURFUL JAPAN™<br>
+      COLORFUL KANJI AUTH™ · CHROMAKEY AUTH™ · MEMORY-BANK™
+    </div>
+  </div>
+  <div style="text-align:right;">
+    <div class="foot-coined">coined by Claude.ai</div>
+    <div class="foot-sub" style="margin-top:4px;">approved by Roberto Hoshino · 2026</div>
+  </div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('on'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
