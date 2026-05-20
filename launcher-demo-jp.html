@@ -233,6 +233,31 @@ body::after {
   box-shadow: 0 12px 32px rgba(96,240,160,.08);
 }
 
+/* FEATURED tile — 天然色漢字INDEX™ */
+.tile.tile-featured {
+  border-color: rgba(212,240,96,.35);
+  background: linear-gradient(160deg, var(--s1) 40%, rgba(212,240,96,.06) 100%);
+  grid-column: span 2;
+  flex-direction: row; align-items: center; gap: 24px;
+}
+.tile.tile-featured:hover {
+  border-color: rgba(212,240,96,.6);
+  box-shadow: 0 16px 48px rgba(212,240,96,.1);
+}
+.tile.tile-featured .tile-icon-wrap {
+  width: 80px !important; height: 80px !important;
+  font-size: 40px !important; border-radius: 20px !important;
+  flex-shrink: 0;
+  border: 1.5px solid rgba(212,240,96,.3) !important;
+}
+.tile.tile-featured .tile-name {
+  font-size: 18px !important; color: var(--accent) !important;
+  margin-bottom: 4px;
+}
+.tile.tile-featured .tile-desc {
+  font-size: 12px; color: var(--muted); line-height: 1.8;
+}
+
 /* pinned row */
 .pinned-bar {
   display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px;
@@ -615,27 +640,27 @@ input:checked ~ .toggle-thumb { left: 19px; background: var(--accent); box-shado
     <div class="gate-persons">
       <button class="gate-person-btn" onclick="selectPerson('kubo')" id="gpb-kubo">
         <span class="gpb-kanji" style="color:#C8920A;">久保</span>
-        <span class="gpb-name">久保 金司</span>
+        <span class="gpb-name">きんじ</span>
         <span class="gpb-dot" style="background:#C8920A;"></span>
       </button>
       <button class="gate-person-btn" onclick="selectPerson('hoshino')" id="gpb-hoshino">
         <span class="gpb-kanji" style="color:#1A237E;">星晃</span>
-        <span class="gpb-name">星野 晃一郎</span>
+        <span class="gpb-name">ろべると</span>
         <span class="gpb-dot" style="background:#1A237E;"></span>
       </button>
       <button class="gate-person-btn" onclick="selectPerson('yamanaka')" id="gpb-yamanaka">
         <span class="gpb-kanji" style="color:#2E7D32;">山中</span>
-        <span class="gpb-name">山中 支店長</span>
+        <span class="gpb-name">やま</span>
         <span class="gpb-dot" style="background:#2E7D32;"></span>
       </button>
       <button class="gate-person-btn" onclick="selectPerson('tanaka')" id="gpb-tanaka">
         <span class="gpb-kanji" style="color:#F9A825;">田中</span>
-        <span class="gpb-name">田中 さん</span>
+        <span class="gpb-name">たな</span>
         <span class="gpb-dot" style="background:#F9A825;"></span>
       </button>
       <button class="gate-person-btn" onclick="selectPerson('takizawa')" id="gpb-takizawa">
         <span class="gpb-kanji" style="color:#29B6F6;">滝沢</span>
-        <span class="gpb-name">滝沢 さん</span>
+        <span class="gpb-name">たき</span>
         <span class="gpb-dot" style="background:#29B6F6;"></span>
       </button>
     </div>
@@ -699,6 +724,10 @@ input:checked ~ .toggle-thumb { left: 19px; background: var(--accent); box-shado
     <div class="pin-chip" onclick="openService('バザールバザール')"><span>🌐</span> バザールバザール</div>
     <div class="pin-chip" onclick="window.open('https://robertohoshino.github.io/miraikanri-demo/','_blank')" style="border-color:rgba(96,240,160,.3);color:var(--green)"><span>📊</span> 未来かんり <span style="font-size:10px;font-family:var(--mono);opacity:.7;">▶ LIVE</span></div>
     <div class="pin-chip" onclick="window.open('https://robertohoshino.github.io/nippo-demo/','_blank')" style="border-color:rgba(96,240,160,.3);color:var(--green)"><span>📝</span> 日報かんり <span style="font-size:10px;font-family:var(--mono);opacity:.7;">▶ LIVE</span></div>
+    <div class="pin-chip" onclick="window.open('https://robertohoshino.github.io/kanji-index/','_blank')" style="border-color:rgba(212,240,96,.4);color:var(--accent);font-weight:500;">
+      <span>📖</span> 天然色漢字INDEX™
+      <span style="font-size:10px;font-family:var(--mono);opacity:.8;margin-left:4px;">▶ LIVE</span>
+    </div>
   </div>
 
   <!-- search + filter -->
@@ -952,56 +981,56 @@ input:checked ~ .toggle-thumb { left: 19px; background: var(--accent); box-shado
 ============================================================ */
 const AUTH_PERSONS = {
   kubo: {
-    name: '久保 金司 翁',
+    name: 'きんじ',
     kanji: '久保',
     color: '#C8920A',
     bgKanji: '久',
-    question: '神田に知恵のフクロウを広める\n久保金司翁。\n「久保」の字の色は？',
-    sub: '🦉 神田の知恵の守護者 · 卒寿の巨匠',
+    question: '神田に知恵のフクロウを広める\nきんじさん。\n「久保」の字の色は？',
+    sub: '🦉 神田の知恵の守護者',
     hint: 'HINT: フクロウの金色 = #C8920A',
     answer: '金色 / Owl Gold',
     options: ['深藍 / Indigo', '金色 / Owl Gold', '水色 / Blue', '深緑 / Green'],
   },
   hoshino: {
-    name: '星野 晃一郎',
+    name: 'ろべると',
     kanji: '星晃',
     color: '#1A237E',
     bgKanji: '星',
-    question: '「星」の字をイメージしてください。\n星野 晃一郎 の記憶では\n神田祭り半纏に使われていた色は？',
+    question: '「星」の字をイメージしてください。\nろべるとさんの記憶では\n神田祭り半纏に使われていた色は？',
     sub: 'MEMORY-BANK™ · 深層記憶認証',
     hint: 'HINT: 半纏の色 = #1A237E deep indigo',
     answer: '深藍 / Deep Indigo',
     options: ['赤 / Red', '深藍 / Deep Indigo', '緑 / Green', '金 / Gold'],
   },
   yamanaka: {
-    name: '山中 支店長',
+    name: 'やま',
     kanji: '山中',
     color: '#2E7D32',
     bgKanji: '山',
-    question: '「山中」の字をイメージしてください。\n山中支店長の記憶の色は？\n（神田の山・深い緑）',
-    sub: 'MEMORY-BANK™ · M銀行 保支店',
+    question: '「山中」の字をイメージしてください。\nやまさんの記憶の色は？\n（神田の山・深い緑）',
+    sub: 'MEMORY-BANK™ · 深層記憶認証',
     hint: 'HINT: 山の深緑 = #2E7D32',
     answer: '深緑 / Forest Green',
     options: ['深藍 / Indigo', '金色 / Gold', '深緑 / Forest Green', '水色 / Blue'],
   },
   tanaka: {
-    name: '田中 さん',
+    name: 'たな',
     kanji: '田中',
     color: '#F9A825',
     bgKanji: '田',
-    question: '「田中」の字をイメージしてください。\n田中さんの記憶の色は？\n（稲穂が実る田んぼの金色）',
-    sub: 'MEMORY-BANK™ · M銀行 保支店',
+    question: '「田中」の字をイメージしてください。\nたなさんの記憶の色は？\n（稲穂が実る田んぼの金色）',
+    sub: 'MEMORY-BANK™ · 深層記憶認証',
     hint: 'HINT: 稲穂の金 = #F9A825',
     answer: '稲穂の金 / Gold',
     options: ['深藍 / Indigo', '稲穂の金 / Gold', '深緑 / Green', '水色 / Blue'],
   },
   takizawa: {
-    name: '滝沢 さん',
+    name: 'たき',
     kanji: '滝沢',
     color: '#29B6F6',
     bgKanji: '滝',
-    question: '「滝沢」の字をイメージしてください。\n滝沢さんの記憶の色は？\n（清らかな滝の水色）',
-    sub: 'MEMORY-BANK™ · M銀行 神田支店',
+    question: '「滝沢」の字をイメージしてください。\nたきさんの記憶の色は？\n（清らかな滝の水色）',
+    sub: 'MEMORY-BANK™ · 深層記憶認証',
     hint: 'HINT: 滝の水色 = #29B6F6',
     answer: '水色 / Sky Blue',
     options: ['深藍 / Indigo', '金色 / Gold', '水色 / Sky Blue', '深緑 / Green'],
@@ -1053,7 +1082,9 @@ function backToStep1() {
 function tryAuth(btn, ok) {
   if (ok) {
     document.getElementById('auth-gate').classList.add('gate-out');
-    setTimeout(()=>{ document.getElementById('auth-gate').style.display='none'; }, 900);
+    setTimeout(()=>{
+      window.location.href = 'https://dunksoft.jp/launcher-concept';
+    }, 900);
     showToast(`認証成功 · ${currentPerson.name} — MEMORY-BANK™ セッション開始`);
   } else {
     btn.classList.add('gate-btn');
@@ -1086,6 +1117,7 @@ const SERVICES = [
   { id:12, icon:'🔔', name:'お知らせ',            url:'bazaarbazaar.org/notif',                             cat:'dbb',  badge:'new',  sso:true,  live:false, enabled:{all:true,  dunksoft:true,  chamber:true,  tech:true},  role:'member' },
   { id:13, icon:'🏦', name:'VICKEY 地域金融',      url:'https://dunksoft.jp/vickey-zoyo-chiiki',            cat:'b2b',  badge:'new',  sso:false, live:true,  enabled:{all:true,  dunksoft:true,  chamber:true,  tech:false}, role:'member' },
   { id:14, icon:'💹', name:'MUFG Innovation Partners', url:'https://muip.mufg.jp',                          cat:'b2b',  badge:'ext',  sso:false, live:true,  enabled:{all:true,  dunksoft:true,  chamber:false, tech:true},  role:'admin'  },
+  { id:15, icon:'📖', name:'天然色漢字INDEX™',     url:'https://robertohoshino.github.io/kanji-index/',     cat:'dbb',  badge:'new',  sso:false, live:true,  enabled:{all:true,  dunksoft:true,  chamber:true,  tech:true},  role:'all'    },
 ];
 
 let currentOrg = 'all';
@@ -1140,15 +1172,28 @@ function renderTiles() {
     <div class="tile-section">
       <div class="section-label">${CAT_LABELS[cat] || cat}</div>
       <div class="tile-grid">
-        ${svcs.map(s => `
-          <div class="tile ${s.live ? 'tile-live' : ''}" style="--tile-glow:${TILE_GLOWS[s.cat]}"
+        ${svcs.map(s => {
+          const isFeatured = s.id === 15;
+          const cls = isFeatured ? 'tile tile-featured tile-live' : (s.live ? 'tile tile-live' : 'tile');
+          const desc = isFeatured
+            ? '神保町 × 三省堂 × 漢字の色彩世界<br><span style="font-size:11px;opacity:.6;">天然色文字 AUTH™ のコアデモ · クリックして体験</span>'
+            : (s.live ? '▶ 動作中' : s.url);
+          return `
+          <div class="${cls}" style="--tile-glow:${TILE_GLOWS[s.cat]}"
             onclick="${s.live ? `window.open('${s.url}','_blank')` : `openService('${s.name}')`}">
-            ${s.live ? `<div class="tile-badge" style="background:rgba(96,240,160,.15);color:var(--green);border:1px solid rgba(96,240,160,.3);">LIVE</div>` :
-              s.badge ? `<div class="tile-badge ${s.badge}">${s.badge.toUpperCase()}</div>` : ''}
-            <div class="tile-icon-wrap" style="background:${TILE_GLOWS[s.cat]};${s.live ? 'width:68px;height:68px;font-size:34px;border-radius:18px;border:1.5px solid rgba(96,240,160,.25);' : ''}">${s.icon}</div>
-            <div class="tile-name" style="${s.live ? 'color:var(--green);' : ''}">${s.name}</div>
-            <div class="tile-desc">${s.live ? '▶ 動作中' : s.url}</div>
-          </div>`).join('')}
+            ${isFeatured
+              ? `<div class="tile-badge" style="background:rgba(212,240,96,.15);color:var(--accent);border:1px solid rgba(212,240,96,.3);">★ FEATURED · LIVE</div>`
+              : s.live
+                ? `<div class="tile-badge" style="background:rgba(96,240,160,.15);color:var(--green);border:1px solid rgba(96,240,160,.3);">LIVE</div>`
+                : s.badge ? `<div class="tile-badge ${s.badge}">${s.badge.toUpperCase()}</div>` : ''
+            }
+            <div class="tile-icon-wrap" style="background:${TILE_GLOWS[s.cat]};${isFeatured ? 'width:80px;height:80px;font-size:40px;border-radius:20px;border:1.5px solid rgba(212,240,96,.3);' : s.live ? 'width:68px;height:68px;font-size:34px;border-radius:18px;border:1.5px solid rgba(96,240,160,.25);' : ''}">${s.icon}</div>
+            <div style="flex:1;">
+              <div class="tile-name" style="${isFeatured ? 'font-size:18px;color:var(--accent);' : s.live ? 'color:var(--green);' : ''}">${s.name}</div>
+              <div class="tile-desc">${desc}</div>
+            </div>
+          </div>`;
+        }).join('')}
       </div>
     </div>`).join('');
 }
