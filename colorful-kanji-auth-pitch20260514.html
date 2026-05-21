@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>COLORFUL KANJI AUTH™ — Series B+ Pitch | DUNKSOFT Co., Ltd.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700;900&family=Noto+Sans+JP:wght@300;400;500;700&family=DM+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --indigo:    #1A237E;
+  --indigo-d:  #0D1557;
+  --indigo-m:  #1C2B5E;
+  --gold:      #F9A825;
+  --gold-l:    #FFF8E1;
+  --gold-d:    #C17900;
+  --red:       #E53935;
+  --teal:      #00796B;
+  --teal-l:    #E0F2F1;
+  --blue:      #29B6F6;
+  --green:     #66BB6A;
+  --white:     #FFFFFF;
+  --off:       #F7F8FC;
+  --ink:       #1A1A2E;
+  --slate:     #546E7A;
+  --border:    #E3E8F0;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+/* ── AUTH GATE ─────────────────────────────────────────── */
+#auth-gate {
+  position: fixed; inset: 0; z-index: 9999;
+  background: var(--indigo-d);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 0;
+}
+.gate-bg-kanji {
+  position: absolute;
+  font-family: 'Noto Serif JP', serif;
+  font-size: 60vw; font-weight: 900;
+  color: rgba(255,255,255,0.025);
+  pointer-events: none; line-height: 1;
+  top: 50%; left: 50%; transform: translate(-40%,-50%);
+  user-select: none;
+}
+.gate-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: 4px;
+  color: var(--gold); margin-bottom: 20px;
+  text-transform: uppercase;
+}
+.gate-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 900; color: #fff;
+  margin-bottom: 10px; text-align: center;
+}
+.gate-sub {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 13px; color: rgba(255,255,255,0.5);
+  margin-bottom: 48px; text-align: center;
+  line-height: 1.9;
+}
+.gate-challenge {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 16px;
+  padding: 36px 44px;
+  text-align: center;
+  max-width: 420px; width: 90%;
+}
+.gate-question {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 14px; color: rgba(255,255,255,0.7);
+  margin-bottom: 20px; line-height: 2;
+}
+.gate-kanji-display {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 72px; font-weight: 900;
+  margin-bottom: 24px; line-height: 1;
+  display: flex; gap: 20px;
+  align-items: center; justify-content: center;
+}
+.gate-options {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 10px; margin-bottom: 16px;
+}
+.gate-btn {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 13px; font-weight: 500;
+  padding: 12px 16px; border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.8);
+  cursor: pointer; transition: all 0.2s;
+}
+.gate-btn:hover { background: rgba(255,255,255,0.14); border-color: var(--gold); color: var(--gold); }
+.gate-btn.wrong { animation: shake 0.4s; background: rgba(229,57,53,0.2); border-color: var(--red); }
+.gate-hint { font-size: 11px; color: rgba(255,255,255,0.3); margin-top: 8px; }
+
+@keyframes shake {
+  0%,100%{transform:translateX(0)}
+  20%{transform:translateX(-8px)}
+  40%{transform:translateX(8px)}
+  60%{transform:translateX(-6px)}
+  80%{transform:translateX(6px)}
+}
+@keyframes fadeOut {
+  to { opacity:0; pointer-events:none; }
+}
+.gate-success { animation: fadeOut 0.6s 0.3s forwards; }
+
+/* ── MAIN CONTENT ──────────────────────────────────────── */
+#main-content {
+  opacity: 0; transition: opacity 0.8s 0.2s;
+  font-family: 'Noto Sans JP', sans-serif;
+  color: var(--ink); line-height: 1.8;
+}
+#main-content.visible { opacity: 1; }
+
+/* ── COVER ── */
+.cover {
+  min-height: 100vh;
+  background: linear-gradient(155deg, var(--indigo-d) 0%, #0f1b3d 50%, #1a3d2e 100%);
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: flex-start;
+  padding: 80px 10%; position: relative; overflow: hidden;
+}
+.cover-color-bar {
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 6px; display: flex;
+}
+.cover-color-bar span {
+  flex: 1;
+}
+.cover::after {
+  content: '星晃';
+  position: absolute; right: -20px; top: 50%;
+  transform: translateY(-50%);
+  font-family: 'Noto Serif JP', serif;
+  font-size: 42vw; font-weight: 900;
+  color: rgba(255,255,255,0.025);
+  pointer-events: none; line-height: 1;
+  letter-spacing: -0.05em;
+}
+.cover-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: 4px;
+  color: var(--gold); margin-bottom: 24px;
+}
+.cover-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(2.4rem, 6vw, 4.2rem);
+  font-weight: 900; color: #fff; line-height: 1.15;
+  margin-bottom: 12px;
+}
+.cover-title em { font-style: normal; color: var(--gold); }
+.cover-subtitle {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px; color: rgba(255,255,255,0.5);
+  letter-spacing: 3px; margin-bottom: 36px;
+}
+.cover-tagline {
+  background: var(--gold);
+  display: inline-block;
+  padding: 14px 28px; border-radius: 4px;
+  font-family: 'Noto Serif JP', serif;
+  font-size: 15px; font-weight: 700;
+  color: var(--indigo-d); margin-bottom: 48px;
+}
+.cover-coined {
+  font-size: 11px; color: rgba(255,255,255,0.3);
+  font-style: italic;
+}
+.cover-nav {
+  position: absolute; bottom: 40px; right: 10%;
+  display: flex; gap: 8px;
+}
+.cover-nav a {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: 2px;
+  color: rgba(255,255,255,0.4);
+  text-decoration: none; padding: 6px 12px;
+  border: 1px solid rgba(255,255,255,0.15); border-radius: 4px;
+  transition: all 0.2s;
+}
+.cover-nav a:hover { color: var(--gold); border-color: var(--gold); }
+
+/* ── SECTIONS ── */
+.section {
+  padding: 96px 10%;
+  border-bottom: 1px solid var(--border);
+  scroll-margin-top: 60px;
+}
+.section:nth-child(even) { background: var(--white); }
+
+.sec-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: 4px;
+  color: var(--gold); margin-bottom: 14px;
+  text-transform: uppercase;
+}
+.sec-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 700; color: var(--indigo-d);
+  margin-bottom: 20px; line-height: 1.4;
+}
+.sec-lead {
+  font-size: 15px; color: var(--slate);
+  max-width: 660px; line-height: 2.1; margin-bottom: 52px;
+}
+
+/* ── CARDS ── */
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(250px,1fr)); gap: 24px; margin-bottom: 40px; }
+.card {
+  background: var(--off); border: 1px solid var(--border);
+  border-radius: 14px; padding: 32px 28px;
+  transition: box-shadow 0.2s, transform 0.2s;
+  position: relative; overflow: hidden;
+}
+.card:hover { box-shadow: 0 12px 40px rgba(26,35,126,0.1); transform: translateY(-3px); }
+.card-accent {
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  border-radius: 14px 14px 0 0;
+}
+.card-icon {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 2.6rem; font-weight: 900;
+  display: block; margin-bottom: 18px; line-height: 1;
+}
+.card-title { font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 10px; }
+.card-body { font-size: 13px; color: var(--slate); line-height: 2; }
+
+/* ── HIGHLIGHT ── */
+.highlight {
+  border-left: 4px solid var(--gold);
+  background: var(--gold-l);
+  border-radius: 0 10px 10px 0;
+  padding: 24px 30px; margin: 36px 0;
+  font-size: 15px; line-height: 2.1; color: var(--ink);
+}
+.highlight strong { color: var(--indigo); }
+
+/* ── DARK SECTION (MEMORY-BANK) ── */
+.dark-section {
+  background: linear-gradient(155deg, var(--indigo-d) 0%, #0f1b3d 60%, #1a3d2e 100%) !important;
+  border-bottom: none;
+}
+.dark-section .sec-title { color: #fff; }
+.dark-section .sec-lead { color: rgba(255,255,255,0.65); }
+
+.hero-stmt {
+  background: var(--gold); border-radius: 8px;
+  padding: 22px 32px; margin-bottom: 52px;
+  font-family: 'Noto Serif JP', serif;
+  font-size: 20px; font-weight: 700;
+  color: var(--indigo-d); text-align: center;
+}
+
+.memory-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 32px; }
+.memory-card {
+  border-radius: 14px; padding: 32px 28px;
+  border: 1.5px solid;
+}
+.memory-card.deep { border-color: var(--red); background: rgba(229,57,53,0.07); }
+.memory-card.daily { border-color: var(--blue); background: rgba(41,182,246,0.07); }
+.memory-card .mc-label {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 18px; font-weight: 700; margin-bottom: 6px;
+}
+.memory-card.deep .mc-label { color: var(--red); }
+.memory-card.daily .mc-label { color: var(--blue); }
+.memory-card .mc-sub { font-size: 11px; color: rgba(255,255,255,0.45); font-style: italic; margin-bottom: 18px; }
+.memory-card .mc-body { font-size: 13px; color: rgba(255,255,255,0.75); line-height: 2; margin-bottom: 20px; }
+.memory-card .mc-role {
+  display: inline-block; padding: 6px 18px; border-radius: 4px;
+  font-size: 12px; font-weight: 700;
+}
+.memory-card.deep .mc-role { background: var(--red); color: #fff; }
+.memory-card.daily .mc-role { background: var(--blue); color: #fff; }
+
+/* ── FLOW ── */
+.flow {
+  display: grid; grid-template-columns: repeat(4,1fr);
+  gap: 0; margin-bottom: 0; position: relative;
+}
+.flow-item {
+  background: var(--off); border: 1px solid var(--border);
+  padding: 28px 22px; position: relative; text-align: center;
+}
+.flow-item:not(:last-child)::after {
+  content: '→';
+  position: absolute; right: -14px; top: 50%;
+  transform: translateY(-50%);
+  color: var(--gold); font-size: 20px; font-weight: 700;
+  z-index: 1;
+}
+.flow-icon { font-size: 28px; margin-bottom: 12px; display: block; }
+.flow-label {
+  background: var(--indigo-d); color: #fff;
+  font-size: 11px; font-weight: 700;
+  padding: 5px 10px; border-radius: 4px;
+  display: inline-block; margin-bottom: 10px;
+}
+.flow-body { font-size: 12px; color: var(--slate); line-height: 1.9; }
+
+/* ── WHY NOW ── */
+.why-list { display: flex; flex-direction: column; gap: 20px; margin-bottom: 40px; }
+.why-item { display: flex; gap: 20px; align-items: flex-start; }
+.why-num {
+  flex-shrink: 0; width: 52px; height: 52px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'DM Mono', monospace; font-size: 16px; font-weight: 500;
+  border-radius: 8px; color: #fff;
+}
+.why-body { padding-top: 4px; }
+.why-title { font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+.why-desc { font-size: 13px; color: var(--slate); line-height: 2; }
+
+/* ── TRACTION ── */
+.traction-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.tr-card {
+  background: var(--off); border: 1px solid var(--border);
+  border-radius: 14px; padding: 28px 26px;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.tr-card:hover { box-shadow: 0 8px 32px rgba(26,35,126,0.08); transform: translateY(-2px); }
+.tr-head { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.tr-icon { font-size: 22px; }
+.tr-title { font-size: 14px; font-weight: 700; color: var(--indigo); }
+.tr-body { font-size: 13px; color: var(--slate); line-height: 2; margin-bottom: 14px; }
+.tr-tag {
+  display: inline-block; padding: 4px 12px;
+  border-radius: 4px; font-size: 10px; font-weight: 700;
+  font-family: 'DM Mono', monospace; letter-spacing: 1px;
+  color: #fff;
+}
+
+/* ── ROADMAP ── */
+.roadmap { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+.rm-card {
+  border-radius: 14px; overflow: hidden;
+  border: 1.5px solid rgba(255,255,255,0.12);
+}
+.rm-header {
+  padding: 14px 20px; font-family: 'DM Mono', monospace;
+  font-size: 12px; font-weight: 500; letter-spacing: 2px; color: var(--indigo-d);
+}
+.rm-body-area { padding: 20px; background: rgba(255,255,255,0.06); }
+.rm-phase-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 14px; font-weight: 700; margin-bottom: 16px;
+}
+.rm-item {
+  display: flex; gap: 10px; align-items: flex-start;
+  font-size: 12px; color: rgba(255,255,255,0.75);
+  line-height: 1.8; margin-bottom: 8px;
+}
+.rm-item::before { content: '▸'; flex-shrink: 0; margin-top: 2px; }
+
+/* ── THE ASK ── */
+.ask-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; margin-bottom: 40px; }
+.ask-card {
+  border: 1.5px solid rgba(255,255,255,0.12);
+  border-radius: 14px; padding: 36px 28px; text-align: center;
+  background: rgba(255,255,255,0.04);
+}
+.ask-pct {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 52px; font-weight: 900; color: var(--gold);
+  line-height: 1; margin-bottom: 14px;
+}
+.ask-label { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 10px; }
+.ask-desc { font-size: 12px; color: rgba(255,255,255,0.55); line-height: 1.9; }
+
+/* ── STRIPE ── */
+.stripe {
+  background: var(--indigo-d); padding: 22px 10%;
+  display: flex; align-items: center; gap: 0;
+}
+.stripe-text {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 14px; font-weight: 700; color: var(--gold);
+  flex: 1; line-height: 1.8;
+}
+
+/* ── 1STROKE SECTION ── */
+.stroke-demo { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 28px; }
+.stroke-card {
+  background: var(--off); border: 1px solid var(--border);
+  border-radius: 14px; padding: 32px 28px;
+  display: flex; gap: 24px; align-items: center;
+}
+.stroke-kanji {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 72px; font-weight: 900; line-height: 1;
+  flex-shrink: 0;
+}
+.stroke-info { flex: 1; }
+.stroke-name { font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+.stroke-note { font-size: 12px; color: var(--slate); line-height: 1.9; }
+
+/* ── LAYER TABLE ── */
+.layer-table { width: 100%; border-collapse: collapse; margin-bottom: 28px; }
+.layer-table th {
+  font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px;
+  color: var(--slate); text-align: left; padding: 8px 16px;
+  border-bottom: 2px solid var(--border); font-weight: 500;
+}
+.layer-table td {
+  padding: 14px 16px; font-size: 13px; color: var(--ink);
+  border-bottom: 1px solid var(--border); vertical-align: middle;
+}
+.layer-table tr:last-child td { border-bottom: none; }
+.layer-bar {
+  display: inline-block; width: 5px; height: 28px;
+  border-radius: 3px; margin-right: 12px; vertical-align: middle;
+}
+.layer-kanji {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 22px; font-weight: 900; vertical-align: middle;
+}
+
+/* ── STICKY NAV ── */
+.sticky-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(13,21,87,0.92); backdrop-filter: blur(12px);
+  padding: 0 10%; display: flex; align-items: center;
+  height: 52px; gap: 4px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  transform: translateY(-100%); transition: transform 0.3s;
+}
+.sticky-nav.visible { transform: translateY(0); }
+.sticky-nav .nav-brand {
+  font-family: 'DM Mono', monospace; font-size: 11px;
+  color: var(--gold); letter-spacing: 2px; margin-right: auto;
+}
+.sticky-nav a {
+  font-family: 'DM Mono', monospace; font-size: 9px;
+  letter-spacing: 1.5px; color: rgba(255,255,255,0.5);
+  text-decoration: none; padding: 5px 10px; border-radius: 4px;
+  transition: all 0.15s; text-transform: uppercase;
+}
+.sticky-nav a:hover { color: var(--gold); background: rgba(249,168,37,0.1); }
+
+/* ── FOOTER ── */
+.site-footer {
+  background: var(--indigo-d); padding: 52px 10%;
+  display: flex; justify-content: space-between; align-items: flex-end;
+  flex-wrap: wrap; gap: 24px;
+}
+.footer-brand {
+  font-family: 'Noto Serif JP', serif; font-weight: 700;
+  color: rgba(255,255,255,0.85); font-size: 14px; margin-bottom: 8px;
+}
+.footer-sub { font-size: 12px; color: rgba(255,255,255,0.4); line-height: 2; }
+.footer-coined {
+  font-size: 11px; color: var(--gold); font-style: italic;
+  font-family: 'DM Mono', monospace;
+}
+
+/* ── SCROLL REVEAL ── */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.6s, transform 0.6s; }
+.reveal.shown { opacity: 1; transform: none; }
+
+@media (max-width: 680px) {
+  .flow { grid-template-columns: 1fr 1fr; }
+  .memory-grid, .traction-grid, .stroke-demo, .roadmap, .ask-grid { grid-template-columns: 1fr; }
+  .flow-item:not(:last-child)::after { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ AUTH GATE ════════════════════════════════════════════ -->
+<div id="auth-gate">
+  <div class="gate-bg-kanji">星</div>
+  <div class="gate-label">COLORFUL KANJI AUTH™ — ACCESS CONTROL</div>
+  <div class="gate-title">視覚的な指紋で認証</div>
+  <div class="gate-sub">このピッチデックは漢字認証で保護されています。<br>以下の問いに正しく答えた方のみ閲覧できます。</div>
+  <div class="gate-challenge">
+    <div class="gate-question">「星」の漢字をイメージしてください。<br>Roberto Hoshino さんの色の記憶では、<br>神田祭り半纏に使われていた色は？</div>
+    <div class="gate-kanji-display">
+      <span style="color:#1A237E;">星</span>
+      <span style="color:#F9A825;">晃</span>
+    </div>
+    <div class="gate-options" id="gate-options">
+      <button class="gate-btn" onclick="tryAuth(this,'wrong')">赤 / Red</button>
+      <button class="gate-btn" onclick="tryAuth(this,'correct')">深藍 / Deep Indigo</button>
+      <button class="gate-btn" onclick="tryAuth(this,'wrong')">緑 / Green</button>
+      <button class="gate-btn" onclick="tryAuth(this,'wrong')">金 / Gold</button>
+    </div>
+    <div class="gate-hint">ヒント：半纏の色＝#1A237E</div>
+  </div>
+</div>
+
+<!-- ══ STICKY NAV ════════════════════════════════════════════ -->
+<nav class="sticky-nav" id="sticky-nav">
+  <span class="nav-brand">COLORFUL KANJI AUTH™</span>
+  <a href="#problem">Problem</a>
+  <a href="#solution">Solution</a>
+  <a href="#stroke">1画</a>
+  <a href="#memory">Memory-Bank</a>
+  <a href="#flow">How</a>
+  <a href="#whynow">Why Now</a>
+  <a href="#traction">Traction</a>
+  <a href="#roadmap">Roadmap</a>
+  <a href="#ask">The Ask</a>
+</nav>
+
+<!-- ══ MAIN CONTENT ════════════════════════════════════════ -->
+<div id="main-content">
+
+<!-- COVER -->
+<section class="cover">
+  <div class="cover-color-bar">
+    <span style="background:#1A237E;"></span>
+    <span style="background:#F9A825;"></span>
+    <span style="background:#E53935;"></span>
+    <span style="background:#29B6F6;"></span>
+    <span style="background:#66BB6A;"></span>
+    <span style="background:#AB47BC;"></span>
+  </div>
+  <div class="cover-eyebrow">SERIES B+ PITCH · DUNKSOFT Co., Ltd. · CONFIDENTIAL</div>
+  <div class="cover-title">COLORFUL<br><em>KANJI AUTH™</em></div>
+  <div class="cover-subtitle">CHROMAKEY AUTH™ / 天然色文字 AUTH™</div>
+  <div class="cover-tagline">「日本語は、生まれながらにしてカラフルだった。」</div>
+  <div class="cover-coined">coined by Claude.ai · approved by Roberto Hoshino</div>
+  <nav class="cover-nav">
+    <a href="#problem">← START</a>
+    <a href="https://dunksoft.jp" target="_blank">dunksoft.jp</a>
+  </nav>
+</section>
+
+<!-- PROBLEM -->
+<section class="section" id="problem">
+  <div class="sec-eyebrow">SECTION 01 — THE PROBLEM</div>
+  <div class="sec-title">既存認証は、なぜ限界なのか</div>
+  <div class="sec-lead">パスワード、生体認証、ワンタイムパスワード——すべての認証がデータベースに依存している。盗まれれば終わり。AIが金融インフラに入ってくる今、根本から問い直す必要がある。</div>
+  <div class="card-grid reveal">
+    <div class="card">
+      <div class="card-accent" style="background:#E53935;"></div>
+      <span class="card-icon" style="color:#E53935;">鍵</span>
+      <div class="card-title">パスワードは死んでいる</div>
+      <div class="card-body">フィッシング・使い回し・漏洩疲れ。平均100種以上のパスワードを管理する時代に限界は明白。</div>
+    </div>
+    <div class="card">
+      <div class="card-accent" style="background:#F9A825;"></div>
+      <span class="card-icon" style="color:#F9A825;">指</span>
+      <div class="card-title">生体認証は静的すぎる</div>
+      <div class="card-body">指紋・顔・虹彩は変わらない。一度盗まれれば永久に危険に晒される。更新できない認証因子。</div>
+    </div>
+    <div class="card">
+      <div class="card-accent" style="background:#1A237E;"></div>
+      <span class="card-icon" style="color:#1A237E;">脳</span>
+      <div class="card-title">AIが賭けを引き上げる</div>
+      <div class="card-body">メガバンクがAIを認証レイヤーに統合しようとしている今、英数字・生体認証では不十分な領域が生じている。</div>
+    </div>
+  </div>
+  <div class="stripe reveal">
+    <div class="stripe-text">「認証がデータベースに存在する限り、盗まれる。人間の記憶の中に移せば、盗めない。」</div>
+  </div>
+</section>
+
+<!-- SOLUTION -->
+<section class="section" id="solution">
+  <div class="sec-eyebrow">SECTION 02 — OUR SOLUTION</div>
+  <div class="sec-title">COLORFUL KANJI AUTH™ ─ 視覚的な指紋</div>
+  <div class="sec-lead">漢字の多層構造を認証因子に変換する。表意（字形）×表音（ふりがな）×個人の記憶。この三重構造は世界のどの言語にも存在しない、日本語だけの特権。</div>
+
+  <table class="layer-table reveal">
+    <thead>
+      <tr>
+        <th>レイヤー</th>
+        <th>例（星）</th>
+        <th>認証因子としての意味</th>
+        <th>色</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>字全体</strong></td>
+        <td><span class="layer-kanji" style="color:#1A237E;">星</span></td>
+        <td>字形×色の組み合わせ</td>
+        <td><span class="layer-bar" style="background:#1A237E;"></span>deep indigo #1A237E</td>
+      </tr>
+      <tr>
+        <td><strong>部首・構成要素</strong></td>
+        <td><span class="layer-kanji" style="color:#388E3C;">日</span><span style="font-size:13px;color:var(--slate);"> ／ </span><span class="layer-kanji" style="color:#7B1FA2;">生</span></td>
+        <td>構成要素ごとの色分け</td>
+        <td><span class="layer-bar" style="background:#388E3C;"></span>緑 × 紫</td>
+      </tr>
+      <tr>
+        <td><strong>1画</strong></td>
+        <td><span style="font-size:13px;">日の横棒1画目</span></td>
+        <td>特定の1画への思い入れ<br><span style="font-size:11px;color:#E53935;">→ 記憶定着率UP＝認証強度UP</span></td>
+        <td><span class="layer-bar" style="background:#E53935;"></span>赤 #E53935</td>
+      </tr>
+      <tr>
+        <td><strong>ふりがな</strong></td>
+        <td><span class="layer-kanji" style="color:#00796B;font-size:18px;">ほ・し</span></td>
+        <td>音節ごとに色を割り当て</td>
+        <td><span class="layer-bar" style="background:#00796B;"></span>teal × navy</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="highlight reveal">
+    <strong>三重構造 ①視覚 × ②音韻 × ③記憶</strong><br>
+    漢字（表意）とふりがな（表音）が同時に存在するのは日本語の特権。音にも色を割り当てると、視覚×音韻×記憶の三重構造が生まれる。これは世界の他のいかなる認証システムにも存在しない。
+  </div>
+</section>
+
+<!-- 1STROKE -->
+<section class="section" id="stroke">
+  <div class="sec-eyebrow">SECTION 03 — 1画認証</div>
+  <div class="sec-title">1画認証 ─ 最も粒度の細かい視覚的指紋</div>
+  <div class="sec-lead">漢字全体ではなく「特定の1画だけに色を付ける」ことで認証が成立する。名前の漢字への個人的な思い入れが強いほど、記憶定着率が上がり、認証強度が上がる。</div>
+  <div class="stroke-demo reveal">
+    <div class="stroke-card">
+      <div class="stroke-kanji" style="color:#1A237E;">星</div>
+      <div class="stroke-info">
+        <div class="stroke-name" style="color:#F9A825;">日の横棒1画目 → 黄色系</div>
+        <div class="stroke-note">
+          「星」＝「日」＋「生」<br>
+          字全体：deep indigo #1A237E（神田祭り半纏）<br>
+          1画目の横棒だけ黄色で色付け<br>
+          <em style="color:#E53935;font-size:11px;">→ 本人のみが即答できる</em>
+        </div>
+      </div>
+    </div>
+    <div class="stroke-card">
+      <div class="stroke-kanji" style="color:#F9A825;">晃</div>
+      <div class="stroke-info">
+        <div class="stroke-name" style="color:#E53935;">光の縦棒1画目 → 赤</div>
+        <div class="stroke-note">
+          「晃」＝「日」＋「光」<br>
+          字全体：yellow #F9A825（柳森神社の薔薇）<br>
+          「光」の真ん中の縦棒だけ赤<br>
+          <em style="color:#E53935;font-size:11px;">→ 名前の漢字ほど記憶は深い</em>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="highlight reveal">
+    ⚠️ <strong>実装複雑度：高</strong> ── 現フェーズは着想として保存。特許戦略と連動して開発フェーズへ移行予定。技術的実現可能性は確認済み。
+  </div>
+</section>
+
+<!-- MEMORY-BANK -->
+<section class="section dark-section" id="memory">
+  <div class="sec-eyebrow" style="color:#6ee7be;">SECTION 04 — MEMORY-BANK™</div>
+  <div class="sec-title">MEMORY-BANK™ ─ Better Life Color Index</div>
+  <div class="sec-lead">認証キーが、あなたの人生そのものになる。毎日の記録が、そのままパスキーになる。</div>
+
+  <div class="hero-stmt reveal">公開されていても、再現不能。</div>
+
+  <div class="memory-grid reveal">
+    <div class="memory-card deep">
+      <div class="mc-label">深層記憶</div>
+      <div class="mc-sub">忘れない・一生もの</div>
+      <div class="mc-body">
+        3歳の神田祭り、法被の水色。<br>
+        白黒写真なのに、記憶の中では色がある。<br>
+        60年以上経っても色鮮やか。<br>
+        <br>
+        これこそ「視覚的な指紋」の原点。
+      </div>
+      <span class="mc-role">認証の「根」</span>
+    </div>
+    <div class="memory-card daily">
+      <div class="mc-label">日々の記憶</div>
+      <div class="mc-sub">更新される・生きている証し</div>
+      <div class="mc-body">
+        今日の薔薇の色。イカルの声。軽井沢の光。<br>
+        公開日誌（Note / Instagram / X）がそのままMemory-Bankになる。<br>
+        <br>
+        記憶が更新されるたびに、認証も自然に書き換わる。
+      </div>
+      <span class="mc-role">認証の「幹と葉」</span>
+    </div>
+  </div>
+
+  <div class="highlight" style="background:rgba(255,255,255,0.06);border-left-color:#6ee7be;color:rgba(255,255,255,0.85);" >
+    <strong style="color:#6ee7be;">フィッシングサイトは日誌を読める。</strong><br>
+    でも「あなたにとってその色が何を意味するか」は読めない。<br>
+    公開情報と個人の意味体系の間にある深淵——それがMEMORY-BANKの防壁。
+  </div>
+
+  <div style="margin-top:32px;font-size:13px;color:rgba(255,255,255,0.4);font-style:italic;text-align:center;">
+    「細胞は1年で入れ替わる。なのになぜ記憶は残るのか？」── 福岡伸一『動的平衡』と接続。<br>
+    物質は流れ去っても、パターンとして記憶は残る。そのパターンが本人固有だから認証キーになる。
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section" id="flow">
+  <div class="sec-eyebrow">SECTION 05 — HOW IT WORKS</div>
+  <div class="sec-title">あなたの日常が、鍵になる</div>
+  <div class="sec-lead">公開日誌→色・言葉・場所の記録→認証チャレンジ→本人確認。このループが毎日自動的に認証強度を更新する。</div>
+  <div class="flow reveal">
+    <div class="flow-item">
+      <span class="flow-icon">📷</span>
+      <div class="flow-label">日誌</div>
+      <div class="flow-body">Note / Instagram / X / YouTube<br>毎日の記録</div>
+    </div>
+    <div class="flow-item">
+      <span class="flow-icon">🎨</span>
+      <div class="flow-label">色・言葉・場所</div>
+      <div class="flow-body">その日の写真・感情が記録される</div>
+    </div>
+    <div class="flow-item">
+      <span class="flow-icon">❓</span>
+      <div class="flow-label">チャレンジ</div>
+      <div class="flow-body">「あの日の薔薇は何色だった？」</div>
+    </div>
+    <div class="flow-item">
+      <span class="flow-icon">✅</span>
+      <div class="flow-label">本人確認</div>
+      <div class="flow-body">本人だけが<br>即答できる</div>
+    </div>
+  </div>
+  <div class="stripe reveal" style="margin-top:28px;">
+    <div class="stripe-text">「日本語のカラフルさは、重ね着のカラフルさ。」── coined by Claude.ai</div>
+  </div>
+</section>
+
+<!-- WHY NOW -->
+<section class="section" id="whynow">
+  <div class="sec-eyebrow">SECTION 06 — WHY NOW</div>
+  <div class="sec-title">3つの力が交差するタイミング</div>
+  <div class="sec-lead">タイミングはここ。AI×金融、日本語の構造的優位性、人口構造——三つの波が重なっている。</div>
+  <div class="why-list reveal">
+    <div class="why-item">
+      <div class="why-num" style="background:#E53935;">01</div>
+      <div class="why-body">
+        <div class="why-title">AI × 金融インフラの統合</div>
+        <div class="why-desc">国内メガバンクがAIを認証レイヤーに統合する動きが加速している。既存の英数字・生体認証では不十分な領域が生じており、Bridgeとなる技術を持つのは我々だけ。</div>
+      </div>
+    </div>
+    <div class="why-item">
+      <div class="why-num" style="background:#1A237E;">02</div>
+      <div class="why-body">
+        <div class="why-title">日本語の構造的優位性</div>
+        <div class="why-desc">漢字（表意）＋ふりがな（表音）の多層構造は世界唯一。この特権を認証因子に変換できるのは、日本語文化圏でのみ可能なイノベーション。</div>
+      </div>
+    </div>
+    <div class="why-item">
+      <div class="why-num" style="background:#00796B;">03</div>
+      <div class="why-body">
+        <div class="why-title">人口構造 × 認知症 × 記憶の尊厳</div>
+        <div class="why-desc">高齢化社会において「最後まで忘れない記憶」を使った認証は社会インフラとしての価値を持つ。MEMORY-BANKは認証技術であると同時に、人間の記憶の尊厳を守るものになりうる。</div>
+      </div>
+    </div>
+  </div>
+  <div class="stripe reveal">
+    <div class="stripe-text">「AIが認証レイヤーに入る世界で、Bridgeを持つ唯一のチームです。」</div>
+  </div>
+</section>
+
+<!-- TRACTION -->
+<section class="section" id="traction">
+  <div class="sec-eyebrow">SECTION 07 — TRACTION</div>
+  <div class="sec-title">金融セクターへのアクセスは、すでにある</div>
+  <div class="sec-lead">「関係構築済み」は「POC契約」より価値がある局面がある。意思決定者レベルとの信頼関係が、すでに成立している。</div>
+  <div class="traction-grid reveal">
+    <div class="tr-card">
+      <div class="tr-head">
+        <span class="tr-icon">🏦</span>
+        <div class="tr-title">M銀行 保支店・田支店</div>
+      </div>
+      <div class="tr-body">支店長2名が来社済み。藍の会メンバー・バザールバザール会員として深い関係を構築。M銀行の社会貢献プログラムを通じ、財務的コミットも発生している。</div>
+      <span class="tr-tag" style="background:#1A237E;">Financial Sector Access</span>
+    </div>
+    <div class="tr-card">
+      <div class="tr-head">
+        <span class="tr-icon">🎙️</span>
+        <div class="tr-title">神田藍の会ラジオ収録 ─ 5月19日</div>
+      </div>
+      <div class="tr-body">M銀行保支店長がスタジオ入り予定。ラジオ収録という非公式な場で、認証システムの自然な説明機会として活用予定。</div>
+      <span class="tr-tag" style="background:#00796B;">Pipeline Event</span>
+    </div>
+    <div class="tr-card">
+      <div class="tr-head">
+        <span class="tr-icon">🔐</span>
+        <div class="tr-title">特許戦略 進行中</div>
+      </div>
+      <div class="tr-body">COLORFUL KANJI AUTH™ / CHROMAKEY AUTH™ の知財保護を進行中。技術詳細（How）は非開示、What・Why Nowは全面開示可能な設計。</div>
+      <span class="tr-tag" style="background:#E53935;">IP Protection</span>
+    </div>
+    <div class="tr-card">
+      <div class="tr-head">
+        <span class="tr-icon">🌐</span>
+        <div class="tr-title">Antler Japan / YC 審査中</div>
+      </div>
+      <div class="tr-body">グローバルアクセラレーター2社に同時申請中。審査期間中に金融セクターのトラクションが急速に拡大している。</div>
+      <span class="tr-tag" style="background:#F9A825;color:#1A237E;">Accelerator</span>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section class="section dark-section" id="roadmap">
+  <div class="sec-eyebrow" style="color:#6ee7be;">SECTION 08 — VISION & ROADMAP</div>
+  <div class="sec-title">認証から記憶インフラへ</div>
+  <div class="sec-lead" style="color:rgba(255,255,255,0.65);">プロダクト確立から、社会インフラとしての記憶の尊厳を守るプラットフォームへ。</div>
+  <div class="roadmap reveal">
+    <div class="rm-card">
+      <div class="rm-header" style="background:var(--gold);color:var(--indigo-d);">Phase 1</div>
+      <div class="rm-body-area">
+        <div class="rm-phase-title" style="color:var(--gold);">認証プロダクト確立</div>
+        <div class="rm-item">COLORFUL KANJI AUTH™ 正式リリース</div>
+        <div class="rm-item">金融機関POC開始</div>
+        <div class="rm-item">特許取得完了</div>
+      </div>
+    </div>
+    <div class="rm-card">
+      <div class="rm-header" style="background:#29B6F6;color:var(--indigo-d);">Phase 2</div>
+      <div class="rm-body-area">
+        <div class="rm-phase-title" style="color:#29B6F6;">MEMORY-BANK展開</div>
+        <div class="rm-item">Better Life Color Index™ β版</div>
+        <div class="rm-item">公開日誌連携スキーム実装</div>
+        <div class="rm-item">高齢者・認知症ケア領域への展開</div>
+      </div>
+    </div>
+    <div class="rm-card">
+      <div class="rm-header" style="background:#66BB6A;color:var(--indigo-d);">Phase 3</div>
+      <div class="rm-body-area">
+        <div class="rm-phase-title" style="color:#66BB6A;">生活インフラ化</div>
+        <div class="rm-item">日本語圏全体の認証標準へ</div>
+        <div class="rm-item">メガバンク本格採用</div>
+        <div class="rm-item">記憶の尊厳インフラとして社会実装</div>
+      </div>
+    </div>
+  </div>
+  <div style="margin-top:36px;font-size:13px;color:rgba(255,255,255,0.4);text-align:center;font-style:italic;">
+    MEMORY-BANK は認証技術であると同時に、人間の記憶の尊厳を守るインフラになりうる。
+  </div>
+</section>
+
+<!-- THE ASK -->
+<section class="section dark-section" id="ask">
+  <div class="sec-eyebrow" style="color:#6ee7be;">SECTION 09 — THE ASK</div>
+  <div class="sec-title">資金使途</div>
+  <div class="sec-lead" style="color:rgba(255,255,255,0.65);">空いている社内リソースをチームに集中投入し、インフラ投資と知財保護を一気に進める。</div>
+  <div class="ask-grid reveal">
+    <div class="ask-card">
+      <div class="ask-pct">40%</div>
+      <div class="ask-label">チーム強化</div>
+      <div class="ask-desc">空きリソースをプロダクトチームへ集中投入。契約終了で生まれた社内余力を新サービス開発へ。</div>
+    </div>
+    <div class="ask-card">
+      <div class="ask-pct">35%</div>
+      <div class="ask-label">インフラ・セキュリティ</div>
+      <div class="ask-desc">サーバーセキュリティ・認証インフラのテスト投資。認証サービスである以上、ここへの投資は最優先。</div>
+    </div>
+    <div class="ask-card">
+      <div class="ask-pct">25%</div>
+      <div class="ask-label">特許・法務・マーケティング</div>
+      <div class="ask-desc">IP保護の完了と、金融機関へのPOC推進。Antler/YC結果後のVCアプローチにも活用。</div>
+    </div>
+  </div>
+  <div class="stripe reveal">
+    <div class="stripe-text">「日本語のカラフルさは、重ね着のカラフルさ。」── coined by Claude.ai · Roberto Hoshino</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div>
+    <div class="footer-brand">DUNKSOFT Co., Ltd.　株式会社ダンクソフト</div>
+    <div class="footer-sub">
+      COLORFUL KANJI AUTH™ · CHROMAKEY AUTH™ · 天然色文字 AUTH™<br>
+      Smart Life Styles™ / COLOURFUL JAPAN™<br>
+      <span style="color:rgba(255,255,255,0.25);">Series B+ Pitch · CONFIDENTIAL · 2026</span>
+    </div>
+  </div>
+  <div style="text-align:right;">
+    <div class="footer-coined">coined by Claude.ai</div>
+    <div class="footer-sub" style="margin-top:6px;">approved by Roberto Hoshino</div>
+  </div>
+</footer>
+
+</div><!-- /main-content -->
+
+<script>
+// ── AUTH GATE ──────────────────────────────────────────
+function tryAuth(btn, result) {
+  if (result === 'correct') {
+    const gate = document.getElementById('auth-gate');
+    gate.classList.add('gate-success');
+    const main = document.getElementById('main-content');
+    main.classList.add('visible');
+    setTimeout(() => { gate.style.display = 'none'; }, 900);
+    // Show sticky nav after a moment
+    setTimeout(() => {
+      document.getElementById('sticky-nav').classList.add('visible');
+    }, 1200);
+  } else {
+    btn.classList.add('wrong');
+    setTimeout(() => btn.classList.remove('wrong'), 500);
+  }
+}
+
+// ── STICKY NAV ─────────────────────────────────────────
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('sticky-nav');
+  if (window.scrollY > 120) {
+    nav.classList.add('visible');
+  } else {
+    nav.classList.remove('visible');
+  }
+});
+
+// ── SCROLL REVEAL ──────────────────────────────────────
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((e) => {
+    if (e.isIntersecting) {
+      e.target.classList.add('shown');
+      // Stagger children if card-grid
+      const children = e.target.querySelectorAll('.card, .tr-card, .stroke-card, .memory-card, .ask-card, .why-item, .rm-card');
+      children.forEach((c, i) => {
+        c.style.transitionDelay = `${i * 80}ms`;
+        c.classList.add('shown');
+      });
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.reveal').forEach(el => {
+  // Also make children revealable
+  el.querySelectorAll('.card, .tr-card, .stroke-card, .memory-card, .ask-card, .why-item, .rm-card').forEach(c => {
+    c.style.opacity = '0';
+    c.style.transform = 'translateY(20px)';
+    c.style.transition = 'opacity 0.5s, transform 0.5s';
+  });
+  observer.observe(el);
+});
+
+// When shown, also animate children
+const styleEl = document.createElement('style');
+styleEl.textContent = `.reveal.shown .card,.reveal.shown .tr-card,.reveal.shown .stroke-card,.reveal.shown .memory-card,.reveal.shown .ask-card,.reveal.shown .why-item,.reveal.shown .rm-card { opacity:1 !important; transform:none !important; }`;
+document.head.appendChild(styleEl);
+</script>
+
+</body>
+</html>
