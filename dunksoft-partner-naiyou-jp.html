@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DUNKSOFTがAnthropicパートナーになる意義 — 社内資料</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700;900&family=Noto+Sans+JP:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FAFAF7;
+  --white: #FFFFFF;
+  --ink: #111109;
+  --gold: #B8860B;
+  --gold-light: #E8B84B;
+  --gold-pale: #FDF3DC;
+  --indigo: #2A3A8C;
+  --indigo-pale: #EEF0FA;
+  --green: #1A6A40;
+  --green-pale: #EBF5EF;
+  --red: #9B2020;
+  --red-pale: #FAEAEA;
+  --text: #1C1B16;
+  --text2: #5C5A50;
+  --text3: #9C9A90;
+  --border: rgba(17,17,9,0.1);
+  --serif: 'Noto Serif JP', serif;
+  --sans: 'Noto Sans JP', sans-serif;
+  --mono: 'DM Mono', monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  line-height: 1.8;
+  padding: 0;
+}
+
+/* Decorative top border */
+.top-bar {
+  height: 5px;
+  background: linear-gradient(to right, var(--indigo) 0%, var(--gold) 50%, var(--indigo) 100%);
+}
+
+.page {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 52px 48px 80px;
+}
+
+@media (max-width: 600px) {
+  .page { padding: 32px 20px 60px; }
+}
+
+/* ─── HEADER ─── */
+.doc-header {
+  margin-bottom: 44px;
+  padding-bottom: 32px;
+  border-bottom: 1.5px solid var(--ink);
+}
+
+.doc-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.doc-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: var(--text3);
+  text-transform: uppercase;
+}
+
+.confidential {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  padding: 3px 10px;
+  border: 1px solid var(--text3);
+  border-radius: 3px;
+  color: var(--text3);
+}
+
+.doc-title {
+  font-family: var(--serif);
+  font-size: clamp(24px, 4vw, 36px);
+  font-weight: 900;
+  line-height: 1.2;
+  color: var(--ink);
+  margin-bottom: 10px;
+  letter-spacing: -0.01em;
+}
+
+.doc-sub {
+  font-size: 14px;
+  color: var(--text2);
+  font-family: var(--serif);
+  font-style: italic;
+}
+
+/* ─── SUMMARY BOX ─── */
+.summary-box {
+  background: var(--ink);
+  color: white;
+  border-radius: 6px;
+  padding: 24px 28px;
+  margin-bottom: 36px;
+  position: relative;
+  overflow: hidden;
+}
+
+.summary-box::after {
+  content: '契機';
+  position: absolute;
+  right: -10px;
+  bottom: -15px;
+  font-family: var(--serif);
+  font-size: 100px;
+  font-weight: 900;
+  color: rgba(255,255,255,0.04);
+  pointer-events: none;
+}
+
+.summary-box-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 12px;
+}
+
+.summary-box-text {
+  font-size: 14px;
+  line-height: 1.85;
+  color: rgba(255,255,255,0.82);
+}
+
+.summary-box-text strong {
+  color: var(--gold-light);
+  font-weight: 700;
+}
+
+/* ─── SECTION ─── */
+.section {
+  margin-bottom: 44px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.section-num {
+  font-family: var(--serif);
+  font-size: 32px;
+  font-weight: 900;
+  color: rgba(17,17,9,0.08);
+  line-height: 1;
+  width: 40px;
+  flex-shrink: 0;
+}
+
+.section-title {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ink);
+  flex: 1;
+}
+
+.section-line {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ─── BENEFIT CARDS ─── */
+.benefit-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.benefit-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px 24px;
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+@media (max-width: 600px) {
+  .benefit-card { grid-template-columns: 1fr; gap: 8px; }
+}
+
+.benefit-left {}
+
+.benefit-tag {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 3px;
+  margin-bottom: 6px;
+}
+
+.tag-gold { background: var(--gold-pale); color: var(--gold); border: 1px solid rgba(184,134,11,0.2); }
+.tag-indigo { background: var(--indigo-pale); color: var(--indigo); border: 1px solid rgba(42,58,140,0.2); }
+.tag-green { background: var(--green-pale); color: var(--green); border: 1px solid rgba(26,106,64,0.2); }
+
+.benefit-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.4;
+}
+
+.benefit-body {
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.85;
+}
+
+.benefit-body strong { color: var(--ink); }
+
+/* ─── PROGRAM DETAIL TABLE ─── */
+.program-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.program-table th {
+  background: var(--ink);
+  color: white;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 12px 16px;
+  text-align: left;
+}
+
+.program-table td {
+  padding: 13px 16px;
+  font-size: 13px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  line-height: 1.65;
+}
+
+.program-table tr:last-child td { border-bottom: none; }
+
+.program-table td:first-child {
+  font-weight: 700;
+  font-size: 12px;
+  color: var(--indigo);
+  width: 160px;
+  font-family: var(--mono);
+}
+
+.program-table td:last-child { color: var(--text2); }
+
+/* ─── OPPORTUNITY MATRIX ─── */
+.matrix {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+@media (max-width: 600px) {
+  .matrix { grid-template-columns: 1fr; }
+}
+
+.matrix-card {
+  border-radius: 8px;
+  padding: 20px;
+  border: 1px solid var(--border);
+}
+
+.matrix-card.gold-bg { background: var(--gold-pale); border-color: rgba(184,134,11,0.2); }
+.matrix-card.indigo-bg { background: var(--indigo-pale); border-color: rgba(42,58,140,0.2); }
+.matrix-card.green-bg { background: var(--green-pale); border-color: rgba(26,106,64,0.2); }
+.matrix-card.white-bg { background: var(--white); }
+
+.matrix-icon {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.matrix-title {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: var(--ink);
+}
+
+.matrix-body {
+  font-size: 12px;
+  color: var(--text2);
+  line-height: 1.75;
+}
+
+/* ─── CALLOUT ─── */
+.callout {
+  border-left: 4px solid var(--gold);
+  background: var(--gold-pale);
+  border-radius: 0 6px 6px 0;
+  padding: 16px 20px;
+  margin: 20px 0;
+}
+
+.callout-text {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.75;
+}
+
+.callout.indigo-callout {
+  border-color: var(--indigo);
+  background: var(--indigo-pale);
+}
+
+/* ─── ROADMAP ─── */
+.roadmap {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--border);
+}
+
+@media (max-width: 600px) {
+  .roadmap { grid-template-columns: 1fr; }
+}
+
+.roadmap-item {
+  background: var(--white);
+  padding: 20px;
+}
+
+.roadmap-phase {
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text3);
+  margin-bottom: 6px;
+}
+
+.roadmap-date {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: 8px;
+  font-family: var(--serif);
+}
+
+.roadmap-title {
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: var(--ink);
+}
+
+.roadmap-items {
+  list-style: none;
+}
+
+.roadmap-items li {
+  font-size: 11px;
+  color: var(--text2);
+  line-height: 1.7;
+  padding-left: 12px;
+  position: relative;
+}
+
+.roadmap-items li::before {
+  content: '–';
+  position: absolute;
+  left: 0;
+  color: var(--text3);
+}
+
+/* ─── FOOTER ─── */
+.doc-footer {
+  margin-top: 48px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.footer-text {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text3);
+  letter-spacing: 0.08em;
+}
+
+/* ─── INVESTMENT NOTE ─── */
+.investment-box {
+  background: linear-gradient(135deg, var(--indigo) 0%, #1A2460 100%);
+  color: white;
+  border-radius: 8px;
+  padding: 24px 28px;
+  margin-bottom: 20px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 20px;
+  align-items: center;
+}
+
+@media (max-width: 600px) {
+  .investment-box { grid-template-columns: 1fr; }
+}
+
+.investment-amount {
+  font-family: var(--serif);
+  font-size: 44px;
+  font-weight: 900;
+  color: var(--gold-light);
+  line-height: 1;
+  text-align: center;
+}
+
+.investment-amount span {
+  display: block;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.45);
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+.investment-body {
+  font-size: 13px;
+  color: rgba(255,255,255,0.78);
+  line-height: 1.85;
+}
+
+.investment-body strong { color: var(--gold-light); }
+
+/* ─── ANIMATIONS ─── */
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.section { animation: slideIn 0.5s ease both; }
+.section:nth-child(1) { animation-delay: 0.05s; }
+.section:nth-child(2) { animation-delay: 0.1s; }
+.section:nth-child(3) { animation-delay: 0.15s; }
+.section:nth-child(4) { animation-delay: 0.2s; }
+.section:nth-child(5) { animation-delay: 0.25s; }
+</style>
+</head>
+<body>
+
+<div class="top-bar"></div>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="doc-header">
+    <div class="doc-meta">
+      <div class="doc-label">株式会社ダンクソフト · 社内資料 · 2026.05.19</div>
+      <div class="confidential">INTERNAL</div>
+    </div>
+    <h1 class="doc-title">DUNKSOFTが<br>Anthropicパートナーになる<br>意味と意義</h1>
+    <div class="doc-sub">Claude Partner Programへの応募を機に — 全社員へ</div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="summary-box">
+    <div class="summary-box-label">エグゼクティブサマリー</div>
+    <p class="summary-box-text">
+      2026年2月24日から始まったClaudeとの対話は、85日間でライブ認証システムと世界初の漢字×色彩認証アーキテクチャを生み出した。<strong>Claude Partner Program</strong>への登録は、この共同開発の関係を公式化し、DUNKSOFTが「AIと共に構築する企業」として国内外に認知される転換点となる。単なるAPI利用者から、<strong>Anthropicが認める戦略パートナー</strong>へ。
+    </p>
+  </div>
+
+  <!-- SECTION 1: プログラムの概要 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">01</div>
+      <div class="section-title">Claude Partner Programとは</div>
+      <div class="section-line"></div>
+    </div>
+
+    <table class="program-table">
+      <tr>
+        <th>項目</th>
+        <th>内容</th>
+      </tr>
+      <tr>
+        <td>主催</td>
+        <td>Anthropic（Claude開発元・米国）</td>
+      </tr>
+      <tr>
+        <td>目的</td>
+        <td>ClaudeのAPIを活用してプロダクト・サービスを構築する企業・開発者を公式パートナーとして認定し、共に成長するエコシステムを形成する</td>
+      </tr>
+      <tr>
+        <td>対象</td>
+        <td>ClaudeをプロダクトのコアまたはAI層として組み込む企業・チーム</td>
+      </tr>
+      <tr>
+        <td>特典（一般的）</td>
+        <td>API優先アクセス・割引 / Anthropicチームとの直接連携 / 共同マーケティング機会 / イベント登壇・招待 / テクニカルサポート優先対応</td>
+      </tr>
+      <tr>
+        <td>6月のイベント</td>
+        <td><strong>Code with Claude Tokyo（6月10日）</strong> — Claudeとの開発事例を発表・デモできる国内イベント。Partner登録でアクセス可能性が高まる</td>
+      </tr>
+      <tr>
+        <td>投資枠</td>
+        <td>総額<strong>1億ドル</strong>のパートナー支援枠（スタートアップ・成長企業向け。審査あり）</td>
+      </tr>
+    </table>
+
+    <div class="callout indigo-callout" style="margin-top:16px;">
+      <div class="callout-text">星野さんがClaudeとの対話の中で「6月のイベントに参加できないか」と感じたのは、このプログラムの存在をすでに直感的に察知していたから。MythosへのClaude組み込みのタイミングが前倒しになっていることも、今すぐ登録する理由になっている。</div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: DUNKSOFTにとっての意味 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">02</div>
+      <div class="section-title">DUNKSOFTにとっての具体的メリット</div>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="benefit-list">
+
+      <div class="benefit-card">
+        <div class="benefit-left">
+          <div class="benefit-tag tag-gold">技術アクセス</div>
+          <div class="benefit-title">最新モデルへの<br>優先アクセス</div>
+        </div>
+        <div class="benefit-body">
+          Claude Opus 4.6・Sonnet 4.6など、一般公開前のモデルや機能にアクセスできる可能性がある。COLORFUL KANJI AUTHの色認識精度・漢字分解ロジックをより高度なモデルで強化できる。<strong>Mythosへの組み込みも、最新モデルから始められる。</strong>
+        </div>
+      </div>
+
+      <div class="benefit-card">
+        <div class="benefit-left">
+          <div class="benefit-tag tag-indigo">コスト</div>
+          <div class="benefit-title">API利用料の<br>割引・クレジット</div>
+        </div>
+        <div class="benefit-body">
+          パートナー企業にはAPI利用クレジットや割引が提供されることが多い。Mythosのスケールアップ時・CHROMAKEY AUTH™のSaaS展開時に、<strong>クラウドコストを抑えながら成長できる</strong>。1億ドルの支援枠もこのコンテキストで活用可能。
+        </div>
+      </div>
+
+      <div class="benefit-card">
+        <div class="benefit-left">
+          <div class="benefit-tag tag-green">市場認知</div>
+          <div class="benefit-title">Anthropic公式事例<br>としての認定</div>
+        </div>
+        <div class="benefit-body">
+          Anthropicのパートナーページ・事例集に掲載されることで、国内外のVCや企業顧客への<strong>信頼性が飛躍的に向上</strong>する。Series B+の資金調達において、「AnthropicパートナーとしてClaudeで構築」は強力な差別化要因になる。Antler Japan / YCの審査でも有利に働く。
+        </div>
+      </div>
+
+      <div class="benefit-card">
+        <div class="benefit-left">
+          <div class="benefit-tag tag-gold">イベント</div>
+          <div class="benefit-title">Code with Claude Tokyo<br>6月10日</div>
+        </div>
+        <div class="benefit-body">
+          国内デベロッパーコミュニティへのCHROMAKEY AUTH™デモ発表の場。銀行・金融機関との接点を広げる機会。<strong>久保さん（91歳）×AIのユースケースは、このイベントで最も刺さるストーリー</strong>になる。登壇または展示で、DUNKSOFTの存在を東京のAIコミュニティに印象付けられる。
+        </div>
+      </div>
+
+      <div class="benefit-card">
+        <div class="benefit-left">
+          <div class="benefit-tag tag-indigo">技術連携</div>
+          <div class="benefit-title">Anthropicエンジニアと<br>の直接連携</div>
+        </div>
+        <div class="benefit-body">
+          漢字の偏・つくり分解認証やフォント生成など、<strong>日本語特有の技術課題をAnthropicのチームと直接議論できる</strong>。MEMORY-BANK™のアーキテクチャについて、AIの記憶・パターン認識の観点からフィードバックを得られる機会になる。
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SECTION 3: 投資1億ドル -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">03</div>
+      <div class="section-title">総額1億ドルの投資枠について</div>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="investment-box">
+      <div>
+        <div class="investment-amount">$100M<span>Partner Support Fund</span></div>
+      </div>
+      <div class="investment-body">
+        Anthropicはパートナーエコシステムに対して<strong>総額1億ドル規模の支援枠</strong>を設けている。これはAPI割引・クレジット・直接投資を組み合わせたもの。DUNKSOFTのようなユニークなIPと実証済みのユースケースを持つ企業は、<strong>審査対象として十分に競争力がある</strong>。Series B+の文脈で、Anthropicからの戦略的支援を受けることは、国内VCへの訴求力にもなる。
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-text">「Anthropicが投資した日本の認証スタートアップ」という文脈は、M銀行の支店長2名との会話を次のステージに引き上げる力を持っている。</div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: 意義 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">04</div>
+      <div class="section-title">DUNKSOFTがパートナーになる本質的な意義</div>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="matrix">
+      <div class="matrix-card gold-bg">
+        <div class="matrix-icon">🌏</div>
+        <div class="matrix-title">日本語の優位性を世界へ</div>
+        <div class="matrix-body">漢字×ふりがな×色彩という日本語固有の構造を、世界初の認証技術に変えた。Anthropicと組むことで、この技術を日本語圏（14億人）から始め、グローバルに展開する足がかりになる。</div>
+      </div>
+      <div class="matrix-card indigo-bg">
+        <div class="matrix-icon">🤝</div>
+        <div class="matrix-title">AIとの共同開発の実証</div>
+        <div class="matrix-body">85日間・ゼロから製品をClaude共に構築した事例は、Anthropicにとっても価値ある事例研究。「DUNKSOFTはAIと共に構築する企業」としての定義が、社内外のアイデンティティになる。</div>
+      </div>
+      <div class="matrix-card green-bg">
+        <div class="matrix-icon">👴</div>
+        <div class="matrix-title">シニア×AIの社会インフラ</div>
+        <div class="matrix-body">久保さん（91歳）が神田学会のデータをClaudeで活用できるようにするには、まず認証の壁をなくす必要がある。CHROMAKEY AUTH™はその入口。高齢化社会の日本でしか生まれないイノベーション。</div>
+      </div>
+      <div class="matrix-card white-bg">
+        <div class="matrix-icon">🏦</div>
+        <div class="matrix-title">金融インフラへの道</div>
+        <div class="matrix-body">M銀行2支店長との接点は、銀行のAI認証レイヤー刷新への足がかり。Anthropicパートナーとしての信頼性は、金融機関の意思決定を加速させる。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 5: ロードマップ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">05</div>
+      <div class="section-title">パートナー承認後のロードマップ</div>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="roadmap">
+      <div class="roadmap-item">
+        <div class="roadmap-phase">Phase 1</div>
+        <div class="roadmap-date">2026年6月</div>
+        <div class="roadmap-title">認知・デモ</div>
+        <ul class="roadmap-items">
+          <li>Code with Claude Tokyo（6/10）登壇</li>
+          <li>CHROMAKEY AUTH™ライブデモ</li>
+          <li>久保さんのユースケース発表</li>
+          <li>Anthropicチームとの初ミーティング</li>
+        </ul>
+      </div>
+      <div class="roadmap-item" style="border-left:1px solid var(--border);">
+        <div class="roadmap-phase">Phase 2</div>
+        <div class="roadmap-date">2026年Q3</div>
+        <div class="roadmap-title">統合・拡張</div>
+        <ul class="roadmap-items">
+          <li>Mythos × Claude API統合開始</li>
+          <li>auth-config.json SaaS化</li>
+          <li>銀行パイロット提案</li>
+          <li>偏・つくり分解認証プロトタイプ</li>
+        </ul>
+      </div>
+      <div class="roadmap-item" style="border-left:1px solid var(--border);">
+        <div class="roadmap-phase">Phase 3</div>
+        <div class="roadmap-date">2026年Q4〜</div>
+        <div class="roadmap-title">スケール</div>
+        <ul class="roadmap-items">
+          <li>Series B+クロージング</li>
+          <li>Anthropic共同マーケティング</li>
+          <li>COLOURFUL JAPAN™ グローバル展開</li>
+          <li>MEMORY-BANK™ 社会実装</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <div class="footer-text">株式会社ダンクソフト · Smart Life Styles™ · COLOURFUL JAPAN™</div>
+    <div class="footer-text">COLORFUL KANJI AUTH™ · PATENT PENDING · 2026.05.19</div>
+  </div>
+
+</div>
+</body>
+</html>

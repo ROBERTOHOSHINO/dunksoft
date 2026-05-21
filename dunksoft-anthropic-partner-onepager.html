@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DUNKSOFT × Anthropic — Partner Program One-Pager</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0D0B08;
+  --paper: #F5F0E8;
+  --paper2: #EDE7D8;
+  --gold: #C8951A;
+  --gold-light: #E8B84B;
+  --indigo: #2A3A8C;
+  --indigo-deep: #1A2460;
+  --red: #B83030;
+  --text: #1A1814;
+  --text2: #5A5448;
+  --text3: #9A9080;
+  --border: rgba(13,11,8,0.12);
+  --mono: 'DM Mono', monospace;
+  --serif: 'Playfair Display', serif;
+  --sans: 'Syne', sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--paper);
+  color: var(--text);
+  font-family: var(--sans);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Background texture */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 15% 85%, rgba(200,149,26,0.06) 0%, transparent 50%),
+    radial-gradient(circle at 85% 15%, rgba(42,58,140,0.06) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* Washi paper grain */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+.page {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 56px 48px 80px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── HEADER ─── */
+.header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: start;
+  gap: 32px;
+  border-bottom: 2px solid var(--ink);
+  padding-bottom: 32px;
+  margin-bottom: 40px;
+}
+
+.header-left {}
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text3);
+  margin-bottom: 12px;
+}
+
+.main-title {
+  font-family: var(--serif);
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 10px;
+}
+
+.main-title em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.tagline {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--text2);
+  line-height: 1.6;
+  max-width: 400px;
+}
+
+.header-right {
+  text-align: right;
+  padding-top: 8px;
+}
+
+.kanji-badge {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.kanji-char {
+  font-family: 'Noto Serif JP', var(--serif);
+  font-size: 52px;
+  font-weight: 700;
+  line-height: 1;
+  background: linear-gradient(135deg, var(--indigo) 40%, var(--gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.kanji-sub {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  color: var(--text3);
+  text-transform: uppercase;
+}
+
+/* ─── PATENT PENDING STRIP ─── */
+.patent-strip {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 10px 20px;
+  border-radius: 4px;
+  margin-bottom: 36px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.patent-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--gold-light);
+  flex-shrink: 0;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* ─── SECTION GRID ─── */
+.section-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+@media (max-width: 600px) {
+  .section-grid { grid-template-columns: 1fr; }
+  .header { grid-template-columns: 1fr; }
+  .page { padding: 32px 24px 60px; }
+}
+
+/* ─── CARD ─── */
+.card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--gold);
+}
+
+.card.indigo::before { background: var(--indigo); }
+.card.red::before { background: var(--red); }
+.card.dark { background: var(--ink); color: var(--paper); border-color: transparent; }
+.card.dark .card-label { color: rgba(245,240,232,0.4); }
+.card.dark .card-body { color: rgba(245,240,232,0.75); }
+
+.card-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text3);
+  margin-bottom: 12px;
+}
+
+.card-title {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+
+.card-body {
+  font-size: 12.5px;
+  color: var(--text2);
+  line-height: 1.75;
+}
+
+/* ─── AUTH LAYER TABLE ─── */
+.layer-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+}
+
+.layer-table tr {
+  border-bottom: 1px solid var(--border);
+}
+
+.layer-table tr:last-child { border-bottom: none; }
+
+.layer-table td {
+  padding: 8px 6px;
+  font-size: 12px;
+  vertical-align: middle;
+}
+
+.layer-table td:first-child {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text3);
+  width: 80px;
+}
+
+.layer-table td:nth-child(2) {
+  font-weight: 700;
+  font-size: 18px;
+  width: 48px;
+  text-align: center;
+}
+
+.layer-table td:last-child {
+  color: var(--text2);
+  font-size: 11px;
+}
+
+.color-pip {
+  display: inline-block;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  margin-right: 4px;
+  vertical-align: middle;
+}
+
+/* ─── COLOR SEQUENCE ─── */
+.color-seq {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+
+.seq-swatch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.seq-circle {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(0,0,0,0.08);
+}
+
+.seq-name {
+  font-family: var(--mono);
+  font-size: 8px;
+  color: var(--text3);
+  text-align: center;
+}
+
+.seq-arrow {
+  color: var(--text3);
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+/* ─── TIMELINE ─── */
+.timeline {
+  position: relative;
+  padding-left: 24px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 7px; top: 8px; bottom: 8px;
+  width: 1px;
+  background: var(--border);
+}
+
+.tl-item {
+  position: relative;
+  margin-bottom: 14px;
+  padding-left: 8px;
+}
+
+.tl-item::before {
+  content: '';
+  position: absolute;
+  left: -18px; top: 6px;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--gold);
+  border: 1.5px solid var(--paper);
+  box-shadow: 0 0 0 1.5px var(--gold);
+}
+
+.tl-date {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  color: var(--text3);
+  margin-bottom: 2px;
+}
+
+.tl-text {
+  font-size: 12px;
+  color: var(--text2);
+  line-height: 1.5;
+}
+
+/* ─── QUOTE BLOCK ─── */
+.quote-block {
+  border-left: 3px solid var(--gold);
+  padding: 12px 20px;
+  margin: 24px 0;
+  background: rgba(200,149,26,0.04);
+  border-radius: 0 6px 6px 0;
+}
+
+.quote-text {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 15px;
+  color: var(--text);
+  line-height: 1.7;
+  margin-bottom: 6px;
+}
+
+.quote-attr {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text3);
+}
+
+/* ─── FULL WIDTH CARD ─── */
+.card-full {
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: 8px;
+  padding: 32px 36px;
+  margin-bottom: 32px;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-full::before {
+  content: '記憶';
+  position: absolute;
+  right: -20px; bottom: -20px;
+  font-family: var(--serif);
+  font-size: 160px;
+  font-weight: 900;
+  color: rgba(200,149,26,0.06);
+  line-height: 1;
+  pointer-events: none;
+}
+
+.card-full-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(245,240,232,0.35);
+  margin-bottom: 16px;
+}
+
+.card-full-title {
+  font-family: var(--serif);
+  font-size: clamp(18px, 3vw, 26px);
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 16px;
+  color: var(--paper);
+}
+
+.card-full-title span { color: var(--gold-light); }
+
+.card-full-body {
+  font-size: 13px;
+  color: rgba(245,240,232,0.65);
+  line-height: 1.8;
+  max-width: 600px;
+  margin-bottom: 24px;
+}
+
+.pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pill {
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  border: 1px solid rgba(245,240,232,0.2);
+  color: rgba(245,240,232,0.7);
+}
+
+.pill.gold {
+  background: rgba(200,149,26,0.2);
+  border-color: rgba(200,149,26,0.4);
+  color: var(--gold-light);
+}
+
+/* ─── WHY US TABLE ─── */
+.why-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.why-table th {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text3);
+  padding: 8px 12px;
+  text-align: left;
+  border-bottom: 1.5px solid var(--ink);
+}
+
+.why-table td {
+  padding: 10px 12px;
+  font-size: 12px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  line-height: 1.5;
+}
+
+.why-table td:first-child {
+  font-weight: 700;
+  font-size: 11px;
+  color: var(--indigo);
+  font-family: var(--mono);
+  width: 140px;
+  white-space: nowrap;
+}
+
+.why-table td:last-child {
+  color: var(--text2);
+}
+
+/* ─── STATS ROW ─── */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 32px;
+}
+
+.stat-item {
+  background: white;
+  padding: 20px 16px;
+  text-align: center;
+}
+
+.stat-value {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--ink);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.stat-value span { color: var(--gold); }
+
+.stat-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text3);
+}
+
+@media (max-width: 600px) {
+  .stats-row { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ─── NEXT STEPS ─── */
+.next-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+@media (max-width: 600px) {
+  .next-grid { grid-template-columns: 1fr; }
+}
+
+.next-item {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 18px;
+  position: relative;
+  background: white;
+}
+
+.next-num {
+  font-family: var(--serif);
+  font-size: 36px;
+  font-weight: 900;
+  color: rgba(13,11,8,0.06);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.next-title {
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  color: var(--ink);
+}
+
+.next-desc {
+  font-size: 11px;
+  color: var(--text2);
+  line-height: 1.6;
+  font-family: var(--mono);
+}
+
+.next-date {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+  margin-top: 8px;
+  text-transform: uppercase;
+}
+
+/* ─── FOOTER ─── */
+.footer {
+  border-top: 1px solid var(--border);
+  padding-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.footer-brand {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--text3);
+  text-transform: uppercase;
+}
+
+.footer-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.footer-patent {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--text3);
+  letter-spacing: 0.08em;
+}
+
+/* ─── DIVIDER ─── */
+.divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 28px 0;
+}
+
+/* ─── SECTION HEADING ─── */
+.section-heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.section-heading-line {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.section-heading-text {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text3);
+  white-space: nowrap;
+}
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.page > * {
+  animation: fadeIn 0.6s ease both;
+}
+
+.page > *:nth-child(1) { animation-delay: 0.05s; }
+.page > *:nth-child(2) { animation-delay: 0.1s; }
+.page > *:nth-child(3) { animation-delay: 0.15s; }
+.page > *:nth-child(4) { animation-delay: 0.2s; }
+.page > *:nth-child(5) { animation-delay: 0.25s; }
+.page > *:nth-child(6) { animation-delay: 0.3s; }
+.page > *:nth-child(7) { animation-delay: 0.35s; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-left">
+      <div class="eyebrow">Anthropic Claude Partner Program — Application Brief · May 2026</div>
+      <h1 class="main-title">Memory is the<br><em>New Password.</em></h1>
+      <p class="tagline">DUNKSOFT Co., Ltd. has built the world's first authentication system rooted in Japanese cultural memory — co-developed with Claude over 85 days.</p>
+    </div>
+    <div class="header-right">
+      <div class="kanji-badge">
+        <div class="kanji-char">記</div>
+        <div class="kanji-sub">Ki · Memory</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PATENT STRIP -->
+  <div class="patent-strip">
+    <div class="patent-dot"></div>
+    COLORFUL KANJI AUTH™ · CHROMAKEY AUTH™ · PATENT PENDING · DUNKSOFT Co., Ltd. · Tokyo, Japan
+    <div class="patent-dot"></div>
+    MEMORY-BANK™ · LIVE AUTH DEPLOYED · 2026.05.19
+  </div>
+
+  <!-- STATS ROW -->
+  <div class="stats-row">
+    <div class="stat-item">
+      <div class="stat-value">85<span>+</span></div>
+      <div class="stat-label">Days co-built with Claude</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">4<span>×</span></div>
+      <div class="stat-label">Auth layers (unique globally)</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">1<span>B+</span></div>
+      <div class="stat-label">Japanese speakers addressable</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">2<span>×</span></div>
+      <div class="stat-label">Bank branch heads met · May '26</div>
+    </div>
+  </div>
+
+  <!-- THE INSIGHT -->
+  <div class="card-full">
+    <div class="card-full-label">Core Thesis</div>
+    <h2 class="card-full-title">The Japanese language is,<br><span>by nature, already colorful.</span></h2>
+    <p class="card-full-body">
+      Kanji (ideographic) + hiragana/katakana (phonetic) + furigana + color — this layered structure exists in no other writing system on Earth. DUNKSOFT has weaponized this uniqueness: instead of "something you know" (passwords) or "something you have" (devices), we authenticate through "something you remember" — culturally-encoded visual memory that is public yet unreproducible.
+    </p>
+    <div class="pill-row">
+      <div class="pill gold">Visual Fingerprint</div>
+      <div class="pill">Public yet irreproducible</div>
+      <div class="pill">Phishing-resistant by design</div>
+      <div class="pill">Cultural DNA as security</div>
+      <div class="pill">Works for 91-year-olds</div>
+    </div>
+  </div>
+
+  <!-- TWO COLUMN: AUTH SYSTEM + TIMELINE -->
+  <div class="section-grid">
+
+    <!-- AUTH LAYERS -->
+    <div class="card indigo">
+      <div class="card-label">COLORFUL KANJI AUTH™ — Four Layers</div>
+      <div class="card-title">One character.<br>Four authentication factors.</div>
+      <table class="layer-table">
+        <tr>
+          <td>Full Kanji</td>
+          <td style="color:#2A3A8C;">星</td>
+          <td><span class="color-pip" style="background:#3B4FB8;"></span>Character × Color combo</td>
+        </tr>
+        <tr>
+          <td>Radical</td>
+          <td style="font-size:14px; color:#4CAF50;">日+生</td>
+          <td><span class="color-pip" style="background:#4CAF50;"></span>Sub-component coloring</td>
+        </tr>
+        <tr>
+          <td>Single Stroke</td>
+          <td style="color:#B83030;">一</td>
+          <td><span class="color-pip" style="background:#B83030;"></span>One stroke = personal anchor</td>
+        </tr>
+        <tr>
+          <td>Furigana</td>
+          <td style="font-size:12px; color:#4BBFBF;">ほし</td>
+          <td><span class="color-pip" style="background:#4BBFBF;"></span>Phonetic layer in color</td>
+        </tr>
+      </table>
+      <div class="color-seq">
+        <div class="seq-swatch">
+          <div class="seq-circle" style="background:#3B4FB8;"></div>
+          <div class="seq-name">Indigo<br>藍</div>
+        </div>
+        <div class="seq-arrow">›</div>
+        <div class="seq-swatch">
+          <div class="seq-circle" style="background:#E8B84B;"></div>
+          <div class="seq-name">Sunny<br>金</div>
+        </div>
+        <div class="seq-arrow">›</div>
+        <div class="seq-swatch">
+          <div class="seq-circle" style="background:#4CAF50;"></div>
+          <div class="seq-name">Jade<br>翠</div>
+        </div>
+        <div style="margin-left:8px; font-size:11px; color:var(--text3); font-family:var(--mono); font-style:italic; line-height:1.5;">Father's<br>kendo gi → rose at<br>Yanagimori Shrine</div>
+      </div>
+    </div>
+
+    <!-- TIMELINE -->
+    <div class="card">
+      <div class="card-label">Co-development Timeline with Claude</div>
+      <div class="card-title">85 days.<br>Built in conversation.</div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-date">Feb 24, 2026</div>
+          <div class="tl-text">First conversation — DUNKSOFT website review → Smart Life Styles™ rebrand born</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">Feb–Mar 2026</div>
+          <div class="tl-text">天然色漢字INDEX™ conceived; kanji-color encoding as authentication origin</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">Apr 10, 2026</div>
+          <div class="tl-text">Live web site published from Okinawa on iPhone only — furigana demo HTML born</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">May 13, 2026</div>
+          <div class="tl-text">Single-stroke auth + MEMORY-BANK™ two-layer architecture designed</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">May 18, 2026</div>
+          <div class="tl-text">Series B+ pitch deck complete · 2 bank branch heads confirmed traction</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">May 19, 2026</div>
+          <div class="tl-text">🔴 LIVE — auth-config.json deployed · First auth: 晃 × #E8B84B (Yanagimori rose)</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- QUOTE -->
+  <div class="quote-block">
+    <div class="quote-text">"Not knowledge, not device, not biometrics.<br>The cultural DNA of 1.4 billion people encoded in memory — that becomes authentication."</div>
+    <div class="quote-attr">COLORFUL KANJI AUTH™ · DUNKSOFT Co., Ltd.</div>
+  </div>
+
+  <!-- WHY PARTNER -->
+  <div class="section-heading">
+    <div class="section-heading-text">Why Partner with Anthropic</div>
+    <div class="section-heading-line"></div>
+  </div>
+
+  <div class="card" style="margin-bottom: 32px;">
+    <div class="card-label">The Case for Partnership</div>
+    <table class="why-table">
+      <tr>
+        <th>Dimension</th>
+        <th>What DUNKSOFT Brings</th>
+      </tr>
+      <tr>
+        <td>UNIQUE IP</td>
+        <td>World's only kanji-color-memory authentication — structurally impossible to replicate outside Japanese script</td>
+      </tr>
+      <tr>
+        <td>PROVEN CO-DEV</td>
+        <td>85 days of documented Claude collaboration producing live product — a rare case study for human×AI co-creation</td>
+      </tr>
+      <tr>
+        <td>MARKET BRIDGE</td>
+        <td>Deep Japanese enterprise relationships (banks, associations) + senior community networks — a channel Anthropic cannot access directly</td>
+      </tr>
+      <tr>
+        <td>SENIOR UX</td>
+        <td>Authentication that works for 91-year-olds: proven with Kanda Ai-no-Kai. Unlocks a demographic that current AI UX ignores</td>
+      </tr>
+      <tr>
+        <td>MYTHOS PIPELINE</td>
+        <td>Gaming platform requiring Claude API at scale — guaranteed consumption with creative use case for Anthropic showcase</td>
+      </tr>
+      <tr>
+        <td>SOCIAL IMPACT</td>
+        <td>Memory dignity infrastructure for aging Japan aligns with Anthropic's long-term beneficial AI mission</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- NEXT STEPS -->
+  <div class="section-heading">
+    <div class="section-heading-text">Next Milestones</div>
+    <div class="section-heading-line"></div>
+  </div>
+
+  <div class="next-grid">
+    <div class="next-item">
+      <div class="next-num">01</div>
+      <div class="next-title">Code with Claude Tokyo</div>
+      <div class="next-desc">Live demo of CHROMAKEY AUTH™ + MEMORY-BANK™ to developer community</div>
+      <div class="next-date">Jun 10, 2026</div>
+    </div>
+    <div class="next-item">
+      <div class="next-num">02</div>
+      <div class="next-title">Mythos × Claude API</div>
+      <div class="next-desc">Claude integration in Mythos gaming platform — NPC dialogue + content generation at scale</div>
+      <div class="next-date">Q3 2026</div>
+    </div>
+    <div class="next-item">
+      <div class="next-num">03</div>
+      <div class="next-title">Financial Sector Pilot</div>
+      <div class="next-desc">Bank branch partnership for senior-accessible Claude-assisted auth onboarding</div>
+      <div class="next-date">Q3–Q4 2026</div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-brand">DUNKSOFT Co., Ltd. · Smart Life Styles™ · COLOURFUL JAPAN™ · Tokyo</div>
+    <div class="footer-right">
+      <div class="footer-patent">COLORFUL KANJI AUTH™ · PATENT PENDING</div>
+      <div class="footer-patent">roberto_hoshino @ note.com · 2026.05.19</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
