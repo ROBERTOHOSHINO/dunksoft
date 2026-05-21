@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>忘れ去られた基本知識が、AIの時代にこそ必要になる。</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700;900&family=Noto+Sans+JP:wght@300;400;500&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:    #0a0908;
+  --paper:  #f7f3ea;
+  --paper2: #ede8d8;
+  --gold:   #C8920A;
+  --gold-l: #F9A825;
+  --indigo: #1A237E;
+  --red:    #C62828;
+  --green:  #1B5E20;
+  --teal:   #00695C;
+  --slate:  #37474F;
+  --border: rgba(10,9,8,0.12);
+  --mono:   'DM Mono', monospace;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+  line-height: 1.9;
+  cursor: default;
+}
+
+/* ── PROGRESS BAR ── */
+.progress {
+  position: fixed; top: 0; left: 0; height: 3px;
+  background: var(--gold); z-index: 1000;
+  transition: width 0.1s;
+  width: 0%;
+}
+
+/* ── SLIDE ── */
+.slide {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  justify-content: center;
+  padding: 80px 10%;
+  position: relative; overflow: hidden;
+  border-bottom: 0.5px solid var(--border);
+}
+
+/* ── SLIDE 01 — COVER ── */
+.s01 {
+  background: var(--ink);
+}
+.s01::before {
+  content: '字';
+  position: absolute;
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 900;
+  font-size: 80vw;
+  color: rgba(200,146,10,0.04);
+  right: -20%; top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none; line-height: 1;
+}
+.s01 .eyebrow {
+  font-family: var(--mono);
+  font-size: 10px; letter-spacing: 5px;
+  color: var(--gold); margin-bottom: 28px;
+  text-transform: uppercase;
+}
+.s01 .title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(1.8rem, 5vw, 4rem);
+  font-weight: 900; color: #fff;
+  line-height: 1.3; margin-bottom: 24px;
+}
+.s01 .title em { color: var(--gold); font-style: normal; }
+.s01 .sub {
+  font-size: 14px; color: rgba(255,255,255,0.45);
+  margin-bottom: 48px; line-height: 2;
+  font-family: var(--mono); letter-spacing: 1px;
+}
+.s01 .byline {
+  font-size: 12px; color: rgba(255,255,255,0.25);
+  font-family: var(--mono); letter-spacing: 2px;
+}
+.s01 .byline em { color: var(--gold); font-style: normal; }
+
+/* ── SLIDE 02 — PROBLEM ── */
+.s02 { background: var(--paper); }
+.slide-label {
+  font-family: var(--mono);
+  font-size: 9px; letter-spacing: 5px;
+  color: var(--gold); margin-bottom: 20px;
+  text-transform: uppercase;
+}
+.slide-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(1.4rem, 3vw, 2.4rem);
+  font-weight: 700; color: var(--indigo);
+  line-height: 1.4; margin-bottom: 40px;
+}
+.chaos-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0; margin-bottom: 40px;
+  border: 0.5px solid var(--border);
+  border-radius: 12px; overflow: hidden;
+}
+.chaos-cell {
+  padding: 24px 20px; text-align: center;
+  border-right: 0.5px solid var(--border);
+  position: relative;
+}
+.chaos-cell:last-child { border-right: none; }
+.chaos-char {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 900; line-height: 1;
+  margin-bottom: 10px; display: block;
+}
+.chaos-label {
+  font-family: var(--mono); font-size: 10px;
+  letter-spacing: 2px; color: var(--slate);
+}
+.chaos-badge {
+  position: absolute; top: 8px; right: 8px;
+  font-family: var(--mono); font-size: 8px;
+  padding: 2px 6px; border-radius: 3px;
+  letter-spacing: 1px;
+}
+.badge-ng { background: rgba(198,40,40,0.1); color: var(--red); border: 0.5px solid rgba(198,40,40,0.2); }
+.badge-ok { background: rgba(27,94,32,0.1); color: var(--green); border: 0.5px solid rgba(27,94,32,0.2); }
+
+.problem-list {
+  display: flex; flex-direction: column; gap: 12px;
+}
+.pl-item {
+  display: flex; gap: 14px; align-items: flex-start;
+  padding: 16px 20px;
+  background: var(--paper2);
+  border-radius: 8px;
+  border-left: 3px solid var(--red);
+}
+.pl-icon { font-size: 18px; flex-shrink: 0; margin-top: 2px; }
+.pl-text { font-size: 13px; color: var(--slate); line-height: 1.9; }
+.pl-text strong { color: var(--ink); font-weight: 500; }
+
+/* ── SLIDE 03 — HISTORY ── */
+.s03 { background: var(--paper2); }
+.timeline {
+  display: flex; flex-direction: column; gap: 0;
+  position: relative; margin-bottom: 36px;
+}
+.timeline::before {
+  content: '';
+  position: absolute; left: 24px; top: 0; bottom: 0;
+  width: 1px; background: var(--border);
+}
+.tl-item {
+  display: flex; gap: 20px; align-items: flex-start;
+  padding: 16px 0;
+}
+.tl-dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  flex-shrink: 0; margin-top: 6px; margin-left: 20px;
+  border: 2px solid var(--paper2);
+  position: relative; z-index: 1;
+}
+.tl-year {
+  font-family: var(--mono); font-size: 11px;
+  letter-spacing: 2px; color: var(--gold);
+  width: 70px; flex-shrink: 0; padding-top: 2px;
+}
+.tl-body { flex: 1; }
+.tl-title { font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 4px; }
+.tl-desc { font-size: 12px; color: var(--slate); line-height: 1.9; }
+
+/* ── SLIDE 04 — SOLUTION ── */
+.s04 { background: var(--ink); }
+.s04 .slide-title { color: #fff; }
+.s04 .slide-label { }
+.solution-demo {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 24px; margin-bottom: 36px;
+}
+.demo-before, .demo-after {
+  border-radius: 14px; padding: 28px 24px;
+  border: 0.5px solid rgba(255,255,255,0.1);
+}
+.demo-before { background: rgba(255,255,255,0.04); }
+.demo-after  { background: rgba(200,146,10,0.06); border-color: rgba(200,146,10,0.2); }
+.demo-tag {
+  font-family: var(--mono); font-size: 10px;
+  letter-spacing: 3px; margin-bottom: 16px;
+  display: inline-block; padding: 3px 10px;
+  border-radius: 3px;
+}
+.demo-tag.before-t { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.4); }
+.demo-tag.after-t  { background: rgba(200,146,10,0.15); color: var(--gold-l); }
+.demo-content {
+  font-family: var(--mono); font-size: 12px;
+  color: rgba(255,255,255,0.6); line-height: 2.2;
+}
+.demo-content.after-c { color: rgba(255,255,255,0.85); }
+.kanji-row {
+  display: flex; align-items: center; gap: 12px;
+  margin: 6px 0;
+}
+.kanji-char {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 2.2rem; font-weight: 900;
+  line-height: 1; flex-shrink: 0;
+}
+.kanji-bar {
+  height: 4px; border-radius: 2px; flex: 1;
+  max-width: 100px; opacity: 0.7;
+}
+.kanji-name {
+  font-family: var(--mono); font-size: 10px;
+  color: rgba(255,255,255,0.4); letter-spacing: 1px;
+}
+
+.insight-box {
+  background: rgba(200,146,10,0.08);
+  border: 0.5px solid rgba(200,146,10,0.2);
+  border-radius: 10px; padding: 20px 24px;
+  font-size: 14px; color: rgba(255,255,255,0.75);
+  line-height: 2; font-family: 'Noto Serif JP', serif;
+}
+.insight-box strong { color: var(--gold-l); }
+
+/* ── SLIDE 05 — MULTI-ATTRIBUTE ── */
+.s05 { background: var(--paper); }
+.attr-example {
+  background: var(--paper2);
+  border-radius: 14px; padding: 28px 28px;
+  margin-bottom: 28px;
+}
+.company-kanji {
+  display: flex; gap: 6px; flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.ck-char {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 2.4rem; font-weight: 900;
+  line-height: 1; padding: 8px 12px;
+  border-radius: 8px; cursor: pointer;
+  transition: transform 0.15s;
+}
+.ck-char:hover { transform: scale(1.1); }
+.ck-label {
+  font-size: 11px; font-family: var(--mono);
+  color: var(--slate); margin-top: 12px; line-height: 2;
+}
+.attr-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
+  gap: 12px;
+}
+.attr-card {
+  padding: 16px 18px; border-radius: 10px;
+  background: var(--paper); border: 0.5px solid var(--border);
+}
+.ac-label { font-family: var(--mono); font-size: 10px; color: var(--gold); letter-spacing: 2px; margin-bottom: 8px; }
+.ac-body  { font-size: 13px; color: var(--slate); line-height: 1.9; }
+.ac-body strong { color: var(--ink); font-weight: 500; }
+
+/* ── SLIDE 06 — PHILOSOPHY ── */
+.s06 {
+  background: linear-gradient(160deg, #0a0908 0%, #1a1408 50%, #080e08 100%);
+}
+.phil-big {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(1.6rem, 4vw, 3rem);
+  font-weight: 900; color: #fff;
+  line-height: 1.5; margin-bottom: 40px;
+}
+.phil-big em { color: var(--gold-l); font-style: normal; }
+.contrast-row {
+  display: grid; grid-template-columns: 1fr auto 1fr;
+  gap: 20px; align-items: center; margin-bottom: 20px;
+}
+.cr-left, .cr-right {
+  padding: 18px 22px; border-radius: 10px;
+  font-size: 13px; line-height: 1.9;
+}
+.cr-left  { background: rgba(255,255,255,0.04); border: 0.5px solid rgba(255,255,255,0.08); color: rgba(255,255,255,0.5); }
+.cr-right { background: rgba(200,146,10,0.07); border: 0.5px solid rgba(200,146,10,0.2);  color: rgba(255,255,255,0.85); }
+.cr-arrow { font-size: 20px; color: var(--gold); text-align: center; }
+.cr-label { font-family: var(--mono); font-size: 10px; letter-spacing: 2px; margin-bottom: 8px; }
+.cr-label.old { color: rgba(255,255,255,0.3); }
+.cr-label.new { color: var(--gold); }
+
+/* ── SLIDE 07 — EVOLUTION ── */
+.s07 { background: var(--paper2); }
+.evo-flow {
+  display: flex; flex-direction: column; gap: 0;
+  max-width: 680px;
+}
+.evo-item {
+  display: flex; gap: 20px; align-items: flex-start;
+  padding: 20px 0;
+  border-bottom: 0.5px solid var(--border);
+}
+.evo-item:last-child { border-bottom: none; }
+.evo-num {
+  flex-shrink: 0; width: 44px; height: 44px;
+  border-radius: 8px; display: flex;
+  align-items: center; justify-content: center;
+  font-family: var(--mono); font-size: 13px; font-weight: 500;
+  color: #fff;
+}
+.evo-body { flex: 1; padding-top: 4px; }
+.evo-title { font-size: 15px; font-weight: 500; color: var(--ink); margin-bottom: 4px; }
+.evo-desc { font-size: 12px; color: var(--slate); line-height: 1.9; }
+.evo-arrow {
+  text-align: left; padding: 6px 0 6px 64px;
+  font-size: 18px; color: var(--gold); opacity: 0.6;
+}
+
+/* ── SLIDE 08 — CLOSING ── */
+.s08 {
+  background: var(--ink);
+  text-align: center; align-items: center;
+}
+.s08::after {
+  content: '色';
+  position: absolute;
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 900; font-size: 70vw;
+  color: rgba(200,146,10,0.03);
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  pointer-events: none; line-height: 1;
+}
+.s08 .big {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(1.4rem, 3.5vw, 2.8rem);
+  font-weight: 900; color: #fff;
+  line-height: 1.6; margin-bottom: 32px;
+  position: relative; z-index: 1;
+}
+.s08 .big em { color: var(--gold-l); font-style: normal; }
+.kanji-rainbow {
+  display: flex; gap: 8px; justify-content: center;
+  margin-bottom: 40px; flex-wrap: wrap;
+  position: relative; z-index: 1;
+}
+.kr-char {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 900; line-height: 1;
+  padding: 12px 14px; border-radius: 10px;
+  cursor: pointer; transition: transform 0.2s;
+}
+.kr-char:hover { transform: translateY(-4px) scale(1.1); }
+.s08 .coined {
+  font-size: 11px; color: rgba(255,255,255,0.25);
+  font-family: var(--mono); letter-spacing: 2px; line-height: 2.2;
+  position: relative; z-index: 1;
+}
+.s08 .coined em { color: var(--gold); font-style: normal; }
+
+/* ── REVEAL ── */
+.reveal { opacity:0; transform:translateY(28px); transition:opacity 0.7s, transform 0.7s; }
+.reveal.on { opacity:1; transform:none; }
+.reveal-d1 { transition-delay: 0.1s; }
+.reveal-d2 { transition-delay: 0.2s; }
+.reveal-d3 { transition-delay: 0.3s; }
+.reveal-d4 { transition-delay: 0.4s; }
+
+/* ── NAV DOTS ── */
+.nav-dots {
+  position: fixed; right: 28px; top: 50%;
+  transform: translateY(-50%);
+  display: flex; flex-direction: column; gap: 10px;
+  z-index: 100;
+}
+.nav-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: rgba(200,146,10,0.3);
+  cursor: pointer; transition: all 0.2s;
+  border: none;
+}
+.nav-dot.active { background: var(--gold); transform: scale(1.5); }
+.nav-dot:hover { background: var(--gold); }
+
+@media (max-width: 640px) {
+  .chaos-grid { grid-template-columns: repeat(2,1fr); }
+  .solution-demo { grid-template-columns: 1fr; }
+  .contrast-row { grid-template-columns: 1fr; }
+  .cr-arrow { display: none; }
+  .nav-dots { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+
+<!-- NAV DOTS -->
+<nav class="nav-dots" id="nav-dots">
+  <button class="nav-dot active" onclick="scrollToSlide(0)" title="Cover"></button>
+  <button class="nav-dot" onclick="scrollToSlide(1)" title="問題"></button>
+  <button class="nav-dot" onclick="scrollToSlide(2)" title="歴史"></button>
+  <button class="nav-dot" onclick="scrollToSlide(3)" title="解決策"></button>
+  <button class="nav-dot" onclick="scrollToSlide(4)" title="多属性"></button>
+  <button class="nav-dot" onclick="scrollToSlide(5)" title="哲学"></button>
+  <button class="nav-dot" onclick="scrollToSlide(6)" title="進化"></button>
+  <button class="nav-dot" onclick="scrollToSlide(7)" title="まとめ"></button>
+</nav>
+
+<!-- ══ SLIDE 01 — COVER ══ -->
+<section class="slide s01" id="slide-0">
+  <div class="eyebrow reveal">DUNKSOFT Co., Ltd. · Roberto Hoshino × Claude.ai · 2026</div>
+  <div class="title reveal reveal-d1">
+    忘れ去られた<em>基本知識</em>が、<br>
+    AIの時代にこそ<br>
+    必要になる。
+  </div>
+  <div class="sub reveal reveal-d2">
+    T261018「天然色漢字INDEX™」が生まれるまで<br>
+    ── コンピュータ × 日本語 × 色 の交差点
+  </div>
+  <div style="display:flex;gap:8px;margin-bottom:36px;" class="reveal reveal-d3">
+    <span style="font-family:'Noto Serif JP',serif;font-size:2.4rem;font-weight:900;color:#1A237E;">字</span>
+    <span style="font-family:'Noto Serif JP',serif;font-size:2.4rem;font-weight:900;color:#C8920A;">色</span>
+    <span style="font-family:'Noto Serif JP',serif;font-size:2.4rem;font-weight:900;color:#1B5E20;">索</span>
+    <span style="font-family:'Noto Serif JP',serif;font-size:2.4rem;font-weight:900;color:#C62828;">引</span>
+  </div>
+  <div class="byline reveal reveal-d4">
+    <em>coined by Claude.ai</em> · approved by Roberto Hoshino
+  </div>
+</section>
+
+<!-- ══ SLIDE 02 — THE PROBLEM ══ -->
+<section class="slide s02" id="slide-1">
+  <div class="slide-label reveal">SECTION 01 — THE PROBLEM</div>
+  <div class="slide-title reveal reveal-d1">
+    「1」と「１」と「一」と「壱」は、<br>
+    コンピュータの中では別物だ。
+  </div>
+
+  <div class="chaos-grid reveal reveal-d2">
+    <div class="chaos-cell" style="background:#fafafa;">
+      <span class="chaos-badge badge-ng">HALF</span>
+      <span class="chaos-char" style="color:#333;">1</span>
+      <div class="chaos-label">半角数字</div>
+    </div>
+    <div class="chaos-cell" style="background:#f5f5f5;">
+      <span class="chaos-badge badge-ng">FULL</span>
+      <span class="chaos-char" style="color:#555;">１</span>
+      <div class="chaos-label">全角数字</div>
+    </div>
+    <div class="chaos-cell" style="background:#f0ede0;">
+      <span class="chaos-badge badge-ng">KANJI</span>
+      <span class="chaos-char" style="color:#1A237E;font-family:'Noto Serif JP',serif;">一</span>
+      <div class="chaos-label">漢数字</div>
+    </div>
+    <div class="chaos-cell" style="background:#ede8d0;">
+      <span class="chaos-badge badge-ng">LEGAL</span>
+      <span class="chaos-char" style="color:#C62828;font-family:'Noto Serif JP',serif;">壱</span>
+      <div class="chaos-label">大字（法的）</div>
+    </div>
+  </div>
+
+  <div class="problem-list reveal reveal-d3">
+    <div class="pl-item">
+      <span class="pl-icon">⌨️</span>
+      <div class="pl-text"><strong>起源はタイプライター時代のASCII。</strong>英字・数字・記号が混在したまま引き継がれた。誰も悪くない——歴史の積み重ねがそうなった。</div>
+    </div>
+    <div class="pl-item">
+      <span class="pl-icon">🔀</span>
+      <div class="pl-text"><strong>ソートが人間の感覚とズレる。</strong>00, 01, 10, 11の次に02, 12, 20——数字で管理する限り、この混乱は続く。</div>
+    </div>
+    <div class="pl-item">
+      <span class="pl-icon">🔒</span>
+      <div class="pl-text"><strong>根本解決できない理由：互換性。</strong>既存データ・システムが全角混じりで動いている以上、移行コストが莫大。漢数字は文化的・法的に廃止不可。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDE 03 — HISTORY ══ -->
+<section class="slide s03" id="slide-2">
+  <div class="slide-label reveal">SECTION 02 — HISTORY</div>
+  <div class="slide-title reveal reveal-d1">
+    タイプライターから<br>AIまで——引き継がれてきたもの
+  </div>
+
+  <div class="timeline reveal reveal-d2">
+    <div class="tl-item">
+      <div class="tl-dot" style="background:#888;"></div>
+      <div class="tl-year">1960s</div>
+      <div class="tl-body">
+        <div class="tl-title">ASCII誕生</div>
+        <div class="tl-desc">英字・数字・記号の文字コード標準化。タイプライターの制約をそのまま引き継いだ。</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot" style="background:#C8920A;"></div>
+      <div class="tl-year">1990s</div>
+      <div class="tl-body">
+        <div class="tl-title">MS-ACCESS × 義理かんり</div>
+        <div class="tl-desc">LA で英語版 $99 のACCESSを購入。漢字タグによる人の管理・抽出を実験。「賀」タグで年賀状リスト抽出——これが天然色漢字INDEX™の原点。</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot" style="background:#1A237E;"></div>
+      <div class="tl-year">2000s</div>
+      <div class="tl-body">
+        <div class="tl-title">バザールバザール誕生</div>
+        <div class="tl-desc">義理かんりを発展させたコミュニティ管理システム。漢字×色のインデックス思想を実装。</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot" style="background:#1B5E20;"></div>
+      <div class="tl-year">2026.02</div>
+      <div class="tl-body">
+        <div class="tl-title">Claude との対話で概念が完成</div>
+        <div class="tl-desc">「天然色漢字INDEX™」として言語化。漢字1文字＋色が、情報整理の新しい標準になる可能性が見えた。</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot" style="background:#C62828;"></div>
+      <div class="tl-year">2026.05</div>
+      <div class="tl-body">
+        <div class="tl-title">COLORFUL KANJI AUTH™ へ進化</div>
+        <div class="tl-desc">INDEX から認証へ。漢字×色×個人の記憶が認証キーになる——世界初の試み。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDE 04 — SOLUTION ══ -->
+<section class="slide s04" id="slide-3">
+  <div class="slide-label reveal">SECTION 03 — THE SOLUTION</div>
+  <div class="slide-title reveal reveal-d1">
+    漢字1文字＋色。<br>
+    これが、楽しい解決策。
+  </div>
+
+  <div class="solution-demo reveal reveal-d2">
+    <div class="demo-before">
+      <span class="demo-tag before-t">BEFORE — 数字コード</span>
+      <div class="demo-content">
+        産業分類: 6201<br>
+        業種コード: C-14<br>
+        セクター: 0032<br>
+        <br>
+        <span style="color:rgba(255,255,255,0.3);">→ 覚えられない<br>→ 直感的でない<br>→ 複数属性に弱い</span>
+      </div>
+    </div>
+    <div class="demo-after">
+      <span class="demo-tag after-t">AFTER — 天然色漢字INDEX™</span>
+      <div class="demo-content after-c">
+        <div class="kanji-row">
+          <span class="kanji-char" style="color:#1A237E;">技</span>
+          <div class="kanji-bar" style="background:#1A237E;"></div>
+          <span class="kanji-name">テクノロジー</span>
+        </div>
+        <div class="kanji-row">
+          <span class="kanji-char" style="color:#C8920A;">商</span>
+          <div class="kanji-bar" style="background:#C8920A;"></div>
+          <span class="kanji-name">商業・流通</span>
+        </div>
+        <div class="kanji-row">
+          <span class="kanji-char" style="color:#1B5E20;">農</span>
+          <div class="kanji-bar" style="background:#1B5E20;"></div>
+          <span class="kanji-name">農業・食</span>
+        </div>
+        <div class="kanji-row">
+          <span class="kanji-char" style="color:#C62828;">医</span>
+          <div class="kanji-bar" style="background:#C62828;"></div>
+          <span class="kanji-name">医療・健康</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="insight-box reveal reveal-d3">
+    漢字は<strong style="color:var(--gold-l);">意味</strong>を持ち、色は<strong style="color:var(--gold-l);">部首のイメージ</strong>から来る。<br>
+    コードを覚えなくても、<strong style="color:#fff;">直感的にわかる</strong>——これが最大の違い。
+  </div>
+</section>
+
+<!-- ══ SLIDE 05 — MULTI-ATTRIBUTE ══ -->
+<section class="slide s05" id="slide-4">
+  <div class="slide-label reveal">SECTION 04 — MULTI-ATTRIBUTE</div>
+  <div class="slide-title reveal reveal-d1">
+    複数属性を、漢字で表現する。
+  </div>
+
+  <div class="attr-example reveal reveal-d2">
+    <div style="font-family:var(--mono);font-size:10px;color:var(--slate);letter-spacing:2px;margin-bottom:14px;">例：トヨタ自動車の属性</div>
+    <div class="company-kanji">
+      <span class="ck-char" style="color:#1A237E;background:rgba(26,35,126,0.06);" title="輸送機器">車</span>
+      <span class="ck-char" style="color:#00695C;background:rgba(0,105,92,0.06);" title="電気・AI">電</span>
+      <span class="ck-char" style="color:#C8920A;background:rgba(200,146,10,0.06);" title="金融">融</span>
+      <span class="ck-char" style="color:#1B5E20;background:rgba(27,94,32,0.06);" title="住宅">住</span>
+      <span class="ck-char" style="color:#C62828;background:rgba(198,40,40,0.06);" title="エネルギー">能</span>
+    </div>
+    <div class="ck-label">
+      東証分類「輸送用機器」1コードでは実態が見えない。<br>
+      漢字5文字で見れば、その会社の多様性が一覧でわかる。
+    </div>
+  </div>
+
+  <div class="attr-grid reveal reveal-d3">
+    <div class="attr-card">
+      <div class="ac-label">AND検索</div>
+      <div class="ac-body">「技」かつ「医」——<strong>医療テック企業</strong>だけ抽出</div>
+    </div>
+    <div class="attr-card">
+      <div class="ac-label">OR検索</div>
+      <div class="ac-body">「商」または「農」——<strong>食品・流通</strong>を横断表示</div>
+    </div>
+    <div class="attr-card">
+      <div class="ac-label">人の管理</div>
+      <div class="ac-body">「賀」タグ付き——<strong>年賀状リスト</strong>を瞬時に抽出</div>
+    </div>
+    <div class="attr-card">
+      <div class="ac-label">未来への応用</div>
+      <div class="ac-body">漢字1文字が<strong>認証キー</strong>へ——INDEX→AUTH</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDE 06 — PHILOSOPHY ══ -->
+<section class="slide s06" id="slide-5">
+  <div class="slide-label reveal">SECTION 05 — PHILOSOPHY</div>
+  <div class="phil-big reveal reveal-d1">
+    番号は<em>管理</em>するためにある。<br>
+    漢字と色は、人を<em>理解し</em><br>
+    つなげるためにある。
+  </div>
+
+  <div class="contrast-row reveal reveal-d2">
+    <div class="cr-left">
+      <div class="cr-label old">OLD WAY — 数字で管理</div>
+      コードを覚える負担<br>
+      意味が見えない<br>
+      人間の感覚とズレる<br>
+      AIが増幅しても混乱が増す
+    </div>
+    <div class="cr-arrow">→</div>
+    <div class="cr-right">
+      <div class="cr-label new">NEW WAY — 漢字と色で理解</div>
+      直感的・覚えやすい<br>
+      意味が見える<br>
+      人間の記憶と連動する<br>
+      AIが増幅すると価値が増す
+    </div>
+  </div>
+
+  <div style="margin-top:28px;padding:20px 24px;background:rgba(200,146,10,0.07);border:0.5px solid rgba(200,146,10,0.2);border-radius:10px;" class="reveal reveal-d3">
+    <div style="font-family:'Noto Serif JP',serif;font-size:14px;color:rgba(255,255,255,0.75);line-height:2;">
+      「良いつながりが、良い社会をつくる。」<br>
+      <span style="font-size:12px;color:rgba(255,255,255,0.35);font-family:var(--mono);">— Roberto Hoshino, DUNKSOFT</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDE 07 — EVOLUTION ══ -->
+<section class="slide s07" id="slide-6">
+  <div class="slide-label reveal">SECTION 06 — EVOLUTION</div>
+  <div class="slide-title reveal reveal-d1">
+    INDEXから認証へ——<br>進化の流れ
+  </div>
+
+  <div class="evo-flow reveal reveal-d2">
+    <div class="evo-item">
+      <div class="evo-num" style="background:#888;">01</div>
+      <div class="evo-body">
+        <div class="evo-title">タイプライター → ASCII → 混乱</div>
+        <div class="evo-desc">1と１と一と壱の共存。誰も解決しないまま今日まで来た。</div>
+      </div>
+    </div>
+    <div class="evo-arrow">↓</div>
+    <div class="evo-item">
+      <div class="evo-num" style="background:var(--gold);">02</div>
+      <div class="evo-body">
+        <div class="evo-title">漢字1文字＋色 = 天然色漢字INDEX™</div>
+        <div class="evo-desc">混乱を嘆かず、楽しく乗り越える。意味と色で人・組織・情報を整理する。</div>
+      </div>
+    </div>
+    <div class="evo-arrow">↓</div>
+    <div class="evo-item">
+      <div class="evo-num" style="background:var(--indigo);">03</div>
+      <div class="evo-body">
+        <div class="evo-title">漢字×色×記憶 = COLORFUL KANJI AUTH™</div>
+        <div class="evo-desc">INDEXが認証に進化。漢字の色が「視覚的な指紋」になる。世界初。</div>
+      </div>
+    </div>
+    <div class="evo-arrow">↓</div>
+    <div class="evo-item">
+      <div class="evo-num" style="background:var(--teal);">04</div>
+      <div class="evo-body">
+        <div class="evo-title">日々の記憶 = MEMORY-BANK™</div>
+        <div class="evo-desc">今日の薔薇の色、セザンヌのJARの色——生活がそのまま認証キーになる。公開されていても、再現不能。</div>
+      </div>
+    </div>
+    <div class="evo-arrow">↓</div>
+    <div class="evo-item">
+      <div class="evo-num" style="background:var(--red);">05</div>
+      <div class="evo-body">
+        <div class="evo-title">声と色 = バザールバザール LAUNCHER™</div>
+        <div class="evo-desc">一度ログインすれば、あとは声でなんでもできる。久保さんでも、誰でも使える。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDE 08 — CLOSING ══ -->
+<section class="slide s08" id="slide-7">
+  <div class="big reveal">
+    AIが発展するほど、<br>
+    <em>情報の整合性</em>という<br>
+    土台が重要になる。
+  </div>
+
+  <div class="kanji-rainbow reveal reveal-d1">
+    <span class="kr-char" style="color:#1A237E;background:rgba(26,35,126,0.08);">字</span>
+    <span class="kr-char" style="color:#C8920A;background:rgba(200,146,10,0.08);">色</span>
+    <span class="kr-char" style="color:#1B5E20;background:rgba(27,94,32,0.08);">索</span>
+    <span class="kr-char" style="color:#C62828;background:rgba(198,40,40,0.08);">引</span>
+    <span class="kr-char" style="color:#00695C;background:rgba(0,105,92,0.08);">認</span>
+    <span class="kr-char" style="color:#6A1B9A;background:rgba(106,27,154,0.08);">証</span>
+    <span class="kr-char" style="color:#E65100;background:rgba(230,81,0,0.08);">憶</span>
+  </div>
+
+  <div style="margin-bottom:40px;position:relative;z-index:1;" class="reveal reveal-d2">
+    <div style="
+      display:inline-block;
+      border-top: 0.5px solid rgba(200,146,10,0.3);
+      border-bottom: 0.5px solid rgba(200,146,10,0.3);
+      padding: 24px 40px;
+      margin-bottom: 12px;
+    ">
+      <div style="
+        font-family:'Noto Serif JP',serif;
+        font-size:clamp(1.4rem,3.5vw,2.2rem);
+        font-weight:900; color:#fff;
+        letter-spacing:0.05em; line-height:1.6;
+      ">真と美が重なり合う。</div>
+    </div>
+    <div style="font-size:11px;color:rgba(255,255,255,0.3);font-family:'DM Mono',monospace;letter-spacing:3px;">
+      — Roberto Hoshino · 44年のIT哲学
+    </div>
+  </div>
+
+  <div class="coined reveal reveal-d3">
+    <em>coined by Claude.ai</em> · approved by Roberto Hoshino<br>
+    株式会社ダンクソフト · Smart Life Styles™ · COLOURFUL JAPAN™<br>
+    天然色漢字INDEX™ · COLORFUL KANJI AUTH™ · MEMORY-BANK™
+  </div>
+</section>
+
+<script>
+// Progress bar
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+  document.getElementById('progress').style.width = pct + '%';
+
+  // Nav dots
+  const slides = document.querySelectorAll('.slide');
+  const dots = document.querySelectorAll('.nav-dot');
+  let current = 0;
+  slides.forEach((s, i) => {
+    if (window.scrollY >= s.offsetTop - window.innerHeight / 2) current = i;
+  });
+  dots.forEach((d, i) => d.classList.toggle('active', i === current));
+});
+
+// Scroll reveal
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('on'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// Nav
+function scrollToSlide(i) {
+  document.getElementById('slide-' + i).scrollIntoView({ behavior: 'smooth' });
+}
+
+// Keyboard nav
+document.addEventListener('keydown', e => {
+  const slides = document.querySelectorAll('.slide');
+  let cur = 0;
+  slides.forEach((s, i) => {
+    if (window.scrollY >= s.offsetTop - 10) cur = i;
+  });
+  if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+    if (cur < slides.length - 1) slides[cur + 1].scrollIntoView({ behavior: 'smooth' });
+  }
+  if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+    if (cur > 0) slides[cur - 1].scrollIntoView({ behavior: 'smooth' });
+  }
+});
+</script>
+</body>
+</html>
