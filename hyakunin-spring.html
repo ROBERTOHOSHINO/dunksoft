@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>色彩日本語 — 百人一首 春の歌</title>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F7F3EC;
+  --paper: #FAF7F0;
+  --ink: #1C1410;
+  --ink-light: #6B5C4E;
+  --t:  #8B3A0F;
+  --y:  #1A4A7A;
+  --k:  #2D6A2D;
+  --j:  #6B4E8A;
+  --jd: #8A6020;
+  --m:  #7A3050;
+  --f:  #2A6B6B;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background: var(--bg);
+  font-family: 'Shippori Mincho', serif;
+  color: var(--ink);
+  padding: 2rem 1rem 4rem;
+}
+header { text-align: center; margin-bottom: 2.5rem; }
+.title { font-size: 1.8rem; font-weight: 700; letter-spacing: 0.3em; }
+.subtitle { font-size: 0.75rem; letter-spacing: 0.2em; color: var(--ink-light); margin-top: 0.4rem; }
+
+.legend {
+  display: flex; flex-wrap: wrap; justify-content: center;
+  gap: 6px 14px; margin: 1.2rem auto; max-width: 560px;
+  padding: 0.7rem 1rem;
+  background: rgba(255,255,255,0.55);
+  border: 0.5px solid rgba(150,130,110,0.3);
+  border-radius: 4px;
+}
+.li { display: flex; align-items: center; gap: 4px; font-size: 0.68rem; color: var(--ink-light); }
+.ld { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.waka-card {
+  background: var(--paper);
+  border: 0.5px solid rgba(150,130,110,0.25);
+  border-radius: 2px;
+  padding: 1.4rem 1rem 0.9rem;
+  position: relative;
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.waka-no {
+  position: absolute;
+  top: 0.5rem; right: 0.7rem;
+  font-size: 0.6rem;
+  color: var(--ink-light);
+  opacity: 0.5;
+}
+
+/* 縦書きロジック: DOM順 句5→4→3→2→1, flex row */
+.tategumi {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 0.5em;
+}
+.ku {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.cell {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1px;
+  padding: 1px 0;
+}
+.kanji {
+  font-size: 1.15rem;
+  min-width: 1.2rem;
+  text-align: center;
+  line-height: 1.5;
+}
+.furigana {
+  font-size: 0.38rem;
+  color: var(--ink-light);
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  line-height: 1.2;
+  align-self: center;
+}
+
+/* 品詞カラー */
+.t  { color: var(--t);  }
+.y  { color: var(--y);  }
+.k  { color: var(--k);  }
+.j  { color: var(--j);  }
+.jd { color: var(--jd); }
+.m  { color: var(--m);  }
+.f  { color: var(--f);  }
+
+.waka-meta {
+  border-top: 0.5px solid rgba(150,130,110,0.2);
+  padding-top: 0.5rem;
+}
+.waka-author { font-size: 0.68rem; color: var(--ink-light); letter-spacing: 0.1em; margin-bottom: 0.2rem; }
+.waka-full { font-size: 0.6rem; color: var(--ink-light); opacity: 0.65; line-height: 1.9; letter-spacing: 0.03em; }
+
+footer { text-align: center; margin-top: 3rem; font-size: 0.63rem; letter-spacing: 0.2em; color: var(--ink-light); opacity: 0.5; }
+</style>
+</head>
+<body>
+<header>
+  <div class="title">色彩日本語</div>
+  <div class="subtitle">COLORFUL JAPANESE — 百人一首 春の歌</div>
+  <div class="legend">
+    <div class="li"><div class="ld" style="background:var(--t)"></div>体言（名詞）</div>
+    <div class="li"><div class="ld" style="background:var(--y)"></div>用言（動詞）</div>
+    <div class="li"><div class="ld" style="background:var(--k)"></div>形容詞</div>
+    <div class="li"><div class="ld" style="background:var(--j)"></div>助詞</div>
+    <div class="li"><div class="ld" style="background:var(--jd)"></div>助動詞</div>
+    <div class="li"><div class="ld" style="background:var(--m)"></div>枕詞</div>
+    <div class="li"><div class="ld" style="background:var(--f)"></div>副詞</div>
+  </div>
+</header>
+<div class="grid">
+
+<!-- ═══ 春の歌（新規追加）═══ -->
+<div class="waka-card">
+  <div class="waka-no">33</div>
+  <div class="tategumi">
+<div class="ku">
+<div class="cell"><span class="kanji y">散</span><span class="furigana">ち</span></div>
+<div class="cell"><span class="kanji y">る</span></div>
+<div class="cell"><span class="kanji jd">ら</span></div>
+<div class="cell"><span class="kanji jd">む</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">花</span><span class="furigana">はな</span></div>
+<div class="cell"><span class="kanji j">の</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">し</span></div>
+<div class="cell"><span class="kanji t">づ</span></div>
+<div class="cell"><span class="kanji t">心</span><span class="furigana">こころ</span></div>
+<div class="cell"><span class="kanji k">な</span></div>
+<div class="cell"><span class="kanji k">く</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">春</span><span class="furigana">はる</span></div>
+<div class="cell"><span class="kanji j">の</span></div>
+<div class="cell"><span class="kanji t">日</span><span class="furigana">ひ</span></div>
+<div class="cell"><span class="kanji j">に</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji m">ひ</span></div>
+<div class="cell"><span class="kanji m">さ</span></div>
+<div class="cell"><span class="kanji m">か</span></div>
+<div class="cell"><span class="kanji m">た</span></div>
+<div class="cell"><span class="kanji m">の</span></div>
+<div class="cell"><span class="kanji t">光</span><span class="furigana">ひかり</span></div>
+<div class="cell"><span class="kanji k">の</span></div>
+<div class="cell"><span class="kanji k">ど</span></div>
+<div class="cell"><span class="kanji k">け</span></div>
+<div class="cell"><span class="kanji k">き</span></div>
+</div>
+</div>
+  <div class="waka-meta">
+    <div class="waka-author">紀友則</div>
+    <div class="waka-full">ひさかたの　光のどけき　春の日に　しづ心なく　花の散るらむ</div>
+  </div>
+</div>
+
+<div class="waka-card">
+  <div class="waka-no">61</div>
+  <div class="tategumi">
+<div class="ku">
+<div class="cell"><span class="kanji t">か</span></div>
+<div class="cell"><span class="kanji t">な</span></div>
+<div class="cell"><span class="kanji y">に</span></div>
+<div class="cell"><span class="kanji y">ほ</span></div>
+<div class="cell"><span class="kanji jd">ひ</span></div>
+<div class="cell"><span class="kanji jd">ぬ</span></div>
+<div class="cell"><span class="kanji jd">る</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">今</span><span class="furigana">け</span></div>
+<div class="cell"><span class="kanji t">日</span><span class="furigana">ふ</span></div>
+<div class="cell"><span class="kanji t">九</span><span class="furigana">こ</span></div>
+<div class="cell"><span class="kanji t">重</span><span class="furigana">こ</span></div>
+<div class="cell"><span class="kanji j">に</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">八</span><span class="furigana">や</span></div>
+<div class="cell"><span class="kanji t">重</span><span class="furigana">へ</span></div>
+<div class="cell"><span class="kanji t">桜</span><span class="furigana">さくら</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">都</span><span class="furigana">みやこ</span></div>
+<div class="cell"><span class="kanji j">の</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">い</span></div>
+<div class="cell"><span class="kanji t">に</span></div>
+<div class="cell"><span class="kanji t">し</span></div>
+<div class="cell"><span class="kanji t">へ</span></div>
+<div class="cell"><span class="kanji j">の</span></div>
+<div class="cell"><span class="kanji t">奈</span><span class="furigana">な</span></div>
+<div class="cell"><span class="kanji t">良</span><span class="furigana">ら</span></div>
+<div class="cell"><span class="kanji j">の</span></div>
+</div>
+</div>
+  <div class="waka-meta">
+    <div class="waka-author">伊勢大輔</div>
+    <div class="waka-full">いにしへの　奈良の都の　八重桜　今日九重に　にほひぬるかな</div>
+  </div>
+</div>
+
+<div class="waka-card">
+  <div class="waka-no">73</div>
+  <div class="tategumi">
+<div class="ku">
+<div class="cell"><span class="kanji t">か</span></div>
+<div class="cell"><span class="kanji t">す</span></div>
+<div class="cell"><span class="kanji t">み</span></div>
+<div class="cell"><span class="kanji t">と</span></div>
+<div class="cell"><span class="kanji t">や</span></div>
+<div class="cell"><span class="kanji t">ま</span></div>
+<div class="cell"><span class="kanji j">の</span></div>
+<div class="cell"><span class="kanji y">た</span></div>
+<div class="cell"><span class="kanji y">た</span></div>
+<div class="cell"><span class="kanji j">ず</span></div>
+<div class="cell"><span class="kanji j">も</span></div>
+<div class="cell"><span class="kanji jd">あ</span></div>
+<div class="cell"><span class="kanji jd">ら</span></div>
+<div class="cell"><span class="kanji jd">な</span></div>
+<div class="cell"><span class="kanji jd">む</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji jd">に</span></div>
+<div class="cell"><span class="kanji jd">け</span></div>
+<div class="cell"><span class="kanji jd">り</span></div>
+<div class="cell"><span class="kanji y">き</span></div>
+<div class="cell"><span class="kanji y">さ</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">桜</span><span class="furigana">さくら</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">峰</span><span class="furigana">を</span></div>
+<div class="cell"><span class="kanji j">の</span></div>
+<div class="cell"><span class="kanji t">高</span><span class="furigana">たか</span></div>
+<div class="cell"><span class="kanji t">砂</span><span class="furigana">さの</span></div>
+</div>
+</div>
+  <div class="waka-meta">
+    <div class="waka-author">権中納言匡房</div>
+    <div class="waka-full">高砂の　をのへの桜　咲きにけり　とやまのかすみ　たたずもあらなむ</div>
+  </div>
+</div>
+
+<div class="waka-card">
+  <div class="waka-no">96</div>
+  <div class="tategumi">
+<div class="ku">
+<div class="cell"><span class="kanji t">わ</span></div>
+<div class="cell"><span class="kanji j">が</span></div>
+<div class="cell"><span class="kanji t">身</span><span class="furigana">み</span></div>
+<div class="cell"><span class="kanji j">は</span></div>
+<div class="cell"><span class="kanji t">も</span></div>
+<div class="cell"><span class="kanji t">の</span></div>
+<div class="cell"><span class="kanji y">ふ</span></div>
+<div class="cell"><span class="kanji y">り</span></div>
+<div class="cell"><span class="kanji y">ゆ</span></div>
+<div class="cell"><span class="kanji y">く</span></div>
+<div class="cell"><span class="kanji jd">け</span></div>
+<div class="cell"><span class="kanji jd">り</span></div>
+<div class="cell"><span class="kanji jd">な</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">雪</span><span class="furigana">ゆき</span></div>
+<div class="cell"><span class="kanji j">な</span></div>
+<div class="cell"><span class="kanji j">ら</span></div>
+<div class="cell"><span class="kanji j">で</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">庭</span><span class="furigana">には</span></div>
+<div class="cell"><span class="kanji j">の</span></div>
+<div class="cell"><span class="kanji t">嵐</span><span class="furigana">あらし</span></div>
+<div class="cell"><span class="kanji j">の</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">花</span><span class="furigana">はな</span></div>
+<div class="cell"><span class="kanji y">さ</span></div>
+<div class="cell"><span class="kanji y">そ</span></div>
+<div class="cell"><span class="kanji y">ふ</span></div>
+</div>
+</div>
+  <div class="waka-meta">
+    <div class="waka-author">入道前太政大臣</div>
+    <div class="waka-full">花さそふ　嵐の庭の　雪ならで　ふりゆくものは　わが身なりけり</div>
+  </div>
+</div>
+
+<!-- ═══ 既存の二十首 ═══ -->
+<div class="waka-card">
+  <div class="waka-no">1</div>
+  <div class="tategumi">
+<div class="ku">
+<div class="cell"><span class="kanji t">露</span><span class="furigana">つゆ</span></div>
+<div class="cell"><span class="kanji j">に</span></div>
+<div class="cell"><span class="kanji y">ぬ</span></div>
+<div class="cell"><span class="kanji y">れ</span></div>
+<div class="cell"><span class="kanji jd">つ</span></div>
+<div class="cell"><span class="kanji jd">つ</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">わ</span></div>
+<div class="cell"><span class="kanji j">が</span></div>
+<div class="cell"><span class="kanji t">衣</span><span class="furigana">ころも</span></div>
+<div class="cell"><span class="kanji t">手</span><span class="furigana">で</span></div>
+<div class="cell"><span class="kanji j">は</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">苫</span><span class="furigana">とま</span></div>
+<div class="cell"><span class="kanji j">を</span></div>
+<div class="cell"><span class="kanji k">あ</span></div>
+<div class="cell"><span class="kanji k">ら</span></div>
+<div class="cell"><span class="kanji k">み</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">か</span></div>
+<div class="cell"><span class="kanji t">り</span></div>
+<div class="cell"><span class="kanji t">ほ</span></div>
+<div class="cell"><span class="kanji j">の</span></div>
+<div class="cell"><span class="kanji t">庵</span><span class="furigana">いほ</span></div>
+<div class="cell"><span class="kanji j">の</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">秋</span><span class="furigana">あき</span></div>
+<div class="cell"><span class="kanji j">の</span></div>
+<div class="cell"><span class="kanji t">田</span><span class="furigana">た</span></div>
+<div class="cell"><span class="kanji j">の</span></div>
+</div>
+</div>
+
+  <div class="waka-meta">
+    <div class="waka-author">天智天皇</div>
+    <div class="waka-full">秋の田の　かりほの庵の　苫をあらみ　わが衣手は　露にぬれつつ</div>
+  </div>
+</div>
+<div class="waka-card">
+  <div class="waka-no">2</div>
+  <div class="tategumi">
+<div class="ku">
+<div class="cell"><span class="kanji t">天</span><span class="furigana">あま</span></div>
+<div class="cell"><span class="kanji j">の</span></div>
+<div class="cell"><span class="kanji t">香</span><span class="furigana">か</span></div>
+<div class="cell"><span class="kanji t">具</span><span class="furigana">ぐ</span></div>
+<div class="cell"><span class="kanji t">山</span><span class="furigana">やま</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">衣</span><span class="furigana">ころも</span></div>
+<div class="cell"><span class="kanji y">ほ</span></div>
+<div class="cell"><span class="kanji y">す</span></div>
+<div class="cell"><span class="kanji jd">て</span></div>
+<div class="cell"><span class="kanji jd">ふ</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji m">白</span><span class="furigana">しろ</span></div>
+<div class="cell"><span class="kanji m">妙</span><span class="furigana">たへ</span></div>
+<div class="cell"><span class="kanji j">の</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">夏</span><span class="furigana">なつ</span></div>
+<div class="cell"><span class="kanji y">来</span><span class="furigana">き</span></div>
+<div class="cell"><span class="kanji jd">に</span></div>
+<div class="cell"><span class="kanji jd">け</span></div>
+<div class="cell"><span class="kanji jd">ら</span></div>
+<div class="cell"><span class="kanji jd">し</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">春</span><span class="furigana">はる</span></div>
+<div class="cell"><span class="kanji y">す</span></div>
+<div class="cell"><span class="kanji y">ぎ</span></div>
+<div class="cell"><span class="kanji j">て</span></div>
+</div>
+</div>
+
+  <div class="waka-meta">
+    <div class="waka-author">持統天皇</div>
+    <div class="waka-full">春すぎて　夏来にけらし　白妙の　衣ほすてふ　天の香具山</div>
+  </div>
+</div>
+<div class="waka-card">
+  <div class="waka-no">3</div>
+  <div class="tategumi">
+<div class="ku">
+<div class="cell"><span class="kanji f">ひ</span></div>
+<div class="cell"><span class="kanji f">と</span></div>
+<div class="cell"><span class="kanji f">り</span></div>
+<div class="cell"><span class="kanji j">か</span></div>
+<div class="cell"><span class="kanji j">も</span></div>
+<div class="cell"><span class="kanji y">寝</span><span class="furigana">ね</span></div>
+<div class="cell"><span class="kanji jd">む</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji f">な</span></div>
+<div class="cell"><span class="kanji f">が</span></div>
+<div class="cell"><span class="kanji f">な</span></div>
+<div class="cell"><span class="kanji f">が</span></div>
+<div class="cell"><span class="kanji k">し</span></div>
+<div class="cell"><span class="kanji t">夜</span><span class="furigana">よ</span></div>
+<div class="cell"><span class="kanji j">を</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji m">し</span></div>
+<div class="cell"><span class="kanji m">だ</span></div>
+<div class="cell"><span class="kanji m">り</span></div>
+<div class="cell"><span class="kanji t">尾</span><span class="furigana">を</span></div>
+<div class="cell"><span class="kanji j">の</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">山</span><span class="furigana">やま</span></div>
+<div class="cell"><span class="kanji t">鳥</span><span class="furigana">どり</span></div>
+<div class="cell"><span class="kanji j">の</span></div>
+<div class="cell"><span class="kanji t">尾</span><span class="furigana">を</span></div>
+<div class="cell"><span class="kanji j">の</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji m">あ</span></div>
+<div class="cell"><span class="kanji m">し</span></div>
+<div class="cell"><span class="kanji m">び</span></div>
+<div class="cell"><span class="kanji m">き</span></div>
+<div class="cell"><span class="kanji m">の</span></div>
+</div>
+</div>
+
+  <div class="waka-meta">
+    <div class="waka-author">柿本人麻呂</div>
+    <div class="waka-full">あしびきの　山鳥の尾の　しだり尾の　ながながし夜を　ひとりかも寝む</div>
+  </div>
+</div>
+<div class="waka-card">
+  <div class="waka-no">4</div>
+  <div class="tategumi">
+<div class="ku">
+<div class="cell"><span class="kanji t">雪</span><span class="furigana">ゆき</span></div>
+<div class="cell"><span class="kanji j">は</span></div>
+<div class="cell"><span class="kanji y">ふ</span></div>
+<div class="cell"><span class="kanji y">り</span></div>
+<div class="cell"><span class="kanji jd">つ</span></div>
+<div class="cell"><span class="kanji jd">つ</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">富</span><span class="furigana">ふ</span></div>
+<div class="cell"><span class="kanji t">士</span><span class="furigana">じ</span></div>
+<div class="cell"><span class="kanji j">の</span></div>
+<div class="cell"><span class="kanji t">高</span><span class="furigana">たか</span></div>
+<div class="cell"><span class="kanji t">嶺</span><span class="furigana">ね</span></div>
+<div class="cell"><span class="kanji j">に</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji m">白</span><span class="furigana">しろ</span></div>
+<div class="cell"><span class="kanji m">妙</span><span class="furigana">たへ</span></div>
+<div class="cell"><span class="kanji j">の</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji y">う</span></div>
+<div class="cell"><span class="kanji y">ち</span></div>
+<div class="cell"><span class="kanji y">い</span></div>
+<div class="cell"><span class="kanji y">で</span></div>
+<div class="cell"><span class="kanji j">て</span></div>
+<div class="cell"><span class="kanji y">み</span></div>
+<div class="cell"><span class="kanji y">れ</span></div>
+<div class="cell"><span class="kanji j">ば</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">田</span><span class="furigana">た</span></div>
+<div class="cell"><span class="kanji t">子</span><span class="furigana">ご</span></div>
+<div class="cell"><span class="kanji j">の</span></div>
+<div class="cell"><span class="kanji t">浦</span><span class="furigana">うら</span></div>
+<div class="cell"><span class="kanji j">に</span></div>
+</div>
+</div>
+
+  <div class="waka-meta">
+    <div class="waka-author">山部赤人</div>
+    <div class="waka-full">田子の浦に　うちいでてみれば　白妙の　富士の高嶺に　雪はふりつつ</div>
+  </div>
+</div>
+<div class="waka-card">
+  <div class="waka-no">5</div>
+  <div class="tategumi">
+<div class="ku">
+<div class="cell"><span class="kanji t">秋</span><span class="furigana">あき</span></div>
+<div class="cell"><span class="kanji j">は</span></div>
+<div class="cell"><span class="kanji k">か</span></div>
+<div class="cell"><span class="kanji k">な</span></div>
+<div class="cell"><span class="kanji k">し</span></div>
+<div class="cell"><span class="kanji k">き</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">声</span><span class="furigana">こゑ</span></div>
+<div class="cell"><span class="kanji y">き</span></div>
+<div class="cell"><span class="kanji y">く</span></div>
+<div class="cell"><span class="kanji t">時</span><span class="furigana">とき</span></div>
+<div class="cell"><span class="kanji j">ぞ</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji y">鳴</span><span class="furigana">な</span></div>
+<div class="cell"><span class="kanji y">く</span></div>
+<div class="cell"><span class="kanji t">鹿</span><span class="furigana">しか</span></div>
+<div class="cell"><span class="kanji j">の</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">も</span></div>
+<div class="cell"><span class="kanji t">み</span></div>
+<div class="cell"><span class="kanji t">ぢ</span></div>
+<div class="cell"><span class="kanji y">踏</span><span class="furigana">ふ</span></div>
+<div class="cell"><span class="kanji y">み</span></div>
+<div class="cell"><span class="kanji y">わ</span></div>
+<div class="cell"><span class="kanji y">け</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">奥</span><span class="furigana">おく</span></div>
+<div class="cell"><span class="kanji t">山</span><span class="furigana">やま</span></div>
+<div class="cell"><span class="kanji j">に</span></div>
+</div>
+</div>
+
+  <div class="waka-meta">
+    <div class="waka-author">猿丸太夫</div>
+    <div class="waka-full">奥山に　もみぢ踏みわけ　鳴く鹿の　声きく時ぞ　秋はかなしき</div>
+  </div>
+</div>
+<div class="waka-card">
+  <div class="waka-no">6</div>
+  <div class="tategumi">
+<div class="ku">
+<div class="cell"><span class="kanji t">夜</span><span class="furigana">よ</span></div>
+<div class="cell"><span class="kanji j">ぞ</span></div>
+<div class="cell"><span class="kanji y">ふ</span></div>
+<div class="cell"><span class="kanji y">け</span></div>
+<div class="cell"><span class="kanji jd">に</span></div>
+<div class="cell"><span class="kanji jd">け</span></div>
+<div class="cell"><span class="kanji jd">る</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji k">白</span><span class="furigana">しろ</span></div>
+<div class="cell"><span class="kanji k">き</span></div>
+<div class="cell"><span class="kanji j">を</span></div>
+<div class="cell"><span class="kanji y">見</span><span class="furigana">み</span></div>
+<div class="cell"><span class="kanji y">れ</span></div>
+<div class="cell"><span class="kanji j">ば</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji y">お</span></div>
+<div class="cell"><span class="kanji y">く</span></div>
+<div class="cell"><span class="kanji t">霜</span><span class="furigana">しも</span></div>
+<div class="cell"><span class="kanji j">の</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji y">渡</span><span class="furigana">わた</span></div>
+<div class="cell"><span class="kanji y">せ</span></div>
+<div class="cell"><span class="kanji jd">る</span></div>
+<div class="cell"><span class="kanji t">橋</span><span class="furigana">はし</span></div>
+<div class="cell"><span class="kanji j">に</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">か</span></div>
+<div class="cell"><span class="kanji t">さ</span></div>
+<div class="cell"><span class="kanji t">さ</span></div>
+<div class="cell"><span class="kanji t">ぎ</span></div>
+<div class="cell"><span class="kanji j">の</span></div>
+</div>
+</div>
+
+  <div class="waka-meta">
+    <div class="waka-author">中納言家持</div>
+    <div class="waka-full">かささぎの　渡せる橋に　おく霜の　白きを見れば　夜ぞふけにける</div>
+  </div>
+</div>
+<div class="waka-card">
+  <div class="waka-no">7</div>
+  <div class="tategumi">
+<div class="ku">
+<div class="cell"><span class="kanji y">出</span><span class="furigana">い</span></div>
+<div class="cell"><span class="kanji y">で</span></div>
+<div class="cell"><span class="kanji jd">し</span></div>
+<div class="cell"><span class="kanji t">月</span><span class="furigana">つき</span></div>
+<div class="cell"><span class="kanji j">か</span></div>
+<div class="cell"><span class="kanji j">も</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">三</span><span class="furigana">み</span></div>
+<div class="cell"><span class="kanji t">笠</span><span class="furigana">かさ</span></div>
+<div class="cell"><span class="kanji j">の</span></div>
+<div class="cell"><span class="kanji t">山</span><span class="furigana">やま</span></div>
+<div class="cell"><span class="kanji j">に</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">春</span><span class="furigana">かす</span></div>
+<div class="cell"><span class="kanji t">日</span><span class="furigana">が</span></div>
+<div class="cell"><span class="kanji jd">な</span></div>
+<div class="cell"><span class="kanji jd">る</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji y">ふ</span></div>
+<div class="cell"><span class="kanji y">り</span></div>
+<div class="cell"><span class="kanji y">さ</span></div>
+<div class="cell"><span class="kanji y">け</span></div>
+<div class="cell"><span class="kanji y">み</span></div>
+<div class="cell"><span class="kanji y">れ</span></div>
+<div class="cell"><span class="kanji j">ば</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">天</span><span class="furigana">あま</span></div>
+<div class="cell"><span class="kanji j">の</span></div>
+<div class="cell"><span class="kanji t">原</span><span class="furigana">はら</span></div>
+</div>
+</div>
+
+  <div class="waka-meta">
+    <div class="waka-author">阿倍仲麻呂</div>
+    <div class="waka-full">天の原　ふりさけみれば　春日なる　三笠の山に　出でし月かも</div>
+  </div>
+</div>
+<div class="waka-card">
+  <div class="waka-no">8</div>
+  <div class="tategumi">
+<div class="ku">
+<div class="cell"><span class="kanji y">な</span></div>
+<div class="cell"><span class="kanji y">が</span></div>
+<div class="cell"><span class="kanji y">め</span></div>
+<div class="cell"><span class="kanji y">せ</span></div>
+<div class="cell"><span class="kanji jd">し</span></div>
+<div class="cell"><span class="kanji j">ま</span></div>
+<div class="cell"><span class="kanji j">に</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">わ</span></div>
+<div class="cell"><span class="kanji j">が</span></div>
+<div class="cell"><span class="kanji t">身</span><span class="furigana">み</span></div>
+<div class="cell"><span class="kanji t">世</span><span class="furigana">よ</span></div>
+<div class="cell"><span class="kanji j">に</span></div>
+<div class="cell"><span class="kanji y">ふ</span></div>
+<div class="cell"><span class="kanji y">る</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji f">い</span></div>
+<div class="cell"><span class="kanji f">た</span></div>
+<div class="cell"><span class="kanji f">づ</span></div>
+<div class="cell"><span class="kanji f">ら</span></div>
+<div class="cell"><span class="kanji j">に</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji y">う</span></div>
+<div class="cell"><span class="kanji y">つ</span></div>
+<div class="cell"><span class="kanji y">り</span></div>
+<div class="cell"><span class="kanji jd">に</span></div>
+<div class="cell"><span class="kanji jd">け</span></div>
+<div class="cell"><span class="kanji jd">り</span></div>
+<div class="cell"><span class="kanji jd">な</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">花</span><span class="furigana">はな</span></div>
+<div class="cell"><span class="kanji j">の</span></div>
+<div class="cell"><span class="kanji t">色</span><span class="furigana">いろ</span></div>
+<div class="cell"><span class="kanji j">は</span></div>
+</div>
+</div>
+
+  <div class="waka-meta">
+    <div class="waka-author">小野小町</div>
+    <div class="waka-full">花の色は　うつりにけりな　いたづらに　わが身世にふる　ながめせしまに</div>
+  </div>
+</div>
+<div class="waka-card">
+  <div class="waka-no">9</div>
+  <div class="tategumi">
+<div class="ku">
+<div class="cell"><span class="kanji t">逢</span><span class="furigana">あふ</span></div>
+<div class="cell"><span class="kanji t">坂</span><span class="furigana">さか</span></div>
+<div class="cell"><span class="kanji j">の</span></div>
+<div class="cell"><span class="kanji t">関</span><span class="furigana">せき</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji y">知</span><span class="furigana">し</span></div>
+<div class="cell"><span class="kanji y">る</span></div>
+<div class="cell"><span class="kanji j">も</span></div>
+<div class="cell"><span class="kanji y">知</span><span class="furigana">し</span></div>
+<div class="cell"><span class="kanji y">ら</span></div>
+<div class="cell"><span class="kanji jd">ぬ</span></div>
+<div class="cell"><span class="kanji j">も</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji y">別</span><span class="furigana">わか</span></div>
+<div class="cell"><span class="kanji y">れ</span></div>
+<div class="cell"><span class="kanji j">て</span></div>
+<div class="cell"><span class="kanji j">は</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji y">行</span><span class="furigana">ゆ</span></div>
+<div class="cell"><span class="kanji y">く</span></div>
+<div class="cell"><span class="kanji j">も</span></div>
+<div class="cell"><span class="kanji y">帰</span><span class="furigana">かへ</span></div>
+<div class="cell"><span class="kanji y">る</span></div>
+<div class="cell"><span class="kanji j">も</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji f">こ</span></div>
+<div class="cell"><span class="kanji f">れ</span></div>
+<div class="cell"><span class="kanji j">や</span></div>
+<div class="cell"><span class="kanji f">こ</span></div>
+<div class="cell"><span class="kanji j">の</span></div>
+</div>
+</div>
+
+  <div class="waka-meta">
+    <div class="waka-author">蝉丸</div>
+    <div class="waka-full">これやこの　行くも帰るも　別れては　知るも知らぬも　逢坂の関</div>
+  </div>
+</div>
+<div class="waka-card">
+  <div class="waka-no">10</div>
+  <div class="tategumi">
+<div class="ku">
+<div class="cell"><span class="kanji t">香</span><span class="furigana">か</span></div>
+<div class="cell"><span class="kanji j">に</span></div>
+<div class="cell"><span class="kanji f">に</span></div>
+<div class="cell"><span class="kanji y">ほ</span></div>
+<div class="cell"><span class="kanji y">ひ</span></div>
+<div class="cell"><span class="kanji jd">け</span></div>
+<div class="cell"><span class="kanji jd">る</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">花</span><span class="furigana">はな</span></div>
+<div class="cell"><span class="kanji j">ぞ</span></div>
+<div class="cell"><span class="kanji t">昔</span><span class="furigana">むかし</span></div>
+<div class="cell"><span class="kanji j">の</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">ふ</span></div>
+<div class="cell"><span class="kanji t">る</span></div>
+<div class="cell"><span class="kanji t">さ</span></div>
+<div class="cell"><span class="kanji t">と</span></div>
+<div class="cell"><span class="kanji j">は</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">心</span><span class="furigana">こころ</span></div>
+<div class="cell"><span class="kanji j">も</span></div>
+<div class="cell"><span class="kanji y">知</span><span class="furigana">し</span></div>
+<div class="cell"><span class="kanji y">ら</span></div>
+<div class="cell"><span class="kanji jd">ず</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">人</span><span class="furigana">ひと</span></div>
+<div class="cell"><span class="kanji j">は</span></div>
+<div class="cell"><span class="kanji f">い</span></div>
+<div class="cell"><span class="kanji f">さ</span></div>
+</div>
+</div>
+
+  <div class="waka-meta">
+    <div class="waka-author">紀貫之</div>
+    <div class="waka-full">人はいさ　心も知らず　ふるさとは　花ぞ昔の　香ににほひける</div>
+  </div>
+</div>
+<div class="waka-card">
+  <div class="waka-no">11</div>
+  <div class="tategumi">
+<div class="ku">
+<div class="cell"><span class="kanji k">の</span></div>
+<div class="cell"><span class="kanji k">ど</span></div>
+<div class="cell"><span class="kanji k">け</span></div>
+<div class="cell"><span class="kanji k">か</span></div>
+<div class="cell"><span class="kanji jd">ら</span></div>
+<div class="cell"><span class="kanji jd">ま</span></div>
+<div class="cell"><span class="kanji jd">し</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">春</span><span class="furigana">はる</span></div>
+<div class="cell"><span class="kanji j">の</span></div>
+<div class="cell"><span class="kanji t">心</span><span class="furigana">こころ</span></div>
+<div class="cell"><span class="kanji j">は</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji jd">な</span></div>
+<div class="cell"><span class="kanji jd">か</span></div>
+<div class="cell"><span class="kanji jd">り</span></div>
+<div class="cell"><span class="kanji jd">せ</span></div>
+<div class="cell"><span class="kanji j">ば</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji y">絶</span><span class="furigana">た</span></div>
+<div class="cell"><span class="kanji y">え</span></div>
+<div class="cell"><span class="kanji j">て</span></div>
+<div class="cell"><span class="kanji t">桜</span><span class="furigana">さくら</span></div>
+<div class="cell"><span class="kanji j">の</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">世</span><span class="furigana">よ</span></div>
+<div class="cell"><span class="kanji j">の</span></div>
+<div class="cell"><span class="kanji t">中</span><span class="furigana">なか</span></div>
+<div class="cell"><span class="kanji j">に</span></div>
+</div>
+</div>
+
+  <div class="waka-meta">
+    <div class="waka-author">在原業平</div>
+    <div class="waka-full">世の中に　絶えて桜の　なかりせば　春の心は　のどけからまし</div>
+  </div>
+</div>
+<div class="waka-card">
+  <div class="waka-no">12</div>
+  <div class="tategumi">
+<div class="ku">
+<div class="cell"><span class="kanji t">水</span><span class="furigana">みづ</span></div>
+<div class="cell"><span class="kanji y">く</span></div>
+<div class="cell"><span class="kanji y">く</span></div>
+<div class="cell"><span class="kanji y">る</span></div>
+<div class="cell"><span class="kanji j">と</span></div>
+<div class="cell"><span class="kanji j">は</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji f">か</span></div>
+<div class="cell"><span class="kanji f">ら</span></div>
+<div class="cell"><span class="kanji f">く</span></div>
+<div class="cell"><span class="kanji f">れ</span></div>
+<div class="cell"><span class="kanji t">な</span></div>
+<div class="cell"><span class="kanji t">ゐ</span></div>
+<div class="cell"><span class="kanji j">に</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">竜</span><span class="furigana">たつ</span></div>
+<div class="cell"><span class="kanji t">田</span><span class="furigana">た</span></div>
+<div class="cell"><span class="kanji t">川</span><span class="furigana">がわ</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">神</span><span class="furigana">かみ</span></div>
+<div class="cell"><span class="kanji t">代</span><span class="furigana">よ</span></div>
+<div class="cell"><span class="kanji j">も</span></div>
+<div class="cell"><span class="kanji y">き</span></div>
+<div class="cell"><span class="kanji y">か</span></div>
+<div class="cell"><span class="kanji jd">ず</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji m">ち</span></div>
+<div class="cell"><span class="kanji m">は</span></div>
+<div class="cell"><span class="kanji m">や</span></div>
+<div class="cell"><span class="kanji m">ぶ</span></div>
+<div class="cell"><span class="kanji m">る</span></div>
+</div>
+</div>
+
+  <div class="waka-meta">
+    <div class="waka-author">在原業平</div>
+    <div class="waka-full">ちはやぶる　神代もきかず　竜田川　からくれなゐに　水くくるとは</div>
+  </div>
+</div>
+<div class="waka-card">
+  <div class="waka-no">13</div>
+  <div class="tategumi">
+<div class="ku">
+<div class="cell"><span class="kanji t">人</span><span class="furigana">ひと</span></div>
+<div class="cell"><span class="kanji j">の</span></div>
+<div class="cell"><span class="kanji y">問</span><span class="furigana">と</span></div>
+<div class="cell"><span class="kanji y">ふ</span></div>
+<div class="cell"><span class="kanji jd">ま</span></div>
+<div class="cell"><span class="kanji jd">で</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">も</span></div>
+<div class="cell"><span class="kanji t">の</span></div>
+<div class="cell"><span class="kanji j">や</span></div>
+<div class="cell"><span class="kanji y">思</span><span class="furigana">おも</span></div>
+<div class="cell"><span class="kanji y">ふ</span></div>
+<div class="cell"><span class="kanji j">と</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">わ</span></div>
+<div class="cell"><span class="kanji j">が</span></div>
+<div class="cell"><span class="kanji t">恋</span><span class="furigana">こひ</span></div>
+<div class="cell"><span class="kanji j">は</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">色</span><span class="furigana">いろ</span></div>
+<div class="cell"><span class="kanji j">に</span></div>
+<div class="cell"><span class="kanji y">出</span><span class="furigana">い</span></div>
+<div class="cell"><span class="kanji y">で</span></div>
+<div class="cell"><span class="kanji jd">に</span></div>
+<div class="cell"><span class="kanji jd">け</span></div>
+<div class="cell"><span class="kanji jd">り</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji y">忍</span><span class="furigana">しの</span></div>
+<div class="cell"><span class="kanji y">ぶ</span></div>
+<div class="cell"><span class="kanji y">れ</span></div>
+<div class="cell"><span class="kanji j">ど</span></div>
+</div>
+</div>
+
+  <div class="waka-meta">
+    <div class="waka-author">平兼盛</div>
+    <div class="waka-full">忍ぶれど　色に出でにけり　わが恋は　ものや思ふと　人の問ふまで</div>
+  </div>
+</div>
+<div class="waka-card">
+  <div class="waka-no">14</div>
+  <div class="tategumi">
+<div class="ku">
+<div class="cell"><span class="kanji y">逢</span><span class="furigana">あ</span></div>
+<div class="cell"><span class="kanji y">は</span></div>
+<div class="cell"><span class="kanji jd">む</span></div>
+<div class="cell"><span class="kanji j">と</span></div>
+<div class="cell"><span class="kanji j">ぞ</span></div>
+<div class="cell"><span class="kanji y">思</span><span class="furigana">おも</span></div>
+<div class="cell"><span class="kanji y">ふ</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji y">わ</span></div>
+<div class="cell"><span class="kanji y">れ</span></div>
+<div class="cell"><span class="kanji j">て</span></div>
+<div class="cell"><span class="kanji j">も</span></div>
+<div class="cell"><span class="kanji t">末</span><span class="furigana">すゑ</span></div>
+<div class="cell"><span class="kanji j">に</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">滝</span><span class="furigana">たき</span></div>
+<div class="cell"><span class="kanji t">川</span><span class="furigana">がわ</span></div>
+<div class="cell"><span class="kanji j">の</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">岩</span><span class="furigana">いは</span></div>
+<div class="cell"><span class="kanji j">に</span></div>
+<div class="cell"><span class="kanji y">せ</span></div>
+<div class="cell"><span class="kanji y">か</span></div>
+<div class="cell"><span class="kanji y">る</span></div>
+<div class="cell"><span class="kanji y">る</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">瀬</span><span class="furigana">せ</span></div>
+<div class="cell"><span class="kanji j">を</span></div>
+<div class="cell"><span class="kanji j">は</span></div>
+<div class="cell"><span class="kanji k">や</span></div>
+<div class="cell"><span class="kanji k">み</span></div>
+</div>
+</div>
+
+  <div class="waka-meta">
+    <div class="waka-author">崇徳院</div>
+    <div class="waka-full">瀬をはやみ　岩にせかるる　滝川の　われても末に　逢はむとぞ思ふ</div>
+  </div>
+</div>
+<div class="waka-card">
+  <div class="waka-no">15</div>
+  <div class="tategumi">
+<div class="ku">
+<div class="cell"><span class="kanji t">秋</span><span class="furigana">あき</span></div>
+<div class="cell"><span class="kanji j">の</span></div>
+<div class="cell"><span class="kanji t">夕</span><span class="furigana">ゆふ</span></div>
+<div class="cell"><span class="kanji t">暮</span><span class="furigana">ぐ</span></div>
+<div class="cell"><span class="kanji t">れ</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">霧</span><span class="furigana">きり</span></div>
+<div class="cell"><span class="kanji y">立</span><span class="furigana">た</span></div>
+<div class="cell"><span class="kanji y">ち</span></div>
+<div class="cell"><span class="kanji y">の</span></div>
+<div class="cell"><span class="kanji y">ぼ</span></div>
+<div class="cell"><span class="kanji y">る</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">槙</span><span class="furigana">まき</span></div>
+<div class="cell"><span class="kanji j">の</span></div>
+<div class="cell"><span class="kanji t">葉</span><span class="furigana">は</span></div>
+<div class="cell"><span class="kanji j">に</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">露</span><span class="furigana">つゆ</span></div>
+<div class="cell"><span class="kanji j">も</span></div>
+<div class="cell"><span class="kanji f">ま</span></div>
+<div class="cell"><span class="kanji f">だ</span></div>
+<div class="cell"><span class="kanji y">ひ</span></div>
+<div class="cell"><span class="kanji jd">ぬ</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">村</span><span class="furigana">むら</span></div>
+<div class="cell"><span class="kanji t">雨</span><span class="furigana">さめ</span></div>
+<div class="cell"><span class="kanji j">の</span></div>
+</div>
+</div>
+
+  <div class="waka-meta">
+    <div class="waka-author">寂蓮法師</div>
+    <div class="waka-full">村雨の　露もまだひぬ　槙の葉に　霧立ちのぼる　秋の夕暮れ</div>
+  </div>
+</div>
+<div class="waka-card">
+  <div class="waka-no">16</div>
+  <div class="tategumi">
+<div class="ku">
+<div class="cell"><span class="kanji t">身</span><span class="furigana">み</span></div>
+<div class="cell"><span class="kanji j">も</span></div>
+<div class="cell"><span class="kanji y">こ</span></div>
+<div class="cell"><span class="kanji y">が</span></div>
+<div class="cell"><span class="kanji y">れ</span></div>
+<div class="cell"><span class="kanji jd">つ</span></div>
+<div class="cell"><span class="kanji jd">つ</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji y">焼</span><span class="furigana">や</span></div>
+<div class="cell"><span class="kanji y">く</span></div>
+<div class="cell"><span class="kanji j">や</span></div>
+<div class="cell"><span class="kanji t">藻</span><span class="furigana">も</span></div>
+<div class="cell"><span class="kanji t">塩</span><span class="furigana">しお</span></div>
+<div class="cell"><span class="kanji j">の</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">夕</span><span class="furigana">ゆふ</span></div>
+<div class="cell"><span class="kanji t">な</span></div>
+<div class="cell"><span class="kanji t">ぎ</span></div>
+<div class="cell"><span class="kanji j">に</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji y">ま</span></div>
+<div class="cell"><span class="kanji y">つ</span></div>
+<div class="cell"><span class="kanji t">ほ</span></div>
+<div class="cell"><span class="kanji j">の</span></div>
+<div class="cell"><span class="kanji t">浦</span><span class="furigana">うら</span></div>
+<div class="cell"><span class="kanji j">の</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji y">来</span><span class="furigana">こ</span></div>
+<div class="cell"><span class="kanji jd">ぬ</span></div>
+<div class="cell"><span class="kanji t">人</span><span class="furigana">ひと</span></div>
+<div class="cell"><span class="kanji j">を</span></div>
+</div>
+</div>
+
+  <div class="waka-meta">
+    <div class="waka-author">藤原定家</div>
+    <div class="waka-full">来ぬ人を　まつほの浦の　夕なぎに　焼くや藻塩の　身もこがれつつ</div>
+  </div>
+</div>
+<div class="waka-card">
+  <div class="waka-no">17</div>
+  <div class="tategumi">
+<div class="ku">
+<div class="cell"><span class="kanji k">憂</span><span class="furigana">う</span></div>
+<div class="cell"><span class="kanji k">き</span></div>
+<div class="cell"><span class="kanji j">も</span></div>
+<div class="cell"><span class="kanji t">の</span></div>
+<div class="cell"><span class="kanji j">は</span></div>
+<div class="cell"><span class="kanji k">な</span></div>
+<div class="cell"><span class="kanji k">し</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">暁</span><span class="furigana">あかつき</span></div>
+<div class="cell"><span class="kanji j">ば</span></div>
+<div class="cell"><span class="kanji j">か</span></div>
+<div class="cell"><span class="kanji j">り</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji y">別</span><span class="furigana">わか</span></div>
+<div class="cell"><span class="kanji y">れ</span></div>
+<div class="cell"><span class="kanji j">よ</span></div>
+<div class="cell"><span class="kanji j">り</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji k">つ</span></div>
+<div class="cell"><span class="kanji k">れ</span></div>
+<div class="cell"><span class="kanji k">な</span></div>
+<div class="cell"><span class="kanji k">く</span></div>
+<div class="cell"><span class="kanji y">見</span><span class="furigana">み</span></div>
+<div class="cell"><span class="kanji y">え</span></div>
+<div class="cell"><span class="kanji jd">し</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">有</span><span class="furigana">あり</span></div>
+<div class="cell"><span class="kanji t">明</span><span class="furigana">あけ</span></div>
+<div class="cell"><span class="kanji j">の</span></div>
+</div>
+</div>
+
+  <div class="waka-meta">
+    <div class="waka-author">壬生忠岑</div>
+    <div class="waka-full">有明の　つれなく見えし　別れより　暁ばかり　憂きものはなし</div>
+  </div>
+</div>
+<div class="waka-card">
+  <div class="waka-no">18</div>
+  <div class="tategumi">
+<div class="ku">
+<div class="cell"><span class="kanji t">名</span><span class="furigana">な</span></div>
+<div class="cell"><span class="kanji j">こ</span></div>
+<div class="cell"><span class="kanji j">そ</span></div>
+<div class="cell"><span class="kanji j">を</span></div>
+<div class="cell"><span class="kanji k">し</span></div>
+<div class="cell"><span class="kanji k">け</span></div>
+<div class="cell"><span class="kanji k">れ</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji f">か</span></div>
+<div class="cell"><span class="kanji f">ひ</span></div>
+<div class="cell"><span class="kanji k">な</span></div>
+<div class="cell"><span class="kanji k">く</span></div>
+<div class="cell"><span class="kanji y">立</span><span class="furigana">た</span></div>
+<div class="cell"><span class="kanji y">た</span></div>
+<div class="cell"><span class="kanji jd">む</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">手</span><span class="furigana">た</span></div>
+<div class="cell"><span class="kanji t">枕</span><span class="furigana">まくら</span></div>
+<div class="cell"><span class="kanji j">に</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">夢</span><span class="furigana">ゆめ</span></div>
+<div class="cell"><span class="kanji j">ば</span></div>
+<div class="cell"><span class="kanji j">か</span></div>
+<div class="cell"><span class="kanji j">り</span></div>
+<div class="cell"><span class="kanji jd">な</span></div>
+<div class="cell"><span class="kanji jd">る</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">春</span><span class="furigana">はる</span></div>
+<div class="cell"><span class="kanji j">の</span></div>
+<div class="cell"><span class="kanji t">夜</span><span class="furigana">よ</span></div>
+<div class="cell"><span class="kanji j">の</span></div>
+</div>
+</div>
+
+  <div class="waka-meta">
+    <div class="waka-author">周防内侍</div>
+    <div class="waka-full">春の夜の　夢ばかりなる　手枕に　かひなく立たむ　名こそをしけれ</div>
+  </div>
+</div>
+<div class="waka-card">
+  <div class="waka-no">19</div>
+  <div class="tategumi">
+<div class="ku">
+<div class="cell"><span class="kanji t">嵐</span><span class="furigana">あらし</span></div>
+<div class="cell"><span class="kanji j">と</span></div>
+<div class="cell"><span class="kanji y">い</span></div>
+<div class="cell"><span class="kanji y">ふ</span></div>
+<div class="cell"><span class="kanji jd">ら</span></div>
+<div class="cell"><span class="kanji jd">む</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji f">む</span></div>
+<div class="cell"><span class="kanji f">べ</span></div>
+<div class="cell"><span class="kanji t">山</span><span class="furigana">やま</span></div>
+<div class="cell"><span class="kanji t">風</span><span class="furigana">かぜ</span></div>
+<div class="cell"><span class="kanji j">を</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji y">し</span></div>
+<div class="cell"><span class="kanji y">を</span></div>
+<div class="cell"><span class="kanji y">る</span></div>
+<div class="cell"><span class="kanji y">れ</span></div>
+<div class="cell"><span class="kanji j">ば</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">秋</span><span class="furigana">あき</span></div>
+<div class="cell"><span class="kanji j">の</span></div>
+<div class="cell"><span class="kanji t">草</span><span class="furigana">くさ</span></div>
+<div class="cell"><span class="kanji t">木</span><span class="furigana">き</span></div>
+<div class="cell"><span class="kanji j">の</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji y">吹</span><span class="furigana">ふ</span></div>
+<div class="cell"><span class="kanji y">く</span></div>
+<div class="cell"><span class="kanji j">か</span></div>
+<div class="cell"><span class="kanji j">ら</span></div>
+<div class="cell"><span class="kanji j">に</span></div>
+</div>
+</div>
+
+  <div class="waka-meta">
+    <div class="waka-author">文屋康秀</div>
+    <div class="waka-full">吹くからに　秋の草木の　しをるれば　むべ山風を　嵐といふらむ</div>
+  </div>
+</div>
+<div class="waka-card">
+  <div class="waka-no">20</div>
+  <div class="tategumi">
+<div class="ku">
+<div class="cell"><span class="kanji t">春</span><span class="furigana">はる</span></div>
+<div class="cell"><span class="kanji j">を</span></div>
+<div class="cell"><span class="kanji j">こ</span></div>
+<div class="cell"><span class="kanji j">そ</span></div>
+<div class="cell"><span class="kanji y">思</span><span class="furigana">おも</span></div>
+<div class="cell"><span class="kanji y">へ</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">今</span><span class="furigana">け</span></div>
+<div class="cell"><span class="kanji t">日</span><span class="furigana">ふ</span></div>
+<div class="cell"><span class="kanji j">を</span></div>
+<div class="cell"><span class="kanji y">待</span><span class="furigana">ま</span></div>
+<div class="cell"><span class="kanji y">ち</span></div>
+<div class="cell"><span class="kanji jd">つ</span></div>
+<div class="cell"><span class="kanji jd">つ</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">君</span><span class="furigana">きみ</span></div>
+<div class="cell"><span class="kanji j">に</span></div>
+<div class="cell"><span class="kanji y">あ</span></div>
+<div class="cell"><span class="kanji y">は</span></div>
+<div class="cell"><span class="kanji jd">む</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">雪</span><span class="furigana">ゆき</span></div>
+<div class="cell"><span class="kanji y">踏</span><span class="furigana">ふ</span></div>
+<div class="cell"><span class="kanji y">み</span></div>
+<div class="cell"><span class="kanji y">わ</span></div>
+<div class="cell"><span class="kanji y">け</span></div>
+<div class="cell"><span class="kanji j">て</span></div>
+</div>
+<div class="ku">
+<div class="cell"><span class="kanji t">あ</span></div>
+<div class="cell"><span class="kanji t">し</span></div>
+<div class="cell"><span class="kanji t">た</span></div>
+<div class="cell"><span class="kanji t">づ</span></div>
+<div class="cell"><span class="kanji j">の</span></div>
+</div>
+</div>
+
+  <div class="waka-meta">
+    <div class="waka-author">藤原道信</div>
+    <div class="waka-full">あしたづの　雪踏みわけて　君にあはむ　今日を待ちつつ　春をこそ思へ</div>
+  </div>
+</div>
+
+</div>
+<footer>色彩日本語 COLORFUL JAPANESE™ — Smart Life Styles® | 百人一首より</footer>
+</body>
+</html>
