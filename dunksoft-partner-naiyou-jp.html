@@ -38,7 +38,6 @@ body {
   padding: 0;
 }
 
-/* Decorative top border */
 .top-bar {
   height: 5px;
   background: linear-gradient(to right, var(--indigo) 0%, var(--gold) 50%, var(--indigo) 100%);
@@ -54,7 +53,6 @@ body {
   .page { padding: 32px 20px 60px; }
 }
 
-/* ─── HEADER ─── */
 .doc-header {
   margin-bottom: 44px;
   padding-bottom: 32px;
@@ -105,7 +103,6 @@ body {
   font-style: italic;
 }
 
-/* ─── SUMMARY BOX ─── */
 .summary-box {
   background: var(--ink);
   color: white;
@@ -148,7 +145,6 @@ body {
   font-weight: 700;
 }
 
-/* ─── SECTION ─── */
 .section {
   margin-bottom: 44px;
 }
@@ -184,7 +180,6 @@ body {
   background: var(--border);
 }
 
-/* ─── BENEFIT CARDS ─── */
 .benefit-list {
   display: flex;
   flex-direction: column;
@@ -205,8 +200,6 @@ body {
 @media (max-width: 600px) {
   .benefit-card { grid-template-columns: 1fr; gap: 8px; }
 }
-
-.benefit-left {}
 
 .benefit-tag {
   display: inline-block;
@@ -238,7 +231,6 @@ body {
 
 .benefit-body strong { color: var(--ink); }
 
-/* ─── PROGRAM DETAIL TABLE ─── */
 .program-table {
   width: 100%;
   border-collapse: collapse;
@@ -279,7 +271,6 @@ body {
 
 .program-table td:last-child { color: var(--text2); }
 
-/* ─── OPPORTUNITY MATRIX ─── */
 .matrix {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -319,7 +310,6 @@ body {
   line-height: 1.75;
 }
 
-/* ─── CALLOUT ─── */
 .callout {
   border-left: 4px solid var(--gold);
   background: var(--gold-pale);
@@ -341,7 +331,6 @@ body {
   background: var(--indigo-pale);
 }
 
-/* ─── ROADMAP ─── */
 .roadmap {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -404,7 +393,6 @@ body {
   color: var(--text3);
 }
 
-/* ─── FOOTER ─── */
 .doc-footer {
   margin-top: 48px;
   padding-top: 20px;
@@ -423,7 +411,6 @@ body {
   letter-spacing: 0.08em;
 }
 
-/* ─── INVESTMENT NOTE ─── */
 .investment-box {
   background: linear-gradient(135deg, var(--indigo) 0%, #1A2460 100%);
   color: white;
@@ -467,7 +454,36 @@ body {
 
 .investment-body strong { color: var(--gold-light); }
 
-/* ─── ANIMATIONS ─── */
+/* 直近モメンタム */
+.momentum-strip {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 18px 24px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.momentum-date {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+  padding-top: 2px;
+  min-width: 80px;
+}
+
+.momentum-body {
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.75;
+}
+
+.momentum-body strong { color: var(--ink); }
+
 @keyframes slideIn {
   from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -479,6 +495,7 @@ body {
 .section:nth-child(3) { animation-delay: 0.15s; }
 .section:nth-child(4) { animation-delay: 0.2s; }
 .section:nth-child(5) { animation-delay: 0.25s; }
+.section:nth-child(6) { animation-delay: 0.3s; }
 </style>
 </head>
 <body>
@@ -490,7 +507,7 @@ body {
   <!-- HEADER -->
   <div class="doc-header">
     <div class="doc-meta">
-      <div class="doc-label">株式会社ダンクソフト · 社内資料 · 2026.05.19</div>
+      <div class="doc-label">株式会社ダンクソフト · 社内資料 · 2026.05.25</div>
       <div class="confidential">INTERNAL</div>
     </div>
     <h1 class="doc-title">DUNKSOFTが<br>Anthropicパートナーになる<br>意味と意義</h1>
@@ -505,7 +522,7 @@ body {
     </p>
   </div>
 
-  <!-- SECTION 1: プログラムの概要 -->
+  <!-- SECTION 1 -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">01</div>
@@ -549,7 +566,7 @@ body {
     </div>
   </div>
 
-  <!-- SECTION 2: DUNKSOFTにとっての意味 -->
+  <!-- SECTION 2 -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">02</div>
@@ -612,7 +629,7 @@ body {
     </div>
   </div>
 
-  <!-- SECTION 3: 投資1億ドル -->
+  <!-- SECTION 3 -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">03</div>
@@ -630,11 +647,13 @@ body {
     </div>
 
     <div class="callout">
-      <div class="callout-text">「Anthropicが投資した日本の認証スタートアップ」という文脈は、M銀行の支店長2名との会話を次のステージに引き上げる力を持っている。</div>
+      <div class="callout-text">
+        三菱UFJ銀行・神保町支店 山中支店長との関係は、神田藍の会ラジオへのご招待をきっかけに温まり、支店長から直接お礼のメッセージが届くまでに発展した。「Anthropicが支援する日本の認証スタートアップ」という文脈は、こうした金融機関との対話を次のステージへ引き上げる力を持っている。
+      </div>
     </div>
   </div>
 
-  <!-- SECTION 4: 意義 -->
+  <!-- SECTION 4 -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">04</div>
@@ -651,7 +670,7 @@ body {
       <div class="matrix-card indigo-bg">
         <div class="matrix-icon">🤝</div>
         <div class="matrix-title">AIとの共同開発の実証</div>
-        <div class="matrix-body">85日間・ゼロから製品をClaude共に構築した事例は、Anthropicにとっても価値ある事例研究。「DUNKSOFTはAIと共に構築する企業」としての定義が、社内外のアイデンティティになる。</div>
+        <div class="matrix-body">85日間・ゼロから製品をClaudeと共に構築した事例は、Anthropicにとっても価値ある事例研究。「DUNKSOFTはAIと共に構築する企業」としての定義が、社内外のアイデンティティになる。</div>
       </div>
       <div class="matrix-card green-bg">
         <div class="matrix-icon">👴</div>
@@ -661,15 +680,60 @@ body {
       <div class="matrix-card white-bg">
         <div class="matrix-icon">🏦</div>
         <div class="matrix-title">金融インフラへの道</div>
-        <div class="matrix-body">M銀行2支店長との接点は、銀行のAI認証レイヤー刷新への足がかり。Anthropicパートナーとしての信頼性は、金融機関の意思決定を加速させる。</div>
+        <div class="matrix-body">三菱UFJ銀行・神保町支店 山中支店長との直接交流、そして43年来の信頼関係を持つ地域金融機関が、銀行のAI認証レイヤー刷新への確かな足がかりとなっている。Anthropicパートナーとしての信頼性が意思決定を加速させる。</div>
       </div>
     </div>
   </div>
 
-  <!-- SECTION 5: ロードマップ -->
+  <!-- SECTION 5: 直近モメンタム（新設） -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">05</div>
+      <div class="section-title">直近の実績モメンタム</div>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="momentum-strip">
+      <div class="momentum-date">2026.05.25</div>
+      <div class="momentum-body">
+        <strong>三菱UFJ銀行・神保町支店 山中支店長よりお礼メッセージ</strong><br>
+        神田藍の会ラジオへのご招待をきっかけに、支店長から直接感謝のメッセージが届く。地域コミュニティ×金融機関という関係が着実に深化。ゆっくりお会いする場を設ける流れへ。
+      </div>
+    </div>
+
+    <div class="momentum-strip">
+      <div class="momentum-date">2026.05.25</div>
+      <div class="momentum-body">
+        <strong>野村総合研究所（NRI）× 経済産業省 ダイバーシティ事例集への掲載確定</strong><br>
+        「働きやすい職場づくりと外国人採用の取り組み」として全10社の一社に選定。公表URL近日公開予定。担当・市原敏揮氏（コンサルティング事業本部）との往復の中で、天然色文字AUTH™の構想に対し「視覚思考者として共感する」という個人的な共鳴が生まれた。
+      </div>
+    </div>
+
+    <div class="momentum-strip">
+      <div class="momentum-date">2026.05.01</div>
+      <div class="momentum-body">
+        <strong>Antler Japan Batch 5 第1回面談（星 里美スカウティングマネージャー）</strong><br>
+        ポジティブな反応を受け、共同創業者マッチングセッションの案内へ。求めるプロフィールはMarketing＋Finance（エンジニアリング不要）。
+      </div>
+    </div>
+
+    <div class="momentum-strip">
+      <div class="momentum-date">2026.04.17</div>
+      <div class="momentum-body">
+        <strong>Y Combinator Summer 2026 応募</strong><br>
+        漢字×HEXカラー＝128bit認証トークンシステムでの応募。結果は6月5日。
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top: 4px;">
+      <div class="callout-text">NRIコンサルタントが「視覚思考者として共感する」と自己開示したこと、MUFJの支店長がラジオをきっかけに直接お礼を伝えてきたこと——これらは製品説明以前に、人と人の感覚が共鳴している証拠。天然色文字AUTH™の本質はここにある。</div>
+    </div>
+  </div>
+
+  <!-- SECTION 6: ロードマップ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">06</div>
       <div class="section-title">パートナー承認後のロードマップ</div>
       <div class="section-line"></div>
     </div>
@@ -683,7 +747,8 @@ body {
           <li>Code with Claude Tokyo（6/10）登壇</li>
           <li>CHROMAKEY AUTH™ライブデモ</li>
           <li>久保さんのユースケース発表</li>
-          <li>Anthropicチームとの初ミーティング</li>
+          <li>NRI・MUFJ接点を活かした金融機関アプローチ</li>
+          <li>YC結果（6/5）・Antler共同創業者マッチング</li>
         </ul>
       </div>
       <div class="roadmap-item" style="border-left:1px solid var(--border);">
@@ -693,7 +758,7 @@ body {
         <ul class="roadmap-items">
           <li>Mythos × Claude API統合開始</li>
           <li>auth-config.json SaaS化</li>
-          <li>銀行パイロット提案</li>
+          <li>銀行パイロット提案（神保町支店・徳島合同証券）</li>
           <li>偏・つくり分解認証プロトタイプ</li>
         </ul>
       </div>
@@ -714,7 +779,7 @@ body {
   <!-- FOOTER -->
   <div class="doc-footer">
     <div class="footer-text">株式会社ダンクソフト · Smart Life Styles™ · COLOURFUL JAPAN™</div>
-    <div class="footer-text">COLORFUL KANJI AUTH™ · PATENT PENDING · 2026.05.19</div>
+    <div class="footer-text">COLORFUL KANJI AUTH™ · PATENT PENDING · 2026.05.25</div>
   </div>
 
 </div>
