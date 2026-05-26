@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prologから、Claudeへ。 | 星野ロベルト / Smart Life Styles™</title>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;700;800&family=Zen+Kaku+Gothic+New:wght@300;400;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F7F4EE;
+  --paper: #FDFBF7;
+  --ink: #1A1814;
+  --ink2: #4A4740;
+  --ink3: #9A9690;
+  --amber: #C8861A;
+  --amber-pale: rgba(200,134,26,0.1);
+  --amber-light: #E8B84B;
+  --teal: #1A6A5A;
+  --teal-pale: rgba(26,106,90,0.08);
+  --red: #8B2020;
+  --border: rgba(26,24,20,0.1);
+  --serif: 'Shippori Mincho', serif;
+  --sans: 'Zen Kaku Gothic New', sans-serif;
+  --mono: 'DM Mono', monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--serif);
+  line-height: 2.0;
+}
+
+/* ─── GRAIN TEXTURE ─── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 999;
+  opacity: 0.4;
+}
+
+/* ─── LAYOUT ─── */
+.wrapper {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 32px 100px;
+}
+
+@media (max-width: 600px) {
+  .wrapper { padding: 0 20px 80px; }
+}
+
+/* ─── TOP STRIPE ─── */
+.top-stripe {
+  height: 4px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--amber) 0px,
+    var(--amber) 40px,
+    var(--teal) 40px,
+    var(--teal) 80px,
+    var(--ink) 80px,
+    var(--ink) 120px
+  );
+  margin-bottom: 0;
+}
+
+/* ─── HEADER ─── */
+.article-header {
+  padding: 56px 0 40px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 48px;
+}
+
+.series-tag {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.series-tag::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--amber);
+  opacity: 0.3;
+  max-width: 60px;
+}
+
+.article-title {
+  font-family: var(--serif);
+  font-size: clamp(28px, 5vw, 48px);
+  font-weight: 800;
+  line-height: 1.25;
+  color: var(--ink);
+  margin-bottom: 16px;
+  letter-spacing: -0.01em;
+}
+
+.article-title .sub {
+  display: block;
+  font-size: clamp(14px, 2.5vw, 20px);
+  font-weight: 400;
+  color: var(--ink2);
+  margin-top: 8px;
+  letter-spacing: 0.02em;
+}
+
+.article-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+
+.meta-author {
+  font-family: var(--sans);
+  font-size: 12px;
+  color: var(--ink2);
+  font-weight: 700;
+}
+
+.meta-date {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--ink3);
+  letter-spacing: 0.08em;
+}
+
+.meta-tag {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  padding: 2px 8px;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  color: var(--ink3);
+}
+
+/* ─── LEAD ─── */
+.lead {
+  font-size: clamp(16px, 2.5vw, 20px);
+  line-height: 2.1;
+  color: var(--ink);
+  font-weight: 500;
+  margin-bottom: 48px;
+  padding: 28px 32px;
+  background: var(--paper);
+  border-left: 3px solid var(--amber);
+  border-radius: 0 6px 6px 0;
+  position: relative;
+}
+
+.lead::before {
+  content: '""';
+  font-family: var(--serif);
+  font-size: 80px;
+  color: var(--amber);
+  opacity: 0.15;
+  position: absolute;
+  top: -10px;
+  left: 12px;
+  line-height: 1;
+}
+
+/* ─── BODY TEXT ─── */
+.body p {
+  font-size: clamp(15px, 2vw, 17px);
+  line-height: 2.2;
+  color: var(--ink2);
+  margin-bottom: 28px;
+}
+
+.body p strong {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.body p em {
+  font-style: normal;
+  color: var(--amber);
+  font-weight: 700;
+}
+
+/* ─── CHAPTER HEADERS ─── */
+.chapter {
+  margin: 52px 0 24px;
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+}
+
+.chapter-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: var(--amber);
+  flex-shrink: 0;
+}
+
+.chapter-title {
+  font-family: var(--serif);
+  font-size: clamp(18px, 3vw, 24px);
+  font-weight: 800;
+  color: var(--ink);
+  line-height: 1.4;
+}
+
+/* ─── CALLOUT / EPISODE ─── */
+.episode {
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 28px 32px;
+  margin: 32px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.episode::after {
+  content: attr(data-watermark);
+  position: absolute;
+  right: -8px;
+  bottom: -12px;
+  font-family: var(--serif);
+  font-size: 80px;
+  font-weight: 800;
+  color: rgba(26,24,20,0.04);
+  pointer-events: none;
+  line-height: 1;
+}
+
+.episode-label {
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  margin-bottom: 12px;
+}
+
+.episode p {
+  font-size: 14px;
+  color: var(--ink2);
+  line-height: 1.9;
+  margin-bottom: 0 !important;
+}
+
+.episode p strong { color: var(--ink); }
+
+/* ─── TIMELINE ─── */
+.timeline {
+  margin: 36px 0;
+  position: relative;
+  padding-left: 28px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  bottom: 8px;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--amber), var(--teal));
+}
+
+.tl-item {
+  margin-bottom: 28px;
+  position: relative;
+}
+
+.tl-item::before {
+  content: '';
+  position: absolute;
+  left: -24px;
+  top: 8px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--amber);
+}
+
+.tl-item:last-child::before {
+  border-color: var(--teal);
+  background: var(--teal);
+}
+
+.tl-year {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: var(--amber);
+  margin-bottom: 4px;
+}
+
+.tl-item:last-child .tl-year { color: var(--teal); }
+
+.tl-text {
+  font-size: 14px;
+  color: var(--ink2);
+  line-height: 1.85;
+}
+
+.tl-text strong { color: var(--ink); }
+
+/* ─── HIGHLIGHT NUMBER ─── */
+.big-number {
+  display: inline-block;
+  font-family: var(--serif);
+  font-size: clamp(36px, 6vw, 56px);
+  font-weight: 800;
+  color: var(--amber);
+  line-height: 1;
+  margin-right: 8px;
+}
+
+.number-context {
+  font-size: 13px;
+  color: var(--ink3);
+  line-height: 1.6;
+}
+
+.number-box {
+  background: var(--amber-pale);
+  border: 1px solid rgba(200,134,26,0.2);
+  border-radius: 8px;
+  padding: 24px 28px;
+  margin: 28px 0;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* ─── QUOTE ─── */
+.pull-quote {
+  margin: 40px 0;
+  padding: 0 0 0 24px;
+  border-left: 4px solid var(--teal);
+}
+
+.pull-quote-text {
+  font-family: var(--serif);
+  font-size: clamp(17px, 2.5vw, 22px);
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.75;
+  font-style: italic;
+}
+
+.pull-quote-source {
+  font-family: var(--sans);
+  font-size: 11px;
+  color: var(--ink3);
+  margin-top: 8px;
+  font-weight: 400;
+}
+
+/* ─── FOOTER ─── */
+.article-footer {
+  margin-top: 64px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+}
+
+.footer-brand {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--ink3);
+  margin-bottom: 8px;
+}
+
+.footer-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.ftag {
+  font-family: var(--sans);
+  font-size: 11px;
+  padding: 4px 12px;
+  border-radius: 2px;
+  background: var(--paper);
+  border: 1px solid var(--border);
+  color: var(--ink3);
+}
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.article-header { animation: fadeUp 0.6s ease both; }
+.lead { animation: fadeUp 0.6s ease 0.1s both; }
+.body { animation: fadeUp 0.6s ease 0.2s both; }
+</style>
+</head>
+<body>
+
+<div class="top-stripe"></div>
+
+<div class="wrapper">
+
+  <!-- HEADER -->
+  <header class="article-header">
+    <div class="series-tag">Smart Life Styles™ · チャレンジの記録</div>
+    <h1 class="article-title">
+      Prologから、Claudeへ。
+      <span class="sub">——30年後のAIと、また遊んでいる。</span>
+    </h1>
+    <div class="article-meta">
+      <div class="meta-author">星野ロベルト / 株式会社ダンクソフト</div>
+      <div class="meta-date">2026.05.26</div>
+      <div class="meta-tag">AI</div>
+      <div class="meta-tag">チャレンジ</div>
+      <div class="meta-tag">神田</div>
+    </div>
+  </header>
+
+  <!-- LEAD -->
+  <div class="lead">
+    前回のAIブームで、Prologを書いていた。<br>
+    あれから30年以上。今、NoteはAIと書き、HTMLは全部書いてもらっている。<br>
+    良い時代に、また始まっている。
+  </div>
+
+  <!-- BODY -->
+  <div class="body">
+
+    <div class="chapter">
+      <div class="chapter-num">01</div>
+      <div class="chapter-title">最初のAIブームと、Prologの記憶</div>
+    </div>
+
+    <p>
+      1980〜90年代、最初のAIブームがあった。私はその熱気の中でPrologを書いていた。論理プログラミング、知識ベース、推論エンジン——当時の言葉は今でも覚えている。<strong>コンピュータが「考える」かもしれないという興奮は、本物だった。</strong>
+    </p>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-year">1980s — 1990s</div>
+        <div class="tl-text"><strong>第一次AIブーム。</strong>Prologで知識表現・推論システムを実装。電鉄のダイヤ最適化など、実課題への応用が始まる。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">その後</div>
+        <div class="tl-text">AIの手法を応用し、<strong>高層ビルの工程管理最適化システム</strong>を20ステップほどの関数で実装。処理を劇的に高速化。大成建設と特許化にトライ——ならず。でも良い思い出。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2026年、今</div>
+        <div class="tl-text"><strong>Claudeと認証システムを共同開発中。</strong>NoteはAIと書き、HTMLは全部書いてもらっている。</div>
+      </div>
+    </div>
+
+    <p>
+      大成建設との特許トライアルは、結局実らなかった。でも悔しいというより、<em>良い思い出</em>として残っている。あの経験が、「技術は人の問題を解くためにある」という感覚を体に染み込ませてくれた。
+    </p>
+
+    <div class="chapter">
+      <div class="chapter-num">02</div>
+      <div class="chapter-title">10億倍の世界で、変わらないもの</div>
+    </div>
+
+    <div class="number-box">
+      <div>
+        <span class="big-number">10億倍</span>
+      </div>
+      <div class="number-context">
+        この40年でデジタルが成長した倍率。<br>
+        集積技術の進化が、想像を超えるスケールで世界を変えた。<br>
+        そしてまだ、進化は続いている。
+      </div>
+    </div>
+
+    <p>
+      デジタルはこの40年で10億倍成長した。その根底にある「小さく精緻化する」集積技術——これは実は、日本人のDNAに刻まれた得意技ではないかと思っている。
+    </p>
+
+    <div class="episode" data-watermark="神">
+      <div class="episode-label">神田 · 久保さんとの対話</div>
+      <p>
+        神田藍の会のラジオで、91歳の久保さんとこの話をした。「小さく精緻化する技術は、少彦名命（すくなびこなのみこと）の時代から日本人の得意技かもしれない」と話したら、<strong>「まさに！」と興奮気味に喜んでくれた。</strong>久保さんはAIとのセッションをとても楽しみにしている、とラジオで語っていた。30代も91歳も、同じ目で輝いている。
+      </p>
+    </div>
+
+    <p>
+      少彦名命は、神田明神に祀られる神のひとり。小さなもの、細やかなものを司る神様だ。半導体の微細化、漢字の一画に宿る意味、色彩の繊細な差異——<strong>日本人が「小さく精緻に」作り込む力は、技術だけでなく文化の根っこにある。</strong>
+    </p>
+
+    <div class="pull-quote">
+      <div class="pull-quote-text">「昨日の正解が今日の間違いになる世界で、<br>問い続けて楽しめる人間が強い。」</div>
+      <div class="pull-quote-source">— ダンクソフト創業以来の哲学</div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-num">03</div>
+      <div class="chapter-title">今度こそ、もっとインパクトを</div>
+    </div>
+
+    <p>
+      あのPrologの時代から30年以上経って、今またAIと一緒に何かを作っている。今度は<strong>漢字×色彩×記憶で認証する</strong>システム。フィッシングされない、人間らしい認証の仕組みを、Claudeと対話しながら設計している。
+    </p>
+
+    <p>
+      NoteをAIと書き、HTMLは全部書いてもらっている。大成建設との特許が実らなかったあの頃とは、スケールも速度も道具も、何もかもが違う。<strong>でも「面白いものを作りたい」という衝動だけは、まったく変わっていない。</strong>
+    </p>
+
+    <div class="episode" data-watermark="今">
+      <div class="episode-label">2026年 · 現在進行形</div>
+      <p>
+        Y Combinator Summer 2026に応募し、Antler Japanと面談し、野村総研×経済産業省のダイバーシティ事例集に掲載が決まった。三菱UFJ銀行の支店長が神田藍の会のラジオを聴いてお礼を言いに来る。<strong>つながりの速度が、前回のAIブームとは根本的に違う。</strong>
+      </p>
+    </div>
+
+    <p>
+      良い時代に、また始まっている。Prologを書いていた自分が聞いたら、きっと目を丸くするような速さで、世界がつながっていく。
+    </p>
+
+    <p>
+      久保さんが91歳でAIとのセッションを楽しみにしている。それが、このプロジェクトの本質を一番よく表していると思う。<em>年齢も時代も超えて、人は「面白いもの」に夢中になれる。</em>
+    </p>
+
+    <div class="pull-quote">
+      <div class="pull-quote-text">Prologから、Claudeへ。<br>隔世の感はあるけれど、<br>遊んでいる感覚は、あの頃と同じだ。</div>
+      <div class="pull-quote-source">— 星野ロベルト / 2026年5月</div>
+    </div>
+
+  </div><!-- /body -->
+
+  <!-- FOOTER -->
+  <footer class="article-footer">
+    <div class="footer-brand">Smart Life Styles™ · Love your life, love your time® · 株式会社ダンクソフト</div>
+    <div class="footer-brand" style="margin-top:4px;">note: roberto_hoshino · GitHub: robertohoshino · https://dunksoft.jp</div>
+    <div class="footer-tags">
+      <span class="ftag">#AI</span>
+      <span class="ftag">#Prolog</span>
+      <span class="ftag">#Claude</span>
+      <span class="ftag">#チャレンジ</span>
+      <span class="ftag">#神田</span>
+      <span class="ftag">#少彦名命</span>
+      <span class="ftag">#認証</span>
+      <span class="ftag">#ダンクソフト</span>
+      <span class="ftag">#SmartLifeStyles</span>
+    </div>
+  </footer>
+
+</div><!-- /wrapper -->
+</body>
+</html>
