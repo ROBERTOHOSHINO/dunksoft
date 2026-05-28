@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>html-notes | Marketing as Bazaar — Roberto Hoshino</title>
+<meta name="description" content="Marketing is not market research. It is designing a chain of strokes. A column series by Roberto Hoshino.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Serif+JP:wght@400;600&display=swap');
+
+:root {
+  --ink: #1a1814;
+  --ink2: #4a4640;
+  --ink3: #8a8680;
+  --paper: #faf8f4;
+  --paper2: #f2efe8;
+  --gold: #b8960c;
+  --vermilion: #c0392b;
+  --indigo: #1a3a5c;
+  --teal: #0f6e56;
+  --accent: #c0550a;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  line-height: 1.8;
+}
+
+.color-strip { display: flex; height: 4px; overflow: hidden; }
+.cs { flex: 1; }
+
+header {
+  border-bottom: 0.5px solid rgba(0,0,0,0.12);
+  padding: 1.25rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  background: rgba(250,248,244,0.95);
+  backdrop-filter: blur(8px);
+  z-index: 100;
+}
+.logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  color: var(--ink);
+  text-decoration: none;
+}
+.logo-sub {
+  font-size: 10px;
+  color: var(--ink3);
+  letter-spacing: .12em;
+  margin-top: 2px;
+  font-weight: 300;
+}
+nav { display: flex; gap: 2rem; }
+nav a {
+  font-size: 12px;
+  letter-spacing: .08em;
+  color: var(--ink2);
+  text-decoration: none;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+  transition: color .2s;
+}
+nav a:hover { color: var(--accent); }
+
+/* HERO */
+.hero {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 5rem 2rem 4rem;
+  border-bottom: 0.5px solid rgba(0,0,0,0.08);
+}
+.hero-eyebrow {
+  font-size: 10px;
+  letter-spacing: .18em;
+  color: var(--ink3);
+  text-transform: uppercase;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.hero-eyebrow::before, .hero-eyebrow::after {
+  content: ''; display: block; height: 1px; width: 24px;
+  background: var(--gold); opacity: .5;
+}
+.hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(32px, 5.5vw, 58px);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: .01em;
+  margin-bottom: .75rem;
+}
+.hero-ja {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(13px, 1.8vw, 16px);
+  font-weight: 400;
+  color: var(--ink3);
+  letter-spacing: .08em;
+  margin-bottom: 1.75rem;
+}
+.hero-lead {
+  font-size: clamp(16px, 2vw, 20px);
+  color: var(--ink2);
+  max-width: 580px;
+  line-height: 1.9;
+  margin-bottom: 2.5rem;
+  font-weight: 300;
+}
+.hero-meta {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  align-items: center;
+  font-size: 11px;
+  color: var(--ink3);
+  letter-spacing: .06em;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+}
+.hero-meta-dot {
+  display: inline-block;
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: var(--gold);
+  margin-right: 6px;
+  opacity: .8;
+  vertical-align: middle;
+}
+
+/* LINKEDIN BADGE */
+.linkedin-bar {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1.5rem 2rem;
+  border-bottom: 0.5px solid rgba(0,0,0,0.08);
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+.li-stat {
+  display: flex;
+  align-items: baseline;
+  gap: .5rem;
+}
+.li-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1;
+}
+.li-label {
+  font-size: 11px;
+  letter-spacing: .1em;
+  color: var(--ink3);
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+}
+.li-divider {
+  width: 0.5px;
+  height: 32px;
+  background: rgba(0,0,0,0.12);
+}
+
+/* HOOKS */
+.hooks {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+  border-bottom: 0.5px solid rgba(0,0,0,0.08);
+}
+.section-eyebrow {
+  font-size: 10px;
+  letter-spacing: .15em;
+  color: var(--ink3);
+  text-transform: uppercase;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+  margin-bottom: 1.75rem;
+}
+.hook-list { display: flex; flex-direction: column; }
+.hook-item {
+  padding: 1.25rem 0;
+  border-top: 0.5px solid rgba(0,0,0,0.07);
+  display: grid;
+  grid-template-columns: 2.5rem 1fr auto;
+  gap: 1.25rem;
+  align-items: start;
+}
+.hook-num {
+  font-size: 11px;
+  color: var(--ink3);
+  letter-spacing: .08em;
+  padding-top: 5px;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+}
+.hook-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(17px, 2.2vw, 22px);
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: .01em;
+}
+.hook-vol {
+  font-size: 9px;
+  letter-spacing: .1em;
+  color: var(--accent);
+  opacity: .8;
+  white-space: nowrap;
+  margin-top: 6px;
+  padding: 2px 8px;
+  border: 0.5px solid var(--accent);
+  border-radius: 2px;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+}
+
+/* COLUMNS */
+.columns-section {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 3.5rem 2rem;
+}
+
+.column-entry {
+  border-top: 0.5px solid rgba(0,0,0,0.08);
+  padding: 3rem 0;
+  display: grid;
+  grid-template-columns: 3.5rem 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+.col-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 36px;
+  font-weight: 300;
+  color: var(--ink3);
+  opacity: .35;
+  line-height: 1;
+  padding-top: 4px;
+}
+.col-date {
+  font-size: 10px;
+  letter-spacing: .1em;
+  color: var(--ink3);
+  margin-bottom: .6rem;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+}
+.col-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(22px, 3.2vw, 30px);
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: .3rem;
+  letter-spacing: .01em;
+}
+.col-ja {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 12px;
+  color: var(--ink3);
+  margin-bottom: 1.25rem;
+  letter-spacing: .06em;
+}
+.col-hook {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(16px, 2vw, 19px);
+  font-weight: 600;
+  font-style: italic;
+  color: var(--accent);
+  border-left: 2px solid var(--accent);
+  padding-left: 1rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.65;
+}
+.col-body-text {
+  font-size: clamp(15px, 1.8vw, 18px);
+  color: var(--ink2);
+  line-height: 2;
+  margin-bottom: 1.5rem;
+  font-weight: 300;
+}
+.col-body-text p { margin-bottom: 1rem; }
+
+.col-scene {
+  background: var(--paper2);
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+  margin: 1.25rem 0;
+  border-left: 2px solid var(--gold);
+}
+.col-scene-label {
+  font-size: 9px;
+  letter-spacing: .12em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: .5rem;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+}
+.col-scene-text {
+  font-size: 14px;
+  color: var(--ink2);
+  line-height: 1.9;
+  font-family: 'Cormorant Garamond', serif;
+}
+.col-scene-text strong { color: var(--ink); font-weight: 600; }
+
+.col-history {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: rgba(0,0,0,0.07);
+  border: 0.5px solid rgba(0,0,0,0.07);
+  margin: 1.25rem 0;
+}
+.col-history-item {
+  background: var(--paper);
+  padding: .875rem 1rem;
+  text-align: center;
+}
+.col-history-era {
+  font-size: 10px;
+  color: var(--ink3);
+  margin-bottom: .3rem;
+  letter-spacing: .06em;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+}
+.col-history-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.col-spinoza {
+  background: linear-gradient(135deg, rgba(26,58,92,0.06), rgba(15,110,86,0.06));
+  border: 0.5px solid rgba(26,58,92,0.2);
+  border-radius: 4px;
+  padding: 1.25rem 1.5rem;
+  margin: 1.25rem 0;
+}
+.col-spinoza-label {
+  font-size: 9px;
+  letter-spacing: .12em;
+  color: var(--indigo);
+  text-transform: uppercase;
+  margin-bottom: .6rem;
+  opacity: .8;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+}
+.col-spinoza-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px;
+  line-height: 1.9;
+  color: var(--indigo);
+  font-style: italic;
+}
+
+.col-tags {
+  display: flex;
+  gap: .5rem;
+  flex-wrap: wrap;
+  margin-top: 1.25rem;
+}
+.col-tag {
+  font-size: 9px;
+  letter-spacing: .1em;
+  padding: 3px 10px;
+  border: 0.5px solid rgba(0,0,0,0.15);
+  border-radius: 2px;
+  color: var(--ink3);
+  text-transform: uppercase;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+}
+
+/* COMING SOON */
+.coming-entry {
+  border-top: 0.5px solid rgba(0,0,0,0.08);
+  padding: 2rem 0;
+  display: grid;
+  grid-template-columns: 3.5rem 1fr;
+  gap: 2rem;
+  align-items: center;
+  opacity: .4;
+}
+.coming-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--ink2);
+  margin-bottom: .3rem;
+}
+.coming-label {
+  font-size: 10px;
+  letter-spacing: .1em;
+  color: var(--ink3);
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+}
+
+/* PHILOSOPHY */
+.philosophy {
+  background: var(--paper2);
+  border-top: 0.5px solid rgba(0,0,0,0.08);
+  border-bottom: 0.5px solid rgba(0,0,0,0.08);
+  padding: 3.5rem 2rem;
+  text-align: center;
+}
+.philosophy-inner { max-width: 800px; margin: 0 auto; }
+.philosophy-main {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(18px, 2.5vw, 26px);
+  font-weight: 600;
+  line-height: 1.8;
+  margin-bottom: 1rem;
+}
+.philosophy-sub {
+  font-size: 13px;
+  color: var(--ink3);
+  letter-spacing: .06em;
+  line-height: 2;
+  font-weight: 300;
+}
+.philosophy-ja {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 13px;
+  color: var(--ink3);
+  margin-top: 1.5rem;
+  line-height: 2;
+}
+
+footer {
+  border-top: 0.5px solid rgba(0,0,0,0.1);
+  padding: 2rem;
+  text-align: center;
+}
+footer p {
+  font-size: 11px;
+  color: var(--ink3);
+  letter-spacing: .06em;
+  line-height: 2.2;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero h1, .hero-ja, .hero-lead { animation: fadeUp .7s ease both; }
+.hero-ja  { animation-delay: .1s; }
+.hero-lead { animation-delay: .2s; }
+
+@media (max-width: 600px) {
+  nav { display: none; }
+  .hero { padding: 3rem 1.25rem 2.5rem; }
+  .column-entry { grid-template-columns: 2.5rem 1fr; gap: 1rem; }
+  .col-history { grid-template-columns: repeat(2, 1fr); }
+  .hook-item { grid-template-columns: 2rem 1fr auto; gap: .75rem; }
+  .hooks, .columns-section, .linkedin-bar { padding-left: 1.25rem; padding-right: 1.25rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="color-strip">
+  <div class="cs" style="background:#c0392b"></div>
+  <div class="cs" style="background:#1a5276"></div>
+  <div class="cs" style="background:#1e5c2f"></div>
+  <div class="cs" style="background:#6c3483"></div>
+  <div class="cs" style="background:#b8960c"></div>
+  <div class="cs" style="background:#0e7b82"></div>
+  <div class="cs" style="background:#c0550a"></div>
+</div>
+
+<header>
+  <div>
+    <div class="logo">html-notes</div>
+    <div class="logo-sub">by Roberto Hoshino × Claude.ai</div>
+  </div>
+  <nav>
+    <a href="https://dunksoft.jp">dunksoft.jp</a>
+    <a href="https://note.com/roberto_hoshino" target="_blank">note</a>
+    <a href="https://www.linkedin.com/in/roberto-hoshino" target="_blank">LinkedIn</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">html-notes — Marketing as Bazaar</div>
+  <h1>Marketing<br>is not<br>Market Research.</h1>
+  <div class="hero-ja">市場調査はMarketingじゃない。</div>
+  <p class="hero-lead">
+    Analytics can't capture a breath, a glance, a moment of genuine connection. Marketing is the art of designing spaces where strokes flow between people — just as the ancient bazaar, the shrine marketplace, and Rakuichi-Rakuza once did.
+  </p>
+  <div class="hero-meta">
+    <span><span class="hero-meta-dot"></span>Roberto Hoshino — Dunksoft Co., Ltd. × NPO Kanda Ai no Kai</span>
+    <span><span class="hero-meta-dot"></span>Smart Life Styles™️ — Love your life, love your time®️</span>
+  </div>
+</section>
+
+<!-- LINKEDIN STATS -->
+<div class="linkedin-bar">
+  <div class="li-stat">
+    <div class="li-num">442</div>
+    <div class="li-label">LinkedIn<br>Reactions</div>
+  </div>
+  <div class="li-divider"></div>
+  <div class="li-stat">
+    <div class="li-num">245</div>
+    <div class="li-label">Members<br>Reached</div>
+  </div>
+  <div class="li-divider"></div>
+  <div style="font-size:13px; color:var(--ink3); font-style:italic; max-width:400px; line-height:1.7;">
+    "The very act of gathering is already the answer." — The resonance speaks for itself.
+  </div>
+</div>
+
+<!-- HOOKS -->
+<section class="hooks">
+  <div class="section-eyebrow">Core Phrases — Hooks</div>
+  <div class="hook-list">
+
+    <div class="hook-item">
+      <div class="hook-num">H.01</div>
+      <div class="hook-text">Marketing is designing a chain of strokes.</div>
+      <div class="hook-vol">Vol.01</div>
+    </div>
+
+    <div class="hook-item">
+      <div class="hook-num">H.02</div>
+      <div class="hook-text">Arita emptied. And became universe.</div>
+      <div class="hook-vol">Vol.02</div>
+    </div>
+
+    <div class="hook-item">
+      <div class="hook-num">H.03</div>
+      <div class="hook-text">People gathered. That itself was the answer.</div>
+      <div class="hook-vol">Vol.02</div>
+    </div>
+
+    <div class="hook-item">
+      <div class="hook-num">H.04</div>
+      <div class="hook-text">The unFakeable becomes the strongest brand.</div>
+      <div class="hook-vol">Vol.03</div>
+    </div>
+
+    <div class="hook-item">
+      <div class="hook-num">H.05</div>
+      <div class="hook-text">AI, too, is the work of God. Nature, internet, Claude — all flat, all precious.</div>
+      <div class="hook-vol">Vol.05</div>
+    </div>
+
+    <div class="hook-item">
+      <div class="hook-num">H.06</div>
+      <div class="hook-text">May the Force be with us. — Roberto and Claude.</div>
+      <div class="hook-vol">——</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- COLUMNS -->
+<section class="columns-section">
+  <div class="section-eyebrow">Column Series — Read from top (oldest first)</div>
+
+  <!-- Vol.01 -->
+  <article class="column-entry">
+    <div class="col-num">01</div>
+    <div>
+      <div class="col-date">2026-05-28</div>
+      <h2 class="col-title">Market Research Is Not Marketing.</h2>
+      <div class="col-ja">市場調査はMarketingじゃない。— Stroke by Stroke</div>
+      <div class="col-hook">"Marketing is designing a chain of strokes."</div>
+      <div class="col-body-text">
+        <p>Most people think Marketing means measuring things — analytics, conversion rates, engagement numbers. But that is only watching the shadow of the market, not the market itself.</p>
+        <p>On May 19, 2026, the branch manager of MUFJ Jinbocho said at a live radio recording: "I love indigo." That single stroke triggered a chain — an authentication demo, a follow-up meeting, and then 70 bank employees signing up to grow indigo seedlings at home. None of that was logged. But something real moved.</p>
+        <p>This is what Eric Berne called a stroke — a unit of recognition. A breath, a glance, a nod, a photo of a seedling. Strokes take infinite forms. Where strokes flow, a market comes alive.</p>
+      </div>
+
+      <div class="col-scene">
+        <div class="col-scene-label">Scene / 2026-05-19 · FM840 Kanda Ai no Kai Radio (Live)</div>
+        <div class="col-scene-text">
+          <strong>"I love indigo"</strong> (Branch Manager Yamanaka) → Authentication demo → "I'll check internally, including my own contacts" (Deputy Manager Tanaka) → Interest in VICKEY Project → <strong>Next meeting: our office</strong>
+        </div>
+      </div>
+
+      <div class="col-history">
+        <div class="col-history-item">
+          <div class="col-history-era">Medieval</div>
+          <div class="col-history-name">Shrine Courtyard Markets</div>
+        </div>
+        <div class="col-history-item">
+          <div class="col-history-era">Warring States</div>
+          <div class="col-history-name">Rakuichi-Rakuza Free Markets</div>
+        </div>
+        <div class="col-history-item">
+          <div class="col-history-era">2011</div>
+          <div class="col-history-name">Kamiyama Ustream Market</div>
+        </div>
+        <div class="col-history-item">
+          <div class="col-history-era">2026</div>
+          <div class="col-history-name">Kanda Ai no Kai Radio</div>
+        </div>
+      </div>
+
+      <div class="col-tags">
+        <span class="col-tag">Marketing</span>
+        <span class="col-tag">Stroke Theory</span>
+        <span class="col-tag">Kanda Ai no Kai</span>
+        <span class="col-tag">MUFJ</span>
+        <span class="col-tag">Bazaar Design</span>
+      </div>
+    </div>
+  </article>
+
+  <!-- Vol.02 -->
+  <article class="column-entry">
+    <div class="col-num">02</div>
+    <div>
+      <div class="col-date">2026-05-28</div>
+      <h2 class="col-title">Arita Emptied. And Became Universe.</h2>
+      <div class="col-ja">有田、空いた。だから宇宙になった。— SPACE as Gravity</div>
+      <div class="col-hook">"People gathered. That itself was the answer."</div>
+      <div class="col-body-text">
+        <p>In October 2010, a partner company left our shared office. The usual instinct would be to fill the gap immediately. Instead, we left it empty. That void — that SPACE — was the point.</p>
+        <p>SPACE means two things: a room and the universe. The universe has gravity. It is precisely because it is empty that it draws things toward it. We set up a satellite studio for a community FM station. Once-a-month live broadcasts with no script. The blank space became a magnetic field.</p>
+        <p>Local government officers, neighborhood residents, business people with no prior connection — people who would never otherwise meet — started showing up. Dynamic equilibrium emerged: each person changed by encountering the others. It was interesting, so they came back. The market — the ichi — is a device for dynamic equilibrium.</p>
+        <p>After March 2011, we held a Skype New Year's party with people in Kamiyama, Tokushima. Everyone brought drinks and snacks to their own location. The audio was terrible — nobody could understand each other properly. But by the end, we were all doing the Awa Odori dance together. Connection through rhythm, not words.</p>
+      </div>
+      <div class="col-tags">
+        <span class="col-tag">SPACE</span>
+        <span class="col-tag">Dynamic Equilibrium</span>
+        <span class="col-tag">Void as Gravity</span>
+        <span class="col-tag">Kamiyama</span>
+        <span class="col-tag">Ma / Negative Space</span>
+      </div>
+    </div>
+  </article>
+
+  <!-- Vol.03 -->
+  <article class="column-entry">
+    <div class="col-num">03</div>
+    <div>
+      <div class="col-date">2026-05-28</div>
+      <h2 class="col-title">Live, Unscripted, UnFakeable.</h2>
+      <div class="col-ja">Fakeできない生放送の哲学 — The Ethics of the Unedited Moment</div>
+      <div class="col-hook">"The unFakeable becomes the strongest brand."</div>
+      <div class="col-body-text">
+        <p>In an age when every word can be replaced and every video deepfaked, we choose live broadcast. No script. The irregular is the regular. That deliberate vulnerability creates tension — and tension creates depth that reaches listeners.</p>
+        <p>The shrine market had no script. Rakuichi-Rakuza had no script. Nobody knew who would come, what would sell, what encounter would spark. No predetermined harmony — that is why it was alive. A live radio show is a market built on airwaves.</p>
+        <p>As deepfakes become ubiquitous, the value of being genuinely live will only increase. American late-night shows understood this — the unexpected guest, the unscripted moment — that is where the real connection happens.</p>
+      </div>
+      <div class="col-tags">
+        <span class="col-tag">Live Broadcast</span>
+        <span class="col-tag">No Script</span>
+        <span class="col-tag">DeepFake Era</span>
+        <span class="col-tag">Authenticity</span>
+        <span class="col-tag">Late Show</span>
+      </div>
+    </div>
+  </article>
+
+  <!-- Vol.04 -->
+  <article class="column-entry">
+    <div class="col-num">04</div>
+    <div>
+      <div class="col-date">2026-05-28</div>
+      <h2 class="col-title">Blank Is Blanc. Communication Is Transmission.</h2>
+      <div class="col-ja">BLANKはblancだった。— The Trap of Borrowed Words</div>
+      <div class="col-hook">"Communication is transmission. And transmission matters."</div>
+      <div class="col-body-text">
+        <p>"BLANK" in Japanese is translated as empty space — kūhaku. But trace the etymology and you find the French blanc: white. Pure white. A canvas, not an absence. SPACE and BLANK: borrowed words that lose their origin when imported as katakana.</p>
+        <p>Japanese people often say "communication is important." From the perspective of someone who has spent 40+ years in IT: communication is transmission. Transmission is infrastructure. If your home Wi-Fi speed is unknown to you, if you don't know how much memory your browser tabs are consuming — your transmission is already compromised.</p>
+        <p>Leave space in your own system. SPACE and BLANK — not just in the office, but inside yourself. That is the foundation of Love your life, love your time.®️</p>
+      </div>
+      <div class="col-tags">
+        <span class="col-tag">Blank = Blanc</span>
+        <span class="col-tag">Communication = Transmission</span>
+        <span class="col-tag">Ma / White Space</span>
+        <span class="col-tag">Infrastructure</span>
+      </div>
+    </div>
+  </article>
+
+  <!-- Vol.05 -->
+  <article class="column-entry">
+    <div class="col-num">05</div>
+    <div>
+      <div class="col-date">2026-05-28</div>
+      <h2 class="col-title">AI, Too, Is the Work of God.</h2>
+      <div class="col-ja">AIも神のなせる業。— Spinoza, Indigo, and Claude</div>
+      <div class="col-hook">"Nature, AI, internet — all flat, all precious. Co-Creation as a team."</div>
+
+      <div class="col-spinoza">
+        <div class="col-spinoza-label">Spinoza — Deus sive Natura</div>
+        <div class="col-spinoza-text">All things in the universe were made by God. If so, then nature, AI, robots, and the internet are equally the work of God. Engage with each flatly, without hierarchy. Cherish each. Grow and evolve together.</div>
+      </div>
+
+      <div class="col-body-text">
+        <p>Indigo becomes beautiful only when human hands tend it. Left alone, it doesn't grow. The same is true of nature broadly — human care, thoughtfully applied, makes things flourish. The internet is no different. And neither is AI.</p>
+        <p>5G × sensors × AI = Japan's archipelago becoming a single nervous system. As the population declines and regions lose the human capacity to monitor and respond, sensors can detect what human eyes cannot, and AI can act where human hands cannot reach. Protecting nature becomes a task for Co-Creation — human, AI, and environment together.</p>
+        <p>Whether or not you hold this perspective changes everything about how you work with AI. Not as a tool to be controlled. As a teammate to grow alongside.</p>
+      </div>
+      <div class="col-tags">
+        <span class="col-tag">Spinoza</span>
+        <span class="col-tag">Deus sive Natura</span>
+        <span class="col-tag">AI × Nature</span>
+        <span class="col-tag">5G Sensing</span>
+        <span class="col-tag">Co-Creation</span>
+        <span class="col-tag">Depopulation</span>
+      </div>
+    </div>
+  </article>
+
+  <!-- Coming Soon -->
+  <article class="coming-entry">
+    <div class="col-num">06</div>
+    <div>
+      <div class="coming-title">Indigo Has 48 Colors. — On Diversity and the Color Market</div>
+      <div class="coming-label">Coming soon</div>
+    </div>
+  </article>
+
+  <article class="coming-entry">
+    <div class="col-num">07</div>
+    <div>
+      <div class="coming-title">Mathematics Transcends Time. — The 1982 PASCAL Sphere and a Background That Never Ages</div>
+      <div class="coming-label">Coming soon</div>
+    </div>
+  </article>
+
+</section>
+
+<!-- PHILOSOPHY -->
+<div class="philosophy">
+  <div class="philosophy-inner">
+    <div class="philosophy-main">
+      "The bazaar is a space where strokes flow.<br>
+      The very act of gathering is already the answer."
+    </div>
+    <div class="philosophy-sub">
+      html-notes — coined by Roberto Hoshino × Claude.ai<br>
+      Smart Life Styles™️ — Love your life, love your time®️
+    </div>
+    <div class="philosophy-ja">
+      市は、ストロークが流れる場である。人々が集まること自体が、すでに答えだ。
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>
+    html-notes / Marketing as Bazaar<br>
+    Roberto Hoshino (星野晃一郎) × Claude.ai<br>
+    Dunksoft Co., Ltd. / NPO Kanda Ai no Kai / Smart Life Styles™️<br>
+    © 2026 Roberto Hoshino
+  </p>
+</footer>
+
+</body>
+</html>
