@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>html-notes | Why I'm Rebuilding Authentication — Roberto Hoshino</title>
+<meta name="description" content="30 years of a technology journey. One woman who mastered Excel at 50 — and was stopped by a password. A mission that begins here.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Noto+Serif+JP:wght@300;400;500&family=Noto+Sans+JP:wght@300;400&family=JetBrains+Mono:wght@300;400&display=swap');
+
+:root {
+  --ink:     #18161a;
+  --ink2:    #3e3a42;
+  --ink3:    #8a8490;
+  --paper:   #faf8f6;
+  --paper2:  #f3f0eb;
+  --gold:    #b89a3e;
+  --indigo:  #2a3a5e;
+  --rose:    #8b4a5a;
+  --teal:    #2a6b5e;
+  --accent:  #7a3a2a;
+  --silver:  #c8c4cc;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 300;
+  line-height: 1.85;
+  overflow-x: hidden;
+}
+
+/* ── TOP STRIPE ── */
+.stripe {
+  height: 3px;
+  background: linear-gradient(90deg,
+    #8b4a5a 0%, #2a3a5e 25%, #2a6b5e 50%, #b89a3e 75%, #7a3a2a 100%);
+}
+
+/* ── HEADER ── */
+header {
+  padding: 1.2rem 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 0.5px solid rgba(0,0,0,0.09);
+  position: sticky; top: 0;
+  background: rgba(250,248,246,0.96);
+  backdrop-filter: blur(10px);
+  z-index: 100;
+}
+.logo-block { line-height: 1; }
+.logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px; font-weight: 500;
+  letter-spacing: .12em; color: var(--ink);
+}
+.logo-sub {
+  font-size: 9px; color: var(--ink3);
+  letter-spacing: .14em; margin-top: 3px;
+  font-family: 'Noto Sans JP', sans-serif; font-weight: 300;
+}
+nav { display: flex; gap: 2rem; }
+nav a {
+  font-size: 11px; letter-spacing: .1em;
+  color: var(--ink3); text-decoration: none;
+  font-family: 'Noto Sans JP', sans-serif; font-weight: 300;
+  transition: color .2s;
+}
+nav a:hover { color: var(--ink); }
+
+/* ── HERO ── */
+.hero {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 6rem 2.5rem 5rem;
+  position: relative;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 2.5rem; right: 2.5rem;
+  height: 0.5px;
+  background: linear-gradient(90deg, transparent, var(--silver), transparent);
+}
+
+.eyebrow {
+  font-size: 9px; letter-spacing: .22em;
+  color: var(--ink3); text-transform: uppercase;
+  font-family: 'Noto Sans JP', sans-serif; font-weight: 300;
+  margin-bottom: 2rem;
+  display: flex; align-items: center; gap: 12px;
+}
+.eyebrow::before {
+  content: ''; display: block;
+  width: 28px; height: 0.5px;
+  background: var(--gold);
+}
+
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(28px, 5vw, 50px);
+  font-weight: 500;
+  line-height: 1.22;
+  letter-spacing: .01em;
+  margin-bottom: 1rem;
+  color: var(--ink);
+}
+.hero-title em {
+  font-style: italic;
+  color: var(--rose);
+}
+
+.hero-ja {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 13px; font-weight: 300;
+  color: var(--ink3); letter-spacing: .1em;
+  margin-bottom: 2rem;
+}
+
+.hero-lead {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(17px, 2.2vw, 21px);
+  font-weight: 300;
+  color: var(--ink2);
+  max-width: 560px;
+  line-height: 1.85;
+  margin-bottom: 2.5rem;
+}
+
+.hero-meta {
+  display: flex; gap: 1.5rem; flex-wrap: wrap;
+  font-size: 10px; color: var(--ink3);
+  letter-spacing: .08em;
+  font-family: 'Noto Sans JP', sans-serif; font-weight: 300;
+  align-items: center;
+}
+.meta-dot {
+  width: 4px; height: 4px; border-radius: 50%;
+  background: var(--gold); opacity: .7;
+  display: inline-block; margin-right: 5px;
+  vertical-align: middle;
+}
+
+/* ── DEDICATION ── */
+.dedication {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 3rem 2.5rem;
+  border-bottom: 0.5px solid rgba(0,0,0,0.07);
+}
+.dedication-inner {
+  background: linear-gradient(135deg,
+    rgba(139,74,90,0.05) 0%,
+    rgba(42,58,94,0.05) 100%);
+  border: 0.5px solid rgba(139,74,90,0.2);
+  border-radius: 3px;
+  padding: 2rem 2.5rem;
+  position: relative;
+}
+.dedication-inner::before {
+  content: '—';
+  position: absolute; top: -1px; left: 2rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px; color: var(--rose); opacity: .4;
+  line-height: 0;
+}
+.dedication-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(15px, 1.9vw, 18px);
+  font-style: italic;
+  line-height: 2;
+  color: var(--ink2);
+  margin-bottom: .75rem;
+}
+.dedication-attr {
+  font-size: 11px; color: var(--rose);
+  letter-spacing: .1em;
+  font-family: 'Noto Sans JP', sans-serif; font-weight: 300;
+}
+
+/* ── ARTICLE BODY ── */
+.article {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 4rem 2.5rem 5rem;
+}
+
+.section-break {
+  display: flex; align-items: center; gap: 1rem;
+  margin: 3rem 0 2rem;
+}
+.section-break-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 11px; color: var(--ink3);
+  letter-spacing: .1em; min-width: 28px;
+}
+.section-break-line {
+  flex: 1; height: 0.5px;
+  background: linear-gradient(90deg, rgba(0,0,0,0.1), transparent);
+}
+.section-break-label {
+  font-size: 9px; letter-spacing: .18em;
+  color: var(--ink3); text-transform: uppercase;
+  font-family: 'Noto Sans JP', sans-serif; font-weight: 300;
+}
+
+.body-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(16px, 1.9vw, 19px);
+  color: var(--ink2);
+  line-height: 2.05;
+  font-weight: 300;
+  margin-bottom: 1.4rem;
+}
+.body-text p { margin-bottom: 1.1rem; }
+.body-text strong { font-weight: 500; color: var(--ink); }
+
+.pull {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(18px, 2.4vw, 24px);
+  font-weight: 500;
+  font-style: italic;
+  color: var(--indigo);
+  border-left: 1.5px solid var(--indigo);
+  padding: .5rem 0 .5rem 1.5rem;
+  margin: 2.5rem 0;
+  line-height: 1.65;
+}
+
+/* TIMELINE */
+.timeline {
+  margin: 2.5rem 0;
+  position: relative;
+  padding-left: 2rem;
+}
+.timeline::before {
+  content: '';
+  position: absolute; left: 5px; top: 8px; bottom: 8px;
+  width: 0.5px;
+  background: linear-gradient(180deg, var(--gold), var(--teal));
+}
+.tl-item {
+  position: relative;
+  margin-bottom: 1.75rem;
+  padding-left: 1.25rem;
+}
+.tl-item::before {
+  content: '';
+  position: absolute; left: -1.7rem; top: 8px;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 1.5px solid var(--gold);
+}
+.tl-item:last-child::before { border-color: var(--teal); }
+.tl-year {
+  font-size: 10px; letter-spacing: .12em;
+  color: var(--gold);
+  font-family: 'JetBrains Mono', monospace; font-weight: 300;
+  margin-bottom: .2rem;
+}
+.tl-item:last-child .tl-year { color: var(--teal); }
+.tl-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px; font-weight: 500;
+  margin-bottom: .2rem; color: var(--ink);
+}
+.tl-desc {
+  font-size: 14px; color: var(--ink3);
+  line-height: 1.75;
+  font-family: 'Cormorant Garamond', serif; font-weight: 300;
+}
+
+/* SCENE BOX */
+.scene {
+  background: var(--paper2);
+  border-radius: 3px;
+  padding: 1.5rem 1.75rem;
+  margin: 2rem 0;
+  border-left: 1.5px solid var(--gold);
+}
+.scene-label {
+  font-size: 9px; letter-spacing: .15em;
+  color: var(--gold); text-transform: uppercase;
+  font-family: 'Noto Sans JP', sans-serif; font-weight: 300;
+  margin-bottom: .75rem;
+}
+.scene-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px; line-height: 1.95;
+  color: var(--ink2); font-weight: 300;
+}
+.scene-text strong { color: var(--ink); font-weight: 500; }
+
+/* INTEGRITY BOX */
+.integrity {
+  background: linear-gradient(135deg,
+    rgba(42,58,94,0.05), rgba(42,107,94,0.05));
+  border: 0.5px solid rgba(42,58,94,0.2);
+  border-radius: 3px;
+  padding: 1.5rem 1.75rem;
+  margin: 2rem 0;
+}
+.integrity-label {
+  font-size: 9px; letter-spacing: .15em;
+  color: var(--indigo); text-transform: uppercase;
+  font-family: 'Noto Sans JP', sans-serif; font-weight: 300;
+  margin-bottom: .75rem; opacity: .8;
+}
+.integrity-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px; line-height: 1.95;
+  color: var(--indigo); font-style: italic;
+}
+.integrity-text code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px; font-style: normal;
+  background: rgba(42,58,94,0.1);
+  padding: 1px 6px; border-radius: 2px;
+  color: var(--indigo);
+}
+
+/* MISSION STATEMENT */
+.mission {
+  border: 0.5px solid rgba(0,0,0,0.1);
+  border-radius: 3px;
+  overflow: hidden;
+  margin: 2.5rem 0;
+}
+.mission-header {
+  background: var(--ink);
+  padding: .75rem 1.5rem;
+  font-size: 9px; letter-spacing: .18em;
+  color: rgba(255,255,255,0.5);
+  text-transform: uppercase;
+  font-family: 'Noto Sans JP', sans-serif; font-weight: 300;
+}
+.mission-body {
+  padding: 1.75rem;
+}
+.mission-item {
+  display: flex; gap: 1rem;
+  margin-bottom: 1.1rem; align-items: start;
+}
+.mission-item:last-child { margin-bottom: 0; }
+.mission-arrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; color: var(--gold);
+  margin-top: 3px; min-width: 20px;
+}
+.mission-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px; line-height: 1.8;
+  color: var(--ink2);
+}
+.mission-text strong { color: var(--ink); font-weight: 500; }
+
+/* CLOSING */
+.closing {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 4rem 2.5rem;
+  text-align: center;
+  border-top: 0.5px solid rgba(0,0,0,0.07);
+}
+.closing-main {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(19px, 2.5vw, 26px);
+  font-weight: 500;
+  line-height: 1.75;
+  margin-bottom: 1.5rem;
+  color: var(--ink);
+}
+.closing-ja {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 13px; font-weight: 300;
+  color: var(--ink3); margin-bottom: 2rem;
+  letter-spacing: .06em; line-height: 2;
+}
+.closing-sub {
+  font-size: 11px; color: var(--ink3);
+  letter-spacing: .08em; line-height: 2.2;
+  font-family: 'Noto Sans JP', sans-serif; font-weight: 300;
+}
+
+/* ROSE LINE */
+.rose-line {
+  width: 40px; height: 1.5px;
+  background: var(--rose);
+  margin: 1.5rem auto;
+  opacity: .5;
+}
+
+footer {
+  border-top: 0.5px solid rgba(0,0,0,0.09);
+  padding: 2rem 2.5rem;
+  text-align: center;
+}
+footer p {
+  font-size: 10px; color: var(--ink3);
+  letter-spacing: .08em; line-height: 2.4;
+  font-family: 'Noto Sans JP', sans-serif; font-weight: 300;
+}
+
+/* ANIMATIONS */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero-title { animation: fadeUp .8s ease both; }
+.hero-ja    { animation: fadeUp .8s .1s ease both; }
+.hero-lead  { animation: fadeUp .8s .2s ease both; }
+
+@media (max-width: 600px) {
+  nav { display: none; }
+  .hero, .article, .dedication, .closing { padding-left: 1.5rem; padding-right: 1.5rem; }
+  .hero { padding-top: 3.5rem; padding-bottom: 3rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="stripe"></div>
+
+<header>
+  <div class="logo-block">
+    <div class="logo">html-notes</div>
+    <div class="logo-sub">by Roberto Hoshino × Claude.ai</div>
+  </div>
+  <nav>
+    <a href="https://dunksoft.jp">dunksoft.jp</a>
+    <a href="https://note.com/roberto_hoshino" target="_blank">note</a>
+    <a href="https://www.linkedin.com/in/roberto-hoshino" target="_blank">LinkedIn</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="eyebrow">html-notes — A 30-Year Technology Journey</div>
+  <h1 class="hero-title">
+    Why I'm Rebuilding<br>
+    <em>Authentication.</em>
+  </h1>
+  <div class="hero-ja">
+    なぜ、いま認証を作り直そうとしているのか。
+  </div>
+  <p class="hero-lead">
+    She mastered Excel at 50. She managed her own finances with precision. Then a password stopped her. That is not a user error. That is a design failure — and a mission.
+  </p>
+  <div class="hero-meta">
+    <span><span class="meta-dot"></span>Roberto Hoshino — 43 years in IT</span>
+    <span><span class="meta-dot"></span>Dunksoft Co., Ltd. — founded 1983</span>
+    <span><span class="meta-dot"></span>Smart Life Styles™️</span>
+  </div>
+</section>
+
+<!-- DEDICATION -->
+<div class="dedication">
+  <div class="dedication-inner">
+    <p class="dedication-text">
+      "She was the one who showed me what optimization really means —
+      not in code, but in a life lived with precision and grace.
+      This work continues in her name."
+    </p>
+    <div class="dedication-attr">In memory of Michiko — 1940s–2026</div>
+  </div>
+</div>
+
+<!-- ARTICLE -->
+<div class="article">
+
+  <!-- SECTION 1 -->
+  <div class="section-break">
+    <div class="section-break-num">01</div>
+    <div class="section-break-line"></div>
+    <div class="section-break-label">The Problem She Solved</div>
+  </div>
+
+  <div class="body-text">
+    <p>In the late 1990s, my mother-in-law was the office director of a law firm specializing in debt restructuring. Her job: stand between hundreds of people crushed by multiple loans and the financial institutions that held their debt.</p>
+    <p>Every month, she handwrote approximately <strong>400 bank transfer slips</strong> — payment by payment, creditor by creditor, five days and ten days at a time. Then she carried them to the bank.</p>
+  </div>
+
+  <div class="scene">
+    <div class="scene-label">The System Before</div>
+    <div class="scene-text">
+      400 handwritten transfer slips per cycle →
+      physical trips to the bank →
+      error-prone, time-consuming, not scalable.<br><br>
+      One person. One pen. Hundreds of lives depending on each stroke.
+    </div>
+  </div>
+
+  <div class="body-text">
+    <p>At that time, I was programming the communications layer for Sumitomo Bank ATM terminals. I understood exactly how the data sat inside those systems. And I had been writing extensively in Microsoft ACCESS.</p>
+    <p>The solution was straightforward: build a database of each debtor's repayment plan, generate the per-creditor transfer data automatically, and export it in the format the bank could read directly.</p>
+    <p>The key insight came from <strong>Fuji Bank's Kudan branch</strong> (now part of Mizuho): if we embedded a debtor reference number in the memo field of each transfer record, creditors could reconcile payments automatically on their end.</p>
+  </div>
+
+  <div class="pull">"One field in a memo column changed everything."</div>
+
+  <div class="body-text">
+    <p>With that single specification addition, the entire process digitized. The law firm grew rapidly. The branch manager was promoted — significantly, I imagine. Transfer fees dropped as volume moved from tellers to data transmission. Processing time collapsed.</p>
+    <p>This is what optimization means when it reaches the right place. Not just efficiency — liberation. She could focus on the people, not the paper.</p>
+  </div>
+
+  <!-- SECTION 2 -->
+  <div class="section-break">
+    <div class="section-break-num">02</div>
+    <div class="section-break-line"></div>
+    <div class="section-break-label">The Problem That Stopped Her</div>
+  </div>
+
+  <div class="body-text">
+    <p>She was in her fifties when she learned to use a computer. Not reluctantly — enthusiastically. She built her own Excel spreadsheets for personal asset management. She moved from a feature phone to a smartphone ahead of most people her age.</p>
+    <p>Then authentication stopped her.</p>
+    <p>Not a sudden failure. A slow retreat. Passwords grew longer and more complex. IDs multiplied across services. The gap between what the systems demanded and what human memory could hold kept widening. Gradually, she could no longer get in.</p>
+  </div>
+
+  <div class="pull">"She didn't forget how to think. She forgot which string of characters she had invented last time."</div>
+
+  <div class="body-text">
+    <p>She is not alone. Kubo-san, who appears on our radio show as our elder commentator, faces the same wall. Millions of seniors who have decades of knowledge and wisdom to share are being quietly locked out of the systems that could help them share it.</p>
+  </div>
+
+  <!-- TIMELINE -->
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-year">1990s</div>
+      <div class="tl-title">400 slips → database</div>
+      <div class="tl-desc">Optimization reaches a law firm. One memo field changes everything.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">2000s</div>
+      <div class="tl-title">Feature phone → smartphone</div>
+      <div class="tl-desc">She adapted. Early adopter, precise thinker.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">2010s</div>
+      <div class="tl-title">Authentication walls rise</div>
+      <div class="tl-desc">Passwords multiply. Complexity increases. Memory fails not the person — the system design fails the person.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">2026 →</div>
+      <div class="tl-title">The mission begins</div>
+      <div class="tl-desc">Authentication rebuilt on memory of life, not strings of characters. In her name.</div>
+    </div>
+  </div>
+
+  <!-- SECTION 3 -->
+  <div class="section-break">
+    <div class="section-break-num">03</div>
+    <div class="section-break-line"></div>
+    <div class="section-break-label">The Technical Root of the Problem</div>
+  </div>
+
+  <div class="body-text">
+    <p>I learned about Integrity early in my programming career — the principle that data must be consistent, valid, and trustworthy throughout a system. The moment I internalized it, I started noticing a quiet anomaly in Japanese digital infrastructure.</p>
+  </div>
+
+  <div class="integrity">
+    <div class="integrity-label">Technical Note — Integrity Failures in Japanese Authentication</div>
+    <div class="integrity-text">
+      Full-width alphanumerics inside Japanese text environments (<code>Ａ Ｂ Ｃ</code> vs <code>A B C</code>) are treated as different characters — but look identical to users. A password entered in one mode fails in another. The user is blamed.<br><br>
+      ASCII codes from <code>30h</code> onward include characters that appear numeric but are classified as text. Systems built without accounting for this create silent authentication failures that users cannot diagnose.<br><br>
+      Authentication — the most critical gateway in any system — is being built on top of these unresolved inconsistencies.
+    </div>
+  </div>
+
+  <div class="body-text">
+    <p>The current authentication paradigm asks people to remember something arbitrary: a string of characters invented under pressure, forgotten under time. This is not a memory problem. It is a design problem — and it systematically excludes the people who most need access: the elderly, children, non-native language users.</p>
+  </div>
+
+  <!-- SECTION 4 -->
+  <div class="section-break">
+    <div class="section-break-num">04</div>
+    <div class="section-break-line"></div>
+    <div class="section-break-label">The Mission Forward</div>
+  </div>
+
+  <div class="body-text">
+    <p>What if authentication was built on what you cannot forget — because it is woven into who you are?</p>
+    <p>The color of the indigo at the Kanda festival. The yellow of the roses at Yanagimori Shrine. The deep green of a Murano glass ring from Venice, bought after 3.11. These are not passwords. They are life itself.</p>
+    <p>The senior population holds irreplaceable knowledge. AI is now powerful enough to help them share it — but only if they can get through the door. Japan's government is deploying Claude and the next versions of GPT at scale. The question is not whether AI will be used. The question is whether the people who most need it can reach it.</p>
+  </div>
+
+  <div class="mission">
+    <div class="mission-header">天然色漢字INDEX™ / COLOURFUL JAPAN™ — Authentication as Life Memory</div>
+    <div class="mission-body">
+      <div class="mission-item">
+        <div class="mission-arrow">→</div>
+        <div class="mission-text"><strong>Authentication built on personal color memory</strong> — kanji name characters mapped to HEX colors from lived experience. Phishing-resistant because no one else shares your memories.</div>
+      </div>
+      <div class="mission-item">
+        <div class="mission-arrow">→</div>
+        <div class="mission-text"><strong>Accessible to seniors, children, non-native speakers</strong> — because it requires no character strings, no arbitrary invention under pressure.</div>
+      </div>
+      <div class="mission-item">
+        <div class="mission-arrow">→</div>
+        <div class="mission-text"><strong>Built on Integrity</strong> — resolving the full-width / half-width inconsistency at the foundation, not papering over it.</div>
+      </div>
+      <div class="mission-item">
+        <div class="mission-arrow">→</div>
+        <div class="mission-text"><strong>Japan-native, globally applicable</strong> — works across all writing systems. The kanji index is the starting point, not the limit.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="body-text">
+    <p>The Finance phase is not yet complete. But Claude's capabilities grow daily, and the architecture becomes clearer with each conversation. The right moment is approaching.</p>
+    <p>She showed me what optimization looks like when it reaches the right person at the right moment. That is what this work is for.</p>
+  </div>
+
+</div>
+
+<!-- CLOSING -->
+<div class="closing">
+  <div class="rose-line"></div>
+  <div class="closing-main">
+    "Authentication should be the memory of a life well lived.<br>
+    Not a string of characters invented under pressure<br>
+    and forgotten with time."
+  </div>
+  <div class="closing-ja">
+    認証が、その人の人生の記憶になる。公開されていても、再現不能。
+  </div>
+  <div class="closing-sub">
+    html-notes — coined by Roberto Hoshino × Claude.ai<br>
+    Smart Life Styles™️ — Love your life, love your time®️<br>
+    天然色漢字INDEX™ / COLOURFUL JAPAN™
+  </div>
+  <div class="rose-line"></div>
+</div>
+
+<footer>
+  <p>
+    html-notes / Why I'm Rebuilding Authentication<br>
+    Roberto Hoshino (星野晃一郎) × Claude.ai<br>
+    Dunksoft Co., Ltd. — founded 1983 / NPO Kanda Ai no Kai<br>
+    © 2026 Roberto Hoshino. Smart Life Styles™️
+  </p>
+</footer>
+
+</body>
+</html>

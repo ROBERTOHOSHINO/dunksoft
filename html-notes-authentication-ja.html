@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>html-notes | なぜ、いま認証を作り直そうとしているのか — 星野晃一郎</title>
+<meta name="description" content="30年の技術の旅。50代でExcelを覚え、自分で資産管理をしていた彼女が、パスワードで止まった。それは設計の失敗だ。">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600&family=Noto+Sans+JP:wght@300;400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=JetBrains+Mono:wght@300;400&display=swap');
+
+:root {
+  --ink:    #18161a;
+  --ink2:   #3e3a42;
+  --ink3:   #8a8490;
+  --paper:  #faf8f6;
+  --paper2: #f3f0eb;
+  --gold:   #b89a3e;
+  --indigo: #2a3a5e;
+  --rose:   #8b4a5a;
+  --teal:   #2a6b5e;
+  --accent: #7a3a2a;
+  --silver: #c8c4cc;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 300;
+  line-height: 2;
+}
+
+.stripe {
+  height: 3px;
+  background: linear-gradient(90deg,
+    #8b4a5a 0%, #2a3a5e 25%, #2a6b5e 50%, #b89a3e 75%, #7a3a2a 100%);
+}
+
+header {
+  padding: 1.2rem 2.5rem;
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 0.5px solid rgba(0,0,0,0.09);
+  position: sticky; top: 0;
+  background: rgba(250,248,246,0.96);
+  backdrop-filter: blur(10px);
+  z-index: 100;
+}
+.logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px; font-weight: 400;
+  letter-spacing: .12em; color: var(--ink);
+}
+.logo-sub {
+  font-size: 9px; color: var(--ink3);
+  letter-spacing: .12em; margin-top: 3px;
+  font-family: 'Noto Sans JP', sans-serif; font-weight: 300;
+}
+nav { display: flex; gap: 2rem; }
+nav a {
+  font-size: 11px; letter-spacing: .08em;
+  color: var(--ink3); text-decoration: none;
+  font-family: 'Noto Sans JP', sans-serif; font-weight: 300;
+  transition: color .2s;
+}
+nav a:hover { color: var(--ink); }
+
+/* HERO */
+.hero {
+  max-width: 760px; margin: 0 auto;
+  padding: 6rem 2.5rem 5rem;
+  position: relative;
+}
+.hero::after {
+  content: '';
+  position: absolute; bottom: 0; left: 2.5rem; right: 2.5rem;
+  height: 0.5px;
+  background: linear-gradient(90deg, transparent, var(--silver), transparent);
+}
+
+.eyebrow {
+  font-size: 9px; letter-spacing: .2em;
+  color: var(--ink3); text-transform: uppercase;
+  font-family: 'Noto Sans JP', sans-serif; font-weight: 300;
+  margin-bottom: 2rem;
+  display: flex; align-items: center; gap: 12px;
+}
+.eyebrow::before {
+  content: ''; display: block;
+  width: 28px; height: 0.5px; background: var(--gold);
+}
+
+.hero-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(24px, 4.5vw, 44px);
+  font-weight: 500; line-height: 1.5;
+  letter-spacing: .04em; margin-bottom: 1rem;
+}
+.hero-title em {
+  font-style: normal;
+  color: var(--rose);
+  border-bottom: 1px solid rgba(139,74,90,0.3);
+}
+
+.hero-en {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px; font-style: italic; font-weight: 300;
+  color: var(--ink3); letter-spacing: .06em;
+  margin-bottom: 2rem;
+}
+
+.hero-lead {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(15px, 1.9vw, 18px);
+  font-weight: 300; color: var(--ink2);
+  max-width: 560px; line-height: 2.1;
+  margin-bottom: 2.5rem;
+}
+
+.hero-meta {
+  display: flex; gap: 1.5rem; flex-wrap: wrap;
+  font-size: 10px; color: var(--ink3);
+  letter-spacing: .08em;
+  font-family: 'Noto Sans JP', sans-serif; font-weight: 300;
+  align-items: center;
+}
+.meta-dot {
+  width: 4px; height: 4px; border-radius: 50%;
+  background: var(--gold); opacity: .7;
+  display: inline-block; margin-right: 5px;
+  vertical-align: middle;
+}
+
+/* DEDICATION */
+.dedication {
+  max-width: 760px; margin: 0 auto;
+  padding: 3rem 2.5rem;
+  border-bottom: 0.5px solid rgba(0,0,0,0.07);
+}
+.dedication-inner {
+  background: linear-gradient(135deg,
+    rgba(139,74,90,0.04), rgba(42,58,94,0.04));
+  border: 0.5px solid rgba(139,74,90,0.2);
+  border-radius: 3px;
+  padding: 2rem 2.5rem;
+}
+.dedication-text {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(14px, 1.8vw, 17px);
+  font-weight: 300; line-height: 2.2;
+  color: var(--ink2); margin-bottom: .75rem;
+}
+.dedication-attr {
+  font-size: 11px; color: var(--rose);
+  letter-spacing: .1em;
+  font-family: 'Noto Sans JP', sans-serif; font-weight: 300;
+}
+
+/* ARTICLE */
+.article {
+  max-width: 760px; margin: 0 auto;
+  padding: 4rem 2.5rem 5rem;
+}
+
+.section-break {
+  display: flex; align-items: center; gap: 1rem;
+  margin: 3.5rem 0 2rem;
+}
+.section-break-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 11px; color: var(--ink3);
+  letter-spacing: .1em; min-width: 28px;
+}
+.section-break-line {
+  flex: 1; height: 0.5px;
+  background: linear-gradient(90deg, rgba(0,0,0,0.1), transparent);
+}
+.section-break-label {
+  font-size: 9px; letter-spacing: .18em;
+  color: var(--ink3); text-transform: uppercase;
+  font-family: 'Noto Sans JP', sans-serif; font-weight: 300;
+}
+
+.body-text {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(14px, 1.7vw, 16px);
+  color: var(--ink2); line-height: 2.2;
+  font-weight: 300; margin-bottom: 1.4rem;
+}
+.body-text p { margin-bottom: 1.1rem; }
+.body-text strong { font-weight: 500; color: var(--ink); }
+
+.pull {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(16px, 2.1vw, 20px);
+  font-weight: 500; color: var(--indigo);
+  border-left: 1.5px solid var(--indigo);
+  padding: .5rem 0 .5rem 1.5rem;
+  margin: 2.5rem 0; line-height: 1.9;
+}
+
+/* SCENE */
+.scene {
+  background: var(--paper2);
+  border-radius: 3px; padding: 1.5rem 1.75rem;
+  margin: 2rem 0;
+  border-left: 1.5px solid var(--gold);
+}
+.scene-label {
+  font-size: 9px; letter-spacing: .15em;
+  color: var(--gold); text-transform: uppercase;
+  font-family: 'Noto Sans JP', sans-serif; font-weight: 300;
+  margin-bottom: .75rem;
+}
+.scene-text {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 14px; line-height: 2.1;
+  color: var(--ink2); font-weight: 300;
+}
+.scene-text strong { color: var(--ink); font-weight: 500; }
+
+/* TIMELINE */
+.timeline {
+  margin: 2.5rem 0;
+  position: relative; padding-left: 2rem;
+}
+.timeline::before {
+  content: '';
+  position: absolute; left: 5px; top: 8px; bottom: 8px;
+  width: 0.5px;
+  background: linear-gradient(180deg, var(--gold), var(--teal));
+}
+.tl-item {
+  position: relative; margin-bottom: 1.75rem;
+  padding-left: 1.25rem;
+}
+.tl-item::before {
+  content: '';
+  position: absolute; left: -1.7rem; top: 8px;
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--paper); border: 1.5px solid var(--gold);
+}
+.tl-item:last-child::before { border-color: var(--teal); }
+.tl-year {
+  font-size: 10px; letter-spacing: .12em; color: var(--gold);
+  font-family: 'JetBrains Mono', monospace; font-weight: 300;
+  margin-bottom: .2rem;
+}
+.tl-item:last-child .tl-year { color: var(--teal); }
+.tl-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 15px; font-weight: 500;
+  margin-bottom: .2rem; color: var(--ink);
+}
+.tl-desc {
+  font-size: 13px; color: var(--ink3);
+  line-height: 1.85;
+  font-family: 'Noto Serif JP', serif; font-weight: 300;
+}
+
+/* INTEGRITY */
+.integrity {
+  background: linear-gradient(135deg,
+    rgba(42,58,94,0.05), rgba(42,107,94,0.05));
+  border: 0.5px solid rgba(42,58,94,0.2);
+  border-radius: 3px; padding: 1.5rem 1.75rem; margin: 2rem 0;
+}
+.integrity-label {
+  font-size: 9px; letter-spacing: .15em; color: var(--indigo);
+  text-transform: uppercase; margin-bottom: .75rem; opacity: .8;
+  font-family: 'Noto Sans JP', sans-serif; font-weight: 300;
+}
+.integrity-text {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 14px; line-height: 2.1;
+  color: var(--indigo); font-weight: 300;
+}
+.integrity-text code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  background: rgba(42,58,94,0.1);
+  padding: 1px 6px; border-radius: 2px;
+  color: var(--indigo);
+}
+
+/* MISSION */
+.mission {
+  border: 0.5px solid rgba(0,0,0,0.1);
+  border-radius: 3px; overflow: hidden; margin: 2.5rem 0;
+}
+.mission-header {
+  background: var(--ink); padding: .75rem 1.5rem;
+  font-size: 9px; letter-spacing: .15em;
+  color: rgba(255,255,255,0.5); text-transform: uppercase;
+  font-family: 'Noto Sans JP', sans-serif; font-weight: 300;
+}
+.mission-body { padding: 1.75rem; }
+.mission-item {
+  display: flex; gap: 1rem;
+  margin-bottom: 1.1rem; align-items: start;
+}
+.mission-item:last-child { margin-bottom: 0; }
+.mission-arrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; color: var(--gold);
+  margin-top: 4px; min-width: 20px;
+}
+.mission-text {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 14px; line-height: 2;
+  color: var(--ink2); font-weight: 300;
+}
+.mission-text strong { color: var(--ink); font-weight: 500; }
+
+/* CLOSING */
+.closing {
+  max-width: 760px; margin: 0 auto;
+  padding: 4rem 2.5rem;
+  text-align: center;
+  border-top: 0.5px solid rgba(0,0,0,0.07);
+}
+.closing-main {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(16px, 2.2vw, 22px);
+  font-weight: 500; line-height: 2;
+  margin-bottom: 1.5rem; color: var(--ink);
+}
+.closing-en {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px; font-style: italic; font-weight: 300;
+  color: var(--ink3); margin-bottom: 2rem;
+  letter-spacing: .06em; line-height: 2;
+}
+.closing-sub {
+  font-size: 10px; color: var(--ink3);
+  letter-spacing: .08em; line-height: 2.4;
+  font-family: 'Noto Sans JP', sans-serif; font-weight: 300;
+}
+.rose-line {
+  width: 40px; height: 1px;
+  background: var(--rose); margin: 1.5rem auto; opacity: .4;
+}
+
+footer {
+  border-top: 0.5px solid rgba(0,0,0,0.09);
+  padding: 2rem 2.5rem; text-align: center;
+}
+footer p {
+  font-size: 10px; color: var(--ink3);
+  letter-spacing: .08em; line-height: 2.4;
+  font-family: 'Noto Sans JP', sans-serif; font-weight: 300;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero-title { animation: fadeUp .8s ease both; }
+.hero-en    { animation: fadeUp .8s .1s ease both; }
+.hero-lead  { animation: fadeUp .8s .2s ease both; }
+
+@media (max-width: 600px) {
+  nav { display: none; }
+  .hero, .article, .dedication, .closing { padding-left: 1.5rem; padding-right: 1.5rem; }
+  .hero { padding-top: 3.5rem; padding-bottom: 3rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="stripe"></div>
+
+<header>
+  <div>
+    <div class="logo">html-notes</div>
+    <div class="logo-sub">by Roberto Hoshino × Claude.ai</div>
+  </div>
+  <nav>
+    <a href="https://dunksoft.jp">dunksoft.jp</a>
+    <a href="https://note.com/roberto_hoshino" target="_blank">note</a>
+    <a href="https://www.linkedin.com/in/roberto-hoshino" target="_blank">LinkedIn</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="eyebrow">html-notes — 30年の技術の旅</div>
+  <h1 class="hero-title">
+    なぜ、いま<br>
+    <em>認証を作り直そうとしているのか。</em>
+  </h1>
+  <div class="hero-en">Why I'm Rebuilding Authentication — A 30-Year Journey</div>
+  <p class="hero-lead">
+    彼女は50代でパソコンを覚え、自分でExcelの資産管理表を作った。スマートフォンにも早めに移行した。それでも、パスワードが彼女を止めた。これはユーザーの失敗ではない。設計の失敗だ。
+  </p>
+  <div class="hero-meta">
+    <span><span class="meta-dot"></span>星野晃一郎（Roberto Hoshino）— IT歴43年</span>
+    <span><span class="meta-dot"></span>株式会社ダンクソフト — 1983年創業</span>
+    <span><span class="meta-dot"></span>Smart Life Styles™️</span>
+  </div>
+</section>
+
+<!-- DEDICATION -->
+<div class="dedication">
+  <div class="dedication-inner">
+    <p class="dedication-text">
+      400枚の振込用紙を、一枚ずつ手書きしていた人がいた。<br>
+      その仕事がデジタルに変わり、多くの人の生活が変わった。<br>
+      50代でパソコンを覚え、自分の資産を自分で管理した。<br>
+      そして最後は、パスワードという小さな壁の前で止まった。<br><br>
+      この仕事を、あなたの名前と共に続けます。
+    </p>
+    <div class="dedication-attr">義母 道子 に捧ぐ — 1940年代〜2026年</div>
+  </div>
+</div>
+
+<!-- ARTICLE -->
+<div class="article">
+
+  <!-- 01 -->
+  <div class="section-break">
+    <div class="section-break-num">01</div>
+    <div class="section-break-line"></div>
+    <div class="section-break-label">彼女が解決した問題</div>
+  </div>
+
+  <div class="body-text">
+    <p>1990年代後半、義母は多重債務者支援を専門とする弁護士事務所の事務局長だった。債務者と債権者の間に立ち、毎月の支払いを管理する仕事。当時の現実はこうだった。</p>
+  </div>
+
+  <div class="scene">
+    <div class="scene-label">デジタル化以前の現実</div>
+    <div class="scene-text">
+      <strong>月に約400枚の振込用紙を手書き。</strong><br>
+      債権者ごと、5日・10日ごとに細かい金額を記入して銀行窓口へ。<br>
+      一人の人間が、一本のペンで、何百人もの生活を支えていた。
+    </div>
+  </div>
+
+  <div class="body-text">
+    <p>そのころ私は、住友銀行のATM端末の通信プログラムを書いていた。銀行のデータがどう動いているか、骨の髄まで知っていた。ちょうどMicrosoft ACCESSで色々と書いていた時期でもある。</p>
+    <p>解決策は明快だった。債務者ごとの返済計画をデータベース化し、債権者別の振込データを自動生成する。そのデータを銀行に送信する。</p>
+    <p>決定的な一手は<strong>富士銀行九段支店（現みずほ）</strong>が加えてくれた。振込データのメモ欄に債務者番号を入れることで、債権者側が自動的に照合できるという仕様追加。</p>
+  </div>
+
+  <div class="pull">「メモ欄の一項目が、すべてを変えた。」</div>
+
+  <div class="body-text">
+    <p>これにより全処理がデジタル化された。弁護士事務所は急成長した。担当支店長は栄転した——おそらく相当な出世をしたと思う。振込手数料は下がり、窓口処理はデータ送信に変わり、時間は劇的に短縮された。</p>
+    <p>これがOPTIMIZEの思想だと、AIから学んだ。効率化ではなく、解放。彼女は書類ではなく、人に向き合えるようになった。</p>
+  </div>
+
+  <!-- 02 -->
+  <div class="section-break">
+    <div class="section-break-num">02</div>
+    <div class="section-break-line"></div>
+    <div class="section-break-label">彼女を止めた問題</div>
+  </div>
+
+  <div class="body-text">
+    <p>50代でパソコンを覚えた。渋々ではなく、積極的に。Excelで自分の資産管理表を作り、運用していた。ガラケーからスマートフォンへも、周りより早く移行した。</p>
+    <p>それでも、認証が彼女を止めた。</p>
+    <p>突然ではなかった。少しずつ後退していった。パスワードはより長く、より複雑になった。IDはサービスごとに増えた。システムが要求するものと、人間の記憶が保持できるものの差が、じわじわと広がっていった。そしてある日、入れなくなった。</p>
+  </div>
+
+  <div class="pull">「考える力を失ったのではない。前回どんな文字列を作ったか、忘れただけだ。」</div>
+
+  <div class="body-text">
+    <p>彼女だけではない。神田藍の会ラジオで長年ご意見番を務めてくださっている久保金司さんも同じ壁に直面している。何十年もの知識と知恵を持つシニアたちが、AIと対話してその知見を次世代に継承できる時間は限られている。にもかかわらず、認証という最初の扉が彼らを静かに締め出し続けている。</p>
+  </div>
+
+  <!-- TIMELINE -->
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-year">1990s</div>
+      <div class="tl-title">400枚の振込用紙 → データベース</div>
+      <div class="tl-desc">最適化が一人の人間の仕事を変えた。メモ欄の一項目がすべてを動かした。</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">2000s</div>
+      <div class="tl-title">ガラケー → スマートフォン</div>
+      <div class="tl-desc">変化を恐れず、早めに動いた。几帳面で、精確な人だった。</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">2010s</div>
+      <div class="tl-title">認証の壁が高くなる</div>
+      <div class="tl-desc">パスワードが増え、複雑化した。記憶の問題ではなく、設計の問題。</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">2026 →</div>
+      <div class="tl-title">認証を作り直す</div>
+      <div class="tl-desc">文字列ではなく、人生の記憶を鍵にする。彼女の名前と共に。</div>
+    </div>
+  </div>
+
+  <!-- 03 -->
+  <div class="section-break">
+    <div class="section-break-num">03</div>
+    <div class="section-break-line"></div>
+    <div class="section-break-label">問題の技術的な根っこ</div>
+  </div>
+
+  <div class="body-text">
+    <p>プログラミングを始めた頃、Integrityという概念を学んだ。データはシステム全体を通じて一貫していなければならない、という原則。それを身につけた瞬間から、日本のデジタルインフラに静かな異常を感じ続けてきた。</p>
+  </div>
+
+  <div class="integrity">
+    <div class="integrity-label">技術的考察 — 日本の認証における Integrity の欠陥</div>
+    <div class="integrity-text">
+      日本語環境では全角の英数字（<code>Ａ Ｂ Ｃ</code>）と半角（<code>A B C</code>）が別の文字として扱われる。見た目は同じでも、システムには別物。あるモードで入力したパスワードが別のモードで失敗する。ユーザーのせいにされる。<br><br>
+      さらにASCIIコードの<code>30h</code>以降には、数値に見えて文字として分類されるコードが存在する。これらを考慮せずに作られたシステムは、ユーザーが診断できない認証失敗を静かに生み出す。<br><br>
+      認証——システム最重要の関門——が、この未解決の不整合の上に構築されている。
+    </div>
+  </div>
+
+  <div class="body-text">
+    <p>現在の認証の設計思想は、「プレッシャーの中で発明した文字列を覚えておけ」というものだ。これは記憶力の問題ではない。設計の問題だ。そしてこの設計は、最もアクセスを必要としている人たち——シニア、子ども、外国語学習者——を組織的に排除し続けている。</p>
+    <p>日本政府はClaudeに加えてOpenAIの次世代バージョンも採用すると言っている。AIのパワーはこれからさらに上がる。だとすれば、そのAIに誰がアクセスできるか——その問いは今すぐ答えなければならない。</p>
+  </div>
+
+  <!-- 04 -->
+  <div class="section-break">
+    <div class="section-break-num">04</div>
+    <div class="section-break-line"></div>
+    <div class="section-break-label">これからの設計</div>
+  </div>
+
+  <div class="body-text">
+    <p>認証の鍵を、忘れられないものにする。なぜなら、それは自分自身に刻まれているから。</p>
+    <p>神田まつりの法被の深い藍色。柳森神社の薔薇の黄色。3.11の後、ヴェネツィアで買ったムラーノガラスの指輪の深緑。これはパスワードではない。人生そのものだ。</p>
+  </div>
+
+  <div class="mission">
+    <div class="mission-header">天然色漢字INDEX™ / COLOURFUL JAPAN™ — 認証を人生の記憶に</div>
+    <div class="mission-body">
+      <div class="mission-item">
+        <div class="mission-arrow">→</div>
+        <div class="mission-text"><strong>姓名の漢字 × 人生の記憶の色（HEX）</strong>で認証トークンを生成。フィッシングに強い——あなたの記憶は他の誰も持っていないから。</div>
+      </div>
+      <div class="mission-item">
+        <div class="mission-arrow">→</div>
+        <div class="mission-text"><strong>シニア・子ども・外国語学習者にも使える</strong>——文字列を発明してプレッシャーの中で覚える必要がない。</div>
+      </div>
+      <div class="mission-item">
+        <div class="mission-arrow">→</div>
+        <div class="mission-text"><strong>Integrityを根から作り直す</strong>——全角・半角問題、ASCIIの不整合を基盤レベルで解決する。</div>
+      </div>
+      <div class="mission-item">
+        <div class="mission-arrow">→</div>
+        <div class="mission-text"><strong>日本発、世界対応</strong>——漢字インデックスが起点。すべての言語・文字体系に展開できる。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="body-text">
+    <p>Financeのフェーズはまだ完結していない。しかしClaudeは日々成長し、システム全体の設計はどんどん明確になっている。佳きタイミングで、スタートする。</p>
+    <p>彼女が見せてくれたのは、最適化が正しい人に届いたとき何が起きるか、ということだった。400枚の振込用紙が消えた日、何百人もの生活が少し楽になった。この仕事も、そういう仕事にしたい。</p>
+  </div>
+
+</div>
+
+<!-- CLOSING -->
+<div class="closing">
+  <div class="rose-line"></div>
+  <div class="closing-main">
+    「認証が、その人の人生の記憶になる。<br>
+    公開されていても、再現不能。」
+  </div>
+  <div class="closing-en">
+    Authentication should be the memory of a life well lived.<br>
+    Not a string of characters invented under pressure and forgotten with time.
+  </div>
+  <div class="closing-sub">
+    html-notes — coined by Roberto Hoshino × Claude.ai<br>
+    Smart Life Styles™️ — Love your life, love your time®️<br>
+    天然色漢字INDEX™ / COLOURFUL JAPAN™
+  </div>
+  <div class="rose-line"></div>
+</div>
+
+<footer>
+  <p>
+    html-notes / なぜ、いま認証を作り直そうとしているのか<br>
+    星野晃一郎（Roberto Hoshino）× Claude.ai<br>
+    株式会社ダンクソフト — 1983年創業 / NPO 神田藍の会<br>
+    © 2026 Roberto Hoshino. Smart Life Styles™️
+  </p>
+</footer>
+
+</body>
+</html>
