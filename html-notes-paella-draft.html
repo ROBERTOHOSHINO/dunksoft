@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>html-notes Vol.06 DRAFT | パエリアと市の原理 — 星野晃一郎</title>
+<meta name="description" content="人が集まるのは売り買いだけではない。情報の語源は「情けに報いること」。パエリア祭りから考える市づくりの本質。">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600&family=Noto+Sans+JP:wght@300;400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap');
+
+:root {
+  --ink:    #18161a;
+  --ink2:   #3e3a42;
+  --ink3:   #8a8490;
+  --paper:  #faf8f4;
+  --paper2: #f3f0eb;
+  --gold:   #b89a3e;
+  --saffron:#d4820a;
+  --teal:   #2a6b5e;
+  --indigo: #2a3a5e;
+  --silver: #c8c4cc;
+  --draft:  #c0550a;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 300;
+  line-height: 2;
+}
+
+/* DRAFT BANNER */
+.draft-banner {
+  background: var(--draft);
+  padding: .6rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+.draft-badge {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+}
+.draft-badge-pill {
+  background: rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.4);
+  border-radius: 20px;
+  padding: .25rem .875rem;
+  font-size: 11px;
+  font-weight: 400;
+  color: white;
+  letter-spacing: .12em;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+.draft-claude {
+  font-size: 10px;
+  color: rgba(255,255,255,0.75);
+  letter-spacing: .1em;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+}
+.draft-note {
+  font-size: 10px;
+  color: rgba(255,255,255,0.7);
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+  letter-spacing: .06em;
+}
+
+/* STRIPE */
+.stripe { height: 3px; background: linear-gradient(90deg, #d4820a 0%, #2a3a5e 30%, #2a6b5e 60%, #b89a3e 100%); }
+
+/* HEADER */
+header {
+  padding: 1.2rem 2.5rem;
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 0.5px solid rgba(0,0,0,0.09);
+  position: sticky; top: 0;
+  background: rgba(250,248,244,0.96);
+  backdrop-filter: blur(10px);
+  z-index: 100;
+}
+.logo { font-family: 'Cormorant Garamond', serif; font-size: 15px; font-weight: 400; letter-spacing: .12em; color: var(--ink); }
+.logo-sub { font-size: 9px; color: var(--ink3); letter-spacing: .12em; margin-top: 3px; font-family: 'Noto Sans JP', sans-serif; font-weight: 300; }
+nav { display: flex; gap: 2rem; }
+nav a { font-size: 11px; letter-spacing: .08em; color: var(--ink3); text-decoration: none; font-family: 'Noto Sans JP', sans-serif; font-weight: 300; }
+
+/* HERO */
+.hero {
+  max-width: 760px; margin: 0 auto;
+  padding: 5rem 2.5rem 4rem;
+  position: relative;
+}
+.hero::after {
+  content: ''; position: absolute; bottom: 0; left: 2.5rem; right: 2.5rem;
+  height: 0.5px; background: linear-gradient(90deg, transparent, var(--silver), transparent);
+}
+.eyebrow {
+  font-size: 9px; letter-spacing: .2em; color: var(--ink3); text-transform: uppercase;
+  font-family: 'Noto Sans JP', sans-serif; font-weight: 300; margin-bottom: 2rem;
+  display: flex; align-items: center; gap: 12px;
+}
+.eyebrow::before { content: ''; display: block; width: 28px; height: 0.5px; background: var(--saffron); }
+
+.hero-vol {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 11px; letter-spacing: .2em; color: var(--saffron);
+  margin-bottom: .75rem; font-weight: 400;
+}
+
+.hero-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(24px, 4.5vw, 44px);
+  font-weight: 500; line-height: 1.5;
+  letter-spacing: .04em; margin-bottom: 1rem;
+}
+.hero-title em { font-style: normal; color: var(--saffron); }
+
+.hero-en {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px; font-style: italic; font-weight: 300;
+  color: var(--ink3); letter-spacing: .06em; margin-bottom: 2rem;
+}
+
+.hero-lead {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(14px, 1.8vw, 17px); font-weight: 300;
+  color: var(--ink2); max-width: 560px; line-height: 2.1; margin-bottom: 2.5rem;
+}
+
+.hero-event {
+  display: inline-flex; align-items: center; gap: .75rem;
+  background: var(--paper2); border: 0.5px solid rgba(0,0,0,0.1);
+  border-radius: 3px; padding: .6rem 1.25rem;
+  font-size: 12px; color: var(--ink2);
+  font-family: 'Noto Sans JP', sans-serif; font-weight: 300;
+}
+.hero-event-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--saffron); }
+
+/* ARTICLE */
+.article { max-width: 760px; margin: 0 auto; padding: 4rem 2.5rem 5rem; }
+
+.section-break {
+  display: flex; align-items: center; gap: 1rem; margin: 3.5rem 0 2rem;
+}
+.section-break-num { font-family: 'Cormorant Garamond', serif; font-size: 11px; color: var(--ink3); letter-spacing: .1em; min-width: 28px; }
+.section-break-line { flex: 1; height: 0.5px; background: linear-gradient(90deg, rgba(0,0,0,0.1), transparent); }
+.section-break-label { font-size: 9px; letter-spacing: .18em; color: var(--ink3); text-transform: uppercase; font-family: 'Noto Sans JP', sans-serif; font-weight: 300; }
+
+.body-text { font-family: 'Noto Serif JP', serif; font-size: clamp(14px, 1.7vw, 16px); color: var(--ink2); line-height: 2.2; font-weight: 300; margin-bottom: 1.4rem; }
+.body-text p { margin-bottom: 1.1rem; }
+.body-text strong { font-weight: 500; color: var(--ink); }
+
+.pull {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(16px, 2.1vw, 20px); font-weight: 500;
+  color: var(--indigo); border-left: 1.5px solid var(--saffron);
+  padding: .5rem 0 .5rem 1.5rem; margin: 2.5rem 0; line-height: 1.9;
+}
+
+/* HISTORY TABLE */
+.history {
+  margin: 2rem 0;
+  border: 0.5px solid rgba(0,0,0,0.08); border-radius: 3px; overflow: hidden;
+}
+.history-row {
+  display: grid; grid-template-columns: 120px 1fr;
+  border-bottom: 0.5px solid rgba(0,0,0,0.06);
+}
+.history-row:last-child { border-bottom: none; }
+.history-era {
+  padding: .875rem 1.25rem;
+  background: var(--paper2);
+  font-size: 12px; font-family: 'Cormorant Garamond', serif;
+  color: var(--saffron); font-weight: 400;
+  border-right: 0.5px solid rgba(0,0,0,0.06);
+  display: flex; align-items: center;
+}
+.history-content {
+  padding: .875rem 1.25rem;
+  font-size: 14px; color: var(--ink2);
+  font-family: 'Noto Serif JP', serif; font-weight: 300;
+  line-height: 1.8;
+}
+
+/* EVENT BOX */
+.event-box {
+  background: linear-gradient(135deg, rgba(212,130,10,0.06), rgba(42,58,94,0.04));
+  border: 0.5px solid rgba(212,130,10,0.25);
+  border-radius: 3px; padding: 1.5rem 1.75rem; margin: 2rem 0;
+}
+.event-box-label {
+  font-size: 9px; letter-spacing: .15em; color: var(--saffron);
+  text-transform: uppercase; margin-bottom: .75rem;
+  font-family: 'Noto Sans JP', sans-serif; font-weight: 300;
+}
+.event-box-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 16px; font-weight: 500; margin-bottom: .75rem;
+}
+.event-box-list {
+  list-style: none; font-size: 14px; color: var(--ink2);
+  font-family: 'Noto Serif JP', serif; font-weight: 300;
+  line-height: 2;
+}
+.event-box-list li::before { content: '→ '; color: var(--saffron); font-family: monospace; }
+
+/* IT CONTRAST */
+.contrast {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+  background: rgba(0,0,0,0.07); border-radius: 3px; overflow: hidden; margin: 2rem 0;
+}
+.contrast-col { background: var(--paper); padding: 1.25rem; }
+.contrast-col-label {
+  font-size: 9px; letter-spacing: .15em; text-transform: uppercase;
+  font-family: 'Noto Sans JP', sans-serif; font-weight: 300;
+  margin-bottom: .875rem;
+}
+.contrast-col:first-child .contrast-col-label { color: var(--ink3); }
+.contrast-col:last-child .contrast-col-label { color: var(--saffron); }
+.contrast-item {
+  font-size: 13px; color: var(--ink2);
+  font-family: 'Noto Serif JP', serif; font-weight: 300;
+  line-height: 1.9; margin-bottom: .5rem;
+  padding-left: .75rem; border-left: 1.5px solid rgba(0,0,0,0.1);
+}
+.contrast-col:last-child .contrast-item { border-left-color: var(--saffron); opacity: .9; }
+
+/* DRAFT WATERMARK note */
+.draft-footer {
+  background: var(--paper2);
+  border-top: 0.5px solid rgba(0,0,0,0.08);
+  padding: 1.5rem 2.5rem;
+  max-width: 760px; margin: 0 auto;
+  display: flex; align-items: center; gap: 1rem;
+}
+.draft-footer-icon {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--draft); display: flex; align-items: center;
+  justify-content: center; flex-shrink: 0;
+  font-size: 14px; color: white; font-family: 'Cormorant Garamond', serif;
+}
+.draft-footer-text { font-size: 12px; color: var(--ink3); font-family: 'Noto Sans JP', sans-serif; font-weight: 300; line-height: 1.8; }
+.draft-footer-text strong { color: var(--ink2); font-weight: 400; }
+
+/* CLOSING */
+.closing { max-width: 760px; margin: 0 auto; padding: 3.5rem 2.5rem; text-align: center; border-top: 0.5px solid rgba(0,0,0,0.07); }
+.closing-main { font-family: 'Noto Serif JP', serif; font-size: clamp(15px, 2vw, 20px); font-weight: 500; line-height: 2; margin-bottom: 1rem; }
+.closing-sub { font-size: 10px; color: var(--ink3); letter-spacing: .08em; line-height: 2.4; font-family: 'Noto Sans JP', sans-serif; font-weight: 300; }
+.gold-line { width: 40px; height: 1px; background: var(--saffron); margin: 1.5rem auto; opacity: .4; }
+
+footer { border-top: 0.5px solid rgba(0,0,0,0.09); padding: 2rem 2.5rem; text-align: center; }
+footer p { font-size: 10px; color: var(--ink3); letter-spacing: .08em; line-height: 2.4; font-family: 'Noto Sans JP', sans-serif; font-weight: 300; }
+
+@keyframes fadeUp { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
+.hero-title { animation: fadeUp .8s ease both; }
+.hero-en    { animation: fadeUp .8s .1s ease both; }
+.hero-lead  { animation: fadeUp .8s .2s ease both; }
+
+@media (max-width: 600px) {
+  nav { display: none; }
+  .hero, .article, .closing { padding-left: 1.5rem; padding-right: 1.5rem; }
+  .hero { padding-top: 3.5rem; }
+  .contrast { grid-template-columns: 1fr; }
+  .history-row { grid-template-columns: 80px 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- DRAFT BANNER -->
+<div class="draft-banner">
+  <div class="draft-badge">
+    <span class="draft-badge-pill">DRAFT</span>
+    <span class="draft-claude">with Claude.ai — 執筆中</span>
+  </div>
+  <div class="draft-note">2026年6月5〜7日 日比谷公園パエリアタパス祭り会場にて初公開。後日加筆修正予定。</div>
+</div>
+
+<div class="stripe"></div>
+
+<header>
+  <div>
+    <div class="logo">html-notes</div>
+    <div class="logo-sub">by Roberto Hoshino × Claude.ai</div>
+  </div>
+  <nav>
+    <a href="https://dunksoft.jp">dunksoft.jp</a>
+    <a href="https://note.com/roberto_hoshino" target="_blank">note</a>
+    <a href="https://www.linkedin.com/in/roberto-hoshino" target="_blank">LinkedIn</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="eyebrow">html-notes — Marketing as Bazaar</div>
+  <div class="hero-vol">Vol. 06</div>
+  <h1 class="hero-title">パエリアと<em>市の原理</em>。</h1>
+  <div class="hero-en">Paella and the Principle of the Bazaar — Why People Really Gather</div>
+  <p class="hero-lead">
+    人が集まるのは、売り買いのためだけではない。「情報」の語源は「情けに報いること」とも言われる。せっかく会えた人に、大事なものを渡す。その場をどう設計するか——パエリア祭りから考える。
+  </p>
+  <div class="hero-event">
+    <div class="hero-event-dot"></div>
+    第11回 日比谷公園パエリア・タパス祭り　2026年6月5〜7日
+  </div>
+</section>
+
+<!-- ARTICLE -->
+<div class="article">
+
+  <!-- 01 -->
+  <div class="section-break">
+    <div class="section-break-num">01</div>
+    <div class="section-break-line"></div>
+    <div class="section-break-label">情報の語源</div>
+  </div>
+
+  <div class="body-text">
+    <p>「情報」という言葉の語源について、こんな解釈がある——<strong>情けに報いること</strong>。せっかく会えた人に、大事な情報を渡す。それが本来の情報のあり方だった。</p>
+    <p>デジタルで繋がれた時代に、なぜリアルな場が必要なのか。答えはここにある。画面越しでは渡せないものがある。温度、匂い、煙、笑い——そういうものと一緒に渡される情報は、深いところに刻まれる。</p>
+  </div>
+
+  <div class="pull">「情けに報いることが、情報の本質だとすれば——市とは、情けを交換する装置だ。」</div>
+
+  <!-- 02 -->
+  <div class="section-break">
+    <div class="section-break-num">02</div>
+    <div class="section-break-line"></div>
+    <div class="section-break-label">市の歴史と構造</div>
+  </div>
+
+  <div class="body-text">
+    <p>歴史を振り返ると、人が集まる場には常に共通の構造がある。売り買いは入口に過ぎない。</p>
+  </div>
+
+  <div class="history">
+    <div class="history-row">
+      <div class="history-era">神社境内のマルシェ</div>
+      <div class="history-content">聖と俗の境界。誰でも入れる場。神様への奉納と、人と人の取引が同じ空間にあった。</div>
+    </div>
+    <div class="history-row">
+      <div class="history-era">楽市楽座</div>
+      <div class="history-content">参入障壁を壊した。多様な人が集まることで、それまで出会わなかった情報が行き交い、経済が生まれ、戦のない世もできた。</div>
+    </div>
+    <div class="history-row">
+      <div class="history-era">バザール</div>
+      <div class="history-content">商品より先に、人の気配がある。煙、香辛料の匂い、値段交渉の声——五感が全部動く。</div>
+    </div>
+    <div class="history-row">
+      <div class="history-era">パエリア祭り 2026</div>
+      <div class="history-content">スペインの審査員、駐日大使、千代田区長、生産者、シェフ、市民——普段交わらない人たちが、煙と火と食の前に集まる。</div>
+    </div>
+  </div>
+
+  <!-- 03 -->
+  <div class="section-break">
+    <div class="section-break-num">03</div>
+    <div class="section-break-line"></div>
+    <div class="section-break-label">IT業界イベントとの対比</div>
+  </div>
+
+  <div class="body-text">
+    <p>有明あたりの大型ITイベントに足を運ぶ機会が減ってきた。同業者が回遊するだけで、中身が薄くなっている。</p>
+  </div>
+
+  <div class="contrast">
+    <div class="contrast-col">
+      <div class="contrast-col-label">大型ITイベントの問題</div>
+      <div class="contrast-item">同業者だけが回遊する</div>
+      <div class="contrast-item">NOCODEブーム——誰でも作れるものはありがたくない</div>
+      <div class="contrast-item">ソリューションはすでに飽和</div>
+      <div class="contrast-item">食べ物も体験も記憶も残らない</div>
+      <div class="contrast-item">BOTは元々ずれた数字を無理やり合わせるだけ</div>
+    </div>
+    <div class="contrast-col">
+      <div class="contrast-col-label">パエリア祭りが持つもの</div>
+      <div class="contrast-item">出会わないはずの人たちが集まる</div>
+      <div class="contrast-item">煙と火と食——五感が全部動く</div>
+      <div class="contrast-item">国際審査員、大使、区長が同じ場に</div>
+      <div class="contrast-item">体験が記憶になり、記憶がつながりになる</div>
+      <div class="contrast-item">楽しいから繰り返し来る——11回目</div>
+    </div>
+  </div>
+
+  <!-- 04 -->
+  <div class="section-break">
+    <div class="section-break-num">04</div>
+    <div class="section-break-line"></div>
+    <div class="section-break-label">2026年 第11回の市</div>
+  </div>
+
+  <div class="event-box">
+    <div class="event-box-label">第11回 日比谷公園パエリア・タパス祭り — 2026.06.05〜07</div>
+    <div class="event-box-title">この場に集まる人たち</div>
+    <ul class="event-box-list">
+      <li>スペインからのパエリア国際審査員</li>
+      <li>駐日ドミニカ共和国大使 エドワード・アニバル・ペレス・レジェス氏</li>
+      <li>樋口 千代田区長</li>
+      <li>日本パエリア協会 理事・審査員（星野晃一郎）</li>
+      <li>生産者、シェフ、市民、子どもたち</li>
+    </ul>
+  </div>
+
+  <div class="body-text">
+    <p>それぞれがそれぞれの課題を持って来る。スペインと日本の食文化交流、地域コミュニティの活性化、観光政策、子どもたちへの食育——テーブルの上のパエリアを前に、普段は会議室でしか話さない話が自然に始まる。</p>
+    <p>これが市の力だ。アジェンダがない。台本がない。でも大事なことが動く。</p>
+  </div>
+
+  <div class="pull">「煙が目に入って大変だけど、美味しいし、盛り上がる。それで十分だ。」</div>
+
+  <!-- 05 -->
+  <div class="section-break">
+    <div class="section-break-num">05</div>
+    <div class="section-break-line"></div>
+    <div class="section-break-label">データが連結する世界へ（加筆予定）</div>
+  </div>
+
+  <div class="body-text">
+    <p>市で人が繋がると、情報が繋がる。情報が繋がると、仕事が繋がる。仕事が繋がると、データが繋がる。</p>
+    <p>ダンクソフトが長年開発してきた統合型リソースマネジメント「未来かんり」は、売掛・買掛・経費・人件費をひとつの連結したデータとして管理する。部署ごとに違うシートをBOTで繋いで数字を合わせるのではなく、最初から繋がっているデータで動く——それがAIが本当に活躍できるベースになる。</p>
+    <p>パエリア祭りで生まれた縁が、いつかそこへ繋がることもある。<strong>市とは、データの連結が始まる場所でもある。</strong></p>
+    <p style="color: var(--draft); font-size:13px; border-left: 1.5px solid var(--draft); padding-left: 1rem; margin-top:1rem;">※ この章は祭り後に加筆予定。会場での気づきを反映します。</p>
+  </div>
+
+</div>
+
+<!-- DRAFT FOOTER NOTE -->
+<div class="draft-footer">
+  <div class="draft-footer-icon">D</div>
+  <div class="draft-footer-text">
+    <strong>DRAFT with Claude.ai</strong> — このページは執筆中です。<br>
+    2026年6月5〜7日のパエリア祭り会場で初公開。会場での気づきをもとに、後日加筆・修正します。<br>
+    最新版は <a href="https://dunksoft.jp" style="color: var(--saffron); text-decoration:none; border-bottom: 1px solid rgba(212,130,10,0.3);">dunksoft.jp</a> にて。
+  </div>
+</div>
+
+<!-- CLOSING -->
+<div class="closing">
+  <div class="gold-line"></div>
+  <div class="closing-main">
+    「市は、ストロークが流れる場である。<br>
+    人々が集まること自体が、すでに答えだ。」
+  </div>
+  <div class="closing-sub">
+    html-notes Vol.06 DRAFT — Marketing as Bazaar<br>
+    Roberto Hoshino（星野晃一郎）× Claude.ai<br>
+    Smart Life Styles™️ — Love your life, love your time®️
+  </div>
+  <div class="gold-line"></div>
+</div>
+
+<footer>
+  <p>
+    html-notes / パエリアと市の原理<br>
+    星野晃一郎（Roberto Hoshino）× Claude.ai<br>
+    株式会社ダンクソフト — 1983年創業 / NPO 神田藍の会<br>
+    日本パエリア協会 理事<br>
+    © 2026 Roberto Hoshino. Smart Life Styles™️
+  </p>
+</footer>
+
+</body>
+</html>
