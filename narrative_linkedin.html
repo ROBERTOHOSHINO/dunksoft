@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Narrative — Koichiro Hoshino / DUNKSOFT</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap');
+
+:root {
+  --ink: #1a1714;
+  --ink-soft: #3a3632;
+  --ink-muted: #8a857e;
+  --paper: #f9f6f0;
+  --paper-warm: #f2ede3;
+  --paper-deep: #e8e0d0;
+  --accent: #b5401a;
+  --accent-soft: #d4602e;
+  --gold: #9a7a2a;
+  --gold-pale: #f5f0e0;
+  --blue: #1a3a5c;
+  --border: rgba(26,23,20,0.12);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+  line-height: 1.8;
+}
+
+/* ── LANG BAR ── */
+.lang-bar {
+  background: var(--ink);
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  font-size: 12px;
+  letter-spacing: .06em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+.lang-bar button {
+  background: none;
+  border: 1px solid rgba(255,255,255,.35);
+  color: #fff;
+  padding: 4px 18px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 11px;
+  transition: background .2s;
+}
+.lang-bar button.active, .lang-bar button:hover { background: rgba(255,255,255,.2); }
+
+/* ── HEADER BAR ── */
+.header-bar {
+  background: var(--paper);
+  border-bottom: 0.5px solid var(--border);
+  padding: 14px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(8px);
+}
+.header-logo {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: none;
+  letter-spacing: .06em;
+}
+.header-logo span { color: var(--accent); }
+.header-links { display: flex; gap: 20px; }
+.header-links a {
+  font-size: 11px;
+  color: var(--ink-muted);
+  text-decoration: none;
+  letter-spacing: .08em;
+  transition: color .2s;
+}
+.header-links a:hover { color: var(--accent); }
+
+/* ── HERO ── */
+.hero {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 88px 40px 72px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg, transparent, transparent 39px,
+    rgba(255,255,255,.025) 39px, rgba(255,255,255,.025) 40px
+  );
+  pointer-events: none;
+}
+.hero-inner { max-width: 820px; margin: 0 auto; position: relative; }
+.hero-eyebrow {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.hero-eyebrow::before {
+  content: '';
+  width: 28px; height: 1px;
+  background: var(--accent-soft);
+  display: block;
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', 'Noto Serif JP', serif;
+  font-size: clamp(32px, 5.5vw, 58px);
+  font-weight: 900;
+  line-height: 1.18;
+  margin-bottom: 20px;
+  letter-spacing: -.01em;
+}
+.hero h1 .accent { color: var(--accent-soft); }
+.hero h1 .gold { color: #d4a84b; }
+
+.hero-byline {
+  font-size: 14px;
+  color: rgba(249,246,240,.55);
+  margin-bottom: 36px;
+  font-family: 'IBM Plex Mono', monospace;
+  letter-spacing: .06em;
+}
+
+.hero-quote {
+  border-left: 2px solid var(--accent-soft);
+  padding-left: 20px;
+  margin-top: 36px;
+  max-width: 640px;
+}
+.hero-quote p {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: clamp(16px, 2.2vw, 21px);
+  line-height: 1.75;
+  color: rgba(249,246,240,.9);
+}
+.hero-quote .attr {
+  font-family: 'IBM Plex Mono', monospace;
+  font-style: normal;
+  font-size: 11px;
+  color: rgba(249,246,240,.4);
+  letter-spacing: .1em;
+  margin-top: 12px;
+  display: block;
+}
+
+/* ── CONTENT ── */
+.content { max-width: 820px; margin: 0 auto; padding: 72px 40px; }
+
+.act {
+  margin-bottom: 72px;
+  position: relative;
+}
+.act-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.act-label::after {
+  content: '';
+  flex: 1;
+  height: 0.5px;
+  background: var(--border);
+}
+
+h2.act-title {
+  font-family: 'Playfair Display', 'Noto Serif JP', serif;
+  font-size: clamp(22px, 3.5vw, 32px);
+  font-weight: 700;
+  line-height: 1.35;
+  margin-bottom: 22px;
+  color: var(--ink);
+}
+
+p.prose {
+  font-size: 16px;
+  line-height: 2.05;
+  color: var(--ink-soft);
+  margin-bottom: 18px;
+  font-weight: 300;
+}
+p.prose strong { color: var(--ink); font-weight: 500; }
+p.prose em { font-style: italic; color: var(--gold); }
+
+/* MOMENT BOX */
+.moment-box {
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: 10px;
+  padding: 32px 36px;
+  margin: 32px 0;
+  position: relative;
+  overflow: hidden;
+}
+.moment-box::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    90deg, transparent, transparent 59px,
+    rgba(255,255,255,.015) 59px, rgba(255,255,255,.015) 60px
+  );
+  pointer-events: none;
+}
+.moment-box .mb-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  margin-bottom: 16px;
+  position: relative;
+}
+.moment-box p {
+  font-size: 15.5px;
+  line-height: 2;
+  color: rgba(249,246,240,.88);
+  position: relative;
+}
+.moment-box p strong { color: #fff; font-weight: 500; }
+
+/* PULL QUOTE */
+.pull-quote {
+  padding: 28px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  margin: 36px 0;
+}
+.pull-quote p {
+  font-family: 'Playfair Display', 'Noto Serif JP', serif;
+  font-size: clamp(18px, 3vw, 26px);
+  font-weight: 700;
+  line-height: 1.55;
+  color: var(--ink);
+}
+.pull-quote p em { font-style: italic; color: var(--accent); }
+
+/* PEERS BOX */
+.peers-box {
+  background: var(--gold-pale);
+  border: 1px solid rgba(154,122,42,.2);
+  border-radius: 10px;
+  padding: 28px 32px;
+  margin: 32px 0;
+}
+.peers-box .pb-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px;
+  letter-spacing: .25em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.peers-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 16px;
+}
+.peer-item {
+  text-align: center;
+  min-width: 110px;
+}
+.peer-name {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+.peer-note {
+  font-size: 11px;
+  color: var(--ink-muted);
+  line-height: 1.5;
+}
+.peer-note.highlight {
+  color: var(--accent);
+  font-weight: 500;
+}
+.peers-box .pb-caption {
+  font-size: 13px;
+  color: var(--ink-soft);
+  line-height: 1.9;
+  border-top: 0.5px solid rgba(154,122,42,.2);
+  padding-top: 14px;
+  margin-top: 4px;
+}
+
+/* TIMELINE MOMENT */
+.timeline-today {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  background: var(--paper-warm);
+  border-radius: 10px;
+  padding: 24px 28px;
+  margin: 28px 0;
+  border-left: 3px solid var(--accent);
+}
+.tt-time {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  color: var(--accent);
+  min-width: 60px;
+  padding-top: 3px;
+  font-weight: 500;
+}
+.tt-body p { font-size: 14.5px; color: var(--ink-soft); line-height: 1.8; }
+.tt-body strong { color: var(--ink); }
+
+/* CODE MOMENT */
+.code-box {
+  background: #1e1e1e;
+  border-radius: 8px;
+  padding: 24px 28px;
+  margin: 28px 0;
+  font-family: 'IBM Plex Mono', monospace;
+}
+.code-box .cb-comment {
+  font-size: 12px;
+  color: #6a9955;
+  margin-bottom: 8px;
+  line-height: 1.7;
+}
+.code-box .cb-code {
+  font-size: 13px;
+  color: #9cdcfe;
+  line-height: 1.9;
+}
+.code-box .cb-code .kw { color: #c586c0; }
+.code-box .cb-code .num { color: #b5cea8; }
+.code-box .cb-code .str { color: #ce9178; }
+.code-box .cb-label {
+  font-size: 10px;
+  color: #555;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+/* CTA */
+.cta-section {
+  background: var(--blue);
+  color: #fff;
+  padding: 56px 40px;
+  text-align: center;
+}
+.cta-section h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  margin-bottom: 14px;
+}
+.cta-section p {
+  font-size: 14px;
+  color: rgba(255,255,255,.6);
+  max-width: 500px;
+  margin: 0 auto 28px;
+  line-height: 1.9;
+}
+.cta-btn {
+  display: inline-block;
+  background: #0a66c2;
+  color: #fff;
+  padding: 13px 36px;
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: .06em;
+  text-decoration: none;
+  transition: background .2s;
+  margin: 0 8px 8px;
+}
+.cta-btn:hover { background: #0856a0; }
+.cta-btn.secondary {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,.4);
+}
+.cta-btn.secondary:hover { background: rgba(255,255,255,.1); }
+
+/* LANG TOGGLE */
+.en-section { display: none; }
+body.lang-en .ja-section { display: none; }
+body.lang-en .en-section { display: block; }
+
+footer {
+  background: var(--paper-deep);
+  border-top: 0.5px solid var(--border);
+  padding: 28px 40px;
+  text-align: center;
+  font-size: 11px;
+  color: var(--ink-muted);
+  font-family: 'IBM Plex Mono', monospace;
+  letter-spacing: .07em;
+  line-height: 2;
+}
+
+@media (max-width: 600px) {
+  .hero { padding: 56px 24px 48px; }
+  .content { padding: 48px 24px; }
+  .cta-section { padding: 44px 24px; }
+  .header-bar { padding: 12px 20px; }
+  .header-links { display: none; }
+  .peers-row { gap: 12px; }
+}
+</style>
+</head>
+<body>
+
+<div class="lang-bar">
+  <button class="active" onclick="setLang('ja')" id="btn-ja">日本語</button>
+  <button onclick="setLang('en')" id="btn-en">English</button>
+</div>
+
+<div class="header-bar">
+  <a href="index.html" class="header-logo">DUNK<span>SOFT</span>.jp</a>
+  <div class="header-links">
+    <a href="takt_patent_1996.html">Vision Layer #0</a>
+    <a href="index.html#vision">Vision Layers</a>
+    <a href="index.html#stories">Stories</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Narrative / Before LinkedIn</div>
+    <h1>
+      30年眠っていた<br>
+      <span class="accent">コピー用紙</span>が、<br>
+      <span class="gold">今日、動き出した。</span>
+    </h1>
+    <p class="hero-byline">Koichiro Hoshino · DUNKSOFT · 2025</p>
+    <div class="hero-quote">
+      <p>完成したコードを見ただけでは、凄さは伝わらない。<br>何百回もリライトした、あの瞬間だけが知っている。</p>
+      <span class="attr">— K. Hoshino</span>
+    </div>
+  </div>
+</header>
+
+<!-- ══════════════════════════════ -->
+<!-- JAPANESE -->
+<!-- ══════════════════════════════ -->
+<div class="ja-section">
+<div class="content">
+
+  <!-- ACT I -->
+  <div class="act">
+    <div class="act-label">Act I / 書棚のコピー用紙</div>
+    <h2 class="act-title">ずっと、そこにあった。</h2>
+
+    <p class="prose">
+      書棚の、どこか。時々目に入るたびに「そうだ、これがある」と思う。<strong>1996年の特許申請書類</strong>。タクト工程表の自動作成——建築工程管理にAIを持ち込んだ、日本では先駆けの試み。手書きのメモ。コピー用紙の束。
+    </p>
+
+    <p class="prose">
+      大切なのはわかっている。でも、公開する方法も、きちんと保管する方法も、ずっと「面倒」だった。文字起こしの精度はずっと低くて、チェックして直す手間を想像するだけで<strong>ぞっとした</strong>。だから、放っておいた。30年近く。
+    </p>
+
+    <div class="pull-quote">
+      <p><em>「面倒」</em>だったのではない。<br>その面倒を引き受けてくれる<em>存在がいなかった</em>のだ。</p>
+    </div>
+  </div>
+
+  <!-- ACT II -->
+  <div class="act">
+    <div class="act-label">Act II / 今日という一瞬</div>
+    <h2 class="act-title">共用スペースの複合機。<br>メール。Claude。一瞬。</h2>
+
+    <p class="prose">
+      今日、それが変わった。Claude.aiとのCo-Creationの中で積み上げてきた成果が後押ししてくれた。「やってみよう」と思えた。
+    </p>
+
+    <div class="timeline-today">
+      <div class="tt-time">今日</div>
+      <div class="tt-body">
+        <p><strong>共用スペースの複合機でスキャン</strong> → メールアドレスにPDFが届く → <strong>Claudeに渡す</strong> → 一瞬で読み取り → <strong>「傾き」という発明を一瞬で見抜く</strong></p>
+      </div>
+    </div>
+
+    <p class="prose">
+      「傾き」。請求項2に書いた、タクト工程最適化の核心アルゴリズム。簡単そうに見える。でも、<strong>ここだけで何十回、何百回とリライトした</strong>。余分な処理をそぎ落とし、速度を上げ続け、使えるレベルにするまで。
+    </p>
+
+    <p class="prose">
+      Claudeは、それを——完成後の静かなコードの中から——<strong>一瞬で「ここだ」と見抜いた</strong>。
+    </p>
+
+    <div class="moment-box">
+      <div class="mb-label">The Algorithm / 傾き（θ）の本質</div>
+      <p>基準タクトの所要日数を「傾き」として定義する。この一行が、コンピュータが自動でタクト工程表を生成できる理由のすべてだ。<strong>熟練現場監督が1〜2週間かけた作業が、ワンクリックになる。</strong>元はPROLOGで設計したAI推論エンジン。でも実行環境がなかった。だからC言語で、約20行に蒸留した。</p>
+    </div>
+
+    <div class="code-box">
+      <div class="cb-label">概念コード / Conceptual — C, ~1994</div>
+      <div class="cb-comment">/* 傾き（θ）= 基準タクトの所要日数。この定義が全てを変えた。<br>&nbsp;&nbsp; What looks like 20 lines took hundreds of rewrites to reach. */</div>
+      <div class="cb-code">
+        <span class="kw">int</span> slope = base_takt_days; &nbsp;<span style="color:#6a9955">// θ — the core insight</span><br>
+        <span class="kw">for</span> (takt = <span class="num">0</span>; takt &lt; total_takts; takt++) {<br>
+        &nbsp;&nbsp;start[takt] = prev_end[takt] > takt * slope<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;? prev_end[takt] : takt * slope;<br>
+        } &nbsp;<span style="color:#6a9955">/* ~20 lines. Hundreds of rewrites. One click result. */</span>
+      </div>
+    </div>
+
+    <p class="prose">
+      ロジック自体の最適化は、AIから学んだ。<strong>私の宝物だ。</strong>
+    </p>
+  </div>
+
+  <!-- ACT III -->
+  <div class="act">
+    <div class="act-label">Act III / 同世代という文脈</div>
+    <h2 class="act-title">Steve Jobsと同世代。<br>現役でコードを書いている。</h2>
+
+    <p class="prose">
+      Steve Jobsは同世代だった。Bill Gatesも。Eric Schmidtも。彼らが産業を変えた時代に、私は建築現場の工程をワンクリックに変えていた。
+    </p>
+
+    <div class="peers-box">
+      <div class="pb-label">同世代 / The Same Generation</div>
+      <div class="peers-row">
+        <div class="peer-item">
+          <div class="peer-name">Steve Jobs</div>
+          <div class="peer-note">Apple · Mac · iPhone<br>同世代</div>
+        </div>
+        <div class="peer-item">
+          <div class="peer-name">Bill Gates</div>
+          <div class="peer-note">Microsoft · Windows<br>同世代</div>
+        </div>
+        <div class="peer-item">
+          <div class="peer-name">Eric Schmidt</div>
+          <div class="peer-note">Google · Android<br>同世代</div>
+        </div>
+        <div class="peer-item">
+          <div class="peer-name">K. Hoshino</div>
+          <div class="peer-note highlight">DUNKSOFT · AI × Code<br>現役プログラミング中</div>
+        </div>
+      </div>
+      <div class="pb-caption">
+        彼らのほとんどは現役のプログラミングから離れた。<strong>現役でコードを書き、AIと共同開発している同世代は、おそらく私くらいかもしれない。</strong>（笑）——それを誇りに思う。
+      </div>
+    </div>
+
+    <p class="prose">
+      自慢ではない。これが<strong>継続のリアル</strong>だ。1980年代後半に結婚式場の花管理システムを作り、1990年代に建築業界全体を統合し、2020年代にClaudeとリアルタイムで共同開発している。同じ人間が、同じ哲学で、40年間続けている。
+    </p>
+  </div>
+
+  <!-- ACT IV -->
+  <div class="act">
+    <div class="act-label">Act IV / 次のSTEP</div>
+    <h2 class="act-title">アーカイブが、<br>扉を開く。</h2>
+
+    <p class="prose">
+      このコピー用紙の公開は、過去の整理ではない。<strong>次のステップへの踏み台だ。</strong>
+    </p>
+
+    <p class="prose">
+      天然色漢字AUTH™を通じて、建築業界だけでなく様々な業界へ。「傾き」のアルゴリズムが建設現場のタクトを最適化したように、色と漢字の認証が人とシステムの接点を最適化する。本質は同じ——<em>複雑なものをシンプルに、シンプルなものを速く。</em>
+    </p>
+
+    <p class="prose">
+      Co-Creationの積み上げが後押ししてくれた今日、30年眠っていたコピー用紙が、ようやく世界に出る。
+    </p>
+
+    <div class="pull-quote">
+      <p>技術は変わる。哲学は変わらない。<br><em>「コスト管理はプロジェクト管理の基本。」</em><br>1980年代から、今日まで。</p>
+    </div>
+  </div>
+
+</div>
+</div><!-- /ja-section -->
+
+<!-- ══════════════════════════════ -->
+<!-- ENGLISH -->
+<!-- ══════════════════════════════ -->
+<div class="en-section">
+<div class="content">
+
+  <div class="act">
+    <div class="act-label">Act I / The Paper That Waited</div>
+    <h2 class="act-title">It was always there.</h2>
+    <p class="prose">
+      Somewhere on the bookshelf. Every now and then, I'd catch a glimpse and think — <em>right, that's there.</em> A patent filing from 1996. The automatic generation of takt schedule charts — an early attempt to bring AI into construction project management. Handwritten notes. A stack of photocopied pages.
+    </p>
+    <p class="prose">
+      I knew it mattered. But publishing it, even properly archiving it, always felt like <strong>too much trouble</strong>. OCR accuracy was never good enough. The thought of checking and correcting every line made me shudder. So I left it. For nearly thirty years.
+    </p>
+    <div class="pull-quote">
+      <p>It wasn't that it was <em>too much trouble.</em><br>There was simply no one to <em>take that trouble for me.</em></p>
+    </div>
+  </div>
+
+  <div class="act">
+    <div class="act-label">Act II / The Moment</div>
+    <h2 class="act-title">A scanner. An email.<br>Claude. One instant.</h2>
+    <p class="prose">
+      Today, that changed. The accumulated momentum of co-creating with Claude.ai gave me the push I needed. <em>Let's just do it.</em>
+    </p>
+    <div class="timeline-today">
+      <div class="tt-time">Today</div>
+      <div class="tt-body">
+        <p><strong>Scanned at the office shared printer</strong> → PDF arrives by email → <strong>Handed to Claude</strong> → Read instantly → <strong>"Slope" — the invention — spotted immediately</strong></p>
+      </div>
+    </div>
+    <p class="prose">
+      "Slope." Claim 2 of the patent. The core of the takt optimization algorithm. It looks simple. But <strong>I rewrote just that part dozens, hundreds of times</strong> — stripping away every excess operation, pushing for speed, until it was actually usable.
+    </p>
+    <p class="prose">
+      Claude looked at the quiet finished code and — <strong>in an instant — found it.</strong>
+    </p>
+    <div class="moment-box">
+      <div class="mb-label">The Algorithm / The Slope (θ)</div>
+      <p>Define the required duration of the baseline takt as the "slope." That single definition is why a computer can automatically generate a full construction schedule. <strong>Two weeks of expert work. One click.</strong> Originally designed as a PROLOG AI inference engine — but the runtime wasn't there. So I distilled it into approximately 20 lines of C. The logic optimization itself: learned from AI. <strong>My treasure.</strong></p>
+    </div>
+  </div>
+
+  <div class="act">
+    <div class="act-label">Act III / The Generation</div>
+    <h2 class="act-title">Same generation as Steve Jobs.<br>Still writing code.</h2>
+    <p class="prose">
+      Steve Jobs was my generation. So was Bill Gates. Eric Schmidt. While they were changing industries, I was reducing two weeks of construction scheduling to a single click.
+    </p>
+    <div class="peers-box">
+      <div class="pb-label">The Same Generation</div>
+      <div class="peers-row">
+        <div class="peer-item"><div class="peer-name">Steve Jobs</div><div class="peer-note">Apple · Mac · iPhone<br>Same generation</div></div>
+        <div class="peer-item"><div class="peer-name">Bill Gates</div><div class="peer-note">Microsoft · Windows<br>Same generation</div></div>
+        <div class="peer-item"><div class="peer-name">Eric Schmidt</div><div class="peer-note">Google · Android<br>Same generation</div></div>
+        <div class="peer-item"><div class="peer-name">K. Hoshino</div><div class="peer-note highlight">DUNKSOFT · AI × Code<br>Still coding. Today.</div></div>
+      </div>
+      <div class="pb-caption">
+        Most of them stepped back from active programming long ago. <strong>Among my generation, actively writing code and co-developing with AI in real time — I may be one of the last few standing.</strong> (^^) — And I wear that with pride.
+      </div>
+    </div>
+    <p class="prose">
+      This isn't a boast. This is what <strong>continuity looks like</strong>. Building a flower cost management system for a wedding venue in the late 1980s. Integrating an entire construction industry lifecycle in the 1990s. Co-developing in real time with Claude in the 2020s. The same person, the same philosophy, forty years running.
+    </p>
+  </div>
+
+  <div class="act">
+    <div class="act-label">Act IV / The Next Step</div>
+    <h2 class="act-title">The archive opens a door.</h2>
+    <p class="prose">
+      Publishing this paper is not about tidying up the past. <strong>It's a launchpad.</strong>
+    </p>
+    <p class="prose">
+      Through COLORFUL KANJI AUTH™, the path leads beyond construction — into every industry where people and systems need to connect. The way "slope" optimized takt scheduling, color and kanji authentication optimizes the human-system interface. The essence is identical: <em>make the complex simple, make the simple fast.</em>
+    </p>
+    <div class="pull-quote">
+      <p>Technology changes. Philosophy doesn't.<br><em>"Cost management is the foundation of project management."</em><br>From the 1980s to today.</p>
+    </div>
+  </div>
+
+</div>
+</div><!-- /en-section -->
+
+<!-- CTA -->
+<div class="cta-section">
+  <h3>Vision Layer #0 — アーカイブを読む</h3>
+  <p>特願平08-036735 · HOW TOTAL SYSTEM · UI-FLORIST · 40年の軌跡<br>
+  The full archive: construction, AI, flowers, and one unbroken philosophy.</p>
+  <a class="cta-btn" href="takt_patent_1996.html">Vision Layer #0 を読む</a>
+  <a class="cta-btn secondary" href="https://www.linkedin.com" target="_blank">LinkedIn →</a>
+</div>
+
+<footer>
+  Koichiro Hoshino · DUNKSOFT Co., Ltd. · Smart Life Styles®<br>
+  Love your life, love your time® · © 2025
+</footer>
+
+<script>
+function setLang(l) {
+  document.body.className = l === 'en' ? 'lang-en' : '';
+  document.getElementById('btn-ja').className = l === 'ja' ? 'active' : '';
+  document.getElementById('btn-en').className = l === 'en' ? 'active' : '';
+  document.documentElement.lang = l;
+}
+</script>
+</body>
+</html>
