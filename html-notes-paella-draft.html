@@ -3,25 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>html-notes Vol.06 DRAFT | パエリアと市の原理 / Paella and the Bazaar / Paella y el Principio del Mercado</title>
+<title>html-notes Vol.06 DRAFT | パエリアと市の原理 — 星野晃一郎</title>
+<meta name="description" content="人が集まるのは売り買いだけではない。情報の語源は「情けに報いること」。パエリア祭りから考える市づくりの本質。">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600&family=Noto+Sans+JP:wght@300;400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap');
 
 :root {
-  --ink:     #18161a;
-  --ink2:    #3e3a42;
-  --ink3:    #8a8490;
-  --paper:   #faf8f4;
-  --paper2:  #f3f0eb;
-  --gold:    #b89a3e;
-  --saffron: #d4820a;
-  --teal:    #2a6b5e;
-  --indigo:  #2a3a5e;
-  --silver:  #c8c4cc;
-  --draft:   #c0550a;
-  --es:      #c0392b;
-  --en:      #1a3a5c;
-  --ja:      #2a6b5e;
+  --ink:    #18161a;
+  --ink2:   #3e3a42;
+  --ink3:   #8a8490;
+  --paper:  #faf8f4;
+  --paper2: #f3f0eb;
+  --gold:   #b89a3e;
+  --saffron:#d4820a;
+  --teal:   #2a6b5e;
+  --indigo: #2a3a5e;
+  --silver: #c8c4cc;
+  --draft:  #c0550a;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -35,69 +33,70 @@ body {
   line-height: 2;
 }
 
-/* ── DRAFT BANNER ── */
+/* DRAFT BANNER */
 .draft-banner {
   background: var(--draft);
   padding: .6rem 2rem;
-  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: .5rem;
 }
-.draft-badge { display: flex; align-items: center; gap: .75rem; }
-.draft-pill {
-  background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.4);
-  border-radius: 20px; padding: .25rem .875rem;
-  font-size: 11px; color: white; letter-spacing: .12em;
-  font-family: 'Noto Sans JP', sans-serif; font-weight: 400;
+.draft-badge {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
 }
-.draft-claude { font-size: 10px; color: rgba(255,255,255,0.75); letter-spacing: .1em; font-family: 'Noto Sans JP', sans-serif; font-weight: 300; }
-.draft-note { font-size: 10px; color: rgba(255,255,255,0.7); font-family: 'Noto Sans JP', sans-serif; font-weight: 300; letter-spacing: .06em; }
+.draft-badge-pill {
+  background: rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.4);
+  border-radius: 20px;
+  padding: .25rem .875rem;
+  font-size: 11px;
+  font-weight: 400;
+  color: white;
+  letter-spacing: .12em;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+.draft-claude {
+  font-size: 10px;
+  color: rgba(255,255,255,0.75);
+  letter-spacing: .1em;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+}
+.draft-note {
+  font-size: 10px;
+  color: rgba(255,255,255,0.7);
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+  letter-spacing: .06em;
+}
 
-/* ── STRIPE ── */
-.stripe { height: 3px; background: linear-gradient(90deg, #c0392b 0%, #d4820a 35%, #2a3a5e 65%, #2a6b5e 100%); }
+/* STRIPE */
+.stripe { height: 3px; background: linear-gradient(90deg, #d4820a 0%, #2a3a5e 30%, #2a6b5e 60%, #b89a3e 100%); }
 
-/* ── LANG SWITCHER ── */
-.lang-bar {
-  background: var(--paper2);
-  border-bottom: 0.5px solid rgba(0,0,0,0.09);
-  padding: .6rem 2rem;
-  display: flex; align-items: center; gap: .75rem;
-  position: sticky; top: 0; z-index: 200;
-  backdrop-filter: blur(10px);
-}
-.lang-label { font-size: 9px; letter-spacing: .15em; color: var(--ink3); text-transform: uppercase; font-family: 'Noto Sans JP', sans-serif; font-weight: 300; margin-right: .25rem; }
-.lang-btn {
-  font-size: 11px; letter-spacing: .1em;
-  padding: .3rem .875rem; border-radius: 20px;
-  border: 0.5px solid rgba(0,0,0,0.15);
-  background: transparent; cursor: pointer;
-  font-family: 'Cormorant Garamond', serif;
-  color: var(--ink3); transition: all .2s;
-}
-.lang-btn.active-ja { background: var(--ja); color: white; border-color: var(--ja); }
-.lang-btn.active-en { background: var(--en); color: white; border-color: var(--en); }
-.lang-btn.active-es { background: var(--es); color: white; border-color: var(--es); }
-.lang-btn:hover { opacity: .8; }
-
-/* ── HEADER ── */
+/* HEADER */
 header {
   padding: 1.2rem 2.5rem;
   display: flex; align-items: center; justify-content: space-between;
   border-bottom: 0.5px solid rgba(0,0,0,0.09);
+  position: sticky; top: 0;
   background: rgba(250,248,244,0.96);
   backdrop-filter: blur(10px);
+  z-index: 100;
 }
 .logo { font-family: 'Cormorant Garamond', serif; font-size: 15px; font-weight: 400; letter-spacing: .12em; color: var(--ink); }
 .logo-sub { font-size: 9px; color: var(--ink3); letter-spacing: .12em; margin-top: 3px; font-family: 'Noto Sans JP', sans-serif; font-weight: 300; }
 nav { display: flex; gap: 2rem; }
 nav a { font-size: 11px; letter-spacing: .08em; color: var(--ink3); text-decoration: none; font-family: 'Noto Sans JP', sans-serif; font-weight: 300; }
 
-/* ── CONTENT SECTIONS ── */
-.lang-content { display: none; }
-.lang-content.active { display: block; }
-
-/* ── HERO ── */
+/* HERO */
 .hero {
   max-width: 760px; margin: 0 auto;
-  padding: 5rem 2.5rem 4rem; position: relative;
+  padding: 5rem 2.5rem 4rem;
+  position: relative;
 }
 .hero::after {
   content: ''; position: absolute; bottom: 0; left: 2.5rem; right: 2.5rem;
@@ -109,60 +108,151 @@ nav a { font-size: 11px; letter-spacing: .08em; color: var(--ink3); text-decorat
   display: flex; align-items: center; gap: 12px;
 }
 .eyebrow::before { content: ''; display: block; width: 28px; height: 0.5px; background: var(--saffron); }
-.hero-vol { font-family: 'Cormorant Garamond', serif; font-size: 11px; letter-spacing: .2em; color: var(--saffron); margin-bottom: .75rem; }
-.hero-title { font-family: 'Noto Serif JP', serif; font-size: clamp(22px, 4.5vw, 42px); font-weight: 500; line-height: 1.5; letter-spacing: .04em; margin-bottom: 1rem; }
-.hero-title-serif { font-family: 'Cormorant Garamond', serif; font-size: clamp(24px, 4.5vw, 44px); font-weight: 600; line-height: 1.3; letter-spacing: .02em; margin-bottom: 1rem; }
-.hero-title em, .hero-title-serif em { font-style: italic; color: var(--saffron); }
-.hero-sub { font-family: 'Cormorant Garamond', serif; font-size: 14px; font-style: italic; font-weight: 300; color: var(--ink3); letter-spacing: .06em; margin-bottom: 2rem; }
-.hero-lead { font-size: clamp(14px, 1.8vw, 17px); font-weight: 300; color: var(--ink2); max-width: 560px; line-height: 2.1; margin-bottom: 2.5rem; }
-.hero-lead-serif { font-family: 'Cormorant Garamond', serif; font-size: clamp(16px, 2vw, 19px); font-weight: 300; color: var(--ink2); max-width: 560px; line-height: 2; margin-bottom: 2.5rem; }
-.hero-event { display: inline-flex; align-items: center; gap: .75rem; background: var(--paper2); border: 0.5px solid rgba(0,0,0,0.1); border-radius: 3px; padding: .6rem 1.25rem; font-size: 12px; color: var(--ink2); font-family: 'Noto Sans JP', sans-serif; font-weight: 300; }
+
+.hero-vol {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 11px; letter-spacing: .2em; color: var(--saffron);
+  margin-bottom: .75rem; font-weight: 400;
+}
+
+.hero-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(24px, 4.5vw, 44px);
+  font-weight: 500; line-height: 1.5;
+  letter-spacing: .04em; margin-bottom: 1rem;
+}
+.hero-title em { font-style: normal; color: var(--saffron); }
+
+.hero-en {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px; font-style: italic; font-weight: 300;
+  color: var(--ink3); letter-spacing: .06em; margin-bottom: 2rem;
+}
+
+.hero-lead {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(14px, 1.8vw, 17px); font-weight: 300;
+  color: var(--ink2); max-width: 560px; line-height: 2.1; margin-bottom: 2.5rem;
+}
+
+.hero-event {
+  display: inline-flex; align-items: center; gap: .75rem;
+  background: var(--paper2); border: 0.5px solid rgba(0,0,0,0.1);
+  border-radius: 3px; padding: .6rem 1.25rem;
+  font-size: 12px; color: var(--ink2);
+  font-family: 'Noto Sans JP', sans-serif; font-weight: 300;
+}
 .hero-event-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--saffron); }
 
-/* ── ARTICLE ── */
+/* ARTICLE */
 .article { max-width: 760px; margin: 0 auto; padding: 4rem 2.5rem 5rem; }
 
-.section-break { display: flex; align-items: center; gap: 1rem; margin: 3.5rem 0 2rem; }
+.section-break {
+  display: flex; align-items: center; gap: 1rem; margin: 3.5rem 0 2rem;
+}
 .section-break-num { font-family: 'Cormorant Garamond', serif; font-size: 11px; color: var(--ink3); letter-spacing: .1em; min-width: 28px; }
 .section-break-line { flex: 1; height: 0.5px; background: linear-gradient(90deg, rgba(0,0,0,0.1), transparent); }
 .section-break-label { font-size: 9px; letter-spacing: .18em; color: var(--ink3); text-transform: uppercase; font-family: 'Noto Sans JP', sans-serif; font-weight: 300; }
 
-.body-text { font-size: clamp(14px, 1.7vw, 16px); color: var(--ink2); line-height: 2.2; font-weight: 300; margin-bottom: 1.4rem; }
-.body-text-serif { font-family: 'Cormorant Garamond', serif; font-size: clamp(16px, 1.9vw, 19px); color: var(--ink2); line-height: 2.05; font-weight: 300; margin-bottom: 1.4rem; }
-.body-text p, .body-text-serif p { margin-bottom: 1.1rem; }
-.body-text strong, .body-text-serif strong { font-weight: 500; color: var(--ink); }
+.body-text { font-family: 'Noto Serif JP', serif; font-size: clamp(14px, 1.7vw, 16px); color: var(--ink2); line-height: 2.2; font-weight: 300; margin-bottom: 1.4rem; }
+.body-text p { margin-bottom: 1.1rem; }
+.body-text strong { font-weight: 500; color: var(--ink); }
 
-.pull { font-family: 'Cormorant Garamond', serif; font-size: clamp(16px, 2.1vw, 21px); font-weight: 600; font-style: italic; color: var(--indigo); border-left: 1.5px solid var(--saffron); padding: .5rem 0 .5rem 1.5rem; margin: 2.5rem 0; line-height: 1.75; }
+.pull {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(16px, 2.1vw, 20px); font-weight: 500;
+  color: var(--indigo); border-left: 1.5px solid var(--saffron);
+  padding: .5rem 0 .5rem 1.5rem; margin: 2.5rem 0; line-height: 1.9;
+}
 
-/* HISTORY */
-.history { margin: 2rem 0; border: 0.5px solid rgba(0,0,0,0.08); border-radius: 3px; overflow: hidden; }
-.history-row { display: grid; grid-template-columns: 130px 1fr; border-bottom: 0.5px solid rgba(0,0,0,0.06); }
+/* HISTORY TABLE */
+.history {
+  margin: 2rem 0;
+  border: 0.5px solid rgba(0,0,0,0.08); border-radius: 3px; overflow: hidden;
+}
+.history-row {
+  display: grid; grid-template-columns: 120px 1fr;
+  border-bottom: 0.5px solid rgba(0,0,0,0.06);
+}
 .history-row:last-child { border-bottom: none; }
-.history-era { padding: .875rem 1.25rem; background: var(--paper2); font-size: 12px; font-family: 'Cormorant Garamond', serif; color: var(--saffron); font-weight: 400; border-right: 0.5px solid rgba(0,0,0,0.06); display: flex; align-items: center; }
-.history-content { padding: .875rem 1.25rem; font-size: 14px; color: var(--ink2); line-height: 1.9; font-weight: 300; }
+.history-era {
+  padding: .875rem 1.25rem;
+  background: var(--paper2);
+  font-size: 12px; font-family: 'Cormorant Garamond', serif;
+  color: var(--saffron); font-weight: 400;
+  border-right: 0.5px solid rgba(0,0,0,0.06);
+  display: flex; align-items: center;
+}
+.history-content {
+  padding: .875rem 1.25rem;
+  font-size: 14px; color: var(--ink2);
+  font-family: 'Noto Serif JP', serif; font-weight: 300;
+  line-height: 1.8;
+}
 
 /* EVENT BOX */
-.event-box { background: linear-gradient(135deg, rgba(212,130,10,0.06), rgba(42,58,94,0.04)); border: 0.5px solid rgba(212,130,10,0.25); border-radius: 3px; padding: 1.5rem 1.75rem; margin: 2rem 0; }
-.event-box-label { font-size: 9px; letter-spacing: .15em; color: var(--saffron); text-transform: uppercase; margin-bottom: .75rem; font-family: 'Noto Sans JP', sans-serif; font-weight: 300; }
-.event-box-title { font-size: 16px; font-weight: 500; margin-bottom: .75rem; }
-.event-box-list { list-style: none; font-size: 14px; color: var(--ink2); line-height: 2; }
+.event-box {
+  background: linear-gradient(135deg, rgba(212,130,10,0.06), rgba(42,58,94,0.04));
+  border: 0.5px solid rgba(212,130,10,0.25);
+  border-radius: 3px; padding: 1.5rem 1.75rem; margin: 2rem 0;
+}
+.event-box-label {
+  font-size: 9px; letter-spacing: .15em; color: var(--saffron);
+  text-transform: uppercase; margin-bottom: .75rem;
+  font-family: 'Noto Sans JP', sans-serif; font-weight: 300;
+}
+.event-box-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 16px; font-weight: 500; margin-bottom: .75rem;
+}
+.event-box-list {
+  list-style: none; font-size: 14px; color: var(--ink2);
+  font-family: 'Noto Serif JP', serif; font-weight: 300;
+  line-height: 2;
+}
 .event-box-list li::before { content: '→ '; color: var(--saffron); font-family: monospace; }
 
-/* CONTRAST */
-.contrast { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: rgba(0,0,0,0.07); border-radius: 3px; overflow: hidden; margin: 2rem 0; }
+/* IT CONTRAST */
+.contrast {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+  background: rgba(0,0,0,0.07); border-radius: 3px; overflow: hidden; margin: 2rem 0;
+}
 .contrast-col { background: var(--paper); padding: 1.25rem; }
-.contrast-col-label { font-size: 9px; letter-spacing: .15em; text-transform: uppercase; font-family: 'Noto Sans JP', sans-serif; font-weight: 300; margin-bottom: .875rem; }
+.contrast-col-label {
+  font-size: 9px; letter-spacing: .15em; text-transform: uppercase;
+  font-family: 'Noto Sans JP', sans-serif; font-weight: 300;
+  margin-bottom: .875rem;
+}
 .contrast-col:first-child .contrast-col-label { color: var(--ink3); }
 .contrast-col:last-child .contrast-col-label { color: var(--saffron); }
-.contrast-item { font-size: 13px; color: var(--ink2); line-height: 1.9; margin-bottom: .5rem; padding-left: .75rem; border-left: 1.5px solid rgba(0,0,0,0.1); }
-.contrast-col:last-child .contrast-item { border-left-color: var(--saffron); }
+.contrast-item {
+  font-size: 13px; color: var(--ink2);
+  font-family: 'Noto Serif JP', serif; font-weight: 300;
+  line-height: 1.9; margin-bottom: .5rem;
+  padding-left: .75rem; border-left: 1.5px solid rgba(0,0,0,0.1);
+}
+.contrast-col:last-child .contrast-item { border-left-color: var(--saffron); opacity: .9; }
 
-/* DRAFT NOTE */
-.draft-note-inline { color: var(--draft); font-size: 13px; border-left: 1.5px solid var(--draft); padding-left: 1rem; margin-top: 1rem; line-height: 1.9; }
+/* DRAFT WATERMARK note */
+.draft-footer {
+  background: var(--paper2);
+  border-top: 0.5px solid rgba(0,0,0,0.08);
+  padding: 1.5rem 2.5rem;
+  max-width: 760px; margin: 0 auto;
+  display: flex; align-items: center; gap: 1rem;
+}
+.draft-footer-icon {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--draft); display: flex; align-items: center;
+  justify-content: center; flex-shrink: 0;
+  font-size: 14px; color: white; font-family: 'Cormorant Garamond', serif;
+}
+.draft-footer-text { font-size: 12px; color: var(--ink3); font-family: 'Noto Sans JP', sans-serif; font-weight: 300; line-height: 1.8; }
+.draft-footer-text strong { color: var(--ink2); font-weight: 400; }
 
 /* CLOSING */
 .closing { max-width: 760px; margin: 0 auto; padding: 3.5rem 2.5rem; text-align: center; border-top: 0.5px solid rgba(0,0,0,0.07); }
-.closing-main { font-family: 'Cormorant Garamond', serif; font-size: clamp(16px, 2.2vw, 22px); font-weight: 600; font-style: italic; line-height: 1.85; margin-bottom: 1rem; }
+.closing-main { font-family: 'Noto Serif JP', serif; font-size: clamp(15px, 2vw, 20px); font-weight: 500; line-height: 2; margin-bottom: 1rem; }
 .closing-sub { font-size: 10px; color: var(--ink3); letter-spacing: .08em; line-height: 2.4; font-family: 'Noto Sans JP', sans-serif; font-weight: 300; }
 .gold-line { width: 40px; height: 1px; background: var(--saffron); margin: 1.5rem auto; opacity: .4; }
 
@@ -170,7 +260,9 @@ footer { border-top: 0.5px solid rgba(0,0,0,0.09); padding: 2rem 2.5rem; text-al
 footer p { font-size: 10px; color: var(--ink3); letter-spacing: .08em; line-height: 2.4; font-family: 'Noto Sans JP', sans-serif; font-weight: 300; }
 
 @keyframes fadeUp { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
-.hero-title, .hero-title-serif { animation: fadeUp .8s ease both; }
+.hero-title { animation: fadeUp .8s ease both; }
+.hero-en    { animation: fadeUp .8s .1s ease both; }
+.hero-lead  { animation: fadeUp .8s .2s ease both; }
 
 @media (max-width: 600px) {
   nav { display: none; }
@@ -183,23 +275,16 @@ footer p { font-size: 10px; color: var(--ink3); letter-spacing: .08em; line-heig
 </head>
 <body>
 
+<!-- DRAFT BANNER -->
 <div class="draft-banner">
   <div class="draft-badge">
-    <span class="draft-pill">DRAFT</span>
-    <span class="draft-claude">with Claude.ai — 執筆中 / In Progress / En Proceso</span>
+    <span class="draft-badge-pill">DRAFT</span>
+    <span class="draft-claude">with Claude.ai — 執筆中</span>
   </div>
   <div class="draft-note">2026年6月5〜7日 日比谷公園パエリアタパス祭り会場にて初公開。後日加筆修正予定。</div>
 </div>
 
 <div class="stripe"></div>
-
-<!-- LANG SWITCHER -->
-<div class="lang-bar">
-  <span class="lang-label">Language</span>
-  <button class="lang-btn active-ja" onclick="switchLang('ja')">日本語</button>
-  <button class="lang-btn" onclick="switchLang('en')">English</button>
-  <button class="lang-btn" onclick="switchLang('es')">Español</button>
-</div>
 
 <header>
   <div>
@@ -213,46 +298,86 @@ footer p { font-size: 10px; color: var(--ink3); letter-spacing: .08em; line-heig
   </nav>
 </header>
 
-<!-- ═══════════════════════════════════
-     日本語
-═══════════════════════════════════ -->
-<div id="content-ja" class="lang-content active">
-
+<!-- HERO -->
 <section class="hero">
   <div class="eyebrow">html-notes — Marketing as Bazaar</div>
   <div class="hero-vol">Vol. 06</div>
   <h1 class="hero-title">パエリアと<em>市の原理</em>。</h1>
-  <div class="hero-sub">Paella and the Principle of the Bazaar</div>
-  <p class="hero-lead">人が集まるのは、売り買いのためだけではない。「情報」の語源は「情けに報いること」とも言われる。せっかく会えた人に、大事なものを渡す。その場をどう設計するか——パエリア祭りから考える。</p>
-  <div class="hero-event"><div class="hero-event-dot"></div>第11回 日比谷公園パエリア・タパス祭り　2026年6月5〜7日</div>
+  <div class="hero-en">Paella and the Principle of the Bazaar — Why People Really Gather</div>
+  <p class="hero-lead">
+    人が集まるのは、売り買いのためだけではない。「情報」の語源は「情けに報いること」とも言われる。せっかく会えた人に、大事なものを渡す。その場をどう設計するか——パエリア祭りから考える。
+  </p>
+  <div class="hero-event">
+    <div class="hero-event-dot"></div>
+    第11回 日比谷公園パエリア・タパス祭り　2026年6月5〜7日
+  </div>
 </section>
 
+<!-- ARTICLE -->
 <div class="article">
 
-  <div class="section-break"><div class="section-break-num">01</div><div class="section-break-line"></div><div class="section-break-label">情報の語源</div></div>
+  <!-- 01 -->
+  <div class="section-break">
+    <div class="section-break-num">01</div>
+    <div class="section-break-line"></div>
+    <div class="section-break-label">情報の語源</div>
+  </div>
+
   <div class="body-text">
     <p>「情報」という言葉の語源について、こんな解釈がある——<strong>情けに報いること</strong>。せっかく会えた人に、大事な情報を渡す。それが本来の情報のあり方だった。</p>
     <p>デジタルで繋がれた時代に、なぜリアルな場が必要なのか。答えはここにある。画面越しでは渡せないものがある。温度、匂い、煙、笑い——そういうものと一緒に渡される情報は、深いところに刻まれる。</p>
   </div>
+
   <div class="pull">「情けに報いることが、情報の本質だとすれば——市とは、情けを交換する装置だ。」</div>
 
-  <div class="section-break"><div class="section-break-num">02</div><div class="section-break-line"></div><div class="section-break-label">市の歴史と構造</div></div>
-  <div class="body-text"><p>歴史を振り返ると、人が集まる場には常に共通の構造がある。売り買いは入口に過ぎない。</p></div>
-  <div class="history">
-    <div class="history-row"><div class="history-era">神社境内のマルシェ</div><div class="history-content">聖と俗の境界。誰でも入れる場。神様への奉納と、人と人の取引が同じ空間にあった。</div></div>
-    <div class="history-row"><div class="history-era">楽市楽座</div><div class="history-content">参入障壁を壊した。多様な人が集まることで、それまで出会わなかった情報が行き交い、経済が生まれ、戦のない世もできた。</div></div>
-    <div class="history-row"><div class="history-era">バザール</div><div class="history-content">商品より先に、人の気配がある。煙、香辛料の匂い、値段交渉の声——五感が全部動く。</div></div>
-    <div class="history-row"><div class="history-era">パエリア祭り 2026</div><div class="history-content">スペインの審査員、駐日大使、千代田区長、生産者、シェフ、市民——普段交わらない人たちが、煙と火と食の前に集まる。</div></div>
+  <!-- 02 -->
+  <div class="section-break">
+    <div class="section-break-num">02</div>
+    <div class="section-break-line"></div>
+    <div class="section-break-label">市の歴史と構造</div>
   </div>
 
-  <div class="section-break"><div class="section-break-num">03</div><div class="section-break-line"></div><div class="section-break-label">IT業界イベントとの対比</div></div>
-  <div class="body-text"><p>有明あたりの大型ITイベントに足を運ぶ機会が減ってきた。同業者が回遊するだけで、中身が薄くなっている。</p></div>
+  <div class="body-text">
+    <p>歴史を振り返ると、人が集まる場には常に共通の構造がある。売り買いは入口に過ぎない。</p>
+  </div>
+
+  <div class="history">
+    <div class="history-row">
+      <div class="history-era">神社境内のマルシェ</div>
+      <div class="history-content">聖と俗の境界。誰でも入れる場。神様への奉納と、人と人の取引が同じ空間にあった。</div>
+    </div>
+    <div class="history-row">
+      <div class="history-era">楽市楽座</div>
+      <div class="history-content">参入障壁を壊した。多様な人が集まることで、それまで出会わなかった情報が行き交い、経済が生まれ、戦のない世もできた。</div>
+    </div>
+    <div class="history-row">
+      <div class="history-era">バザール</div>
+      <div class="history-content">商品より先に、人の気配がある。煙、香辛料の匂い、値段交渉の声——五感が全部動く。</div>
+    </div>
+    <div class="history-row">
+      <div class="history-era">パエリア祭り 2026</div>
+      <div class="history-content">スペインの審査員、駐日大使、千代田区長、生産者、シェフ、市民——普段交わらない人たちが、煙と火と食の前に集まる。</div>
+    </div>
+  </div>
+
+  <!-- 03 -->
+  <div class="section-break">
+    <div class="section-break-num">03</div>
+    <div class="section-break-line"></div>
+    <div class="section-break-label">IT業界イベントとの対比</div>
+  </div>
+
+  <div class="body-text">
+    <p>有明あたりの大型ITイベントに足を運ぶ機会が減ってきた。同業者が回遊するだけで、中身が薄くなっている。</p>
+  </div>
+
   <div class="contrast">
     <div class="contrast-col">
       <div class="contrast-col-label">大型ITイベントの問題</div>
       <div class="contrast-item">同業者だけが回遊する</div>
       <div class="contrast-item">NOCODEブーム——誰でも作れるものはありがたくない</div>
       <div class="contrast-item">ソリューションはすでに飽和</div>
+      <div class="contrast-item">食べ物も体験も記憶も残らない</div>
       <div class="contrast-item">BOTは元々ずれた数字を無理やり合わせるだけ</div>
     </div>
     <div class="contrast-col">
@@ -260,11 +385,18 @@ footer p { font-size: 10px; color: var(--ink3); letter-spacing: .08em; line-heig
       <div class="contrast-item">出会わないはずの人たちが集まる</div>
       <div class="contrast-item">煙と火と食——五感が全部動く</div>
       <div class="contrast-item">国際審査員、大使、区長が同じ場に</div>
+      <div class="contrast-item">体験が記憶になり、記憶がつながりになる</div>
       <div class="contrast-item">楽しいから繰り返し来る——11回目</div>
     </div>
   </div>
 
-  <div class="section-break"><div class="section-break-num">04</div><div class="section-break-line"></div><div class="section-break-label">2026年 第11回の市</div></div>
+  <!-- 04 -->
+  <div class="section-break">
+    <div class="section-break-num">04</div>
+    <div class="section-break-line"></div>
+    <div class="section-break-label">2026年 第11回の市</div>
+  </div>
+
   <div class="event-box">
     <div class="event-box-label">第11回 日比谷公園パエリア・タパス祭り — 2026.06.05〜07</div>
     <div class="event-box-title">この場に集まる人たち</div>
@@ -276,220 +408,64 @@ footer p { font-size: 10px; color: var(--ink3); letter-spacing: .08em; line-heig
       <li>生産者、シェフ、市民、子どもたち</li>
     </ul>
   </div>
+
   <div class="body-text">
-    <p>それぞれがそれぞれの課題を持って来る。アジェンダがない。台本がない。でも大事なことが動く。</p>
+    <p>それぞれがそれぞれの課題を持って来る。スペインと日本の食文化交流、地域コミュニティの活性化、観光政策、子どもたちへの食育——テーブルの上のパエリアを前に、普段は会議室でしか話さない話が自然に始まる。</p>
+    <p>これが市の力だ。アジェンダがない。台本がない。でも大事なことが動く。</p>
   </div>
+
   <div class="pull">「煙が目に入って大変だけど、美味しいし、盛り上がる。それで十分だ。」</div>
 
-  <div class="section-break"><div class="section-break-num">05</div><div class="section-break-line"></div><div class="section-break-label">データが連結する世界へ（加筆予定）</div></div>
+  <!-- 05 -->
+  <div class="section-break">
+    <div class="section-break-num">05</div>
+    <div class="section-break-line"></div>
+    <div class="section-break-label">データが連結する世界へ（加筆予定）</div>
+  </div>
+
   <div class="body-text">
-    <p>市で人が繋がると、情報が繋がる。情報が繋がると、仕事が繋がる。統合型リソースマネジメント<a href="https://robertohoshino.github.io/miraikanri-demo/" target="_blank" style="color:var(--saffron);text-decoration:none;border-bottom:1px solid rgba(212,130,10,0.3);">「未来かんり」</a>は、売掛・買掛・経費・人件費をひとつの連結したデータとして管理する。それがAIが本当に活躍できるベースになる。</p>
-    <p class="draft-note-inline">※ この章は祭り後に加筆予定。会場での気づきを反映します。</p>
+    <p>市で人が繋がると、情報が繋がる。情報が繋がると、仕事が繋がる。仕事が繋がると、データが繋がる。</p>
+    <p>ダンクソフトが長年開発してきた統合型リソースマネジメント<a href="https://robertohoshino.github.io/miraikanri-demo/" target="_blank" style="color:var(--saffron);text-decoration:none;border-bottom:1px solid rgba(212,130,10,0.3);">「未来かんり」</a>は、売掛・買掛・経費・人件費をひとつの連結したデータとして管理する。部署ごとに違うシートをBOTで繋いで数字を合わせるのではなく、最初から繋がっているデータで動く——それがAIが本当に活躍できるベースになる。</p>
+    <p>パエリア祭りで生まれた縁が、いつかそこへ繋がることもある。<strong>市とは、データの連結が始まる場所でもある。</strong></p>
+    <p style="color: var(--draft); font-size:13px; border-left: 1.5px solid var(--draft); padding-left: 1rem; margin-top:1rem;">※ この章は祭り後に加筆予定。会場での気づきを反映します。</p>
   </div>
 
 </div>
 
+<!-- DRAFT FOOTER NOTE -->
+<div class="draft-footer">
+  <div class="draft-footer-icon">D</div>
+  <div class="draft-footer-text">
+    <strong>DRAFT with Claude.ai</strong> — このページは執筆中です。<br>
+    2026年6月5〜7日のパエリア祭り会場で初公開。会場での気づきをもとに、後日加筆・修正します。<br>
+    最新版は <a href="https://dunksoft.jp" style="color: var(--saffron); text-decoration:none; border-bottom: 1px solid rgba(212,130,10,0.3);">dunksoft.jp</a> にて。
+  </div>
+</div>
+
+<!-- CLOSING -->
 <div class="closing">
   <div class="gold-line"></div>
-  <div class="closing-main">「市は、ストロークが流れる場である。<br>人々が集まること自体が、すでに答えだ。」</div>
-  <div class="closing-sub">html-notes Vol.06 DRAFT — coined in dialogue, Roberto Hoshino × Claude.ai<br>Smart Life Styles™️ — Love your life, love your time®️</div>
+  <div class="closing-main">
+    「市は、ストロークが流れる場である。<br>
+    人々が集まること自体が、すでに答えだ。」
+  </div>
+  <div class="closing-sub">
+    html-notes Vol.06 DRAFT — Marketing as Bazaar<br>
+    Roberto Hoshino（星野晃一郎）× Claude.ai<br>
+    Smart Life Styles™️ — Love your life, love your time®️
+  </div>
   <div class="gold-line"></div>
 </div>
-
-</div><!-- /ja -->
-
-
-<!-- ═══════════════════════════════════
-     ENGLISH
-═══════════════════════════════════ -->
-<div id="content-en" class="lang-content">
-
-<section class="hero">
-  <div class="eyebrow">html-notes — Marketing as Bazaar</div>
-  <div class="hero-vol">Vol. 06</div>
-  <h1 class="hero-title-serif">Paella and the<br><em>Principle of the Bazaar.</em></h1>
-  <div class="hero-sub">パエリアと市の原理 — Vol.06 DRAFT</div>
-  <p class="hero-lead-serif">People don't gather just to buy and sell. The Japanese word for "information" — jōhō — contains within it the idea of repaying a kindness. When you finally meet someone, you give them something precious. The design of that encounter is everything.</p>
-  <div class="hero-event"><div class="hero-event-dot"></div>11th Hibiya Park Paella &amp; Tapas Festival — June 5–7, 2026</div>
-</section>
-
-<div class="article">
-
-  <div class="section-break"><div class="section-break-num">01</div><div class="section-break-line"></div><div class="section-break-label">The Origin of Information</div></div>
-  <div class="body-text-serif">
-    <p>There is an interpretation of the Japanese word <em>jōhō</em> (情報, "information") that traces it back to <strong>repaying a kindness</strong>. When you have the rare gift of being in the same place as someone, you give them something important. That was the original meaning of sharing information.</p>
-    <p>In a world of digital connection, why does a physical place still matter? Because there are things that cannot be passed through a screen. Temperature. Smoke. Laughter. Information delivered alongside those things is engraved in a deeper place.</p>
-  </div>
-  <div class="pull">"If information means repaying a kindness — then the market is a device for exchanging kindness."</div>
-
-  <div class="section-break"><div class="section-break-num">02</div><div class="section-break-line"></div><div class="section-break-label">The History and Structure of the Market</div></div>
-  <div class="body-text-serif"><p>Looking back through history, every place where people gathered shares a common structure. Buying and selling is merely the entrance.</p></div>
-  <div class="history">
-    <div class="history-row"><div class="history-era">Shrine Courtyard Markets</div><div class="history-content">The boundary between the sacred and the everyday. A place anyone could enter. Offerings to the gods and transactions between people in the same space.</div></div>
-    <div class="history-row"><div class="history-era">Rakuichi-Rakuza</div><div class="history-content">The removal of barriers to entry. Diverse people converging — information that had never met began to circulate. Economies were born. An era without war became possible.</div></div>
-    <div class="history-row"><div class="history-era">The Bazaar</div><div class="history-content">Before the goods, the presence of people. Smoke, the smell of spices, the sound of bargaining — all five senses engaged at once.</div></div>
-    <div class="history-row"><div class="history-era">Paella Festival 2026</div><div class="history-content">Spanish judges, an ambassador, a ward mayor, producers, chefs, citizens — people who would never ordinarily meet, gathered before fire and food.</div></div>
-  </div>
-
-  <div class="section-break"><div class="section-break-num">03</div><div class="section-break-line"></div><div class="section-break-label">Contrast: IT Industry Events</div></div>
-  <div class="body-text-serif"><p>I've been attending fewer of the large-scale IT events at venues like Ariake. The same industry insiders circulate among the same booths. The content has thinned.</p></div>
-  <div class="contrast">
-    <div class="contrast-col">
-      <div class="contrast-col-label">Problems with big IT events</div>
-      <div class="contrast-item">Only insiders circulate</div>
-      <div class="contrast-item">NoCode boom — nobody values what anyone can make</div>
-      <div class="contrast-item">Solutions already saturated</div>
-      <div class="contrast-item">BOTs force-fit numbers that were never aligned</div>
-    </div>
-    <div class="contrast-col">
-      <div class="contrast-col-label">What the Paella Festival has</div>
-      <div class="contrast-item">People who would never otherwise meet</div>
-      <div class="contrast-item">Smoke, fire, food — all five senses</div>
-      <div class="contrast-item">International judges, ambassadors, local officials</div>
-      <div class="contrast-item">Fun enough to return — 11th edition</div>
-    </div>
-  </div>
-
-  <div class="section-break"><div class="section-break-num">04</div><div class="section-break-line"></div><div class="section-break-label">The 11th Market — 2026</div></div>
-  <div class="event-box">
-    <div class="event-box-label">11th Hibiya Park Paella &amp; Tapas Festival — 2026.06.05–07</div>
-    <div class="event-box-title">Who gathers here</div>
-    <ul class="event-box-list">
-      <li>International paella judges from Spain</li>
-      <li>Ambassador of the Dominican Republic to Japan — H.E. Edward Aníbal Pérez Reyes</li>
-      <li>Mayor of Chiyoda Ward — Mr. Higuchi</li>
-      <li>Japan Paella Association Board Member &amp; Judge — Roberto Hoshino</li>
-      <li>Producers, chefs, citizens, children</li>
-    </ul>
-  </div>
-  <div class="body-text-serif"><p>Everyone arrives carrying their own questions. No agenda. No script. And yet important things move.</p></div>
-  <div class="pull">"The smoke gets in your eyes. But the paella is delicious, and the energy is real. That's enough."</div>
-
-  <div class="section-break"><div class="section-break-num">05</div><div class="section-break-line"></div><div class="section-break-label">Toward Connected Data — (to be expanded)</div></div>
-  <div class="body-text-serif">
-    <p>When people connect at the market, information connects. When information connects, work connects. <a href="https://robertohoshino.github.io/miraikanri-demo/" target="_blank" style="color:var(--saffron);text-decoration:none;border-bottom:1px solid rgba(212,130,10,0.3);">Miraikanri</a> — Dunksoft's integrated resource management system — keeps receivables, payables, expenses and labour costs as a single connected dataset. That is the foundation on which AI can truly work.</p>
-    <p class="draft-note-inline">※ This section will be expanded after the festival, incorporating observations from the venue.</p>
-  </div>
-
-</div>
-
-<div class="closing">
-  <div class="gold-line"></div>
-  <div class="closing-main">"The market is a place where strokes flow.<br>The very act of gathering is already the answer."</div>
-  <div class="closing-sub">html-notes Vol.06 DRAFT — coined in dialogue, Roberto Hoshino × Claude.ai<br>Smart Life Styles™️ — Love your life, love your time®️</div>
-  <div class="gold-line"></div>
-</div>
-
-</div><!-- /en -->
-
-
-<!-- ═══════════════════════════════════
-     ESPAÑOL
-═══════════════════════════════════ -->
-<div id="content-es" class="lang-content">
-
-<section class="hero">
-  <div class="eyebrow">html-notes — Marketing como Mercado</div>
-  <div class="hero-vol">Vol. 06</div>
-  <h1 class="hero-title-serif">La Paella y el<br><em>Principio del Mercado.</em></h1>
-  <div class="hero-sub">パエリアと市の原理 — Vol.06 DRAFT</div>
-  <p class="hero-lead-serif">La gente no se reúne sólo para comprar y vender. En japonés, la palabra "información" lleva dentro la idea de devolver una gentileza. Cuando por fin te encuentras con alguien, le das algo valioso. El diseño de ese encuentro lo es todo.</p>
-  <div class="hero-event"><div class="hero-event-dot"></div>11.º Festival de Paella y Tapas del Parque Hibiya — 5–7 de junio de 2026</div>
-</section>
-
-<div class="article">
-
-  <div class="section-break"><div class="section-break-num">01</div><div class="section-break-line"></div><div class="section-break-label">El Origen de la Información</div></div>
-  <div class="body-text-serif">
-    <p>Existe una interpretación de la palabra japonesa <em>jōhō</em> (情報, "información") que la vincula a <strong>devolver una gentileza</strong>. Cuando tienes el regalo de estar en el mismo lugar que alguien, le das algo importante. Ese era el significado original de compartir información.</p>
-    <p>En un mundo de conexión digital, ¿por qué sigue importando un lugar físico? Porque hay cosas que no pueden transmitirse a través de una pantalla. Temperatura. Humo. Risas. La información entregada junto a esas cosas queda grabada en un lugar más profundo.</p>
-  </div>
-  <div class="pull">"Si información significa devolver una gentileza — entonces el mercado es un dispositivo para intercambiar gentilezas."</div>
-
-  <div class="section-break"><div class="section-break-num">02</div><div class="section-break-line"></div><div class="section-break-label">Historia y Estructura del Mercado</div></div>
-  <div class="body-text-serif"><p>Mirando atrás en la historia, cada lugar donde la gente se reunía comparte una estructura común. Comprar y vender es apenas la entrada.</p></div>
-  <div class="history">
-    <div class="history-row"><div class="history-era">Mercados en templos sintoístas</div><div class="history-content">El límite entre lo sagrado y lo cotidiano. Un lugar al que cualquiera podía entrar. Ofrendas a los dioses y transacciones entre personas en el mismo espacio.</div></div>
-    <div class="history-row"><div class="history-era">Rakuichi-Rakuza</div><div class="history-content">La eliminación de barreras de entrada. Personas diversas convergiendo — información que nunca se había encontrado comenzó a circular. Nacieron economías. Se volvió posible una era sin guerras.</div></div>
-    <div class="history-row"><div class="history-era">El Bazar</div><div class="history-content">Antes que las mercancías, la presencia de las personas. Humo, aroma de especias, el sonido del regateo — los cinco sentidos activos a la vez.</div></div>
-    <div class="history-row"><div class="history-era">Festival de Paella 2026</div><div class="history-content">Jueces españoles, un embajador, el alcalde del barrio, productores, chefs, ciudadanos — personas que normalmente nunca se encontrarían, reunidas ante el fuego y la comida.</div></div>
-  </div>
-
-  <div class="section-break"><div class="section-break-num">03</div><div class="section-break-line"></div><div class="section-break-label">Contraste: Eventos de la Industria IT</div></div>
-  <div class="body-text-serif"><p>Cada vez voy menos a los grandes eventos tecnológicos. Los mismos profesionales del sector circulan entre los mismos stands. El contenido se ha diluido.</p></div>
-  <div class="contrast">
-    <div class="contrast-col">
-      <div class="contrast-col-label">Problemas de los grandes eventos IT</div>
-      <div class="contrast-item">Solo circulan los mismos profesionales</div>
-      <div class="contrast-item">Auge del NoCode — nadie valora lo que todos pueden hacer</div>
-      <div class="contrast-item">Soluciones ya saturadas</div>
-      <div class="contrast-item">Los BOTs fuerzan números que nunca estuvieron alineados</div>
-    </div>
-    <div class="contrast-col">
-      <div class="contrast-col-label">Lo que tiene el Festival de Paella</div>
-      <div class="contrast-item">Personas que de otro modo nunca se encontrarían</div>
-      <div class="contrast-item">Humo, fuego, comida — los cinco sentidos</div>
-      <div class="contrast-item">Jueces internacionales, embajadores, autoridades locales</div>
-      <div class="contrast-item">Tan divertido que la gente vuelve — 11.ª edición</div>
-    </div>
-  </div>
-
-  <div class="section-break"><div class="section-break-num">04</div><div class="section-break-line"></div><div class="section-break-label">El 11.º Mercado — 2026</div></div>
-  <div class="event-box">
-    <div class="event-box-label">11.º Festival de Paella y Tapas del Parque Hibiya — 2026.06.05–07</div>
-    <div class="event-box-title">Quiénes se reúnen aquí</div>
-    <ul class="event-box-list">
-      <li>Jueces internacionales de paella desde España</li>
-      <li>Embajador de República Dominicana en Japón — S.E. Edward Aníbal Pérez Reyes</li>
-      <li>Alcalde del Distrito de Chiyoda — Sr. Higuchi</li>
-      <li>Miembro de la Junta y Juez de la Asociación Japonesa de Paella — Roberto Hoshino</li>
-      <li>Productores, chefs, ciudadanos, niños</li>
-    </ul>
-  </div>
-  <div class="body-text-serif"><p>Cada uno llega con sus propias preguntas. Sin agenda. Sin guión. Y sin embargo, las cosas importantes se mueven.</p></div>
-  <div class="pull">"El humo te entra en los ojos. Pero la paella está deliciosa, y la energía es real. Con eso basta."</div>
-
-  <div class="section-break"><div class="section-break-num">05</div><div class="section-break-line"></div><div class="section-break-label">Hacia Datos Conectados — (por ampliar)</div></div>
-  <div class="body-text-serif">
-    <p>Cuando las personas se conectan en el mercado, la información se conecta. Cuando la información se conecta, el trabajo se conecta. <a href="https://robertohoshino.github.io/miraikanri-demo/" target="_blank" style="color:var(--saffron);text-decoration:none;border-bottom:1px solid rgba(212,130,10,0.3);">Miraikanri</a> — el sistema integrado de gestión de recursos de Dunksoft — mantiene cuentas por cobrar, cuentas por pagar, gastos y costes laborales como un único conjunto de datos conectados. Esa es la base sobre la que la IA puede trabajar de verdad.</p>
-    <p class="draft-note-inline">※ Esta sección se ampliará tras el festival, incorporando observaciones del lugar.</p>
-  </div>
-
-</div>
-
-<div class="closing">
-  <div class="gold-line"></div>
-  <div class="closing-main">"El mercado es un lugar donde fluyen los gestos.<br>El simple acto de reunirse ya es la respuesta."</div>
-  <div class="closing-sub">html-notes Vol.06 DRAFT — coined in dialogue, Roberto Hoshino × Claude.ai<br>Smart Life Styles™️ — Love your life, love your time®️</div>
-  <div class="gold-line"></div>
-</div>
-
-</div><!-- /es -->
-
 
 <footer>
   <p>
-    html-notes Vol.06 / パエリアと市の原理 / Paella and the Bazaar / La Paella y el Principio del Mercado<br>
+    html-notes / パエリアと市の原理<br>
     星野晃一郎（Roberto Hoshino）× Claude.ai<br>
-    株式会社ダンクソフト — 1983年創業 / NPO 神田藍の会 / 日本パエリア協会 理事<br>
+    株式会社ダンクソフト — 1983年創業 / NPO 神田藍の会<br>
+    日本パエリア協会 理事<br>
     © 2026 Roberto Hoshino. Smart Life Styles™️
   </p>
 </footer>
-
-<script>
-function switchLang(lang) {
-  ['ja','en','es'].forEach(l => {
-    document.getElementById('content-' + l).classList.remove('active');
-    document.querySelector('.lang-btn.active-' + l) && document.querySelector('.lang-btn.active-' + l).classList.remove('active-' + l);
-  });
-  document.getElementById('content-' + lang).classList.add('active');
-  const btns = document.querySelectorAll('.lang-btn');
-  btns.forEach(b => b.classList.remove('active-ja','active-en','active-es'));
-  const idx = ['ja','en','es'].indexOf(lang);
-  btns[idx].classList.add('active-' + lang);
-  document.querySelector('.lang-bar').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-}
-</script>
 
 </body>
 </html>
