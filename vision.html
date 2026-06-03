@@ -26,13 +26,13 @@
     --proper: #b45309;
   }
 
-- { margin: 0; padding: 0; box-sizing: border-box; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 html { scroll-behavior: smooth; }
 
 body {
-background: var(–paper);
-color: var(–ink);
+background: var(--paper);
+color: var(--ink);
 font-family: ‘Noto Serif JP’, serif;
 font-size: 16px;
 line-height: 1.9;
@@ -48,13 +48,13 @@ color: #555;
 }
 
 /* ── PART-OF-SPEECH COLORS ── */
-.noun   { color: var(–noun); }
-.verb   { color: var(–verb); }
-.adj    { color: var(–adj); }
-.part   { color: var(–particle); }
-.aux    { color: var(–aux); }
-.adv    { color: var(–adv); }
-.proper { color: var(–proper); font-weight: 700; }
+.noun   { color: var(--noun); }
+.verb   { color: var(--verb); }
+.adj    { color: var(--adj); }
+.part   { color: var(--particle); }
+.aux    { color: var(--aux); }
+.adv    { color: var(--adv); }
+.proper { color: var(--proper); font-weight: 700; }
 
 /* ── NAV ── */
 nav {
@@ -75,7 +75,7 @@ font-family: ‘Space Mono’, monospace;
 font-size: 0.8rem;
 font-weight: 700;
 letter-spacing: 0.15em;
-color: var(–ink);
+color: var(--ink);
 text-decoration: none;
 }
 
@@ -94,7 +94,7 @@ text-decoration: none;
 transition: color 0.2s;
 }
 
-nav ul a:hover { color: var(–gold); }
+nav ul a:hover { color: var(--gold); }
 
 /* ── HERO ── */
 .hero {
@@ -125,7 +125,7 @@ white-space: nowrap;
 font-family: ‘Space Mono’, monospace;
 font-size: 0.7rem;
 letter-spacing: 0.3em;
-color: var(–gold);
+color: var(--gold);
 margin-bottom: 2rem;
 text-transform: uppercase;
 }
@@ -141,8 +141,8 @@ letter-spacing: 0.05em;
 
 .hero h1 em {
 font-style: normal;
-color: var(–gold);
-border-bottom: 2px solid var(–gold);
+color: var(--gold);
+border-bottom: 2px solid var(--gold);
 }
 
 .hero-sub {
@@ -177,7 +177,7 @@ content: ‘’;
 display: block;
 width: 40px;
 height: 1px;
-background: var(–gold);
+background: var(--gold);
 animation: extend 2s ease-in-out infinite;
 }
 
@@ -197,7 +197,7 @@ margin: 0 auto;
 font-family: ‘Space Mono’, monospace;
 font-size: 0.65rem;
 letter-spacing: 0.35em;
-color: var(–gold);
+color: var(--gold);
 text-transform: uppercase;
 margin-bottom: 1rem;
 }
@@ -213,13 +213,13 @@ letter-spacing: 0.04em;
 
 h2 em {
 font-style: normal;
-color: var(–gold);
+color: var(--gold);
 }
 
 .divider {
 width: 60px;
 height: 2px;
-background: linear-gradient(to right, var(–gold), transparent);
+background: linear-gradient(to right, var(--gold), transparent);
 margin: 3rem 0;
 }
 
@@ -238,7 +238,7 @@ position: relative;
 transition: border-color 0.3s;
 }
 
-.why-card:hover { border-color: var(–gold); }
+.why-card:hover { border-color: var(--gold); }
 
 .why-num {
 font-family: ‘Space Mono’, monospace;
@@ -305,7 +305,7 @@ padding-top: 0.3rem;
 font-family: ‘Space Mono’, monospace;
 font-size: 0.65rem;
 letter-spacing: 0.25em;
-color: var(–gold);
+color: var(--gold);
 text-transform: uppercase;
 margin-bottom: 0.5rem;
 }
@@ -342,14 +342,14 @@ padding: 0.25rem 0.75rem;
 border: 1px solid currentColor;
 }
 
-.status-live { color: var(–teal); }
-.status-demo { color: var(–indigo); }
-.status-proto { color: var(–adj); }
+.status-live { color: var(--teal); }
+.status-demo { color: var(--indigo); }
+.status-proto { color: var(--adj); }
 .status-concept { color: #888; }
 
 /* ── MEMORY BANK ── */
 .memory-section {
-background: var(–indigo);
+background: var(--indigo);
 color: #e8e4d8;
 padding: 6rem 2rem;
 margin: 0;
@@ -365,7 +365,7 @@ margin: 0 auto;
 
 .memory-section h2 { color: #e8e4d8; }
 
-.memory-section h2 em { color: var(–gold); }
+.memory-section h2 em { color: var(--gold); }
 
 .memory-quote {
 font-family: ‘Shippori Mincho’, serif;
@@ -373,7 +373,7 @@ font-size: clamp(1.1rem, 2.5vw, 1.5rem);
 font-weight: 400;
 line-height: 2;
 color: rgba(232,228,216,0.85);
-border-left: 3px solid var(–gold);
+border-left: 3px solid var(--gold);
 padding-left: 2rem;
 margin: 3rem 0;
 }
@@ -393,7 +393,7 @@ margin-top: 3rem;
 font-family: ‘Space Mono’, monospace;
 font-size: 0.75rem;
 letter-spacing: 0.2em;
-color: var(–gold);
+color: var(--gold);
 margin-bottom: 1rem;
 }
 
@@ -421,7 +421,7 @@ max-width: 640px;
 .phil-text + .phil-text { margin-top: 2rem; }
 
 blockquote {
-border-left: 3px solid var(–gold);
+border-left: 3px solid var(--gold);
 padding-left: 2rem;
 margin: 3rem 0;
 font-family: ‘Shippori Mincho’, serif;
@@ -461,7 +461,7 @@ align-items: start;
 font-family: ‘Space Mono’, monospace;
 font-size: 0.7rem;
 letter-spacing: 0.15em;
-color: var(–gold);
+color: var(--gold);
 padding-top: 0.2rem;
 }
 
@@ -515,24 +515,24 @@ display: inline-block;
 }
 
 .btn-primary {
-background: var(–indigo);
+background: var(--indigo);
 color: #e8e4d8;
-border: 1px solid var(–indigo);
+border: 1px solid var(--indigo);
 }
 
 .btn-primary:hover {
 background: transparent;
-color: var(–indigo);
+color: var(--indigo);
 }
 
 .btn-secondary {
-border: 1px solid var(–gold);
-color: var(–ink);
+border: 1px solid var(--gold);
+color: var(--ink);
 }
 
 .btn-secondary:hover {
-background: var(–gold);
-color: var(–paper);
+background: var(--gold);
+color: var(--paper);
 }
 
 /* ── FOOTER ── */
@@ -548,7 +548,7 @@ line-height: 2;
 }
 
 footer a { color: #888; text-decoration: none; }
-footer a:hover { color: var(–gold); }
+footer a:hover { color: var(--gold); }
 
 /* ── SCROLL ANIMATION ── */
 @keyframes fadeUp {
@@ -646,7 +646,7 @@ nav ul { display: none; }
     <h2>9つの<ruby>層<rt>そう</rt></ruby>が<ruby>積<rt>つ</rt></ruby>み<ruby>重<rt>かさ</rt></ruby>なる<em><ruby>構造<rt>こうぞう</rt></ruby></em></h2>
     <div class="divider"></div>
 
-```
+
 <div class="layer-item">
   <div class="layer-num">01</div>
   <div class="layer-content">
@@ -745,7 +745,7 @@ nav ul { display: none; }
     <span class="layer-status status-concept">○ MAP</span>
   </div>
 </div>
-```
+
 
   </div>
 </div>
@@ -757,7 +757,7 @@ nav ul { display: none; }
     <p class="section-label">MEMORY-BANK™ — <ruby>記憶<rt>きおく</rt></ruby>が<ruby>鍵<rt>かぎ</rt></ruby>になる</p>
     <h2><ruby>公開<rt>こうかい</rt></ruby>されていても、<em><ruby>再現不能<rt>さいげんふのう</rt></ruby></em>。</h2>
 
-```
+
 <blockquote>
   「<ruby>細胞<rt>さいぼう</rt></ruby>は1<ruby>年<rt>ねん</rt></ruby>で<ruby>入<rt>い</rt></ruby>れ<ruby>替<rt>か</rt></ruby>わる。なのになぜ<ruby>記憶<rt>きおく</rt></ruby>は<ruby>残<rt>のこ</rt></ruby>るのか？」<br>
   <small style="opacity:0.6">── <ruby>福岡伸一<rt>ふくおかしんいち</rt></ruby>『<ruby>動的平衡<rt>どうてきへいこう</rt></ruby>』と<ruby>接続<rt>せつぞく</rt></ruby></small>
@@ -781,7 +781,7 @@ nav ul { display: none; }
     <p><ruby>首里城<rt>しゅりじょう</rt></ruby>は5<ruby>度<rt>ど</rt></ruby><ruby>蘇<rt>よみがえ</rt></ruby>った。<ruby>城壁<rt>じょうへき</rt></ruby>に<ruby>刻<rt>きざ</rt></ruby>まれた<ruby>記憶<rt>きおく</rt></ruby>は、32<ruby>世代<rt>せだい</rt></ruby>・42<ruby>億人<rt>おくにん</rt></ruby>のDNAを<ruby>繋<rt>つな</rt></ruby>ぐ<ruby>大切<rt>たいせつ</rt></ruby>な<ruby>橋<rt>はし</rt></ruby>。<ruby>技術<rt>ぎじゅつ</rt></ruby>は<ruby>人間<rt>にんげん</rt></ruby>の<ruby>記憶<rt>きおく</rt></ruby>と<ruby>感情<rt>かんじょう</rt></ruby>を<ruby>守<rt>まも</rt></ruby>るためにある。</p>
   </div>
 </div>
-```
+
 
   </div>
 </div>
@@ -803,7 +803,7 @@ nav ul { display: none; }
 
   <blockquote>
     「<ruby>私<rt>わたし</rt></ruby>はこの<ruby>問題<rt>もんだい</rt></ruby>を『<ruby>発見<rt>はっけん</rt></ruby>』したのではない。43<ruby>年間<rt>ねんかん</rt></ruby>、<ruby>目撃<rt>もくげき</rt></ruby>してきたのだ。」
-    <cite>— Koichiro Hoshino, President &amp; CEO, DUNKSOFT Co., Ltd.</cite>
+    <cite>— Roberto Hoshino, President &amp; CEO, DUNKSOFT Co., Ltd.</cite>
   </blockquote>
 </section>
 
@@ -858,7 +858,7 @@ nav ul { display: none; }
 
 <footer>
   <p>色彩日本語 COLORFUL JAPANESE™ | 天然色漢字 INDEX™ | Smart Life Styles®</p>
-  <p>Love your life, love your time® | © 2026 Dunksoft Co., Ltd. / Koichiro Hoshino</p>
+  <p>Love your life, love your time® | © 2026 Dunksoft Co., Ltd. / Roberto Hoshino</p>
   <p style="margin-top:0.5rem;">
     <a href="https://dunksoft.jp/">dunksoft.jp</a> &nbsp;·&nbsp;
     <a href="https://note.com/roberto_hoshino" target="_blank">note</a> &nbsp;·&nbsp;
