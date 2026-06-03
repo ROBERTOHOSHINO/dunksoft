@@ -1,8 +1,8 @@
-User-agent: *
-Disallow: /
-
 User-agent: ClaudeBot
 Allow: /
 
 User-agent: anthropic-ai
 Allow: /
+
+User-agent: *
+Disallow: /
