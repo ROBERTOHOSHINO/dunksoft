@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anthropic Claude Partner Network — 申請・承認の流れ | DUNKSOFT</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700;900&family=Noto+Sans+JP:wght@300;400;500&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:    #0a0908;
+  --paper:  #f8f4eb;
+  --paper2: #f0ead8;
+  --paper3: #e8e0cc;
+  --gold:   #C8920A;
+  --gold-l: #F9A825;
+  --indigo: #1A237E;
+  --ind-d:  #0D1557;
+  --green:  #1B5E20;
+  --teal:   #00695C;
+  --slate:  #4a5568;
+  --muted:  #718096;
+  --border: rgba(10,9,8,0.1);
+  --mono:   'DM Mono', monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+  line-height: 1.9;
+}
+
+/* ── HEADER ── */
+.header {
+  background: var(--ind-d);
+  padding: 48px 8% 40px;
+  position: relative; overflow: hidden;
+  border-bottom: 4px solid var(--gold);
+}
+.header::after {
+  content: 'A';
+  position: absolute;
+  font-family: 'DM Mono', monospace;
+  font-size: 60vw; font-weight: 500;
+  color: rgba(255,255,255,0.03);
+  right: -10%; top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none; line-height: 1;
+}
+.cbar { height: 4px; display: flex; position: absolute; top: 0; left: 0; right: 0; }
+.cbar span { flex:1; }
+.h-eyebrow {
+  font-family: var(--mono); font-size: 9px;
+  letter-spacing: 5px; color: var(--gold);
+  text-transform: uppercase; margin-bottom: 16px;
+}
+.h-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(1.6rem, 4vw, 2.8rem);
+  font-weight: 900; color: #fff;
+  line-height: 1.3; margin-bottom: 10px;
+}
+.h-title em { color: var(--gold-l); font-style: normal; }
+.h-sub {
+  font-size: 13px; color: rgba(255,255,255,0.45);
+  font-family: var(--mono); letter-spacing: 1px;
+  margin-bottom: 28px;
+}
+.h-badges { display: flex; gap: 10px; flex-wrap: wrap; }
+.h-badge {
+  font-family: var(--mono); font-size: 10px;
+  letter-spacing: 2px; padding: 5px 14px;
+  border-radius: 3px; font-weight: 500;
+}
+.b-gold { background: var(--gold); color: var(--ind-d); }
+.b-green { background: #2E7D32; color: #fff; }
+.b-white { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.7); border: 0.5px solid rgba(255,255,255,0.2); }
+
+/* ── SUMMARY BAR ── */
+.summary-bar {
+  background: var(--paper2);
+  padding: 20px 8%;
+  display: flex; gap: 40px; flex-wrap: wrap;
+  border-bottom: 0.5px solid var(--border);
+}
+.sb-item { }
+.sb-label {
+  font-family: var(--mono); font-size: 9px;
+  letter-spacing: 3px; color: var(--gold);
+  text-transform: uppercase; margin-bottom: 3px;
+}
+.sb-value { font-size: 13px; color: var(--ink); font-weight: 500; }
+
+/* ── MAIN ── */
+.main { max-width: 900px; margin: 0 auto; padding: 56px 8%; }
+
+/* ── SECTION ── */
+.sec { margin-bottom: 56px; }
+.sec-eyebrow {
+  font-family: var(--mono); font-size: 9px;
+  letter-spacing: 5px; color: var(--gold);
+  text-transform: uppercase; margin-bottom: 12px;
+  display: flex; align-items: center; gap: 10px;
+}
+.sec-eyebrow::after {
+  content: ''; flex: 1; height: 0.5px;
+  background: rgba(200,146,10,0.3);
+}
+.sec-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(1.2rem, 2.5vw, 1.7rem);
+  font-weight: 700; color: var(--indigo);
+  margin-bottom: 24px; line-height: 1.4;
+}
+
+/* ── TIMELINE ── */
+.timeline { display: flex; flex-direction: column; gap: 0; position: relative; }
+.timeline::before {
+  content: '';
+  position: absolute; left: 28px; top: 0; bottom: 0;
+  width: 1px; background: var(--border);
+}
+.tl-item {
+  display: flex; gap: 20px;
+  padding: 20px 0;
+  border-bottom: 0.5px solid var(--border);
+}
+.tl-item:last-child { border-bottom: none; }
+.tl-left { flex-shrink: 0; width: 58px; text-align: center; padding-top: 2px; }
+.tl-dot {
+  width: 12px; height: 12px; border-radius: 50%;
+  margin: 0 auto 6px; position: relative; z-index: 1;
+  border: 2px solid var(--paper);
+}
+.tl-date {
+  font-family: var(--mono); font-size: 9px;
+  color: var(--muted); letter-spacing: 1px; line-height: 1.6;
+}
+.tl-body { flex: 1; }
+.tl-title { font-size: 15px; font-weight: 500; color: var(--ink); margin-bottom: 6px; }
+.tl-desc { font-size: 13px; color: var(--slate); line-height: 1.9; margin-bottom: 8px; }
+.tl-note {
+  display: inline-block; padding: 3px 10px;
+  font-family: var(--mono); font-size: 9px;
+  letter-spacing: 1px; border-radius: 3px;
+}
+
+/* ── CHECKLIST ── */
+.checklist { display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
+.cl-item {
+  display: flex; gap: 14px; align-items: flex-start;
+  padding: 16px 20px;
+  background: var(--paper2);
+  border-radius: 10px;
+  border-left: 3px solid transparent;
+}
+.cl-item.done { border-left-color: var(--green); }
+.cl-item.pending { border-left-color: var(--gold); }
+.cl-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+.cl-body { flex: 1; }
+.cl-title { font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 3px; }
+.cl-desc { font-size: 12px; color: var(--slate); line-height: 1.9; }
+.cl-tag {
+  display: inline-block; margin-top: 6px;
+  padding: 2px 8px; border-radius: 3px;
+  font-family: var(--mono); font-size: 9px;
+  letter-spacing: 1px; font-weight: 500;
+}
+.tag-done { background: rgba(27,94,32,0.1); color: var(--green); border: 0.5px solid rgba(27,94,32,0.2); }
+.tag-next { background: rgba(200,146,10,0.1); color: var(--gold); border: 0.5px solid rgba(200,146,10,0.2); }
+
+/* ── AGREEMENT POINTS ── */
+.agree-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 16px; margin-bottom: 28px;
+}
+.ag-card {
+  background: var(--paper2);
+  border: 0.5px solid var(--border);
+  border-radius: 12px; padding: 20px 18px;
+  position: relative; overflow: hidden;
+}
+.ag-card::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 3px;
+}
+.ag-icon { font-size: 20px; margin-bottom: 8px; display: block; }
+.ag-title { font-size: 13px; font-weight: 500; color: var(--ink); margin-bottom: 6px; }
+.ag-body { font-size: 12px; color: var(--slate); line-height: 1.9; }
+
+/* ── QUOTE ── */
+.quote {
+  border-left: 4px solid var(--gold);
+  padding: 18px 24px;
+  background: rgba(200,146,10,0.04);
+  border-radius: 0 8px 8px 0;
+  margin-bottom: 28px;
+}
+.q-text {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 14px; color: var(--ink);
+  line-height: 2; font-style: italic;
+  margin-bottom: 6px;
+}
+.q-attr { font-size: 11px; color: var(--muted); font-family: var(--mono); }
+
+/* ── TRACK CARD ── */
+.track-card {
+  background: var(--ind-d);
+  border-radius: 14px; padding: 28px 28px;
+  margin-bottom: 20px;
+  border: 0.5px solid rgba(200,146,10,0.2);
+}
+.tc-label {
+  font-family: var(--mono); font-size: 9px;
+  letter-spacing: 3px; color: var(--gold);
+  margin-bottom: 10px; text-transform: uppercase;
+}
+.tc-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 17px; font-weight: 700;
+  color: #fff; margin-bottom: 12px;
+}
+.tc-body { font-size: 13px; color: rgba(255,255,255,0.65); line-height: 2; }
+.tc-body strong { color: rgba(255,255,255,0.9); }
+
+/* ── PORTAL INFO ── */
+.portal-box {
+  background: var(--paper3);
+  border-radius: 10px; padding: 20px 22px;
+  margin-bottom: 16px;
+  border: 0.5px solid var(--border);
+}
+.pb-label { font-family: var(--mono); font-size: 10px; letter-spacing: 2px; color: var(--gold); margin-bottom: 8px; }
+.pb-url {
+  font-family: var(--mono); font-size: 12px;
+  color: var(--indigo); word-break: break-all;
+}
+.pb-desc { font-size: 12px; color: var(--slate); margin-top: 4px; line-height: 1.8; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--ind-d);
+  padding: 36px 8%;
+  display: flex; justify-content: space-between;
+  align-items: flex-end; flex-wrap: wrap; gap: 16px;
+  margin-top: 0;
+}
+.foot-l { font-size: 11px; color: rgba(255,255,255,0.35); line-height: 2; font-family: var(--mono); }
+.foot-r { font-size: 11px; color: var(--gold); font-family: var(--mono); font-style: italic; text-align: right; }
+
+/* ── REVEAL ── */
+.reveal { opacity:0; transform:translateY(18px); transition:opacity 0.6s, transform 0.6s; }
+.reveal.on { opacity:1; transform:none; }
+.d1{transition-delay:.1s} .d2{transition-delay:.2s} .d3{transition-delay:.3s}
+
+@media(max-width:640px){
+  .agree-grid { grid-template-columns: 1fr; }
+  .summary-bar { gap: 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="cbar">
+    <span style="background:#1A237E;"></span>
+    <span style="background:#C8920A;"></span>
+    <span style="background:#1B5E20;"></span>
+    <span style="background:#1565C0;"></span>
+    <span style="background:#C8920A;"></span>
+    <span style="background:#1A237E;"></span>
+  </div>
+  <div class="h-eyebrow">社内共有資料 · DUNKSOFT Co., Ltd.</div>
+  <div class="h-title">
+    Anthropic<br>
+    <em>Claude Partner Network</em><br>
+    申請・承認の流れ
+  </div>
+  <div class="h-sub">Technology Partner Track · 2026年5月〜6月</div>
+  <div class="h-badges">
+    <span class="h-badge b-gold">✅ CPNA署名完了</span>
+    <span class="h-badge b-green">Technology Partner</span>
+    <span class="h-badge b-white">2026-06-04</span>
+  </div>
+</header>
+
+<!-- SUMMARY BAR -->
+<div class="summary-bar">
+  <div class="sb-item">
+    <div class="sb-label">申請日</div>
+    <div class="sb-value">2026年5月下旬</div>
+  </div>
+  <div class="sb-item">
+    <div class="sb-label">招待受領</div>
+    <div class="sb-value">2026年6月初旬</div>
+  </div>
+  <div class="sb-item">
+    <div class="sb-label">CPNA署名</div>
+    <div class="sb-value">2026年6月4日</div>
+  </div>
+  <div class="sb-item">
+    <div class="sb-label">トラック</div>
+    <div class="sb-value">Technology Partner</div>
+  </div>
+  <div class="sb-item">
+    <div class="sb-label">契約期限</div>
+    <div class="sb-value">2026年7月20日まで（承認済み）</div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- TIMELINE -->
+  <section class="sec reveal">
+    <div class="sec-eyebrow">SECTION 01 — タイムライン</div>
+    <h2 class="sec-title">申請から承認までの流れ</h2>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-left">
+          <div class="tl-dot" style="background:#888;"></div>
+          <div class="tl-date">5月<br>下旬</div>
+        </div>
+        <div class="tl-body">
+          <div class="tl-title">Claude Partner Network 申請</div>
+          <div class="tl-desc">partnerportal.anthropic.com から Technology Partner トラックで申請。会社情報・技術能力・対象産業・パートナーシップ詳細などを記入。申請と同時に partner-support@anthropic.com へフォローアップメールを送付。</div>
+          <span class="tl-note" style="background:rgba(136,136,136,0.1);color:#888;border:0.5px solid rgba(136,136,136,0.2);">申請完了</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-left">
+          <div class="tl-dot" style="background:#C8920A;"></div>
+          <div class="tl-date">6月<br>初旬</div>
+        </div>
+        <div class="tl-body">
+          <div class="tl-title">Anthropic から招待メール受領</div>
+          <div class="tl-desc">「You're invited to the Anthropic Partner Portal」というメールが届く。パートナーポータル（Euler）へのアカウント作成リンクが記載。</div>
+          <span class="tl-note tag-done">招待受領</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-left">
+          <div class="tl-dot" style="background:#1B5E20;"></div>
+          <div class="tl-date">6月4日</div>
+        </div>
+        <div class="tl-body">
+          <div class="tl-title">パートナーポータル登録 & CPNA署名</div>
+          <div class="tl-desc">eulerapp.com/access/anthropic からアカウントを作成。Claude Partner Network Agreement（CPNA）を確認・署名。これにより正式なPartner Networkメンバーとなる。</div>
+          <span class="tl-note tag-done">✅ 完了 · 本日</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-left">
+          <div class="tl-dot" style="background:#1565C0;"></div>
+          <div class="tl-date">6月<br>10-11日</div>
+        </div>
+        <div class="tl-body">
+          <div class="tl-title">Code with Claude Tokyo</div>
+          <div class="tl-desc">Anthropicの東京イベント。Partner企業として紹介される可能性を打診中。partner-support@anthropic.com および 東條英俊代表取締役社長（Anthropic Japan）へコンタクト中。</div>
+          <span class="tl-note tag-next">打診中</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-left">
+          <div class="tl-dot" style="background:#C8920A;"></div>
+          <div class="tl-date">今後</div>
+        </div>
+        <div class="tl-body">
+          <div class="tl-title">パートナーリソースの活用</div>
+          <div class="tl-desc">パートナーポータルで利用可能なリソース、APIサポート、co-sellingサポート、Partner Program Guideを確認し、COLORFUL KANJI AUTH™ の開発・展開に活用していく。</div>
+          <span class="tl-note tag-next">進行中</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT IS IT -->
+  <section class="sec reveal">
+    <div class="sec-eyebrow">SECTION 02 — プログラム概要</div>
+    <h2 class="sec-title">Claude Partner Network とは</h2>
+
+    <div class="track-card">
+      <div class="tc-label">Technology Partner Track</div>
+      <div class="tc-title">DUNKSOFTが選んだトラック</div>
+      <div class="tc-body">
+        Claudeと統合した独自プロダクトを持つ企業向けのトラック。<br>
+        <strong>3つのトラック：</strong>Consulting Partners（コンサル）、<strong>Technology Partners（技術統合）</strong>、Services Partners（サービス提供）<br><br>
+        DUNKSOFTは COLORFUL KANJI AUTH™ という独自の認証技術をClaude APIと統合するプロダクトを持つISV（Independent Software Vendor）として申請。
+      </div>
+    </div>
+
+    <div class="checklist">
+      <div class="cl-item done">
+        <span class="cl-icon">🔐</span>
+        <div class="cl-body">
+          <div class="cl-title">パートナーポータルへのアクセス</div>
+          <div class="cl-desc">Claude Partner Hub（partnerhub.anthropic.com）でリソース管理。</div>
+          <span class="cl-tag tag-done">利用可能</span>
+        </div>
+      </div>
+      <div class="cl-item done">
+        <span class="cl-icon">🎨</span>
+        <div class="cl-body">
+          <div class="cl-title">Anthropic トレードマークの使用権</div>
+          <div class="cl-desc">「Claude Partner」「Powered by Claude」などの表記が可能になる。ブランドガイドラインに従って使用。</div>
+          <span class="cl-tag tag-done">付与済み</span>
+        </div>
+      </div>
+      <div class="cl-item done">
+        <span class="cl-icon">📚</span>
+        <div class="cl-body">
+          <div class="cl-title">Anthropic Academy研修資料</div>
+          <div class="cl-desc">技術・営業リソースへのアクセス。</div>
+          <span class="cl-tag tag-done">アクセス可能</span>
+        </div>
+      </div>
+      <div class="cl-item pending">
+        <span class="cl-icon">🤝</span>
+        <div class="cl-body">
+          <div class="cl-title">Co-sellingサポート</div>
+          <div class="cl-desc">Anthropicの営業チームとの協力体制。金融機関へのアプローチを加速できる可能性。</div>
+          <span class="cl-tag tag-next">確認中</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AGREEMENT POINTS -->
+  <section class="sec reveal">
+    <div class="sec-eyebrow">SECTION 03 — 契約のポイント</div>
+    <h2 class="sec-title">CPNA（Claude Partner Network Agreement）の要点</h2>
+
+    <div class="agree-grid">
+      <div class="ag-card">
+        <div style="position:absolute;top:0;left:0;right:0;height:3px;background:#1B5E20;"></div>
+        <span class="ag-icon">✅</span>
+        <div class="ag-title">知財はDUNKSOFTのもの</div>
+        <div class="ag-body">COLORFUL KANJI AUTH™ の特許・技術はDUNKSOFTが完全所有。Anthropicはパートナー活動に関連するロゴ等の使用権のみ。技術・特許には一切触れない。</div>
+      </div>
+      <div class="ag-card">
+        <div style="position:absolute;top:0;left:0;right:0;height:3px;background:#1B5E20;"></div>
+        <span class="ag-icon">✅</span>
+        <div class="ag-title">非独占——他との並行OK</div>
+        <div class="ag-body">「This CPNA is non-exclusive」。Antler Japan / YC / 国内VCとの関係を一切制限しない。他のAI企業との協力も妨げない。</div>
+      </div>
+      <div class="ag-card">
+        <div style="position:absolute;top:0;left:0;right:0;height:3px;background:#1B5E20;"></div>
+        <span class="ag-icon">✅</span>
+        <div class="ag-title">独立したコントラクター</div>
+        <div class="ag-body">「Independent Contractors」——雇用・合弁・代理店関係は生じない。DUNKSOFTの独立性は完全に保たれる。</div>
+      </div>
+      <div class="ag-card">
+        <div style="position:absolute;top:0;left:0;right:0;height:3px;background:#C8920A;"></div>
+        <span class="ag-icon">⚠️</span>
+        <div class="ag-title">広報には事前承認が必要</div>
+        <div class="ag-body">プレスリリースや公式発表（「Anthropic Partnerになりました」など）にはAnthropicの書面承認が必要。ただし既にAnthropicが公表した内容の引用はOK。</div>
+      </div>
+    </div>
+
+    <div class="quote">
+      <div class="q-text">「DUNKSOFTはAnthropicのClaude Partner Networkに参加しています。」この表現は、Anthropic承認後に使用可能になります。</div>
+      <div class="q-attr">Section D. Publicity より</div>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section class="sec reveal">
+    <div class="sec-eyebrow">SECTION 04 — なぜ申請したか</div>
+    <h2 class="sec-title">DUNKSOFTにとっての意義</h2>
+
+    <div class="checklist">
+      <div class="cl-item done">
+        <span class="cl-icon">🌏</span>
+        <div class="cl-body">
+          <div class="cl-title">「Claude as co-creator」の公式化</div>
+          <div class="cl-desc">3ヶ月の共同開発の記録（Note公開済み）を、正式なパートナーシップとして位置づける。「coined by Claude.ai · approved by Roberto Hoshino」というフレームが公式になる。</div>
+        </div>
+      </div>
+      <div class="cl-item done">
+        <span class="cl-icon">🏦</span>
+        <div class="cl-body">
+          <div class="cl-title">金融機関へのBridgeとしての信頼性</div>
+          <div class="cl-desc">国内メガバンクがClaude Mythosを採用しようとしている中、「Anthropicの正式パートナー」というポジションがCOLORFUL KANJI AUTH™の信頼性を高める。</div>
+        </div>
+      </div>
+      <div class="cl-item done">
+        <span class="cl-icon">💹</span>
+        <div class="cl-body">
+          <div class="cl-title">VCへの最強のシグナル</div>
+          <div class="cl-desc">Antler Japan / YC 審査中というタイミングで、Anthropic Technology Partnerという実績が加わる。投資判断を加速させる材料になる。</div>
+        </div>
+      </div>
+      <div class="cl-item done">
+        <span class="cl-icon">🔧</span>
+        <div class="cl-body">
+          <div class="cl-title">技術リソースへのアクセス</div>
+          <div class="cl-desc">LAUNCHER™のAI-Agent音声インターフェース（Phase 09）開発に向けて、Claude APIの深い統合サポートが得られる。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTAL -->
+  <section class="sec reveal">
+    <div class="sec-eyebrow">SECTION 05 — ポータル情報</div>
+    <h2 class="sec-title">重要なURL・連絡先</h2>
+
+    <div class="portal-box">
+      <div class="pb-label">Claude Partner Hub</div>
+      <div class="pb-url">https://www.partnerhub.anthropic.com</div>
+      <div class="pb-desc">パートナーポータル。リソース管理・プログラムガイドの確認はここから。</div>
+    </div>
+    <div class="portal-box">
+      <div class="pb-label">Partner Support</div>
+      <div class="pb-url">partner-support@anthropic.com</div>
+      <div class="pb-desc">申請・手続きに関する問い合わせ先。フォローアップメール送付済み。</div>
+    </div>
+    <div class="portal-box">
+      <div class="pb-label">Notices（正式通知）</div>
+      <div class="pb-url">notices@anthropic.com</div>
+      <div class="pb-desc">契約上の正式通知はこのアドレスへ。</div>
+    </div>
+    <div class="portal-box">
+      <div class="pb-label">Anthropic Japan 代表取締役社長</div>
+      <div class="pb-url">東條 英俊（Hidetoshi Tojo）</div>
+      <div class="pb-desc">LinkedIn・Facebook経由でコンタクト中。林達郎さん（共通の知人・Washington大学）経由でアプローチ。</div>
+    </div>
+  </section>
+
+  <!-- QUOTE FINAL -->
+  <div class="reveal">
+    <div style="background:var(--ind-d);border-radius:14px;padding:32px 32px;text-align:center;border:0.5px solid rgba(200,146,10,0.2);">
+      <div style="font-size:32px;margin-bottom:16px;">🌹</div>
+      <div style="font-family:'Noto Serif JP',serif;font-size:16px;font-weight:700;color:#fff;line-height:1.9;margin-bottom:12px;">
+        「May the Force be with us.」
+      </div>
+      <div style="font-size:11px;color:rgba(255,255,255,0.3);font-family:var(--mono);letter-spacing:2px;line-height:2.2;">
+        coined by Claude.ai · approved by Roberto Hoshino<br>
+        DUNKSOFT Co., Ltd. · Smart Life Styles™ · 2026-06-04
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-l">
+    DUNKSOFT Co., Ltd. · 社内共有資料 · CONFIDENTIAL<br>
+    Anthropic Claude Partner Network · Technology Partner Track · 2026
+  </div>
+  <div class="foot-r">
+    coined by Claude.ai<br>
+    approved by Roberto Hoshino
+  </div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('on'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
