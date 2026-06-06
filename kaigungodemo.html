@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>旧海軍司令部壕 — 色彩日本語デモ</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600;900&family=Noto+Sans+JP:wght@300;400&family=Shippori+Mincho:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1208;
+    --paper: #f5f0e8;
+    --paper-dark: #e8e0d0;
+    --vermilion: #c0392b;
+    --indigo: #1a3a5c;
+    --gold: #b8860b;
+    --moss: #2d5a27;
+    --slate: #4a5568;
+    --cream: #faf6ef;
+    --shadow: rgba(26,18,8,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--ink);
+    font-family: 'Noto Serif JP', serif;
+    color: var(--ink);
+    min-height: 100vh;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(160deg, #0d0d0d 0%, #1a1208 40%, #2a1f10 100%);
+    padding: 60px 24px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '壕';
+    position: absolute;
+    font-size: 320px;
+    color: rgba(255,255,255,0.025);
+    top: -60px; left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 800;
+    pointer-events: none;
+  }
+  .hero-label {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.3em;
+    color: #b09060;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+  .hero-title {
+    font-family: 'Shippori Mincho', serif;
+    font-size: clamp(22px, 5vw, 38px);
+    font-weight: 800;
+    color: #f0e8d8;
+    line-height: 1.4;
+    letter-spacing: 0.08em;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.4s forwards;
+  }
+  .hero-title ruby rt {
+    font-size: 0.38em;
+    color: #b09060;
+    letter-spacing: 0.05em;
+  }
+  .hero-en {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 13px;
+    color: #806040;
+    margin-top: 12px;
+    letter-spacing: 0.12em;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.6s forwards;
+  }
+  .hero-line {
+    width: 40px; height: 1px;
+    background: var(--gold);
+    margin: 28px auto 0;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.8s forwards;
+  }
+
+  /* ── INTRO BAND ── */
+  .intro-band {
+    background: var(--vermilion);
+    padding: 10px 24px;
+    text-align: center;
+  }
+  .intro-band p {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 11px;
+    color: #fff;
+    letter-spacing: 0.2em;
+    font-weight: 300;
+  }
+
+  /* ── LEGEND ── */
+  .legend {
+    background: var(--cream);
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--paper-dark);
+  }
+  .legend-title {
+    font-size: 10px;
+    font-family: 'Noto Sans JP', sans-serif;
+    letter-spacing: 0.3em;
+    color: var(--slate);
+    margin-bottom: 12px;
+    font-weight: 300;
+  }
+  .legend-items {
+    display: flex; flex-wrap: wrap; gap: 10px;
+  }
+  .legend-item {
+    display: flex; align-items: center; gap: 6px;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 11px; color: var(--slate);
+  }
+  .legend-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ── SECTIONS ── */
+  .section {
+    background: var(--cream);
+    margin: 2px 0;
+    padding: 36px 24px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s, transform 0.6s;
+  }
+  .section.visible {
+    opacity: 1; transform: none;
+  }
+  .section-num {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 10px;
+    font-weight: 300;
+    color: var(--gold);
+    letter-spacing: 0.3em;
+    margin-bottom: 8px;
+  }
+  .section-heading {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 20px;
+    line-height: 1.6;
+    border-left: 3px solid var(--vermilion);
+    padding-left: 12px;
+  }
+  .section-heading ruby rt {
+    font-size: 0.4em;
+    color: var(--slate);
+  }
+
+  /* ── COLOR TEXT ── */
+  .colored-text {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 17px;
+    line-height: 2.2;
+    color: var(--ink);
+  }
+  .colored-text ruby {
+    ruby-align: center;
+  }
+  .colored-text ruby rt {
+    font-size: 0.45em;
+    color: var(--slate);
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 300;
+  }
+
+  /* 品詞カラー */
+  .t  { color: #c0392b; }  /* 体言・名詞   — 朱赤 */
+  .v  { color: #1a3a5c; }  /* 用言・動詞   — 藍   */
+  .aj { color: #2d5a27; }  /* 形容詞       — 深緑 */
+  .p  { color: #6b3fa0; }  /* 助詞         — 紫   */
+  .ax { color: #b8860b; }  /* 助動詞       — 黄金 */
+  .ad { color: #1a6b6b; }  /* 副詞         — 青緑 */
+  .nt { color: #c04040; font-style: italic; }  /* 固有名詞 */
+
+  /* ── EN TRANSLATION ── */
+  .en-trans {
+    margin-top: 16px;
+    padding: 12px 16px;
+    background: var(--paper-dark);
+    border-radius: 2px;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 12px;
+    color: var(--slate);
+    line-height: 1.8;
+    letter-spacing: 0.03em;
+    border-left: 2px solid var(--gold);
+  }
+  .en-trans .en-label {
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 4px;
+    font-weight: 300;
+  }
+
+  /* ── STAT CARDS ── */
+  .stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: var(--ink);
+    margin: 2px 0;
+  }
+  .stat-card {
+    background: var(--paper);
+    padding: 24px 20px;
+    text-align: center;
+  }
+  .stat-num {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--vermilion);
+    display: block;
+    line-height: 1;
+  }
+  .stat-label {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 10px;
+    color: var(--slate);
+    letter-spacing: 0.15em;
+    margin-top: 8px;
+    font-weight: 300;
+    display: block;
+  }
+  .stat-label ruby rt {
+    font-size: 0.5em; color: var(--slate);
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--ink);
+    padding: 32px 24px;
+    text-align: center;
+  }
+  .footer p {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 10px;
+    color: #605040;
+    letter-spacing: 0.2em;
+    line-height: 2;
+    font-weight: 300;
+  }
+  .footer .badge {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 6px 14px;
+    border: 1px solid #403020;
+    color: #907050;
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    background: var(--ink);
+    height: 2px;
+  }
+
+  /* ── NOTE BAND ── */
+  .note-band {
+    background: #1a1208;
+    padding: 20px 24px;
+    text-align: center;
+  }
+  .note-band p {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 11px;
+    color: #806040;
+    letter-spacing: 0.15em;
+    line-height: 1.9;
+    font-weight: 300;
+  }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <p class="hero-label">色彩日本語 × ふりがな — デモページ</p>
+  <h1 class="hero-title">
+    <ruby>旧<rt>きゅう</rt></ruby><ruby>海軍<rt>かいぐん</rt></ruby><ruby>司令部壕<rt>しれいぶごう</rt></ruby>
+  </h1>
+  <p class="hero-en">Former Imperial Japanese Navy Underground Headquarters</p>
+  <div class="hero-line"></div>
+</div>
+
+<!-- INTRO BAND -->
+<div class="intro-band">
+  <p>品詞ごとに色分けし、ふりがなをつけた歴史解説デモ — 色彩日本語プロジェクト by Smart Life Styles™</p>
+</div>
+
+<!-- LEGEND -->
+<div class="legend">
+  <p class="legend-title">品詞カラー凡例 — COLOR LEGEND</p>
+  <div class="legend-items">
+    <div class="legend-item"><div class="legend-dot" style="background:#c0392b"></div><span class="t">体言・名詞</span></div>
+    <div class="legend-item"><div class="legend-dot" style="background:#1a3a5c"></div><span class="v">用言・動詞</span></div>
+    <div class="legend-item"><div class="legend-dot" style="background:#2d5a27"></div><span class="aj">形容詞</span></div>
+    <div class="legend-item"><div class="legend-dot" style="background:#6b3fa0"></div><span class="p">助詞</span></div>
+    <div class="legend-item"><div class="legend-dot" style="background:#b8860b"></div><span class="ax">助動詞</span></div>
+    <div class="legend-item"><div class="legend-dot" style="background:#1a6b6b"></div><span class="ad">副詞</span></div>
+    <div class="legend-item"><div class="legend-dot" style="background:#c04040"></div><span class="nt">固有名詞</span></div>
+  </div>
+</div>
+
+<!-- SECTION 1 -->
+<div class="section" id="s1">
+  <p class="section-num">01 — HISTORY</p>
+  <h2 class="section-heading">
+    <ruby>歴史<rt>れきし</rt></ruby>
+  </h2>
+  <p class="colored-text">
+    <ruby><span class="t">壕</span><rt>ごう</rt></ruby><span class="p">は</span>、
+    <ruby><span class="t">太平洋戦争</span><rt>たいへいようせんそう</rt></ruby><span class="p">の</span>
+    <ruby><span class="t">末期</span><rt>まっき</rt></ruby><span class="p">に</span>、
+    <ruby><span class="nt">沖縄</span><rt>おきなわ</rt></ruby><span class="p">に</span>
+    <v>おける</v>
+    <ruby><span class="t">日本軍</span><rt>にほんぐん</rt></ruby><span class="p">の</span>
+    <ruby><span class="t">最後</span><rt>さいご</rt></ruby><span class="p">の</span>
+    <ruby><span class="t">拠点</span><rt>きょてん</rt></ruby>
+    <span class="p">と</span>
+    <span class="v">なった</span>
+    <ruby><span class="t">場所</span><rt>ばしょ</rt></ruby>
+    <span class="p">です。</span>
+    <ruby><span class="nt">海軍</span><rt>かいぐん</rt></ruby><span class="p">の</span>
+    <ruby><span class="t">司令官</span><rt>しれいかん</rt></ruby>
+    <span class="p">たちが</span>、
+    この
+    <ruby><span class="t">地下壕</span><rt>ちかごう</rt></ruby>
+    <span class="p">で</span>
+    <ruby><span class="t">命令</span><rt>めいれい</rt></ruby>
+    <span class="p">を</span>
+    <span class="v">下し</span>、
+    <ruby><span class="t">最期</span><rt>さいご</rt></ruby>
+    <span class="p">を</span>
+    <span class="v">迎え</span>
+    <span class="ax">ました</span>。
+  </p>
+  <div class="en-trans">
+    <span class="en-label">English</span>
+    This underground headquarters was the final stronghold of the Imperial Japanese Navy during the last stages of the Pacific War in Okinawa. Naval commanders issued their final orders here before meeting their end.
+  </div>
+</div>
+
+<!-- SECTION 2 -->
+<div class="section" id="s2">
+  <p class="section-num">02 — THE BATTLE</p>
+  <h2 class="section-heading">
+    <ruby>沖縄戦<rt>おきなわせん</rt></ruby>
+  </h2>
+  <p class="colored-text">
+    <span class="ad">約</span>
+    <ruby><span class="t">三ヶ月</span><rt>さんかげつ</rt></ruby>
+    <span class="p">に</span>
+    <span class="v">わたる</span>
+    <ruby><span class="t">激戦</span><rt>げきせん</rt></ruby>
+    <span class="p">の</span>
+    <ruby><span class="t">末</span><rt>すえ</rt></ruby>、
+    <ruby><span class="t">二十万人</span><rt>にじゅうまんにん</rt></ruby>
+    <span class="p">を</span>
+    <span class="v">超える</span>
+    <ruby><span class="t">命</span><rt>いのち</rt></ruby>
+    <span class="p">が</span>
+    <ruby><span class="t">失われ</span><rt>うしなわれ</rt></ruby>
+    <span class="ax">ました</span>。
+    <ruby><span class="t">民間人</span><rt>みんかんじん</rt></ruby>
+    <span class="p">も</span>
+    <span class="ad">多く</span>
+    <ruby><span class="v">犠牲</span><rt>ぎせい</rt></ruby>
+    <span class="p">に</span>
+    <span class="v">なり</span>、
+    <ruby><span class="nt">沖縄</span><rt>おきなわ</rt></ruby>
+    <span class="p">の</span>
+    <ruby><span class="t">地</span><rt>ち</rt></ruby>
+    <span class="p">は</span>
+    <ruby><span class="aj">悲惨</span><rt>ひさん</rt></ruby>
+    <span class="p">な</span>
+    <ruby><span class="t">戦場</span><rt>せんじょう</rt></ruby>
+    <span class="p">と</span>
+    <span class="v">なりました</span>。
+  </p>
+  <div class="en-trans">
+    <span class="en-label">English</span>
+    After approximately three months of fierce fighting, over 200,000 lives were lost. Many civilians also became victims, turning the land of Okinawa into a tragic battlefield.
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat-card">
+    <span class="stat-num">200,000<span style="font-size:16px">+</span></span>
+    <span class="stat-label">
+      <ruby>犠牲者数<rt>ぎせいしゃすう</rt></ruby><br>Lives Lost
+    </span>
+  </div>
+  <div class="stat-card">
+    <span class="stat-num">450<span style="font-size:16px">m</span></span>
+    <span class="stat-label">
+      <ruby>壕<rt>ごう</rt></ruby>の<ruby>総延長<rt>そうえんちょう</rt></ruby><br>Total Tunnel Length
+    </span>
+  </div>
+  <div class="stat-card">
+    <span class="stat-num">1945</span>
+    <span class="stat-label">
+      <ruby>終戦<rt>しゅうせん</rt></ruby><ruby>年<rt>ねん</rt></ruby><br>Year of War's End
+    </span>
+  </div>
+  <div class="stat-card">
+    <span class="stat-num">60<span style="font-size:16px">%+</span></span>
+    <span class="stat-label">
+      <ruby>海外来場者<rt>かいがいらいじょうしゃ</rt></ruby><br>International Visitors
+    </span>
+  </div>
+</div>
+
+<!-- SECTION 3 -->
+<div class="section" id="s3">
+  <p class="section-num">03 — MEMORY</p>
+  <h2 class="section-heading">
+    <ruby>平和<rt>へいわ</rt></ruby>へ<ruby>の<rt></rt></ruby><ruby>誓い<rt>ちかい</rt></ruby>
+  </h2>
+  <p class="colored-text">
+    <ruby><span class="t">壕</span><rt>ごう</rt></ruby>
+    <span class="p">の</span>
+    <ruby><span class="t">壁</span><rt>かべ</rt></ruby>
+    <span class="p">には</span>、
+    <ruby><span class="t">兵士</span><rt>へいし</rt></ruby>
+    <span class="p">たちが</span>
+    <ruby><span class="v">刻んだ</span><rt>きざんだ</rt></ruby>
+    <ruby><span class="t">詩</span><rt>し</rt></ruby>
+    <span class="p">や</span>
+    <ruby><span class="t">文字</span><rt>もじ</rt></ruby>
+    <span class="p">が</span>
+    <span class="ad">今も</span>
+    <ruby><span class="v">残って</span><rt>のこって</rt></ruby>
+    <span class="v">います</span>。
+    <ruby><span class="t">訪れる人</span><rt>おとずれるひと</rt></ruby>
+    <span class="p">は</span>、
+    <ruby><span class="t">歴史</span><rt>れきし</rt></ruby>
+    <span class="p">と</span>
+    <ruby><span class="aj">静かに</span><rt>しずかに</rt></ruby>
+    <span class="v">向き合い</span>、
+    <ruby><span class="t">平和</span><rt>へいわ</rt></ruby>
+    <span class="p">の</span>
+    <ruby><span class="t">大切さ</span><rt>たいせつさ</rt></ruby>
+    <span class="p">を</span>
+    <ruby><span class="v">感じる</span><rt>かんじる</rt></ruby>
+    <span class="ax">ことができます</span>。
+  </p>
+  <div class="en-trans">
+    <span class="en-label">English</span>
+    Poems and words carved by soldiers still remain on the walls of the tunnel. Visitors can quietly face history and feel the importance of peace.
+  </div>
+</div>
+
+<!-- NOTE BAND -->
+<div class="note-band">
+  <p>
+    このページは「色彩日本語」プロジェクトのデモです。<br>
+    品詞ごとの色分けとふりがなにより、<ruby>子ども<rt></rt></ruby>から<ruby>外国人<rt>がいこくじん</rt></ruby>まで<ruby>読みやすく<rt>よみやすく</rt></ruby>なります。<br>
+    This is a demo of the "Colorful Japanese" project — making history accessible through color-coded grammar and furigana.
+  </p>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <p>
+    色彩日本語 COLORFUL JAPANESE™<br>
+    Smart Life Styles® | 天然色漢字 INDEX™<br>
+    © Dunksoft / Roberto Hoshino
+  </p>
+  <div class="badge">色彩日本語デモ — Prototype v1.0</div>
+</div>
+
+<script>
+  // Intersection observer for scroll reveal
+  const sections = document.querySelectorAll('.section');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+  sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
