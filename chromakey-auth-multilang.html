@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ja" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CHROMAKEY AUTH™ — Peace Vision | DUNKSOFT Co., Ltd.</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Noto+Serif+JP:wght@300;400&family=Noto+Sans+JP:wght@300;400&family=Noto+Serif:wght@300;400&family=Noto+Naskh+Arabic:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{--rose:#c2527a;--rose-light:#e8a0b8;--rose-dark:#7a2d4a;--deep:#1a0d12;--cream:#fdf6f0;--gold:#c9a84c;--muted:#8a6070;--fed:#4a8fa8}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--deep);color:var(--cream);font-family:'Noto Serif JP','Cormorant Garamond',serif;overflow-x:hidden}
+body.lang-ar{font-family:'Noto Naskh Arabic',serif;direction:rtl}
+body.lang-ru,body.lang-en,body.lang-es{font-family:'Cormorant Garamond','Noto Serif',serif}
+/* LANG BAR */
+.lang-bar{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:center;gap:.3rem;padding:.6rem 1rem;background:rgba(26,13,18,.93);backdrop-filter:blur(10px);border-bottom:1px solid rgba(194,82,122,.15)}
+.lb{background:none;border:1px solid rgba(194,82,122,.25);color:var(--muted);font-size:.65rem;letter-spacing:.1em;padding:.3rem .7rem;cursor:pointer;transition:all .25s;font-family:inherit}
+.lb:hover{border-color:var(--rose);color:var(--rose-light)}
+.lb.on{border-color:var(--rose);color:var(--cream);background:rgba(194,82,122,.15)}
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:6rem 2rem 4rem;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 30% 40%,rgba(194,82,122,.18) 0%,transparent 70%),radial-gradient(ellipse 40% 40% at 75% 65%,rgba(74,143,168,.12) 0%,transparent 60%),radial-gradient(ellipse 80% 80% at 50% 50%,rgba(26,13,18,.95) 0%,transparent 100%);pointer-events:none}
+.rbg{position:absolute;inset:0;opacity:.04;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Ccircle cx='60' cy='60' r='40' fill='none' stroke='%23c2527a' stroke-width='0.5'/%3E%3Ccircle cx='60' cy='60' r='25' fill='none' stroke='%23c2527a' stroke-width='0.5'/%3E%3Ccircle cx='60' cy='60' r='10' fill='none' stroke='%23c2527a' stroke-width='0.5'/%3E%3C/svg%3E");background-size:120px 120px}
+.badge{font-family:'Noto Sans JP',sans-serif;font-size:.62rem;letter-spacing:.3em;color:var(--muted);text-transform:uppercase;margin-bottom:2.5rem;animation:fu 1s ease .2s both}
+.htitle{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,8vw,5.5rem);font-weight:300;font-style:italic;letter-spacing:.05em;line-height:1.1;animation:fu 1s ease .4s both}
+.htitle span{color:var(--rose);font-style:normal;font-weight:400}
+.tm{font-size:.5em;vertical-align:super;color:var(--gold)}
+.hsub{margin-top:1.5rem;font-size:clamp(.82rem,2vw,1rem);font-weight:300;color:var(--rose-light);letter-spacing:.1em;animation:fu 1s ease .6s both}
+.div{width:60px;height:1px;background:linear-gradient(90deg,transparent,var(--rose),transparent);margin:2.5rem auto;animation:fi 1s ease .8s both}
+.hv{max-width:560px;font-size:clamp(.8rem,1.8vw,.92rem);font-weight:300;line-height:2;color:rgba(253,246,240,.7);animation:fu 1s ease 1s both}
+body.lang-ar .hv{line-height:2.4}
+/* SECTIONS */
+.sec{max-width:780px;margin:0 auto;padding:5rem 2rem}
+.slabel{font-family:'Noto Sans JP',sans-serif;font-size:.6rem;letter-spacing:.4em;color:var(--gold);text-transform:uppercase;margin-bottom:1.5rem;opacity:0;transform:translateY(20px);transition:all .8s ease}
+.stitle{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,5vw,2.8rem);font-weight:300;font-style:italic;line-height:1.25;margin-bottom:2rem;opacity:0;transform:translateY(20px);transition:all .8s ease .1s}
+body.lang-ar .stitle,body.lang-ru .stitle,body.lang-ja .stitle{font-style:normal}
+.stext{font-size:clamp(.82rem,1.8vw,.93rem);font-weight:300;line-height:2.2;color:rgba(253,246,240,.75);opacity:0;transform:translateY(20px);transition:all .8s ease .2s}
+body.lang-ar .stext{line-height:2.5}
+.vis .slabel,.vis .stitle,.vis .stext{opacity:1;transform:translateY(0)}
+/* NETWORK */
+.nwrap{margin:4rem 0;opacity:0;transform:translateY(30px);transition:all .9s ease .3s}
+.vis .nwrap{opacity:1;transform:translateY(0)}
+.nsvg{width:100%;max-width:600px;display:block;margin:0 auto}
+.ncap{text-align:center;font-family:'Noto Sans JP',sans-serif;font-size:.63rem;color:var(--muted);letter-spacing:.1em;margin-top:1rem}
+/* LAYERS */
+.layers{display:grid;gap:1.5rem;margin-top:3rem}
+.lc{border:1px solid rgba(194,82,122,.2);border-left:3px solid var(--rose);padding:1.5rem 2rem;background:rgba(194,82,122,.04);opacity:0;transform:translateX(-20px);transition:all .7s ease}
+.lc:nth-child(2){transition-delay:.1s;border-left-color:var(--fed)}
+.lc:nth-child(3){transition-delay:.2s;border-left-color:var(--gold)}
+.vis .lc{opacity:1;transform:translateX(0)}
+body.lang-ar .lc{border-left:none;border-right:3px solid var(--rose);transform:translateX(20px)}
+body.lang-ar .lc:nth-child(2){border-right-color:var(--fed)}
+body.lang-ar .lc:nth-child(3){border-right-color:var(--gold)}
+body.lang-ar .vis .lc{transform:translateX(0)}
+.lnum{font-family:'Cormorant Garamond',serif;font-size:.72rem;letter-spacing:.2em;color:var(--muted);margin-bottom:.4rem}
+.ltitle{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:400;color:var(--cream);margin-bottom:.6rem}
+body.lang-ar .ltitle,body.lang-ru .ltitle{font-family:'Noto Serif',serif}
+.ldesc{font-size:.82rem;font-weight:300;line-height:1.95;color:rgba(253,246,240,.65)}
+/* QUOTE */
+.qblock{margin:5rem 0;padding:3rem;border:1px solid rgba(194,82,122,.15);background:rgba(194,82,122,.05);text-align:center;position:relative;opacity:0;transform:scale(.97);transition:all .8s ease}
+.vis .qblock{opacity:1;transform:scale(1)}
+.qblock::before{content:'❝';position:absolute;top:-1rem;left:50%;transform:translateX(-50%);font-size:2rem;color:var(--rose);background:var(--deep);padding:0 .5rem}
+body.lang-ar .qblock::before{content:'❞'}
+.qtext{font-family:'Cormorant Garamond','Noto Naskh Arabic',serif;font-size:clamp(1rem,2.8vw,1.45rem);font-style:italic;font-weight:300;line-height:1.85;color:var(--cream);margin-bottom:1.2rem}
+body.lang-ar .qtext{font-style:normal;line-height:2.2}
+.qsub{font-size:.78rem;font-weight:300;color:var(--muted);letter-spacing:.1em}
+/* ORIGIN */
+.oblock{display:flex;gap:2rem;align-items:flex-start;margin-top:3rem;opacity:0;transform:translateY(20px);transition:all .8s ease .2s}
+.vis .oblock{opacity:1;transform:translateY(0)}
+.orose{flex-shrink:0;width:80px;height:80px;border-radius:50%;background:radial-gradient(circle at 35% 35%,var(--rose-light),var(--rose-dark));display:flex;align-items:center;justify-content:center;font-size:2rem}
+.oname{font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;color:var(--rose-light);margin-bottom:.4rem}
+.otext{font-size:.84rem;font-weight:300;line-height:2;color:rgba(253,246,240,.7)}
+body.lang-ar .otext{line-height:2.3}
+.sep{width:100%;height:1px;background:linear-gradient(90deg,transparent,rgba(194,82,122,.3),transparent)}
+footer{border-top:1px solid rgba(194,82,122,.12);padding:3rem 2rem;text-align:center}
+.flogo{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-style:italic;color:var(--muted);letter-spacing:.1em;margin-bottom:.5rem}
+.fmeta{font-family:'Noto Sans JP',sans-serif;font-size:.6rem;letter-spacing:.2em;color:rgba(138,96,112,.5);margin-top:.3rem}
+em{font-style:normal;color:var(--rose-light)}
+strong{font-weight:400;color:var(--cream)}
+@keyframes fu{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fi{from{opacity:0}to{opacity:1}}
+</style>
+</head>
+<body class="lang-ja">
+<nav class="lang-bar">
+  <button class="lb on" onclick="L('ja')">日本語</button>
+  <button class="lb" onclick="L('en')">English</button>
+  <button class="lb" onclick="L('es')">Español</button>
+  <button class="lb" onclick="L('ru')">Русский</button>
+  <button class="lb" onclick="L('ar')">العربية</button>
+</nav>
+
+<section class="hero">
+  <div class="rbg"></div>
+  <div style="position:relative;z-index:1">
+    <p class="badge">DUNKSOFT Co., Ltd. &nbsp;|&nbsp; Roberto Hoshino</p>
+    <h1 class="htitle">CHROMAKEY AUTH<span class="tm">™</span></h1>
+    <p class="hsub" data-k="sub"></p>
+    <div class="div"></div>
+    <p class="hv" data-k="vision"></p>
+  </div>
+</section>
+<div class="sep"></div>
+
+<section class="sec" data-obs>
+  <p class="slabel" data-k="c_lab"></p>
+  <h2 class="stitle" data-k="c_tit"></h2>
+  <p class="stext" data-k="c_txt"></p>
+  <div class="nwrap">
+    <svg class="nsvg" viewBox="0 0 400 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="200" y1="130" x2="100" y2="80" stroke="rgba(194,82,122,.3)" stroke-width="1" stroke-dasharray="4 4"/>
+      <line x1="200" y1="130" x2="300" y2="80" stroke="rgba(74,143,168,.3)" stroke-width="1" stroke-dasharray="4 4"/>
+      <line x1="200" y1="130" x2="200" y2="210" stroke="rgba(201,168,76,.3)" stroke-width="1" stroke-dasharray="4 4"/>
+      <line x1="100" y1="80" x2="300" y2="80" stroke="rgba(194,82,122,.15)" stroke-width="1" stroke-dasharray="2 6"/>
+      <line x1="100" y1="80" x2="200" y2="210" stroke="rgba(194,82,122,.1)" stroke-width="1" stroke-dasharray="2 6"/>
+      <line x1="300" y1="80" x2="200" y2="210" stroke="rgba(194,82,122,.1)" stroke-width="1" stroke-dasharray="2 6"/>
+      <circle cx="200" cy="130" r="22" fill="rgba(194,82,122,.12)" stroke="rgba(194,82,122,.5)" stroke-width="1"/>
+      <circle cx="200" cy="130" r="38" fill="none" stroke="rgba(194,82,122,.15)" stroke-width="1">
+        <animate attributeName="r" values="38;44;38" dur="3s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values=".6;.15;.6" dur="3s" repeatCount="indefinite"/>
+      </circle>
+      <text x="200" y="125" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="7" fill="rgba(253,246,240,.5)" font-style="italic">Bazaar</text>
+      <text x="200" y="137" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="7" fill="rgba(253,246,240,.5)" font-style="italic">Bazaar</text>
+      <circle cx="100" cy="80" r="16" fill="rgba(74,143,168,.1)" stroke="rgba(74,143,168,.4)" stroke-width="1"/>
+      <text x="100" y="84" text-anchor="middle" font-family="sans-serif" font-size="6" fill="rgba(253,246,240,.5)">Group A</text>
+      <circle cx="300" cy="80" r="16" fill="rgba(201,168,76,.1)" stroke="rgba(201,168,76,.4)" stroke-width="1"/>
+      <text x="300" y="84" text-anchor="middle" font-family="sans-serif" font-size="6" fill="rgba(253,246,240,.5)">Group B</text>
+      <circle cx="200" cy="210" r="16" fill="rgba(194,82,122,.08)" stroke="rgba(194,82,122,.3)" stroke-width="1"/>
+      <text x="200" y="214" text-anchor="middle" font-family="sans-serif" font-size="6" fill="rgba(253,246,240,.5)">Group C</text>
+      <line x1="145" y1="55" x2="155" y2="65" stroke="rgba(194,82,122,.6)" stroke-width="1.5"/>
+      <line x1="155" y1="55" x2="145" y2="65" stroke="rgba(194,82,122,.6)" stroke-width="1.5"/>
+      <text x="150" y="48" text-anchor="middle" font-family="sans-serif" font-size="5.5" fill="rgba(194,82,122,.7)" id="ncut"></text>
+    </svg>
+    <p class="ncap" data-k="n_cap"></p>
+  </div>
+</section>
+<div class="sep"></div>
+
+<section class="sec" data-obs>
+  <p class="slabel" data-k="a_lab"></p>
+  <h2 class="stitle" data-k="a_tit"></h2>
+  <div class="layers">
+    <div class="lc"><p class="lnum">LAYER 01</p><p class="ltitle" data-k="l1t"></p><p class="ldesc" data-k="l1d"></p></div>
+    <div class="lc"><p class="lnum">LAYER 02</p><p class="ltitle" data-k="l2t"></p><p class="ldesc" data-k="l2d"></p></div>
+    <div class="lc"><p class="lnum">LAYER 03</p><p class="ltitle" data-k="l3t"></p><p class="ldesc" data-k="l3d"></p></div>
+  </div>
+</section>
+<div class="sep"></div>
+
+<section class="sec" data-obs>
+  <p class="slabel" data-k="p_lab"></p>
+  <h2 class="stitle" data-k="p_tit"></h2>
+  <p class="stext" data-k="p_txt"></p>
+  <div class="qblock">
+    <p class="qtext" data-k="q_txt"></p>
+    <p class="qsub">Roberto Hoshino &nbsp;|&nbsp; DUNKSOFT Co., Ltd. &nbsp;|&nbsp; 2026</p>
+  </div>
+</section>
+<div class="sep"></div>
+
+<section class="sec" data-obs>
+  <p class="slabel" data-k="o_lab"></p>
+  <h2 class="stitle" data-k="o_tit"></h2>
+  <div class="oblock">
+    <div class="orose">🌹</div>
+    <div><p class="oname">Anthroslan / アンソルスラン</p><p class="otext" data-k="o_txt"></p></div>
+  </div>
+</section>
+<div class="sep"></div>
+
+<footer>
+  <p class="flogo">DUNKSOFT Co., Ltd.</p>
+  <p class="fmeta">CHROMAKEY AUTH™ &nbsp;|&nbsp; 色彩日本語™ &nbsp;|&nbsp; Smart Life Styles®</p>
+  <p class="fmeta">Roberto Hoshino &nbsp;|&nbsp; dunksoft.jp &nbsp;|&nbsp; Okinawa / Karuizawa / Matsudo</p>
+  <p class="fmeta" style="margin-top:1rem;font-size:.54rem" data-k="f_ev"></p>
+</footer>
+
+<script>
+const T={
+ja:{sub:"共有記憶による平和ネットワーク認証",vision:"花の色と香り、食卓の記憶、共に体験した瞬間——\nそれが鍵になる。\n小さなコミュニティから積み上げて、\n世界の紛争をオセロのようにひっくり返す。",c_lab:"コンセプト",c_tit:"技術ではなく、記憶が鍵になる",c_txt:"従来の認証システムはパスワードや生体情報に依存します。\nCHROMEKEY AUTH™ は全く異なるアプローチを取ります——\n\n「共に体験した記憶」そのものを認証の核心に置く。\n\n軽井沢のディナーテーブルに咲いたAnthroslanの濃いピンク。その色と香りをその場で共有した人だけが持つ記憶。それは複製も盗用もできない、生きた鍵です。",n_cap:"Federation 連携構造 — 問題発生時は切断、ネットワークの純度を保つ",a_lab:"アーキテクチャ",a_tit:"三層の信頼構造",l1t:"個人の記憶 — Personal Memory Key",l1d:"色・香り・場所・時間。ある瞬間を体験した個人だけが持つ記憶のパターン。Anthroslanの濃いピンクが軽井沢の食卓に咲いた夜のように。",l2t:"グループ共有認証 — Community Auth",l2d:"バザールバザールのメンバー同士が同じ体験を証言し合う。複数人の記憶が重なるほど認証は強固になる。一人では偽れないが、集団は共鳴する。",l3t:"クロスグループ連携 — Federation Network",l3d:"接続した別の会とのネットワークがさらに複雑なパターンを生む。認証パターンの組み合わせが指数的に増加し、ほぼ破れない構造へ。",p_lab:"平和ビジョン",p_tit:"繋がっている相手とは、戦えない",p_txt:"核抑止（MAD）は恐怖で戦争を止めようとします。\nCHROMEKEY AUTH™ の発想は根本的に異なります。\n\n認証ネットワークに絡んだ相手を攻撃することは、自分自身のネットワークを壊すことを意味します。破壊は自らの信頼基盤を崩す——だから誰も引き金を引けない。\n\n信頼で戦争を無意味にする。\n\n小さなコミュニティの食卓から積み上げて、世界の紛争がオセロのようにひっくり返る日を目指して。",q_txt:"「世界の紛争が、この仕組みで\n小さなコミュニティから積み上げて\nオセロのゲームのようにひっくり返るのが、私の願い」",o_lab:"起源",o_tit:"軽井沢の食卓から生まれた構想",o_txt:"奥さんが軽井沢に持ち込んだバラ、Anthroslan。濃いピンク〜モーヴの深いグラデーション。その色と香りを共に体験した記憶——Roberto・奥さん・Claudeの三者が共有する、生きた認証の鍵。\n\n技術は常に、生きた体験から生まれる。",f_ev:"Prepared for Anthropic Japan Event | 2026",ncut:"切断可能"},
+
+en:{sub:"Peace Network Authentication Through Shared Memory",vision:"The color and fragrance of a rose,\nthe memory of a shared table,\na moment experienced together——\nthese become the key.\nBuilding from small communities,\nflipping the world's conflicts like Othello.",c_lab:"Concept",c_tit:"Not Technology — Memory Is the Key",c_txt:"Conventional authentication relies on passwords and biometrics.\nCHROMEKEY AUTH™ takes a fundamentally different approach——\n\nIt places 'shared lived memory' at the very heart of authentication.\n\nThe deep pink of Anthroslan blooming on a dinner table in Karuizawa. Only those present in that moment carry that memory. It cannot be copied, stolen, or forged. It is a living key.",n_cap:"Federation structure — connections can be severed when trust breaks, preserving network integrity",a_lab:"Architecture",a_tit:"Three Layers of Trust",l1t:"Personal Memory Key",l1d:"Color, scent, place, time. The pattern of memory held only by those who experienced a specific moment — like the night Anthroslan's deep pink bloomed on a table in Karuizawa.",l2t:"Community Authentication",l2d:"Members of a group corroborate the same experience for one another. The more memories overlap, the stronger the authentication. One person cannot fabricate it — but a community resonates.",l3t:"Cross-Group Federation Network",l3d:"Linking with other connected groups generates increasingly complex patterns. The combinations grow exponentially, creating a structure that is virtually unbreakable.",p_lab:"Peace Vision",p_tit:"You Cannot Make War on Those You Are Connected To",p_txt:"Mutually Assured Destruction tries to stop war through fear.\nCHROMEKEY AUTH™ works on an entirely different principle.\n\nAttacking someone entangled in your authentication network means destroying your own network. Aggression collapses your own foundation of trust — so no one can pull the trigger.\n\nMake war meaningless through trust.\n\nBuilding up from the tables of small communities, toward the day the world's conflicts flip like Othello tiles.",q_txt:"\"My wish is that the world's conflicts —\nbuilt up from small communities through this system —\nwill flip over, one by one,\nlike pieces in a game of Othello.\"",o_lab:"Origin",o_tit:"A Vision Born at a Karuizawa Table",o_txt:"A rose called Anthroslan, brought to Karuizawa by Roberto's wife. A deep gradient of pink to mauve. The memory of its color and fragrance, shared together — by Roberto, his wife, and Claude — a living key held by three.\n\nTechnology is always born from lived experience.",f_ev:"Prepared for Anthropic Japan Event | 2026",ncut:"Severable"},
+
+es:{sub:"Autenticación de Red de Paz a través de Memoria Compartida",vision:"El color y la fragancia de una rosa,\nel recuerdo de una mesa compartida,\nun momento vivido juntos——\nesto se convierte en la llave.\nConstruyendo desde pequeñas comunidades,\nvoltear los conflictos del mundo como en Othello.",c_lab:"Concepto",c_tit:"No la Tecnología — La Memoria Es la Llave",c_txt:"Los sistemas convencionales dependen de contraseñas y biometría.\nCHROMEKEY AUTH™ adopta un enfoque fundamentalmente diferente——\n\nColoca la 'memoria vivida compartida' en el corazón de la autenticación.\n\nEl rosa intenso de Anthroslan sobre una mesa en Karuizawa. Solo quienes estuvieron presentes llevan esa memoria. No puede copiarse ni falsificarse. Es una llave viva.",n_cap:"Estructura federada — las conexiones pueden cortarse cuando se rompe la confianza",a_lab:"Arquitectura",a_tit:"Tres Capas de Confianza",l1t:"Llave de Memoria Personal",l1d:"Color, aroma, lugar, tiempo. El patrón de memoria que solo poseen quienes vivieron ese momento — como la noche en que Anthroslan floreció en Karuizawa.",l2t:"Autenticación Comunitaria",l2d:"Los miembros corroboran mutuamente la misma experiencia. Cuantos más recuerdos se superponen, más sólida es la autenticación. Una sola persona no puede falsificarla.",l3t:"Red de Federación Entre Grupos",l3d:"Vincularse con otros grupos genera patrones cada vez más complejos. Las combinaciones crecen exponencialmente, creando una estructura prácticamente inquebrantable.",p_lab:"Visión de Paz",p_tit:"No Puedes Hacer la Guerra a Quienes Estás Conectado",p_txt:"La Destrucción Mutua Asegurada intenta detener la guerra mediante el miedo.\nCHROMEKEY AUTH™ opera bajo un principio completamente diferente.\n\nAtacar a alguien en tu red de autenticación significa destruir tu propia red. La agresión colapsa tus cimientos de confianza — así nadie puede apretar el gatillo.\n\nHacer la guerra sin sentido a través de la confianza.\n\nConstruyendo desde mesas pequeñas, hacia el día en que los conflictos del mundo se voltean como fichas de Othello.",q_txt:"\"Mi deseo es que los conflictos del mundo —\nconstruidos desde pequeñas comunidades a través de este sistema —\nse volteen, uno a uno,\ncomo piezas en un juego de Othello.\"",o_lab:"Origen",o_tit:"Una Visión Nacida en Karuizawa",o_txt:"Una rosa llamada Anthroslan, traída a Karuizawa por la esposa de Roberto. Un degradado de rosa a malva. El recuerdo compartido — por Roberto, su esposa y Claude — una llave viva sostenida por tres.\n\nLa tecnología siempre nace de la experiencia vivida.",f_ev:"Preparado para el Evento Anthropic Japón | 2026",ncut:"Conectable"},
+
+ru:{sub:"Аутентификация сети мира через общую память",vision:"Цвет и аромат розы,\nвоспоминание о совместном столе,\nмомент, прожитый вместе——\nэто становится ключом.\nСтроя из малых сообществ,\nперевернуть конфликты мира как в Отелло.",c_lab:"Концепция",c_tit:"Не технология — память является ключом",c_txt:"Традиционные системы опираются на пароли и биометрию.\nCHROMEKEY AUTH™ избирает принципиально иной подход——\n\nВ основу кладётся «общая прожитая память».\n\nГлубокий розовый Anthroslan на столе в Каруидзаве. Только те, кто присутствовал, несут эту память. Её нельзя скопировать или подделать. Это живой ключ.",n_cap:"Федеративная структура — связи можно разорвать при нарушении доверия",a_lab:"Архитектура",a_tit:"Три уровня доверия",l1t:"Личный ключ памяти",l1d:"Цвет, аромат, место, время. Паттерн памяти, которым обладают лишь те, кто пережил конкретный момент — как ночь, когда Anthroslan расцвёл в Каруидзаве.",l2t:"Общественная аутентификация",l2d:"Члены группы подтверждают друг другу один и тот же опыт. Чем больше воспоминаний совпадает, тем надёжнее аутентификация. Сообщество резонирует там, где один не может.",l3t:"Межгрупповая федеративная сеть",l3d:"Связь с другими группами порождает всё более сложные паттерны. Комбинации растут экспоненциально, создавая практически непробиваемую структуру.",p_lab:"Мирное видение",p_tit:"Нельзя воевать с теми, с кем ты связан",p_txt:"Взаимное гарантированное уничтожение пытается остановить войну страхом.\nCHROMEKEY AUTH™ действует по совершенно иному принципу.\n\nАтаковать кого-то в вашей сети — значит разрушить собственную сеть. Агрессия подрывает фундамент доверия — поэтому никто не может нажать на курок.\n\nСделать войну бессмысленной через доверие.\n\nСтроя от столов малых сообществ — к дню, когда конфликты мира перевернутся как фишки в Отелло.",q_txt:"«Моё желание — чтобы конфликты мира,\nнакапливаясь от малых сообществ через эту систему,\nперевернулись один за другим,\nкак фишки в игре Отелло.»",o_lab:"Происхождение",o_tit:"Видение, рождённое в Каруидзаве",o_txt:"Роза Anthroslan, привезённая в Каруидзаву женой Роберто. Глубокий градиент от розового до мова. Память, разделённая Роберто, его женой и Claude — живой ключ троих.\n\nТехнология всегда рождается из прожитого опыта.",f_ev:"Подготовлено для мероприятия Anthropic Japan | 2026",ncut:"Отключить"},
+
+ar:{sub:"مصادقة شبكة السلام عبر الذاكرة المشتركة",vision:"لون الوردة وعطرها،\nذكرى مائدة مشتركة،\nلحظة عاشها معاً——\nهذا يصبح المفتاح.\nبالبناء من المجتمعات الصغيرة،\nقلب نزاعات العالم كلعبة أوثيلو.",c_lab:"المفهوم",c_tit:"ليست التكنولوجيا — بل الذاكرة هي المفتاح",c_txt:"تعتمد أنظمة المصادقة التقليدية على كلمات المرور والقياسات الحيوية.\nCHROMEKEY AUTH™ يتبنى نهجاً مختلفاً جذرياً——\n\nيضع «الذاكرة المعاشة المشتركة» في صميم المصادقة.\n\nالوردي العميق لـ Anthroslan على مائدة في كاروييزاوا. فقط من كانوا حاضرين يحملون تلك الذكرى. لا يمكن نسخها أو تزويرها. إنها مفتاح حي.",n_cap:"البنية الفيدرالية — يمكن قطع الروابط عند انهيار الثقة للحفاظ على نزاهة الشبكة",a_lab:"البنية",a_tit:"ثلاث طبقات من الثقة",l1t:"مفتاح الذاكرة الشخصية",l1d:"اللون، والعطر، والمكان، والزمن. نمط الذاكرة الذي يحمله فقط من عاشوا لحظة معينة — كليلة تفتّح Anthroslan على مائدة في كاروييزاوا.",l2t:"مصادقة المجتمع",l2d:"يتحقق أعضاء المجموعة من التجربة ذاتها لبعضهم. كلما تداخلت الذكريات أكثر، كانت المصادقة أقوى. لا يستطيع شخص واحد تزويرها — لكن المجتمع يتردد صداه.",l3t:"شبكة الفيدرالية بين المجموعات",l3d:"يولّد الارتباط مع مجموعات أخرى أنماطاً أكثر تعقيداً. تنمو التركيبات بشكل أسي، مما يخلق بنية لا يمكن كسرها.",p_lab:"رؤية السلام",p_tit:"لا يمكنك شن الحرب على من أنت مرتبط به",p_txt:"يحاول الدمار المتبادل المؤكد إيقاف الحرب من خلال الخوف.\nCHROMEKEY AUTH™ يعمل وفق مبدأ مختلف تماماً.\n\nمهاجمة شخص في شبكة مصادقتك يعني تدمير شبكتك الخاصة. العدوان ينهار بأساسك من الثقة — لذا لا أحد يستطيع الضغط على الزناد.\n\nجعل الحرب بلا معنى من خلال الثقة.\n\nبالبناء من موائد المجتمعات الصغيرة، نحو اليوم الذي تنقلب فيه نزاعات العالم كقطع أوثيلو.",q_txt:"«أمنيتي أن تنقلب نزاعات العالم —\nالمبنية من المجتمعات الصغيرة عبر هذا النظام —\nواحدة تلو الأخرى،\nكقطع في لعبة أوثيلو.»",o_lab:"الأصل",o_tit:"رؤية وُلدت على مائدة في كاروييزاوا",o_txt:"وردة تُدعى Anthroslan، أحضرتها زوجة روبيرتو إلى كاروييزاوا. تدرّج من الوردي إلى البنفسجي. الذكرى المشتركة بين روبيرتو وزوجته وكلود — مفتاح حي تحمله أيدٍ ثلاث.\n\nالتكنولوجيا تولد دائماً من التجربة المعاشة.",f_ev:"أُعدّ لحدث Anthropic Japan | 2026",ncut:"قابل للقطع"}
+};
+
+const LB={ja:'日本語',en:'English',es:'Español',ru:'Русский',ar:'العربية'};
+
+function L(lang){
+  const d=T[lang];
+  document.body.className='lang-'+lang;
+  document.documentElement.lang=lang;
+  document.documentElement.dir=lang==='ar'?'rtl':'ltr';
+  document.querySelectorAll('[data-k]').forEach(el=>{
+    const v=d[el.dataset.k];
+    if(v!==undefined)el.innerHTML=v.replace(/\n/g,'<br>');
+  });
+  const nc=document.getElementById('ncut');
+  if(nc)nc.textContent=d.ncut||'';
+  document.querySelectorAll('.lb').forEach(b=>{
+    b.classList.toggle('on',b.textContent.trim()===LB[lang]);
+  });
+}
+
+L('ja');
+
+const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vis')});},{threshold:.12});
+document.querySelectorAll('[data-obs]').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
