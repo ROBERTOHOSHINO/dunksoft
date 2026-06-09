@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CPN Services Track ローンチガイダンス — 日本語訳 | DUNKSOFT</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700;900&family=Noto+Sans+JP:wght@300;400;500&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:    #1a1714;
+  --paper:  #f9f6f0;
+  --paper2: #f2ede4;
+  --paper3: #e8e0d2;
+  --acc:    #d4602e;
+  --blue:   #1a3a5c;
+  --green:  #1B5E20;
+  --gold:   #9a7a2a;
+  --slate:  #4a5568;
+  --border: rgba(26,23,20,0.12);
+  --mono:   'DM Mono', monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--paper);color:var(--ink);font-family:'Noto Sans JP',sans-serif;font-weight:300;line-height:1.9;}
+
+/* ── HEADER ── */
+.header{background:var(--ink);padding:48px 8% 40px;border-bottom:4px solid var(--acc);position:relative;overflow:hidden;}
+.header::after{content:'L';position:absolute;font-family:var(--mono);font-size:60vw;font-weight:500;color:rgba(255,255,255,0.02);right:-10%;top:50%;transform:translateY(-50%);pointer-events:none;line-height:1;}
+.h-eye{font-family:var(--mono);font-size:9px;letter-spacing:5px;color:var(--acc);text-transform:uppercase;margin-bottom:14px;}
+.h-title{font-family:'Noto Serif JP',serif;font-size:clamp(1.6rem,4vw,2.6rem);font-weight:900;color:#fff;line-height:1.3;margin-bottom:10px;}
+.h-title em{color:#d4a060;font-style:normal;}
+.h-sub{font-size:12px;color:rgba(255,255,255,0.4);font-family:var(--mono);letter-spacing:1px;margin-bottom:20px;}
+.h-badges{display:flex;gap:10px;flex-wrap:wrap;}
+.hb{font-family:var(--mono);font-size:10px;letter-spacing:2px;padding:4px 14px;border-radius:3px;}
+.hb-acc{background:var(--acc);color:#fff;}
+.hb-out{background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.6);border:0.5px solid rgba(255,255,255,0.2);}
+
+/* ── NOTICE ── */
+.notice{background:#fff3cd;border:1px solid #ffc107;border-radius:8px;padding:14px 20px;margin:32px 8%;font-size:13px;color:#856404;}
+
+/* ── MAIN ── */
+.main{max-width:860px;margin:0 auto;padding:48px 8%;}
+
+/* ── SECTION ── */
+.sec{margin-bottom:52px;}
+.sec-num{font-family:var(--mono);font-size:9px;letter-spacing:5px;color:var(--acc);text-transform:uppercase;margin-bottom:10px;}
+.sec-title{font-family:'Noto Serif JP',serif;font-size:clamp(1.2rem,2.5vw,1.8rem);font-weight:700;color:var(--blue);margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid var(--acc);}
+
+/* ── BOILERPLATE ── */
+.boilerplate{background:rgba(212,96,46,0.06);border:1px solid rgba(212,96,46,0.2);border-radius:10px;padding:22px 26px;margin-bottom:28px;}
+.bp-label{font-family:var(--mono);font-size:9px;letter-spacing:3px;color:var(--acc);text-transform:uppercase;margin-bottom:10px;}
+.bp-text{font-size:14px;color:var(--ink);line-height:2;}
+
+/* ── TIER LINES ── */
+.tier-lines{display:flex;flex-direction:column;gap:12px;margin-bottom:28px;}
+.tl-item{display:flex;gap:16px;align-items:flex-start;padding:16px 20px;background:var(--paper2);border:0.5px solid var(--border);border-radius:10px;}
+.tl-badge{flex-shrink:0;padding:4px 14px;border-radius:4px;font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:1px;min-width:120px;text-align:center;}
+.tl-text{font-size:13px;color:var(--slate);line-height:1.9;flex:1;font-style:italic;}
+
+/* ── SOCIAL TEMPLATES ── */
+.social-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:28px;}
+.social-card{background:#fff;border:1px solid rgba(0,0,0,0.1);border-radius:12px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.05);}
+.sc-head{padding:12px 18px;font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:2px;text-transform:uppercase;}
+.sc-body{padding:18px 18px;font-size:13px;color:var(--slate);line-height:2;}
+.copy-btn{margin:0 18px 14px;background:var(--blue);color:#fff;border:none;padding:8px 18px;border-radius:4px;cursor:pointer;font-size:12px;font-family:'Noto Sans JP',sans-serif;transition:background .2s;}
+.copy-btn:hover{background:#0f2640;}
+.copy-btn.copied{background:var(--green);}
+
+/* ── QUOTE BOX ── */
+.quote-box{background:var(--paper3);border-radius:10px;padding:22px 26px;margin-bottom:20px;border-left:4px solid var(--gold);}
+.qb-label{font-family:var(--mono);font-size:9px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:10px;}
+.qb-text{font-size:14px;color:var(--ink);line-height:2;font-style:italic;margin-bottom:8px;}
+.qb-attr{font-size:11px;color:var(--slate);font-family:var(--mono);}
+
+/* ── VISUAL ASSETS ── */
+.assets-box{background:var(--paper2);border:0.5px solid var(--border);border-radius:10px;padding:22px 26px;margin-bottom:20px;}
+.ab-title{font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--blue);text-transform:uppercase;margin-bottom:14px;}
+.ab-list{display:flex;flex-direction:column;gap:10px;}
+.ab-item{display:flex;gap:10px;font-size:13px;color:var(--slate);line-height:1.9;}
+.ab-arrow{color:var(--acc);flex-shrink:0;font-weight:700;}
+.ab-path{font-family:var(--mono);font-size:11px;background:var(--paper3);padding:2px 8px;border-radius:3px;color:var(--blue);}
+
+/* ── DO / DON'T ── */
+.do-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:28px;}
+.do-card{border-radius:10px;padding:20px 22px;}
+.do-card.do{background:#e8f5e9;border:1px solid rgba(27,94,32,0.2);}
+.do-card.dont{background:#fce4ec;border:1px solid rgba(183,28,28,0.2);}
+.do-title{font-family:var(--mono);font-size:10px;letter-spacing:2px;margin-bottom:12px;}
+.do-card.do .do-title{color:var(--green);}
+.do-card.dont .do-title{color:#b71c1c;}
+.do-list{display:flex;flex-direction:column;gap:7px;}
+.do-item{display:flex;gap:8px;font-size:12px;line-height:1.8;}
+.do-check{flex-shrink:0;font-weight:700;}
+.do-card.do .do-check{color:var(--green);}
+.do-card.dont .do-check{color:#b71c1c;}
+
+/* ── CALLOUT ── */
+.callout{border-radius:10px;padding:16px 20px;margin:16px 0;}
+.callout.warn{background:#fff3e0;border-left:4px solid #e65100;}
+.callout.key{background:rgba(212,96,46,0.06);border-left:4px solid var(--acc);}
+.callout.info{background:#e3f2fd;border-left:4px solid #1565c0;}
+.callout-title{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;color:var(--acc);}
+.callout-body{font-size:13px;line-height:1.9;color:var(--slate);}
+
+/* ── DUNKSOFT NOTE ── */
+.ds-note{background:var(--ink);border-radius:14px;padding:28px 28px;margin-top:16px;}
+.ds-title{font-family:'Noto Serif JP',serif;font-size:16px;font-weight:700;color:#d4a060;margin-bottom:16px;}
+.ds-list{display:flex;flex-direction:column;gap:10px;}
+.ds-item{display:flex;gap:10px;font-size:13px;color:rgba(255,255,255,0.7);line-height:1.9;}
+.ds-dot{flex-shrink:0;color:#d4a060;}
+
+/* ── FOOTER ── */
+footer{background:var(--ink);padding:32px 8%;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;}
+.foot-l{font-size:11px;color:rgba(255,255,255,0.35);font-family:var(--mono);line-height:2;}
+.foot-r{font-size:11px;color:var(--acc);font-family:var(--mono);font-style:italic;}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity 0.6s,transform 0.6s;}
+.reveal.on{opacity:1;transform:none;}
+
+@media(max-width:640px){
+  .social-grid,.do-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="h-eye">社内参考資料 · DUNKSOFT Co., Ltd. · 翻訳版</div>
+  <div class="h-title">CPN Services Track<br><em>ローンチガイダンス</em></div>
+  <div class="h-sub">対象：Select・Preferred・Global Premier パートナー · 原文：Anthropic Confidential</div>
+  <div class="h-badges">
+    <span class="hb hb-acc">日本語訳</span>
+    <span class="hb hb-out">原文：英語</span>
+    <span class="hb hb-out">翻訳：Claude.ai</span>
+    <span class="hb hb-out">2026-06-09</span>
+  </div>
+</header>
+
+<div class="notice">
+  <strong>注意：</strong>本文書はAnthropicのCPN Services Track Launch Guidanceの日本語参考訳です。法的効力を持つのは英語原文のみです。また、本ガイダンスは<strong>Select・Preferred・Global Premier</strong>の各ティアパートナー向けです。現在Registeredの企業はSelect昇格後に活用できます。
+</div>
+
+<div class="main">
+
+<!-- OVERVIEW -->
+<section class="sec reveal">
+  <div class="sec-num">概要</div>
+  <h2 class="sec-title">ローンチ時に必要なものがすべてここにあります</h2>
+
+  <div class="boilerplate">
+    <div class="bp-label">定型文（Boilerplate）— 公式説明文</div>
+    <div class="bp-text">
+      Claude Partner Networkは、Claudeを顧客向けに本番稼働させる企業とAnthropicが協働するための仕組みです。Services Trackは、認定された納品チームを構築し、顧客と共にデプロイし、公開顧客リファレンスを通じてその成果を証明したパートナーを評価します。パートナーはSelect、Preferred、Global Premierのティアを通じて昇格します。
+    </div>
+  </div>
+</section>
+
+<!-- APPROVED TIER LINES -->
+<section class="sec reveal">
+  <div class="sec-num">Section 01</div>
+  <h2 class="sec-title">承認済みティア表現</h2>
+  <p style="font-size:14px;color:var(--slate);margin-bottom:20px;line-height:2;">発表・投稿・プレスリリースで使用できる公式の表現です。この表現以外でティアを称することはできません。</p>
+
+  <div class="tier-lines">
+    <div class="tl-item">
+      <span class="tl-badge" style="background:#1a1a1a;color:#d4a060;">Global Premier</span>
+      <div class="tl-text">「[企業名]は、Claude Partner NetworkのローンチGlobal Premierパートナーです。Anthropicのトップサービスティアです。」</div>
+    </div>
+    <div class="tl-item">
+      <span class="tl-badge" style="background:#2d5a8c;color:#fff;">Preferred</span>
+      <div class="tl-text">「[企業名]は、Claude Partner Network Services TrackのローンチPreferredパートナーです。」</div>
+    </div>
+    <div class="tl-item">
+      <span class="tl-badge" style="background:#1a3a5c;color:#fff;">Select</span>
+      <div class="tl-text">「[企業名]は、Claude Partner Network Services TrackのSelectパートナーです。」</div>
+    </div>
+  </div>
+
+  <div class="callout key">
+    <div class="callout-title">⚠️ DUNKSOFTの現状</div>
+    <div class="callout-body">現在<strong>Registered</strong>のため、上記のティア表現は使用できません。Select昇格後に「DUNKSOFTは、Claude Partner Network Services TrackのSelectパートナーです。」と発表できます。</div>
+  </div>
+</section>
+
+<!-- SOCIAL TEMPLATES -->
+<section class="sec reveal">
+  <div class="sec-num">Section 02</div>
+  <h2 class="sec-title">SNS投稿テンプレート</h2>
+  <p style="font-size:14px;color:var(--slate);margin-bottom:20px;line-height:2;">各ティアの公式SNS投稿テンプレートです。Select昇格後の参考にしてください。</p>
+
+  <div class="social-grid">
+    <div class="social-card">
+      <div class="sc-head" style="background:#1a1a1a;color:#d4a060;">Global Premier</div>
+      <div class="sc-body" id="gp-text">当社はClaude Partner NetworkのGlobal Premierパートナーとしてローンチすることを誇りに思います。Anthropicのトップサービスティアです。私たちの認定チームは、お客様のためにClaudeを本番稼働させ、さらにAnthropicと共に発展させていきます。詳しくはブログ記事をご覧ください。</div>
+      <button class="copy-btn" onclick="copyText('gp-text',this)">📋 コピー</button>
+    </div>
+    <div class="social-card">
+      <div class="sc-head" style="background:#2d5a8c;color:#fff;">Preferred</div>
+      <div class="sc-body" id="pref-text">本日、Claude Partner Network Services TrackのPreferredパートナーとしてローンチします。私たちの認定Claudeプラクティスは、お客様がアイデアから本番稼働まで進むことを支援しており、このパートナーシップにより共に提供できることがさらに深まります。詳しくはブログ記事をご覧ください。</div>
+      <button class="copy-btn" onclick="copyText('pref-text',this)">📋 コピー</button>
+    </div>
+    <div class="social-card">
+      <div class="sc-head" style="background:#1a3a5c;color:#fff;">Select</div>
+      <div class="sc-body" id="sel-text">当社はClaude Partner Network Services TrackのSelectパートナーとして参加しました。私たちのチームはお客様向けにClaudeを納品する認定を受けており、ここからさらに構築していきます。詳しくはブログ記事をご覧ください。</div>
+      <button class="copy-btn" onclick="copyText('sel-text',this)">📋 コピー</button>
+    </div>
+    <div class="social-card">
+      <div class="sc-head" style="background:#4a3a2a;color:#d4a060;">オプション引用文</div>
+      <div class="sc-body" id="quote-text">「Claudeを本番稼働させることが、お客様にとって本当の価値が生まれる場所です。[ティア]パートナーとしてClaude Partner Networkに参加することで、Anthropicとともにその取り組みをスケールさせることができます。」</div>
+      <button class="copy-btn" onclick="copyText('quote-text',this)">📋 コピー</button>
+    </div>
+  </div>
+
+  <div class="quote-box">
+    <div class="qb-label">引用文の使い方</div>
+    <div class="qb-text">「Claudeを本番稼働させることが、お客様にとって本当の価値が生まれる場所です。[ティア]パートナーとしてClaude Partner Networkに参加することで、Anthropicとともにその取り組みをスケールさせることができます。」</div>
+    <div class="qb-attr">属性：[スポークスパーソン, 役職, 企業名]</div>
+  </div>
+</section>
+
+<!-- VISUAL ASSETS -->
+<section class="sec reveal">
+  <div class="sec-num">Section 03</div>
+  <h2 class="sec-title">ビジュアルアセットとリンク</h2>
+
+  <div class="assets-box">
+    <div class="ab-title">パートナーバッジの入手方法</div>
+    <div class="ab-list">
+      <div class="ab-item">
+        <span class="ab-arrow">▸</span>
+        <div><strong>バッジのダウンロード場所：</strong>Claude Partner Hub内の <span class="ab-path">Content → Folders → Partner Badges</span></div>
+      </div>
+      <div class="ab-item">
+        <span class="ab-arrow">▸</span>
+        <div>バッジを改変・色変更したり、プログラムが行っていない主張と組み合わせたりしないでください。</div>
+      </div>
+      <div class="ab-item">
+        <span class="ab-arrow">▸</span>
+        <div><strong>ローンチブログ：</strong><span class="ab-path">anthropic.com/news/services-track-partner-hub</span></div>
+      </div>
+      <div class="ab-item">
+        <span class="ab-arrow">▸</span>
+        <div><strong>プログラムページ：</strong><span class="ab-path">claude.com/partners</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout warn">
+    <div class="callout-title">⚠️ Registeredはバッジ使用不可</div>
+    <div class="callout-body">バッジはSelect以上のパートナーのみ使用可能です（Program Guide §3.2参照）。Registered企業がバッジを使用することはCPNAの違反になります。Select昇格後にContent → Folders → Partner Badgesからダウンロードしてください。</div>
+  </div>
+</section>
+
+<!-- DO / DON'T -->
+<section class="sec reveal">
+  <div class="sec-num">Section 04</div>
+  <h2 class="sec-title">やること・やってはいけないこと</h2>
+
+  <div class="do-grid">
+    <div class="do-card do">
+      <div class="do-title">✓ やること（Do）</div>
+      <div class="do-list">
+        <div class="do-item"><span class="do-check">✓</span><div>ブログが公開されてから投稿する</div></div>
+        <div class="do-item"><span class="do-check">✓</span><div>承認済みのティア表現と定型文を使用する</div></div>
+        <div class="do-item"><span class="do-check">✓</span><div>Anthropicをタグ付けして拡散してもらう</div></div>
+      </div>
+    </div>
+    <div class="do-card dont">
+      <div class="do-title">✗ やってはいけないこと（Do not）</div>
+      <div class="do-list">
+        <div class="do-item"><span class="do-check">✗</span><div>ブログ公開前に投稿しない</div></div>
+        <div class="do-item"><span class="do-check">✗</span><div>ティアの数値要件・取引経済・インセンティブ金額を明示または示唆しない</div></div>
+        <div class="do-item"><span class="do-check">✗</span><div>他のパートナーに対する優位性・ランキングを主張しない</div></div>
+        <div class="do-item"><span class="do-check">✗</span><div>顧客の書面同意なしに顧客名を掲載しない</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DUNKSOFT NOTE -->
+<section class="sec reveal">
+  <div class="sec-num">DUNKSOFT 戦略メモ</div>
+  <h2 class="sec-title">Select昇格後のローンチ計画</h2>
+
+  <div class="ds-note">
+    <div class="ds-title">Select昇格時に一気に動くリスト</div>
+    <div class="ds-list">
+      <div class="ds-item"><span class="ds-dot">01</span><div>Content → Folders → Partner Badgesからバッジをダウンロード</div></div>
+      <div class="ds-item"><span class="ds-dot">02</span><div>dunksoft.jp全ページに「Claude Partner Network · Select Partner」の表記とバッジを追加</div></div>
+      <div class="ds-item"><span class="ds-dot">03</span><div>LinkedInとFacebookに承認済みのSelect表現で投稿、Anthropicをタグ付け</div></div>
+      <div class="ds-item"><span class="ds-dot">04</span><div>MUFJの田中次長・山中支店長へバッジ入りのURLを共有</div></div>
+      <div class="ds-item"><span class="ds-dot">05</span><div>Note記事に「Claude Partner Network Selectパートナー」として追記</div></div>
+      <div class="ds-item"><span class="ds-dot">06</span><div>東條社長へのコンタクト時に「Selectパートナー」として名乗れる</div></div>
+    </div>
+  </div>
+
+  <div class="callout info" style="margin-top:20px;">
+    <div class="callout-title">📅 目標タイムライン</div>
+    <div class="callout-body">
+      <strong>2026年10月1日（特例審査）</strong>までにMUFJのServices Registrationを完了し、顧客事例1件を公開 → Select昇格申請。<br>
+      昇格後、上記リストを一気に実行。「Japan初のClaude Partner Network Selectパートナー」としてのポジションを確立。
+    </div>
+  </div>
+</section>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-l">
+    DUNKSOFT Co., Ltd. · 社内参考資料 · CONFIDENTIAL<br>
+    原文：CPN Services Track Launch Guidance · Anthropic Confidential<br>
+    翻訳：Claude.ai · 2026-06-09
+  </div>
+  <div class="foot-r">
+    coined by Claude.ai<br>
+    approved by Roberto Hoshino
+  </div>
+</footer>
+
+<script>
+function copyText(id, btn) {
+  const text = document.getElementById(id).innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    const orig = btn.textContent;
+    btn.textContent = '✓ コピーしました';
+    btn.className = 'copy-btn copied';
+    setTimeout(() => { btn.textContent = orig; btn.className = 'copy-btn'; }, 2000);
+  });
+}
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('on'); });
+}, { threshold: 0.06 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
