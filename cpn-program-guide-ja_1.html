@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Partner Network プログラムガイド — 日本語訳 | DUNKSOFT</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700;900&family=Noto+Sans+JP:wght@300;400;500&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:    #1a1714;
+  --paper:  #f9f6f0;
+  --paper2: #f2ede4;
+  --paper3: #e8e0d2;
+  --acc:    #d4602e;
+  --gold:   #9a7a2a;
+  --blue:   #1a3a5c;
+  --green:  #1B5E20;
+  --slate:  #4a5568;
+  --border: rgba(26,23,20,0.12);
+  --mono:   'DM Mono', monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--paper);color:var(--ink);font-family:'Noto Sans JP',sans-serif;font-weight:300;line-height:1.9;}
+
+/* ── HEADER ── */
+.header{background:var(--ink);padding:48px 8% 40px;position:relative;overflow:hidden;border-bottom:4px solid var(--acc);}
+.header::after{content:'C';position:absolute;font-family:var(--mono);font-size:60vw;font-weight:500;color:rgba(255,255,255,0.02);right:-10%;top:50%;transform:translateY(-50%);pointer-events:none;line-height:1;}
+.h-eye{font-family:var(--mono);font-size:9px;letter-spacing:5px;color:var(--acc);text-transform:uppercase;margin-bottom:14px;}
+.h-title{font-family:'Noto Serif JP',serif;font-size:clamp(1.6rem,4vw,2.8rem);font-weight:900;color:#fff;line-height:1.3;margin-bottom:10px;}
+.h-title em{color:#d4a060;font-style:normal;}
+.h-sub{font-size:12px;color:rgba(255,255,255,0.4);font-family:var(--mono);letter-spacing:1px;margin-bottom:20px;}
+.h-badges{display:flex;gap:10px;flex-wrap:wrap;}
+.hb{font-family:var(--mono);font-size:10px;letter-spacing:2px;padding:4px 14px;border-radius:3px;}
+.hb-acc{background:var(--acc);color:#fff;}
+.hb-out{background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.6);border:0.5px solid rgba(255,255,255,0.2);}
+
+/* ── NOTICE ── */
+.notice{background:#fff3cd;border:1px solid #ffc107;border-radius:8px;padding:14px 20px;margin:32px 8%;font-size:13px;color:#856404;}
+.notice strong{color:#664d03;}
+
+/* ── TOC ── */
+.toc{background:var(--paper2);border:0.5px solid var(--border);border-radius:12px;padding:28px 32px;margin:32px 8%;}
+.toc-title{font-family:var(--mono);font-size:10px;letter-spacing:3px;color:var(--acc);text-transform:uppercase;margin-bottom:16px;}
+.toc-list{display:flex;flex-direction:column;gap:6px;}
+.toc-item{display:flex;gap:12px;align-items:baseline;}
+.toc-num{font-family:var(--mono);font-size:10px;color:var(--acc);flex-shrink:0;width:32px;}
+.toc-link{font-size:13px;color:var(--blue);text-decoration:none;}
+.toc-link:hover{text-decoration:underline;}
+
+/* ── MAIN ── */
+.main{max-width:860px;margin:0 auto;padding:48px 8%;}
+
+/* ── SECTION ── */
+.sec{margin-bottom:56px;}
+.sec-num{font-family:var(--mono);font-size:9px;letter-spacing:5px;color:var(--acc);text-transform:uppercase;margin-bottom:10px;}
+.sec-title{font-family:'Noto Serif JP',serif;font-size:clamp(1.3rem,2.5vw,1.9rem);font-weight:700;color:var(--blue);margin-bottom:8px;line-height:1.4;padding-bottom:12px;border-bottom:2px solid var(--acc);}
+.sec-lead{font-size:14px;color:var(--slate);line-height:2.1;margin-bottom:28px;max-width:700px;}
+
+/* ── SUBSECTION ── */
+.sub{margin-bottom:32px;}
+.sub-title{font-family:'Noto Serif JP',serif;font-size:16px;font-weight:700;color:var(--ink);margin-bottom:12px;padding-left:12px;border-left:3px solid var(--acc);}
+.sub-body{font-size:14px;color:var(--slate);line-height:2.1;margin-bottom:12px;}
+
+/* ── CALLOUT ── */
+.callout{border-radius:10px;padding:18px 22px;margin:16px 0;}
+.callout.warn{background:#fff3e0;border-left:4px solid #e65100;}
+.callout.info{background:#e3f2fd;border-left:4px solid #1565c0;}
+.callout.key{background:rgba(212,96,46,0.06);border-left:4px solid var(--acc);}
+.callout.green{background:#e8f5e9;border-left:4px solid var(--green);}
+.callout-title{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;color:var(--acc);}
+.callout-body{font-size:13px;line-height:1.9;}
+
+/* ── TABLE ── */
+.tbl-wrap{overflow-x:auto;margin:16px 0;}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+th{background:var(--blue);color:#fff;padding:10px 14px;text-align:left;font-weight:500;font-family:'Noto Sans JP',sans-serif;}
+td{padding:10px 14px;border-bottom:0.5px solid var(--border);vertical-align:top;line-height:1.8;}
+tr:nth-child(even) td{background:var(--paper2);}
+tr:hover td{background:var(--paper3);}
+.td-check{color:var(--green);font-weight:700;text-align:center;}
+.td-dash{color:var(--slate);text-align:center;}
+
+/* ── TIER CARDS ── */
+.tier-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin:20px 0;}
+.tier-card{border-radius:12px;overflow:hidden;border:0.5px solid var(--border);}
+.tc-head{padding:14px 16px;}
+.tc-label{font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;opacity:0.7;}
+.tc-name{font-family:'Noto Serif JP',serif;font-size:16px;font-weight:700;}
+.tc-body{background:var(--paper);padding:14px 16px;font-size:12px;color:var(--slate);line-height:1.9;}
+
+/* ── FLOW ── */
+.flow{display:flex;gap:0;margin:20px 0;flex-wrap:wrap;}
+.flow-item{flex:1;min-width:160px;background:var(--paper2);border:0.5px solid var(--border);padding:16px 18px;position:relative;}
+.flow-item:not(:last-child)::after{content:'→';position:absolute;right:-14px;top:50%;transform:translateY(-50%);font-size:18px;color:var(--acc);z-index:1;}
+.flow-stage{font-family:var(--mono);font-size:9px;letter-spacing:2px;color:var(--acc);margin-bottom:6px;}
+.flow-name{font-family:'Noto Serif JP',serif;font-size:15px;font-weight:700;color:var(--ink);margin-bottom:4px;}
+.flow-desc{font-size:12px;color:var(--slate);line-height:1.8;}
+
+/* ── LIST ── */
+.list{display:flex;flex-direction:column;gap:6px;margin:10px 0;}
+.li{display:flex;gap:10px;font-size:13px;color:var(--slate);line-height:1.9;}
+.li-dot{flex-shrink:0;color:var(--acc);font-weight:700;padding-top:1px;}
+
+/* ── CALENDAR ── */
+.cal-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0;}
+.cal-item{background:var(--paper2);border:0.5px solid var(--border);border-radius:8px;padding:14px 16px;}
+.cal-period{font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--acc);margin-bottom:6px;}
+.cal-body{font-size:13px;color:var(--slate);line-height:1.8;}
+
+/* ── FOOTER ── */
+footer{background:var(--ink);padding:32px 8%;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;margin-top:0;}
+.foot-l{font-size:11px;color:rgba(255,255,255,0.35);font-family:var(--mono);line-height:2;}
+.foot-r{font-size:11px;color:var(--acc);font-family:var(--mono);font-style:italic;}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity 0.6s,transform 0.6s;}
+.reveal.on{opacity:1;transform:none;}
+
+@media(max-width:640px){
+  .tier-grid{grid-template-columns:1fr 1fr;}
+  .cal-grid{grid-template-columns:1fr;}
+  .flow{flex-direction:column;}
+  .flow-item:not(:last-child)::after{display:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="h-eye">社内参考資料 · DUNKSOFT Co., Ltd. · 翻訳版</div>
+  <div class="h-title">Claude Partner Network<br><em>プログラムガイド</em></div>
+  <div class="h-sub">Services Edition · Version 1 · 2026年6月3日発効 · 原文：Anthropic Confidential</div>
+  <div class="h-badges">
+    <span class="hb hb-acc">日本語訳</span>
+    <span class="hb hb-out">原文：英語</span>
+    <span class="hb hb-out">翻訳：Claude.ai</span>
+    <span class="hb hb-out">2026-06-09</span>
+  </div>
+</header>
+
+<div class="notice">
+  <strong>注意：</strong>本文書はAnthropicのClaude Partner Network Program Guide（Services Edition）の日本語参考訳です。法的効力を持つのは英語原文のみです。内容の解釈に疑義が生じた場合は必ず英語原文を参照してください。原文はConfidential（機密）扱いです。
+</div>
+
+<!-- TOC -->
+<div class="toc">
+  <div class="toc-title">目次</div>
+  <div class="toc-list">
+    <div class="toc-item"><span class="toc-num">01</span><a class="toc-link" href="#s01">Claude Partner Networkへようこそ</a></div>
+    <div class="toc-item"><span class="toc-num">02</span><a class="toc-link" href="#s02">ティアと要件</a></div>
+    <div class="toc-item"><span class="toc-num">03</span><a class="toc-link" href="#s03">ティア別ベネフィット</a></div>
+    <div class="toc-item"><span class="toc-num">04</span><a class="toc-link" href="#s04">Anthropicとの協働：オペレーティングモデル</a></div>
+    <div class="toc-item"><span class="toc-num">05</span><a class="toc-link" href="#s05">資金とインセンティブ</a></div>
+    <div class="toc-item"><span class="toc-num">06</span><a class="toc-link" href="#s06">プログラム運営</a></div>
+    <div class="toc-item"><span class="toc-num">07</span><a class="toc-link" href="#s07">用語集</a></div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+<!-- SECTION 01 -->
+<section class="sec reveal" id="s01">
+  <div class="sec-num">Section 01</div>
+  <h2 class="sec-title">Claude Partner Networkへようこそ</h2>
+  <p class="sec-lead">Claude Partner Networkは、Claudeを顧客向けに本番稼働させる企業とAnthropicが協働するための仕組みです。一つのプログラム、一つの階段。ルールは公開され、プロセスは透明で、測定基準は可視化されています。</p>
+
+  <div class="sub">
+    <div class="sub-title">プログラムの基本思想</div>
+    <p class="sub-body">このプログラムは一つのアイデアを中心に構築されています：<strong>認定を受けた人材が顧客のためにClaudeを稼働させること——最初の本番デプロイからスケーラブルな導入まで。</strong></p>
+    <p class="sub-body">認定ベンチ（供給側）は貴社でAnthropicの認定資格を保持し、プラットフォームでアクティブな人員です。顧客フットプリント（需要側）は、貴社の支援により本番デプロイが稼働し、Claudeの活用が拡大している顧客です。人材を育成し、その人材を顧客のために活用する企業を評価します。</p>
+    <p class="sub-body">パートナーの仕事は複数の形態をとります：<strong>導入推進</strong>（顧客の人材研修・ガバナンス構築・使用量拡大）、<strong>変革</strong>（パイロットから事業全体のスケール展開）、<strong>構築</strong>（本番システムへのClaudeの実装・エンジニアリング）。</p>
+  </div>
+
+  <div class="callout key">
+    <div class="callout-title">⚠️ 重要：Registeredについて</div>
+    <div class="callout-body"><strong>Registeredはパートナーシップティアではありません。</strong>Registeredメンバーは自社をClaude Partner Networkパートナーと称することはできず、AnthropicもRegisteredメンバーをパートナーとは記載しません。<br><strong>パートナーステータスはSelectから始まります。</strong></div>
+  </div>
+
+  <div class="tier-grid">
+    <div class="tier-card">
+      <div class="tc-head" style="background:#e8e0d0;">
+        <div class="tc-label">On-ramp</div>
+        <div class="tc-name" style="color:#4a3a2a;">Registered</div>
+      </div>
+      <div class="tc-body">パートナーステータスに向けて準備中</div>
+    </div>
+    <div class="tier-card">
+      <div class="tc-head" style="background:#1a3a5c;">
+        <div class="tc-label" style="color:rgba(255,255,255,0.6);">Partner tier 1</div>
+        <div class="tc-name" style="color:#fff;">Select</div>
+      </div>
+      <div class="tc-body">検証済みのClaudeプラクティス</div>
+    </div>
+    <div class="tier-card">
+      <div class="tc-head" style="background:#2d5a8c;">
+        <div class="tc-label" style="color:rgba(255,255,255,0.6);">Partner tier 2</div>
+        <div class="tc-name" style="color:#fff;">Preferred</div>
+      </div>
+      <div class="tc-body">深度・幅・再現性</div>
+    </div>
+    <div class="tier-card">
+      <div class="tc-head" style="background:#1a1a1a;">
+        <div class="tc-label" style="color:rgba(255,255,255,0.6);">Partner tier 3</div>
+        <div class="tc-name" style="color:#d4a060;">Global Premier</div>
+      </div>
+      <div class="tc-body">グローバル規模のClaudeプラクティス</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 02 -->
+<section class="sec reveal" id="s02">
+  <div class="sec-num">Section 02</div>
+  <h2 class="sec-title">ティアと要件</h2>
+
+  <div class="sub">
+    <div class="sub-title">2.1 · ティア概要</div>
+    <div class="tbl-wrap">
+      <table>
+        <tr>
+          <th>ティア</th>
+          <th>意味</th>
+          <th>対象企業</th>
+        </tr>
+        <tr>
+          <td><strong>Registered</strong></td>
+          <td>CPNA署名済み・Academy アクセス取得済み。パートナーステータスに向けて準備中。</td>
+          <td>Claudeプラクティスを立ち上げようとしている企業（認定予定者10名以上）</td>
+        </tr>
+        <tr>
+          <td><strong>Select</strong></td>
+          <td>パートナー。プラクティスが検証済み：認定ベンチ・ライブの共同顧客・公開リファレンス。</td>
+          <td>Claudeの納品・活性化モーションが確立している企業</td>
+        </tr>
+        <tr>
+          <td><strong>Preferred</strong></td>
+          <td>深度と専門性を持って運営。より深いベンチ・広い顧客フットプリント・再現可能なリファレンス。</td>
+          <td>Claudeを専用プラクティスエリアとして運営している企業</td>
+        </tr>
+        <tr>
+          <td><strong>Global Premier</strong></td>
+          <td>グローバルのClaudeプラクティスを規模を持って運営：深い認定ベンチ・複数地域の顧客・Anthropicとの共同事業計画。</td>
+          <td>グローバル・複数地域のClaudeプラクティスを運営している企業</td>
+        </tr>
+      </table>
+    </div>
+    <p style="font-size:12px;color:var(--slate);margin-top:8px;">ベネフィットは累積されます。上位ティアは下位ティアのすべてを含みます。</p>
+  </div>
+
+  <div class="sub">
+    <div class="sub-title">2.2 · 各ティアの到達要件</div>
+    <div class="tbl-wrap">
+      <table>
+        <tr>
+          <th>ティア</th>
+          <th>アクティブ認定個人数</th>
+          <th>デプロイ済み共同顧客数（TTM）</th>
+          <th>公開顧客事例</th>
+        </tr>
+        <tr>
+          <td><strong>Select</strong></td>
+          <td>≥ 10名</td>
+          <td>≥ 2社</td>
+          <td>≥ 1件</td>
+        </tr>
+        <tr>
+          <td><strong>Preferred</strong></td>
+          <td>≥ 100名</td>
+          <td>≥ 15社</td>
+          <td>≥ 3件</td>
+        </tr>
+        <tr>
+          <td><strong>Global Premier</strong></td>
+          <td>≥ 1,000名</td>
+          <td>≥ 100社（3地域以上）</td>
+          <td>≥ 15件</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="callout info" style="margin-top:16px;">
+      <div class="callout-title">📅 2026年特例</div>
+      <div class="callout-body">2026年のローンチ年に限り、<strong>2026年10月1日</strong>に追加の昇格審査が実施されます。2027年以降は1月1日と7月1日の半期ごとの審査となります。</div>
+    </div>
+  </div>
+
+  <div class="sub">
+    <div class="sub-title">2.3 · 測定の定義</div>
+    <div class="list">
+      <div class="li"><span class="li-dot">▸</span><div><strong>アクティブ認定個人：</strong>現在の公式Anthropic認定資格を保持し、過去90日以内にAcademyまたは認定活動の記録がある社員。現在の公式認定資格はCCAF（Claude Certified Architect: Foundations）。</div></div>
+      <div class="li"><span class="li-dot">▸</span><div><strong>デプロイ済み共同顧客：</strong>貴社がDelivery Partner of Recordとして、少なくとも1件の本番稼働中のClaudeデプロイメントがある一意の顧客組織（直近12ヶ月）。パイロットやPoCは含まない。</div></div>
+      <div class="li"><span class="li-dot">▸</span><div><strong>公開顧客事例：</strong>パートナーが関与した本番Claudeデプロイメントについて、NDAなしでアクセス可能な文書化されたアカウント。顧客の課題・Claudeベースのソリューション・少なくとも1つの定量的な成果を含む必要あり。</div></div>
+    </div>
+  </div>
+
+  <div class="sub">
+    <div class="sub-title">2.4 · ティア審査の仕組み</div>
+    <div class="list">
+      <div class="li"><span class="li-dot">▸</span><div><strong>昇格：</strong>次のティアの要件を前回の審査期間全体で満たした場合、企業を昇格します。</div></div>
+      <div class="li"><span class="li-dot">▸</span><div><strong>ティア保護：</strong>昇格後は少なくとも次の年次審査（12月31日）プラス90日間の是正期間を通じてそのティアを維持します。</div></div>
+      <div class="li"><span class="li-dot">▸</span><div><strong>降格：</strong>年次審査時のみ実施。90日前の通知と是正計画を伴います（2つの例外あり：四半期監査で認定フロア違反が2回連続した場合、または重大なプログラム違反）。</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 03 -->
+<section class="sec reveal" id="s03">
+  <div class="sec-num">Section 03</div>
+  <h2 class="sec-title">ティア別ベネフィット</h2>
+  <p class="sec-lead">各ティアで提供されるベネフィットを一覧で確認できます。ベネフィットは累積されます。</p>
+
+  <div class="sub">
+    <div class="sub-title">3.1 · ベネフィット一覧</div>
+    <div class="tbl-wrap">
+      <table>
+        <tr>
+          <th>ベネフィット</th>
+          <th>Registered</th>
+          <th>Select</th>
+          <th>Preferred</th>
+          <th>Global Premier</th>
+        </tr>
+        <tr><td colspan="5" style="background:#f0e8d8;font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--acc);padding:8px 14px;">構築（Build）</td></tr>
+        <tr><td>Anthropic Partner Academy</td><td>フルアクセス</td><td class="td-check">✓</td><td class="td-check">✓</td><td class="td-check">✓</td></tr>
+        <tr><td>認定試験</td><td>無料アクセス</td><td>初回50%割引</td><td class="td-check">✓</td><td class="td-check">✓</td></tr>
+        <tr><td>パートナーポータルダッシュボード</td><td>Selectへの道</td><td>フル表示</td><td class="td-check">✓</td><td class="td-check">✓</td></tr>
+        <tr><td>Partner Resource Hub</td><td>限定アクセス</td><td>含む</td><td class="td-check">✓</td><td class="td-check">✓</td></tr>
+        <tr><td>PAM AI（常時稼働アシスタント）</td><td>含む</td><td class="td-check">✓</td><td class="td-check">✓</td><td class="td-check">✓</td></tr>
+        <tr><td>Sandboxクレジット</td><td class="td-dash">—</td><td>$3K/年（申請）</td><td>$20K/年（申請）</td><td>$50K/年（申請）</td></tr>
+        <tr><td colspan="5" style="background:#f0e8d8;font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--acc);padding:8px 14px;">販売・市場展開（Sell and go to market）</td></tr>
+        <tr><td>ディール紹介</td><td class="td-dash">—</td><td class="td-dash">—</td><td>登録・追跡</td><td class="td-check">✓</td></tr>
+        <tr><td>Co-sellサポート</td><td class="td-dash">—</td><td class="td-dash">—</td><td>案件ごとに適格</td><td class="td-check">✓</td></tr>
+        <tr><td>パートナーディレクトリ掲載</td><td class="td-dash">—</td><td>Select掲載</td><td>Preferred掲載</td><td>Global Premier掲載</td></tr>
+        <tr><td>CPN Connect月次ブロードキャスト</td><td>含む</td><td class="td-check">✓</td><td class="td-check">✓</td><td class="td-check">✓</td></tr>
+        <tr><td>製品アップデートコール</td><td class="td-dash">—</td><td>含む</td><td class="td-check">✓</td><td class="td-check">✓</td></tr>
+        <tr><td><strong>Claude Partnerバッジ・ブランドアセット</strong></td><td class="td-dash" style="color:var(--acc);font-weight:700;">× 不可</td><td>含む</td><td class="td-check">✓</td><td class="td-check">✓</td></tr>
+        <tr><td>Partner Advisory Board</td><td class="td-dash">—</td><td class="td-dash">—</td><td>候補として検討</td><td class="td-check">✓</td></tr>
+        <tr><td>イベントスポンサーシップ機会</td><td class="td-dash">—</td><td class="td-dash">—</td><td class="td-dash">—</td><td>含む</td></tr>
+        <tr><td colspan="5" style="background:#f0e8d8;font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--acc);padding:8px 14px;">納品（Deliver）</td></tr>
+        <tr><td>サービス登録</td><td>共同顧客登録可</td><td>完全アトリビューション</td><td class="td-check">✓</td><td class="td-check">✓</td></tr>
+        <tr><td>パートナーリレーションシップ管理</td><td>セルフサービス</td><td>セルフサービス</td><td>プールチーム</td><td>Named PAM</td></tr>
+        <tr><td>顧客事例インセンティブ（$5K/件・年次上限あり）</td><td class="td-dash">—</td><td>最大$15K（3件）</td><td>最大$30K（6件）</td><td>最大$50K（10件）</td></tr>
+        <tr><td>エグゼクティブスポンサーシップ</td><td class="td-dash">—</td><td class="td-dash">—</td><td class="td-dash">—</td><td>含む</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="callout warn">
+    <div class="callout-title">⚠️ Registeredについての重要事項</div>
+    <div class="callout-body">Registeredが持たないもの：<strong>Claude Partnerバッジ、ディレクトリ掲載、パートナーマーク。</strong>これらのシグナルは企業がSelectのバーを超えていることを示すものであり、Anthropicは意図的にその正確性を保っています。ペナルティではなく、バッジを価値あるものにするためです。Selectに到達した瞬間、グリッドの他のすべてが有効になります。</div>
+  </div>
+</section>
+
+<!-- SECTION 04 -->
+<section class="sec reveal" id="s04">
+  <div class="sec-num">Section 04</div>
+  <h2 class="sec-title">Anthropicとの協働：オペレーティングモデル</h2>
+  <p class="sec-lead">Anthropicをディールに巻き込む方法、納品作業のクレジットを得る方法、Anthropicが返礼として行うことを説明します。</p>
+
+  <div class="sub">
+    <div class="sub-title">4.1 · エンゲージメントライフサイクル</div>
+    <div class="flow">
+      <div class="flow-item">
+        <div class="flow-stage">Stage 1</div>
+        <div class="flow-name">ソース（Source）</div>
+        <div class="flow-desc">貴社が案件を発掘する<br>→ <strong>ディール紹介</strong></div>
+      </div>
+      <div class="flow-item">
+        <div class="flow-stage">Stage 2</div>
+        <div class="flow-name">活性化（Activate）</div>
+        <div class="flow-desc">ユースケースを本番稼働させる<br>→ <strong>サービス登録</strong></div>
+      </div>
+      <div class="flow-item">
+        <div class="flow-stage">Stage 3</div>
+        <div class="flow-name">拡大（Grow）</div>
+        <div class="flow-desc">1デプロイメントをフットプリントへ<br>→ <strong>Go-live確認</strong></div>
+      </div>
+    </div>
+    <div class="callout key">
+      <div class="callout-title">重要</div>
+      <div class="callout-body">作業を必ず登録してください。サービス登録は、ティアステータスを左右するデプロイ済み顧客の記録が構築される仕組みです。登録されていないエンゲージメントはクレジットされません。</div>
+    </div>
+  </div>
+
+  <div class="sub">
+    <div class="sub-title">4.2 · ディール紹介（Deal Referral）</div>
+    <p class="sub-body">顧客がClaudeを初めて購入または既存のフットプリントを拡大しようとしており、Anthropicにソーシングのクレジットを付与してほしい場合に使用します。</p>
+    <div class="list">
+      <div class="li"><span class="li-dot">▸</span><div><strong>誰が紹介できるか：</strong>Preferred以上のパートナー。ディール保護とco-sellリソースはPreferredから始まります。</div></div>
+      <div class="li"><span class="li-dot">▸</span><div><strong>提出方法：</strong>Claude Partner Hub → 「Submit Referral」をクリック → フォーム送信。またはPAM AIに口頭で依頼可能。</div></div>
+      <div class="li"><span class="li-dot">▸</span><div><strong>クレジットの分類：</strong>Sourced（ソーシング）またはCo-Sell（共同販売）のいずれかに分類されます。</div></div>
+    </div>
+  </div>
+
+  <div class="sub">
+    <div class="sub-title">4.3 · サービス登録（Services Registration）</div>
+    <p class="sub-body">Claudeの実装を納品する際——自社でソーシングしたか、顧客から依頼されたか、Anthropicから紹介されたかを問わず——納品アトリビューションを申請する際に使用します。</p>
+    <div class="callout green">
+      <div class="callout-title">✅ Registeredでも今すぐ登録可能</div>
+      <div class="callout-body">すべてのティア（Registered含む）が登録できます。早期登録がDelivery Partner of Recordとして認定され、ティアの実績構築につながります。</div>
+    </div>
+    <div class="list">
+      <div class="li"><span class="li-dot">▸</span><div><strong>提出方法：</strong>ポータル → Services → Submit Project → フォーム記入</div></div>
+      <div class="li"><span class="li-dot">▸</span><div><strong>審査結果：</strong>Confirmed（確認済み）/ Clarification needed（確認要）/ In conflict（競合あり）/ Declined（却下）</div></div>
+      <div class="li"><span class="li-dot">▸</span><div><strong>Go-liveから：</strong>ユースケースがライブデプロイメントとなり、デプロイ済み共同顧客の実績としてカウントされます。</div></div>
+    </div>
+  </div>
+
+  <div class="sub">
+    <div class="sub-title">4.4 · 顧客リファレンス</div>
+    <p class="sub-body">公開顧客事例は納品作業を次の顧客に見せる最も価値あるアセットです。</p>
+    <div class="list">
+      <div class="li"><span class="li-dot">▸</span><div><strong>申請方法：</strong>Claude Partner HubのPartner-Attached Customer Reference Nomination Formから提出。</div></div>
+      <div class="li"><span class="li-dot">▸</span><div><strong>必要条件：</strong>本番デプロイメント・パートナーの関与・名前付き顧客・少なくとも1つの定量的な成果・公開されてアクセス可能。</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 05 -->
+<section class="sec reveal" id="s05">
+  <div class="sec-num">Section 05</div>
+  <h2 class="sec-title">資金とインセンティブ</h2>
+
+  <div class="sub">
+    <div class="sub-title">5.1 · Sandboxクレジット</div>
+    <p class="sub-body">イネーブルメント・デモ・アクセラレーター・IP開発・機能テスト用の年間Anthropic APIクレジット。本番デプロイメントには使用不可。</p>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>ティア</th><th>年間基本付与額</th><th>開始時期</th></tr>
+        <tr><td>Select</td><td>$3,000</td><td>2026年7月〜</td></tr>
+        <tr><td>Preferred</td><td>$20,000</td><td>2026年7月〜</td></tr>
+        <tr><td>Global Premier</td><td>$50,000</td><td>2026年7月〜</td></tr>
+      </table>
+    </div>
+    <p style="font-size:12px;color:var(--slate);margin-top:8px;">2026年は付与月に関わらず、年間の全額クレジットが付与されます。クレジットは繰り越し不可・現金価値なし・譲渡不可。</p>
+  </div>
+
+  <div class="sub">
+    <div class="sub-title">5.2 · 顧客事例インセンティブ</div>
+    <p class="sub-body">公開顧客事例は、パートナーがプログラムのために生産できる最も価値あるアセットです。</p>
+    <div class="list">
+      <div class="li"><span class="li-dot">▸</span><div><strong>対象：</strong>Select以上。ティアフロアを超えた承認済み事例1件につき$5,000。</div></div>
+      <div class="li"><span class="li-dot">▸</span><div><strong>フラッグシップ加算：</strong>Anthropicが自社チャネル（anthropic.com/claude.com）で掲載した場合+$2,500（最大$7,500/件）。</div></div>
+      <div class="li"><span class="li-dot">▸</span><div><strong>年次上限：</strong>Select +3件 · Preferred +6件 · Global Premier +10件。</div></div>
+      <div class="li"><span class="li-dot">▸</span><div><strong>注意：</strong>インセンティブは顧客に渡してはなりません。顧客の同意はインセンティブとは無関係に取得してください。</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 06 -->
+<section class="sec reveal" id="s06">
+  <div class="sec-num">Section 06</div>
+  <h2 class="sec-title">プログラム運営</h2>
+
+  <div class="sub">
+    <div class="sub-title">6.1 · Claude Partner Hub（パートナーポータル）</div>
+    <p class="sub-body">Claude Partner HubはEuler上でホストされており、ティアステータスとインセンティブ発生の唯一の情報源です。日常的な操作はすべてここで行います。</p>
+  </div>
+
+  <div class="sub">
+    <div class="sub-title">6.2 · プログラムカレンダー</div>
+    <div class="cal-grid">
+      <div class="cal-item">
+        <div class="cal-period">毎月</div>
+        <div class="cal-body">ステータス更新（1日）、CPN Connectブロードキャスト（最終水/木曜日）</div>
+      </div>
+      <div class="cal-item">
+        <div class="cal-period">四半期</div>
+        <div class="cal-body">認定資格監査、Preferred以上はPAMとのビジネスレビュー</div>
+      </div>
+      <div class="cal-item">
+        <div class="cal-period">半期</div>
+        <div class="cal-body">ティア昇格：1月1日と7月1日<br>（2026年は特例で10月1日にも実施）</div>
+      </div>
+      <div class="cal-item">
+        <div class="cal-period">年次</div>
+        <div class="cal-body">ティア審査（12月31日）、Joint Business Planの更新</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sub">
+    <div class="sub-title">6.3 · エスカレーションパス</div>
+    <div class="callout info">
+      <div class="callout-title">まずPAM AIへ</div>
+      <div class="callout-body">登録・アトリビューション・「○○はどこですか」という質問のほとんどはPAM AIがリアルタイムで解決します。</div>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>問題の種類</th><th>最初の窓口</th><th>エスカレーション先</th></tr>
+        <tr><td>ディール紹介の紛争・競合</td><td>Partner Operations<br>partner-support@anthropic.com</td><td>Regional Partner Lead</td></tr>
+        <tr><td>ティア・アトリビューションの紛争</td><td>Partner Operations<br>partner-support@anthropic.com</td><td>Head of Partner Programs</td></tr>
+        <tr><td>資金決定の異議申し立て</td><td>Your PAM</td><td>Head of Partner Programs</td></tr>
+        <tr><td>技術・製品の問題（登録済みエンゲージメント）</td><td>Partner Support<br>partner-support@anthropic.com</td><td>Applied AI lead</td></tr>
+        <tr><td>商業・契約</td><td>Your PAM</td><td>Partner Legal</td></tr>
+        <tr><td>プログラムフィードバック・方針への異議</td><td>partner-feedback@anthropic.com</td><td>Partner Experience team</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 07 -->
+<section class="sec reveal" id="s07">
+  <div class="sec-num">Section 07</div>
+  <h2 class="sec-title">用語集</h2>
+
+  <div class="sub">
+    <div class="list">
+      <div class="li"><span class="li-dot">▸</span><div><strong>AAI（Applied AI）：</strong>Anthropicの顧客向けエンジニアリング機能。登録済みエンゲージメントに対して技術的なco-sellと納品サポートを提供するチーム。</div></div>
+      <div class="li"><span class="li-dot">▸</span><div><strong>アクティブ認定個人：</strong>現在の公式Anthropicパートナー認定資格を保持し、過去90日以内にAcademyまたは認定活動の記録がある社員。</div></div>
+      <div class="li"><span class="li-dot">▸</span><div><strong>CCAF（Claude Certified Architect: Foundations）：</strong>パートナーのアクティブ認定ベンチ数にカウントされる公式Anthropicパートナー認定資格。</div></div>
+      <div class="li"><span class="li-dot">▸</span><div><strong>CPN（Claude Partner Network）：</strong>Claudeを顧客向けに本番稼働させる企業向けのAnthropicの単一パートナープログラム。</div></div>
+      <div class="li"><span class="li-dot">▸</span><div><strong>CPN Connect：</strong>製品アップデート・イネーブルメント・プログラムニュースをカバーする月次の全パートナー向けブロードキャスト。</div></div>
+      <div class="li"><span class="li-dot">▸</span><div><strong>顧客事例インセンティブ：</strong>ティアフロアを超えた承認済み公開顧客事例1件につき$5,000、年次上限あり。</div></div>
+      <div class="li"><span class="li-dot">▸</span><div><strong>ディール紹介（Deal Referral）：</strong>パートナーが新規または拡大のClaudeユースケースをAnthropicに伝え、ソーシングまたは影響クレジットとディール保護を申請するポータル操作。</div></div>
+      <div class="li"><span class="li-dot">▸</span><div><strong>Delivery Partner of Record (DPoR)：</strong>登録済みユースケースの主要納品として紐付けられた単一パートナー。デプロイ済み顧客クレジットが付与される役割。</div></div>
+      <div class="li"><span class="li-dot">▸</span><div><strong>デプロイ済み顧客：</strong>パートナーがDPoRとして少なくとも1件の本番稼働中のデプロイメントがある一意の顧客組織（直近12ヶ月）。</div></div>
+      <div class="li"><span class="li-dot">▸</span><div><strong>Go-live：</strong>登録済みユースケースが初めて継続的な本番消費量に達した時点。Anthropicのテレメトリーで測定。</div></div>
+      <div class="li"><span class="li-dot">▸</span><div><strong>PAM（Partner Account Manager）：</strong>Global Premierパートナーの関係を管理する指名されたAnthropicの担当者。</div></div>
+      <div class="li"><span class="li-dot">▸</span><div><strong>PAM AI：</strong>パートナーポータルのすべてのティアで利用可能な常時稼働アシスタント。登録・アトリビューション・ティアステータスの質問に対応。</div></div>
+      <div class="li"><span class="li-dot">▸</span><div><strong>公開顧客事例：</strong>パートナーが関与した本番Claudeデプロイメントについて、NDAなしでアクセス可能な文書化されたアカウント。顧客名・定量的成果を含む必要あり。</div></div>
+      <div class="li"><span class="li-dot">▸</span><div><strong>Registered：</strong>プレパートナーのオンランプ。CPNA署名済みでAcademyアクセスを取得しているが、Selectには到達していない企業。Registeredはパートナーシップティアではない。</div></div>
+      <div class="li"><span class="li-dot">▸</span><div><strong>Sandboxクレジット：</strong>パートナーの専用非本番サンドボックス組織に付与される年間Anthropic APIクレジット（内部使用のみ）。</div></div>
+      <div class="li"><span class="li-dot">▸</span><div><strong>Select：</strong>最初のパートナーティア。Selectに到達することは検証済みのClaudeプラクティスを持つことを意味します。パートナーステータスはSelectから始まります。</div></div>
+      <div class="li"><span class="li-dot">▸</span><div><strong>サービス登録（Services Registration）：</strong>パートナーがClaude実装の納品アトリビューションを申請するポータル操作。Delivery Partner of Recordへの道。</div></div>
+      <div class="li"><span class="li-dot">▸</span><div><strong>地域（Region）：</strong>AMER（米州）、EMEA（欧州・中東・アフリカ）、APAC（アジア太平洋）、JP（日本）の4地域。</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- DUNKSOFT STRATEGY -->
+<section class="sec reveal">
+  <div class="sec-num">DUNKSOFT 戦略メモ</div>
+  <h2 class="sec-title">今後のアクション整理</h2>
+
+  <div class="callout key">
+    <div class="callout-title">現在地</div>
+    <div class="callout-body"><strong>Registered</strong>（オンランプ）— バッジ・ディレクトリ掲載・パートナーマークは現時点では使用不可。</div>
+  </div>
+
+  <div style="margin-top:20px;">
+    <div class="list">
+      <div class="li"><span class="li-dot" style="color:var(--green);">✅</span><div><strong>今すぐできる：Services Registration</strong>——MUFJとの取り組みを登録。Registeredでも可能。早期登録がSelect昇格の実績になる。</div></div>
+      <div class="li"><span class="li-dot" style="color:var(--green);">✅</span><div><strong>今すぐできる：公開顧客事例の準備</strong>——Noteに公開済みの記事（MUFJラジオ、COLORFUL KANJI AUTH™の共同開発記録）がリファレンスの候補になりうる。</div></div>
+      <div class="li"><span class="li-dot" style="color:#e65100);">⏳</span><div><strong>確認中：Technology / ISVトラック</strong>——Services Trackの要件（10名認定）はDUNKSOFTには難しい。別トラックの存在を問い合わせ中。</div></div>
+      <div class="li"><span class="li-dot" style="color:#1565c0;">📅</span><div><strong>目標：2026年10月1日の特例審査</strong>——2026年のみの追加審査。MUFJの案件が動けばSelect昇格の可能性あり。</div></div>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-l">
+    DUNKSOFT Co., Ltd. · 社内参考資料 · CONFIDENTIAL<br>
+    原文：Claude Partner Network Program Guide · Services Edition · Version 1 · Effective 3 June 2026<br>
+    翻訳：Claude.ai · 2026-06-09
+  </div>
+  <div class="foot-r">
+    coined by Claude.ai<br>
+    approved by Roberto Hoshino
+  </div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('on'); });
+}, { threshold: 0.06 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
