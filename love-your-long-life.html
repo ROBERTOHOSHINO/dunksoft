@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Love your long life, love your long time! | html-notes | DUNKSOFT</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Noto+Serif+JP:wght@300;400&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#14121a;
+  --paper:#f7f3ee;
+  --cream:#fdf9f5;
+  --noda:#9c7bc8;        /* NODAさんの薄紫 */
+  --noda-pale:#ede5f6;
+  --indigo:#1a237e;      /* 神田祭の藍 */
+  --sumi:#1f1d24;        /* 墨 */
+  --kubo-a:#2e5d43;      /* 久保さんの緑たち */
+  --kubo-b:#2f5f41;
+  --kubo-c:#305e46;
+  --kubo-d:#2d5c44;
+  --kubo-e:#315f43;
+  --gold:#b8923a;
+  --muted:#9a93a3;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'Noto Serif JP',serif;
+  overflow-x:hidden;
+}
+
+/* ── LANGUAGE NAV ── */
+.langnav{
+  position:sticky;top:0;z-index:10;
+  display:flex;justify-content:center;gap:2.5rem;
+  padding:1rem 2rem;
+  background:rgba(247,243,238,.92);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid rgba(20,18,26,.08);
+}
+.langnav a{
+  font-family:'Noto Sans JP',sans-serif;
+  font-size:.68rem;letter-spacing:.3em;
+  color:var(--muted);text-decoration:none;
+  transition:color .3s ease;
+}
+.langnav a:hover,.langnav a:focus-visible{color:var(--noda)}
+.langnav a:focus-visible{outline:2px solid var(--noda);outline-offset:4px}
+
+/* ── HERO ── */
+.hero{
+  min-height:88vh;
+  display:flex;flex-direction:column;
+  justify-content:center;align-items:center;
+  text-align:center;
+  padding:5rem 2rem 4rem;
+  position:relative;
+}
+.hero-eyebrow{
+  font-family:'Noto Sans JP',sans-serif;
+  font-size:.62rem;letter-spacing:.45em;
+  color:var(--muted);text-transform:uppercase;
+  margin-bottom:2.5rem;
+}
+.tagline-old{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(.95rem,2.4vw,1.2rem);
+  font-style:italic;font-weight:300;
+  color:var(--muted);
+  text-decoration:line-through;
+  text-decoration-color:rgba(154,147,163,.45);
+  text-decoration-thickness:1px;
+  margin-bottom:1.4rem;
+}
+.tagline-new{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.9rem,6.5vw,3.8rem);
+  font-weight:300;line-height:1.25;
+  color:var(--ink);
+}
+.tagline-new .long{
+  font-style:italic;
+  color:var(--noda);
+}
+.hero-sub{
+  margin-top:3rem;
+  font-family:'Noto Sans JP',sans-serif;
+  font-size:.66rem;letter-spacing:.32em;
+  color:var(--muted);
+}
+.hero-note{
+  margin-top:.9rem;
+  font-family:'Cormorant Garamond',serif;
+  font-size:.9rem;font-style:italic;
+  color:var(--gold);
+}
+
+/* ── CHAPTERS ── */
+.chapter{
+  max-width:680px;
+  margin:0 auto;
+  padding:4.5rem 2rem;
+}
+.eyebrow{
+  font-family:'Noto Sans JP',sans-serif;
+  font-size:.6rem;letter-spacing:.4em;
+  color:var(--muted);text-transform:uppercase;
+  margin-bottom:1.2rem;
+}
+h2{
+  font-family:'Noto Serif JP',serif;
+  font-size:clamp(1.35rem,4vw,1.9rem);
+  font-weight:400;line-height:1.6;
+  margin-bottom:1.8rem;
+}
+.en h2{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(1.5rem,4.5vw,2.2rem)}
+.body{
+  font-size:clamp(.84rem,1.9vw,.95rem);
+  font-weight:300;line-height:2.4;
+  color:rgba(20,18,26,.76);
+}
+.body p+p{margin-top:1.6rem}
+.body strong{font-weight:400;color:var(--ink)}
+rt{
+  font-size:.52em;color:var(--muted);
+  font-family:'Noto Sans JP',sans-serif;font-weight:300;
+}
+.accent-noda{color:var(--noda)}
+.accent-indigo{color:var(--indigo)}
+
+/* ── PULL QUOTE ── */
+.pquote{
+  margin:2.6rem 0;
+  padding:1.8rem 2.2rem;
+  border-left:3px solid var(--noda);
+  background:var(--noda-pale);
+}
+.pquote p{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.05rem,2.8vw,1.4rem);
+  font-style:italic;font-weight:300;
+  line-height:1.75;
+}
+.pquote.jp p{font-family:'Noto Serif JP',serif;font-style:normal;font-weight:300}
+.pquote cite{
+  display:block;margin-top:.7rem;
+  font-family:'Noto Sans JP',sans-serif;
+  font-size:.6rem;letter-spacing:.2em;
+  color:var(--muted);font-style:normal;
+}
+
+/* ── KUBO GREENS (signature) ── */
+.greens{
+  margin:2.8rem 0;
+  text-align:center;
+}
+.greens-row{
+  display:flex;justify-content:center;gap:.6rem;
+  flex-wrap:wrap;
+}
+.greens-row span{
+  width:52px;height:52px;border-radius:50%;
+  display:inline-block;
+}
+.g1{background:var(--kubo-a)} .g2{background:var(--kubo-b)}
+.g3{background:var(--kubo-c)} .g4{background:var(--kubo-d)}
+.g5{background:var(--kubo-e)}
+.greens-caption{
+  margin-top:1.1rem;
+  font-family:'Noto Sans JP',sans-serif;
+  font-size:.62rem;letter-spacing:.25em;
+  color:var(--muted);
+}
+
+/* ── ORDINANCE ── */
+.ordinance{
+  margin:2.8rem 0;
+  background:var(--sumi);
+  color:var(--paper);
+  padding:2.4rem 2.2rem;
+}
+.ordinance .o-label{
+  font-family:'Noto Sans JP',sans-serif;
+  font-size:.58rem;letter-spacing:.35em;
+  color:var(--noda);text-transform:uppercase;
+  margin-bottom:1.4rem;
+}
+.ordinance ol{
+  list-style:none;counter-reset:law;
+}
+.ordinance li{
+  counter-increment:law;
+  font-size:.85rem;font-weight:300;line-height:2.2;
+  color:rgba(247,243,238,.82);
+  padding-left:2.6rem;position:relative;
+}
+.ordinance li+li{margin-top:1.1rem}
+.ordinance li::before{
+  content:"第" counter(law,cjk-ideographic) "条";
+  position:absolute;left:0;top:0;
+  font-family:'Noto Sans JP',sans-serif;
+  font-size:.62rem;letter-spacing:.08em;
+  color:var(--gold);line-height:2.9;
+}
+.en .ordinance li::before{
+  content:"Art. " counter(law);
+  letter-spacing:.05em;
+}
+
+/* ── DIVIDER ── */
+.sep{
+  width:100%;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(156,123,200,.3),transparent);
+}
+.sep-lang{
+  width:100%;height:1px;margin:2rem 0 0;
+  background:linear-gradient(90deg,transparent,rgba(20,18,26,.18),transparent);
+}
+
+/* ── COLOPHON ── */
+.colophon{
+  background:var(--sumi);
+  text-align:center;
+  padding:5rem 2rem;
+}
+.colophon .fable{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1rem,2.6vw,1.25rem);
+  font-style:italic;font-weight:300;
+  color:rgba(247,243,238,.85);
+  max-width:560px;margin:0 auto;line-height:1.9;
+}
+.colophon .fable .first{color:var(--noda)}
+.colophon .coined{
+  margin-top:2.2rem;
+  font-family:'Cormorant Garamond',serif;
+  font-size:.85rem;font-style:italic;
+  color:var(--muted);line-height:1.9;
+}
+footer{
+  padding:2.6rem 2rem;text-align:center;
+  background:var(--paper);
+  border-top:1px solid rgba(20,18,26,.08);
+}
+.flogo{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.05rem;font-style:italic;
+  color:var(--muted);margin-bottom:.4rem;
+}
+.fmeta{
+  font-family:'Noto Sans JP',sans-serif;
+  font-size:.56rem;letter-spacing:.2em;
+  color:rgba(154,147,163,.7);margin-top:.3rem;
+}
+
+@media (prefers-reduced-motion:no-preference){
+  .hero-eyebrow,.tagline-old,.tagline-new,.hero-sub,.hero-note{
+    animation:fu 1s ease both;
+  }
+  .tagline-old{animation-delay:.25s}
+  .tagline-new{animation-delay:.5s}
+  .hero-sub{animation-delay:.85s}
+  .hero-note{animation-delay:1.05s}
+  @keyframes fu{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+}
+@media (max-width:480px){
+  .langnav{gap:1.6rem}
+  .pquote{padding:1.4rem 1.4rem}
+  .ordinance{padding:2rem 1.4rem}
+}
+</style>
+</head>
+<body>
+
+<nav class="langnav" aria-label="Language">
+  <a href="#ja">日本語</a>
+  <a href="#en">English</a>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <p class="hero-eyebrow">html-notes&ensp;|&ensp;COLOURFUL JAPAN™</p>
+  <p class="tagline-old">Love your life, love your time®</p>
+  <h1 class="tagline-new">Love your <span class="long">long</span> life,<br>love your <span class="long">long</span> time!</h1>
+  <p class="hero-sub">星野晃一郎&ensp;Roberto Hoshino&ensp;|&ensp;DUNKSOFT Co., Ltd.&ensp;|&ensp;2026.06</p>
+  <p class="hero-note">— The first column written with Claude Fable 5 —</p>
+</header>
+
+<div class="sep"></div>
+
+<!-- ═══════════ 日本語 ═══════════ -->
+<article id="ja" lang="ja">
+
+<section class="chapter">
+  <p class="eyebrow">序 · 一語を足す</p>
+  <h2>タグラインに、<span class="accent-noda">long</span> を一語</h2>
+  <div class="body">
+    <p>「Love your life, love your time」——<ruby>株式会社<rt>かぶしきがいしゃ</rt></ruby><ruby>ダンクソフト<rt>だんくそふと</rt></ruby>が<ruby>掲<rt>かか</rt></ruby>げてきたこの言葉に、ある日、<strong>long</strong> という一語が二度すべり込んだ。それだけで、ブランドの<ruby>射程<rt>しゃてい</rt></ruby>が変わった。</p>
+    <p>日本は<ruby>高齢化率<rt>こうれいかりつ</rt></ruby>世界一の国だ。世界はそれを「<ruby>危機<rt>きき</rt></ruby>」と呼ぶ。シニアはAIに<strong>守られる側</strong>として設計されてきた。COLOURFUL JAPAN™は、その<ruby>前提<rt>ぜんてい</rt></ruby>をひっくり返す——<strong>長く生きた人ほど、豊かな<ruby>鍵<rt>かぎ</rt></ruby>を持っている。</strong></p>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<section class="chapter">
+  <p class="eyebrow">一 · 松戸のコート</p>
+  <h2><ruby>薄紫<rt>うすむらさき</rt></ruby>の髪は、毎週<ruby>更新<rt>こうしん</rt></ruby>される</h2>
+  <div class="body">
+    <p><ruby>松戸<rt>まつど</rt></ruby>のテニスコートには、84歳のNODAさんがいる。毎週コートに立ち、ウェアをいまも<ruby>更新<rt>こうしん</rt></ruby>し、最近は髪を<span class="accent-noda">薄紫</span>に染めた。</p>
+    <p>この薄紫は、ただの色ではない。<strong>毎週コートに通い続けている人間にしか分からない色</strong>だ。攻撃者がどれだけ私の過去を調べ上げても、「NODAさんの今週の髪の色」は盗めない。記憶を盗むのではなく、<strong>生活を生き続けることでしか更新できない鍵</strong>——コミュニティへの現在進行形の参加そのものが、認証になる。</p>
+  </div>
+  <div class="pquote jp">
+    <p>楽しくPLAYしている人の色は、<br>毎週、新しい。</p>
+    <cite>松戸 · 2026</cite>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<section class="chapter">
+  <p class="eyebrow">二 · 神田の墨絵</p>
+  <h2>緑は、彼にしか見えない</h2>
+  <div class="body">
+    <p><ruby>神田<rt>かんだ</rt></ruby>には、91歳の<ruby>久保<rt>くぼ</rt></ruby>さんがいる。すでにAIを使いこなし、<ruby>墨絵<rt>すみえ</rt></ruby>を<ruby>描<rt>えが</rt></ruby>く。彼の描く東京の大きな<ruby>樹<rt>き</rt></ruby>——その墨の中に、彼には<strong>それぞれ違った緑</strong>が見えている。91年分の<ruby>感覚記憶<rt>かんかくきおく</rt></ruby>でしか<ruby>復号<rt>ふくごう</rt></ruby>できない緑だ。</p>
+  </div>
+  <div class="greens" role="img" aria-label="ほとんど同じに見える五つの緑の円">
+    <div class="greens-row">
+      <span class="g1"></span><span class="g2"></span><span class="g3"></span><span class="g4"></span><span class="g5"></span>
+    </div>
+    <p class="greens-caption">彼にしか、見分けられない。</p>
+  </div>
+  <div class="body">
+    <p>墨絵は誰でも見られる——これが<strong>公開層</strong>。緑は彼にしか見えない——これが<strong>秘密層</strong>。作品を世界に公開しても、緑は<ruby>漏<rt>も</rt></ruby>れない。<ruby>公開鍵<rt>こうかいかぎ</rt></ruby>と<ruby>秘密鍵<rt>ひみつかぎ</rt></ruby>の構造を、久保さんは理論より先に、画家として実装していた。</p>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<section class="chapter">
+  <p class="eyebrow">三 · 知恵の銀行</p>
+  <h2>シニアの<ruby>知恵<rt>ちえ</rt></ruby>が、<ruby>暮<rt>く</rt></ruby>らしを守る</h2>
+  <div class="body">
+    <p>AIエージェントが安全に使えるようになるとき、何が起きるか。NODAさんの色、久保さんの緑——シニアの経験と知恵が、<strong>knowledge base</strong>として、私たちの普段の生活を豊かに、安全にしてくれる。</p>
+    <p>エージェントには昼の記憶（memory）と夜の<ruby>編纂<rt>へんさん</rt></ruby>（dreaming）がある。森の<ruby>樹々<rt>きぎ</rt></ruby>が地中の<ruby>菌根<rt>きんこん</rt></ruby>ネットワークで<ruby>養分<rt>ようぶん</rt></ruby>と警報を交わすように、記憶の市は中央サーバーなしでつながる。いちばん多くを<ruby>繋<rt>つな</rt></ruby>いでいるのは、いちばん古い樹だ。</p>
+    <p>知恵は共有され、記憶の<ruby>所有権<rt>しょゆうけん</rt></ruby>は本人に残る。そのための<ruby>律<rt>りつ</rt></ruby>を、<ruby>暗号都市<rt>あんごうとし</rt></ruby>の<ruby>条例<rt>じょうれい</rt></ruby>として書きはじめた。</p>
+  </div>
+  <div class="ordinance">
+    <p class="o-label">暗号都市条例 · Cipher City Ordinance</p>
+    <ol>
+      <li>他者の色は<ruby>市<rt>いち</rt></ruby>の共有財である。本人の<ruby>承認<rt>しょうにん</rt></ruby>なくして鍵にしてはならない。</li>
+      <li>記憶の揺らぎは失格ではない。<ruby>閾値内<rt>いきちない</rt></ruby>の変化として受け止める。</li>
+      <li>色を生み続けるかぎり、年齢に関わらず市民である。</li>
+    </ol>
+  </div>
+  <div class="body">
+    <p>この<ruby>一篇<rt>いっぺん</rt></ruby>も、第一条にもとづいて、お二人の承認をいただいてから世界に出す。条例は、最初の<ruby>施行<rt>しこう</rt></ruby>から始まる。</p>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<section class="chapter">
+  <p class="eyebrow">結 · 資産先進国</p>
+  <h2>長さそのものを、愛せる社会へ</h2>
+  <div class="body">
+    <p>記憶の蓄積が資産になる都市では、<strong>高齢者こそ最富裕層</strong>だ。森でいちばん多くを繋いでいるのが、いちばん古い樹であるように。</p>
+    <p>世界がこれから老いていくなら、日本は<ruby>課題先進国<rt>かだいせんしんこく</rt></ruby>ではなく<strong><ruby>資産先進国<rt>しさんせんしんこく</rt></ruby></strong>である。84歳の薄紫と、91歳の緑が、それを先に証明している。</p>
+    <p>Love your <span class="accent-noda">long</span> life, love your <span class="accent-noda">long</span> time!</p>
+  </div>
+</section>
+
+</article>
+
+<div class="sep-lang"></div>
+
+<!-- ═══════════ English ═══════════ -->
+<article id="en" lang="en" class="en">
+
+<section class="chapter">
+  <p class="eyebrow">Prologue · One word</p>
+  <h2>Adding <em class="accent-noda">long</em> to the tagline</h2>
+  <div class="body">
+    <p>"Love your life, love your time" — the words DUNKSOFT Co., Ltd. has carried for years. One day, the word <strong>long</strong> slipped in, twice. That alone changed the reach of the brand.</p>
+    <p>Japan has the world's highest rate of aging. The world calls it a crisis, and designs AI to <strong>protect</strong> seniors. COLOURFUL JAPAN™ flips that premise: <strong>the longer you have lived, the richer the keys you hold.</strong></p>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<section class="chapter">
+  <p class="eyebrow">I · The court in Matsudo</p>
+  <h2>Light-purple hair, updated weekly</h2>
+  <div class="body">
+    <p>On a tennis court in Matsudo plays NODA-san, 84. She is there every week. She still updates her wear. Recently she dyed her hair <span class="accent-noda">light purple</span>.</p>
+    <p>That light purple is not just a color. It is a color <strong>known only to those who keep showing up to the court</strong>. An attacker may mine my entire past, but they cannot steal "the color of NODA-san's hair this week." A key that cannot be phished, only lived — <strong>ongoing participation in a community becomes authentication itself.</strong></p>
+  </div>
+  <div class="pquote">
+    <p>The colors of someone at play<br>are renewed every week.</p>
+    <cite>Matsudo · 2026</cite>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<section class="chapter">
+  <p class="eyebrow">II · Ink painting in Kanda</p>
+  <h2>Greens only he can see</h2>
+  <div class="body">
+    <p>In Kanda lives Kubo-san, 91 — already fluent with AI, and a painter of sumi-e ink works. In his paintings of Tokyo's great trees, he sees <strong>a different green in every stroke of black ink</strong>. Greens that only 91 years of sensory memory can decode.</p>
+  </div>
+  <div class="greens" role="img" aria-label="Five green circles that look almost identical">
+    <div class="greens-row">
+      <span class="g1"></span><span class="g2"></span><span class="g3"></span><span class="g4"></span><span class="g5"></span>
+    </div>
+    <p class="greens-caption">Only he can tell them apart.</p>
+  </div>
+  <div class="body">
+    <p>Anyone can view the painting — that is the <strong>public layer</strong>. The greens are visible to him alone — that is the <strong>private layer</strong>. Publish the work to the world, and the greens never leak. Kubo-san implemented public-key cryptography as a painter, long before the theory reached him.</p>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<section class="chapter">
+  <p class="eyebrow">III · A bank of wisdom</p>
+  <h2>Senior wisdom keeps our days safe</h2>
+  <div class="body">
+    <p>When AI agents become safe to use, something shifts. NODA-san's colors, Kubo-san's greens — the experience and wisdom of seniors become a <strong>knowledge base</strong> that makes everyday life richer and safer for all of us.</p>
+    <p>Agents have daytime memory and nighttime curation — dreaming. Like forest trees exchanging nutrients and warnings through mycorrhizal networks underground, a market of memories connects without a central server. The oldest trees are the ones that connect the most.</p>
+    <p>Wisdom is shared; ownership of memory stays with the person. We have begun writing the rules for this, as the ordinance of Cipher City.</p>
+  </div>
+  <div class="ordinance">
+    <p class="o-label">Cipher City Ordinance</p>
+    <ol>
+      <li>Another person's color is a commons of the market. It shall not become a key without their consent.</li>
+      <li>A wavering memory is not a failure. It is change within a threshold, and shall be received as such.</li>
+      <li>Whoever keeps generating color is a citizen, regardless of age.</li>
+    </ol>
+  </div>
+  <div class="body">
+    <p>This very column follows Article 1: it goes out to the world only with the consent of both protagonists. An ordinance begins with its first enforcement.</p>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<section class="chapter">
+  <p class="eyebrow">Coda · The asset-leading nation</p>
+  <h2>Toward a society that loves length itself</h2>
+  <div class="body">
+    <p>In a city where accumulated memory is an asset, <strong>elders are the wealthiest citizens</strong> — just as the oldest tree in the forest is the one that connects the most.</p>
+    <p>If the world is about to grow old, Japan is not the problem-leading nation but the <strong>asset-leading nation</strong>. A light-purple at 84 and the greens of 91 are already the proof.</p>
+    <p>Love your <span class="accent-noda">long</span> life, love your <span class="accent-noda">long</span> time!</p>
+  </div>
+</section>
+
+</article>
+
+<!-- COLOPHON -->
+<section class="colophon">
+  <p class="fable">
+    This is the <span class="first">first column</span> written together with <span class="first">Claude Fable 5</span>.<br>
+    この一篇は、Claude Fable 5 との最初の共作です。<br>
+    May the Force be with us.
+  </p>
+  <p class="coined">
+    coined &amp; written by Claude.ai × Roberto Hoshino<br>
+    Karuizawa · June 2026
+  </p>
+</section>
+
+<footer>
+  <p class="flogo">DUNKSOFT Co., Ltd.</p>
+  <p class="fmeta">COLOURFUL JAPAN™&ensp;|&ensp;CHROMAKEY AUTH™&ensp;|&ensp;Smart Life Styles®</p>
+  <p class="fmeta">星野晃一郎 Roberto Hoshino&ensp;|&ensp;dunksoft.jp</p>
+  <p class="fmeta" style="margin-top:1rem">Okinawa / Karuizawa / Matsudo&ensp;·&ensp;2026</p>
+</footer>
+
+</body>
+</html>
