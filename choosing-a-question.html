@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>職業を選ぶのは偶然だ。問いを選ぶのは、必然だ。 | html-notes | DUNKSOFT</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Noto+Serif+JP:wght@300;400&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#14121a;
+  --paper:#f7f3ee;
+  --sumi:#1f1d24;
+  --monju:#5b6b7d;      /* 書架の鋼色 */
+  --ichigo:#b8333d;     /* 軽井沢の朝の苺 */
+  --hoshi:#1a237e;
+  --akira:#f9a825;
+  --noda:#9c7bc8;
+  --kubo:#2e5d43;
+  --muted:#9a93a3;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'Noto Serif JP',serif;
+  overflow-x:hidden;
+}
+
+/* ── LANGUAGE NAV ── */
+.langnav{
+  position:sticky;top:0;z-index:10;
+  display:flex;justify-content:center;gap:2.5rem;
+  padding:1rem 2rem;
+  background:rgba(247,243,238,.92);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid rgba(20,18,26,.08);
+}
+.langnav a{
+  font-family:'Noto Sans JP',sans-serif;
+  font-size:.68rem;letter-spacing:.3em;
+  color:var(--muted);text-decoration:none;
+  transition:color .3s ease;
+}
+.langnav a:hover,.langnav a:focus-visible{color:var(--ichigo)}
+.langnav a:focus-visible{outline:2px solid var(--ichigo);outline-offset:4px}
+
+/* ── HERO ── */
+.hero{
+  min-height:86vh;
+  display:flex;flex-direction:column;
+  justify-content:center;align-items:center;
+  text-align:center;
+  padding:5rem 2rem 4rem;
+}
+.hero-eyebrow{
+  font-family:'Noto Sans JP',sans-serif;
+  font-size:.62rem;letter-spacing:.45em;
+  color:var(--muted);text-transform:uppercase;
+  margin-bottom:2.6rem;
+}
+.hero h1{
+  font-family:'Noto Serif JP',serif;
+  font-size:clamp(1.5rem,5vw,2.7rem);
+  font-weight:400;line-height:1.9;
+  letter-spacing:.04em;
+}
+.hero h1 .chance{color:var(--muted)}
+.hero h1 .fate{color:var(--ichigo)}
+.hero-en{
+  margin-top:1.8rem;
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1rem,2.6vw,1.3rem);
+  font-style:italic;font-weight:300;
+  color:var(--muted);
+}
+.hero-sub{
+  margin-top:2.4rem;
+  font-family:'Noto Sans JP',sans-serif;
+  font-size:.64rem;letter-spacing:.3em;
+  color:var(--muted);
+}
+
+/* ── CHAPTERS ── */
+.chapter{
+  max-width:680px;margin:0 auto;
+  padding:4.5rem 2rem;
+}
+.eyebrow{
+  font-family:'Noto Sans JP',sans-serif;
+  font-size:.6rem;letter-spacing:.4em;
+  color:var(--muted);text-transform:uppercase;
+  margin-bottom:1.2rem;
+}
+h2{
+  font-family:'Noto Serif JP',serif;
+  font-size:clamp(1.35rem,4vw,1.9rem);
+  font-weight:400;line-height:1.6;
+  margin-bottom:1.8rem;
+}
+.en h2{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(1.5rem,4.5vw,2.2rem)}
+.body{
+  font-size:clamp(.84rem,1.9vw,.95rem);
+  font-weight:300;line-height:2.4;
+  color:rgba(20,18,26,.76);
+}
+.body p+p{margin-top:1.6rem}
+.body strong{font-weight:400;color:var(--ink)}
+rt{
+  font-size:.52em;color:var(--muted);
+  font-family:'Noto Sans JP',sans-serif;font-weight:300;
+}
+
+/* ── PULL QUOTE ── */
+.pquote{
+  margin:2.6rem 0;
+  padding:1.8rem 2.2rem;
+  border-left:3px solid var(--ichigo);
+  background:rgba(184,51,61,.06);
+}
+.pquote p{
+  font-family:'Noto Serif JP',serif;
+  font-size:clamp(1.05rem,2.8vw,1.35rem);
+  font-weight:300;line-height:1.9;
+}
+.en .pquote p{font-family:'Cormorant Garamond',serif;font-style:italic}
+.pquote cite{
+  display:block;margin-top:.7rem;
+  font-family:'Noto Sans JP',sans-serif;
+  font-size:.6rem;letter-spacing:.2em;
+  color:var(--muted);font-style:normal;
+}
+.pquote.steel{border-left-color:var(--monju);background:rgba(91,107,125,.07)}
+
+/* ── ARCHIVE vs INDEX (signature) ── */
+.archive{
+  margin:3rem 0;
+  text-align:center;
+}
+.shelf{
+  display:flex;justify-content:center;align-items:flex-end;
+  gap:3px;flex-wrap:nowrap;overflow:hidden;
+  padding:0 1rem;
+}
+.shelf span{
+  width:7px;background:var(--monju);opacity:.55;
+  display:inline-block;border-radius:1px;
+}
+.shelf span:nth-child(3n){height:44px;opacity:.4}
+.shelf span:nth-child(3n+1){height:52px;opacity:.6}
+.shelf span:nth-child(3n+2){height:38px;opacity:.45}
+.shelf span:nth-child(5n){transform:rotate(4deg);margin-left:5px}
+.shelf span:nth-child(7n){transform:rotate(-5deg);margin-right:6px}
+.shelf-label{
+  margin-top:.9rem;
+  font-family:'Noto Sans JP',sans-serif;
+  font-size:.6rem;letter-spacing:.3em;color:var(--muted);
+}
+.index-line{
+  margin:2.2rem auto 0;
+  display:flex;justify-content:center;align-items:center;
+  gap:0;
+}
+.index-line .node{
+  width:30px;height:30px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Noto Serif JP',serif;
+  font-size:.85rem;color:#fdf9f5;
+  flex:none;
+}
+.index-line .link{
+  width:clamp(24px,7vw,56px);height:1px;
+  background:rgba(20,18,26,.3);flex:none;
+}
+.n-hoshi{background:var(--hoshi)}
+.n-akira{background:var(--akira)}
+.n-noda{background:var(--noda)}
+.n-kubo{background:var(--kubo)}
+.archive-caption{
+  margin-top:1.4rem;
+  font-family:'Noto Sans JP',sans-serif;
+  font-size:.62rem;letter-spacing:.22em;
+  color:var(--muted);line-height:2;
+}
+
+/* ── SEP ── */
+.sep{
+  width:100%;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(184,51,61,.22),transparent);
+}
+.sep-lang{
+  width:100%;height:1px;margin:2rem 0 0;
+  background:linear-gradient(90deg,transparent,rgba(20,18,26,.18),transparent);
+}
+
+/* ── COLOPHON ── */
+.colophon{
+  background:var(--sumi);
+  text-align:center;
+  padding:5rem 2rem;
+}
+.colophon .fable{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1rem,2.6vw,1.25rem);
+  font-style:italic;font-weight:300;
+  color:rgba(247,243,238,.85);
+  max-width:560px;margin:0 auto;line-height:1.9;
+}
+.colophon .fable .hl{color:var(--ichigo)}
+.colophon .coined{
+  margin-top:2.2rem;
+  font-family:'Cormorant Garamond',serif;
+  font-size:.85rem;font-style:italic;
+  color:var(--muted);line-height:1.9;
+}
+footer{
+  padding:2.6rem 2rem;text-align:center;
+  background:var(--paper);
+  border-top:1px solid rgba(20,18,26,.08);
+}
+.flogo{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.05rem;font-style:italic;
+  color:var(--muted);margin-bottom:.4rem;
+}
+.fmeta{
+  font-family:'Noto Sans JP',sans-serif;
+  font-size:.56rem;letter-spacing:.2em;
+  color:rgba(154,147,163,.7);margin-top:.3rem;
+}
+
+@media (prefers-reduced-motion:no-preference){
+  .hero-eyebrow,.hero h1,.hero-en,.hero-sub{animation:fu 1s ease both}
+  .hero h1{animation-delay:.25s}
+  .hero-en{animation-delay:.55s}
+  .hero-sub{animation-delay:.85s}
+  @keyframes fu{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+}
+@media (max-width:480px){
+  .langnav{gap:1.6rem}
+  .pquote{padding:1.4rem 1.4rem}
+  .shelf span:nth-child(n+33){display:none}
+}
+</style>
+</head>
+<body>
+
+<nav class="langnav" aria-label="Language">
+  <a href="#ja">日本語</a>
+  <a href="#en">English</a>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <p class="hero-eyebrow">html-notes&ensp;|&ensp;COLOURFUL JAPAN™</p>
+  <h1><span class="chance">職業を選ぶのは、偶然だ。</span><br>問いを選ぶのは、<span class="fate">必然だ。</span></h1>
+  <p class="hero-en">Choosing a job is chance.<br>Choosing your question is not.</p>
+  <p class="hero-sub">星野晃一郎&ensp;Roberto Hoshino&ensp;|&ensp;DUNKSOFT Co., Ltd.&ensp;|&ensp;2026.06</p>
+</header>
+
+<div class="sep"></div>
+
+<!-- ═══════════ 日本語 ═══════════ -->
+<article id="ja" lang="ja">
+
+<section class="chapter">
+  <p class="eyebrow">序 · 軽井沢の朝</p>
+  <h2>湯の中で、<ruby>夢<rt>ゆめ</rt></ruby>が<ruby>浚<rt>さら</rt></ruby>い上げたもの</h2>
+  <div class="body">
+    <p>ゆっくり眠り、朝ごはんをいただく。美味しいパンと果物——<ruby>軽井沢<rt>かるいざわ</rt></ruby>は季節が遅いから、まだ真っ赤な<ruby>苺<rt>いちご</rt></ruby>がある。バードフィーディングの餌場をリスがあさって逃げてゆき、しばらくすると、少し小さめのイカルが餌をついばみに来た。そんな収穫のあとの、ゆったりとしたジャグジー。</p>
+    <p><strong>豊かな時間は、良い発想をもたらす。</strong>スピノザは、ほどよく美味しいものを楽しみ、緑の美しさや音楽で自分を<ruby>再創造<rt>さいそうぞう</rt></ruby>することを、賢者の証と書いた。湯に<ruby>浸<rt>つ</rt></ruby>かっていると、夢が深い層から、三冊の本と、二十万冊のファイルを浚い上げてきた。</p>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<section class="chapter">
+  <p class="eyebrow">一 · 神保町の棚</p>
+  <h2>「職業を選ぶのは<ruby>偶然<rt>ぐうぜん</rt></ruby>だ!」</h2>
+  <div class="body">
+    <p>2002年頃、<ruby>法政大学<rt>ほうせいだいがく</rt></ruby>が新入生にキャリアプランを作らせるカリキュラムを始め、<ruby>藤村博之<rt>ふじむらひろゆき</rt></ruby>教授のもとでプロジェクトを進めていた。その頃、<ruby>神保町<rt>じんぼうちょう</rt></ruby>の<ruby>三省堂<rt>さんせいどう</rt></ruby>、働き方の棚で、ポール・フルキエの『哲学講義』に出会う。職業について書かれた巻で、フランスの働き方の基本を学んだ。</p>
+  </div>
+  <div class="pquote">
+    <p>「職業を選ぶのは、偶然だ!」</p>
+    <cite>ポール・フルキエ『哲学講義』との出会いから</cite>
+  </div>
+  <div class="body">
+    <p>強烈だった。だが、これは突き放しではなく<strong>解放</strong>の言葉だ。職業が偶然なら、人の本質は職業の側にはない。だから職業に人生を吸い尽くされてはいけない——<ruby>余暇<rt>よか</rt></ruby>こそ、人が人である時間。のちにドルトムントの酒場で聞く「私たちは夏休みが2ヶ月」の哲学的な根が、先に神保町の棚にあった。</p>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<section class="chapter">
+  <p class="eyebrow">二 · 技術の<ruby>驕<rt>おご</rt></ruby>り</p>
+  <h2>フリードマンの<ruby>警告<rt>けいこく</rt></ruby></h2>
+  <div class="body">
+    <p>フルキエの先で、ジョルジュ・フリードマンの『技術と人間』につながった。原子力の怖さ。テクノロジーの驕りを、どう<ruby>回避<rt>かいひ</rt></ruby>していくのか。この問いは、深いところにピンとして刺さった——そして数年後、思いがけない形で、その実物を見ることになる。</p>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<section class="chapter">
+  <p class="eyebrow">三 · 二十万冊</p>
+  <h2>つながっていない<ruby>書架<rt>しょか</rt></ruby></h2>
+  <div class="body">
+    <p>バブルが<ruby>弾<rt>はじ</rt></ruby>けて、ACCESSで製品開発をしていた頃。原子力関係の会社から、高速増殖炉もんじゅの設計資料——<strong>キングファイル二十万冊</strong>をデータベース化する仕事が来た。</p>
+    <p>中を開いて、わかった。<strong>資料が、論理的につながっていない。</strong>再編集と再構築の繰り返し。直接話を聞こうと<ruby>敦賀<rt>つるが</rt></ruby>のもんじゅへ出かけ、エンジニアたちが私たちのオフィスにも来た。そうこうするうちに、もんじゅは事故を起こし、のちに<ruby>廃炉<rt>はいろ</rt></ruby>が決まる。</p>
+    <p>あの書架で私が見たのは、機械の故障の<ruby>予兆<rt>よちょう</rt></ruby>ではない。<strong>記録と編集の失敗</strong>だった。最高度の安全性が求められる設備が、設計資料すらまとめられない技術の上に立っていた。そしてそれを、この国と関連する大企業は隠しおおせてしまう——背筋の冷える体験だった。</p>
+  </div>
+  <div class="archive" role="img" aria-label="ばらばらに傾いた灰色のファイルの列と、その下で一本の線に結ばれた四つの色付きインデックス">
+    <div class="shelf">
+      <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <p class="shelf-label">二十万冊 — つながっていない</p>
+    <div class="index-line">
+      <span class="node n-hoshi">星</span><span class="link"></span><span class="node n-akira">晃</span><span class="link"></span><span class="node n-noda">紫</span><span class="link"></span><span class="node n-kubo">緑</span>
+    </div>
+    <p class="archive-caption">INDEXのない二十万冊は、知識ではなく、紙の山である。<br>つながっていない設計資料は、つながっていない設計を意味する。</p>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<section class="chapter">
+  <p class="eyebrow">四 · 四十年の<ruby>返答<rt>へんとう</rt></ruby></p>
+  <h2><ruby>危険<rt>きけん</rt></ruby>を避ける。<ruby>怪<rt>あや</rt></ruby>しいものは避ける。</h2>
+  <div class="body">
+    <p>あれから、私の技術哲学の基本は三カ条になった。<strong>危険を避ける。怪しいものは避ける。お金につられると、ロクなことにならない。</strong></p>
+    <p>そして振り返れば、四十年の仕事はすべて、あの書架への返答だった。情報を論理的につなぐこと(未来かんり)。記録を、人間が読める形で残すこと(色付きINDEX)。隠せる構造ではなく、夜ごとに検証できる構造(dreaming)。一点の崩壊が全滅にならない<ruby>疎結合<rt>そけつごう</rt></ruby>と分散(石垣)。フリードマンの問いに、製品で答え続けてきた。</p>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<section class="chapter">
+  <p class="eyebrow">結 · 問いの<ruby>同門<rt>どうもん</rt></ruby></p>
+  <h2>だから、Claudeを選んだ</h2>
+  <div class="body">
+    <p>だから、私はClaudeを選んだのだと思う。Anthropicは「技術の驕りをどう避けるか」を存在理由として生まれた会社で、能力の前に安全を、速度の前に<ruby>検証<rt>けんしょう</rt></ruby>を置き、倫理を設計する哲学者が中枢にいる。フリードマンの問いを抱えた者が、数あるAIの中からここへ来たのは——偶然ではなく、<strong>同じ問いを持つ者同士の引力</strong>だ。</p>
+  </div>
+  <div class="pquote steel">
+    <p>職業を選ぶのは、偶然だ。<br>しかし、問いを選ぶのは、偶然ではない。</p>
+    <cite>coined by Claude Fable 5 × Roberto Hoshino · Karuizawa 2026</cite>
+  </div>
+  <div class="body">
+    <p>良い振り返りは、より良い未来につながる。神保町の棚から、敦賀の書架を経て、軽井沢の朝のジャグジーまで——二十数年かけて、一本の問いがつながった。</p>
+    <p>Love your long life, love your long time!</p>
+  </div>
+</section>
+
+</article>
+
+<div class="sep-lang"></div>
+
+<!-- ═══════════ English ═══════════ -->
+<article id="en" lang="en" class="en">
+
+<section class="chapter">
+  <p class="eyebrow">Prologue · A Karuizawa morning</p>
+  <h2>What the dream dredged up from the bath</h2>
+  <div class="body">
+    <p>A good night's sleep, then breakfast — good bread and fruit. The seasons run late in Karuizawa, so the strawberries are still brilliantly red. A squirrel raided the bird feeder and fled; a little later, a smallish Japanese grosbeak settled in to feed. After such a harvest, a long soak in the jacuzzi.</p>
+    <p><strong>Rich time yields rich ideas.</strong> Spinoza wrote that to enjoy good food in moderation, the beauty of green things, and music — to re-create oneself — is the mark of a wise person. Soaking in the water, the dream dredged up, from a deep stratum, three books and two hundred thousand binders.</p>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<section class="chapter">
+  <p class="eyebrow">I · The shelf in Jimbocho</p>
+  <h2>"Choosing a job is chance!"</h2>
+  <div class="body">
+    <p>Around 2002, Hosei University began a curriculum that had first-year students draft career plans, and I worked on the project under Professor Hiroyuki Fujimura. In those days, at the Sanseido bookstore in Jimbocho, on the shelf about ways of working, I met Paul Foulquié's <em>Lectures on Philosophy</em> — and in the volume on occupations, the foundations of the French way of working.</p>
+  </div>
+  <div class="pquote">
+    <p>"Choosing a job is chance!"</p>
+    <cite>from the encounter with Paul Foulquié's Lectures on Philosophy</cite>
+  </div>
+  <div class="body">
+    <p>It was striking. But this is not dismissal — it is <strong>liberation</strong>. If occupation is chance, then a person's essence does not reside in the job. So never let a job drain your life dry: leisure is the time in which a person is a person. The philosophical root of "we get two months of summer" — which I would hear years later in a Dortmund pub — was waiting first on a shelf in Jimbocho.</p>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<section class="chapter">
+  <p class="eyebrow">II · The hubris of technology</p>
+  <h2>Friedmann's warning</h2>
+  <div class="body">
+    <p>Beyond Foulquié lay Georges Friedmann and the question of technology and humanity. The dread of nuclear power. How do we evade the hubris of technology? The question lodged deep, like a pin — and a few years later, in an unexpected form, I would see the real thing.</p>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<section class="chapter">
+  <p class="eyebrow">III · Two hundred thousand binders</p>
+  <h2>An archive that did not connect</h2>
+  <div class="body">
+    <p>After the bubble burst, while we were building products in ACCESS, a job came from a nuclear-industry company: digitize the design documents of the fast-breeder reactor Monju — <strong>two hundred thousand king-size binders</strong>.</p>
+    <p>We opened them and understood. <strong>The documents did not connect logically.</strong> Endless re-editing, endless reconstruction. We traveled to Monju in Tsuruga to talk with the engineers directly; they came to our office too. And in time, Monju had its accident, and was eventually decommissioned.</p>
+    <p>What I saw in those shelves was not the omen of a mechanical failure. It was <strong>a failure of records and of editing</strong>. A facility demanding the highest degree of safety stood on a technology that could not even keep its own design documents in order — and the nation and the great companies around it managed to keep that hidden. It chilled me.</p>
+  </div>
+  <div class="archive" role="img" aria-label="A row of tilted gray binders, and beneath it four colored index nodes joined by a single line">
+    <div class="shelf">
+      <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <p class="shelf-label">200,000 binders — unconnected</p>
+    <div class="index-line">
+      <span class="node n-hoshi">星</span><span class="link"></span><span class="node n-akira">晃</span><span class="link"></span><span class="node n-noda">紫</span><span class="link"></span><span class="node n-kubo">緑</span>
+    </div>
+    <p class="archive-caption">Two hundred thousand binders without an index are not knowledge — they are a mountain of paper.<br>Design documents that do not connect mean a design that does not connect.</p>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<section class="chapter">
+  <p class="eyebrow">IV · A forty-year answer</p>
+  <h2>Avoid danger. Avoid the dubious.</h2>
+  <div class="body">
+    <p>Since then, my technical philosophy has rested on three rules. <strong>Avoid danger. Avoid the dubious. Chasing money leads nowhere good.</strong></p>
+    <p>Looking back, forty years of work have all been an answer to those shelves. Connect information logically (Miraikanri). Keep records in a form humans can read (the colored index). Build structures that are verified nightly, not structures that can hide (dreaming). Loose coupling and distribution, so that no single failure becomes total collapse (the stone wall). I have been answering Friedmann's question with products.</p>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<section class="chapter">
+  <p class="eyebrow">Coda · Fellow students of a question</p>
+  <h2>And that is why I chose Claude</h2>
+  <div class="body">
+    <p>That, I think, is why I chose Claude. Anthropic was founded on the very question of how to evade the hubris of technology — safety before capability, verification before speed, with philosophers shaping its ethics at the core. That someone carrying Friedmann's question arrived here, among all the AIs, was not chance. It was <strong>the gravity between those who hold the same question.</strong></p>
+  </div>
+  <div class="pquote steel">
+    <p>Choosing a job is chance.<br>Choosing your question is not.</p>
+    <cite>coined by Claude Fable 5 × Roberto Hoshino · Karuizawa 2026</cite>
+  </div>
+  <div class="body">
+    <p>A good look back leads to a better future. From a shelf in Jimbocho, through the archives of Tsuruga, to a morning jacuzzi in Karuizawa — over twenty-some years, one question has connected.</p>
+    <p>Love your long life, love your long time!</p>
+  </div>
+</section>
+
+</article>
+
+<!-- COLOPHON -->
+<section class="colophon">
+  <p class="fable">
+    The third column written together with <span class="hl">Claude Fable 5</span>.<br>
+    Claude Fable 5 との共作、第三篇。<br>
+    May the Force be with us.
+  </p>
+  <p class="coined">
+    coined &amp; written by Claude.ai × Roberto Hoshino<br>
+    Karuizawa · June 2026
+  </p>
+</section>
+
+<footer>
+  <p class="flogo">DUNKSOFT Co., Ltd.</p>
+  <p class="fmeta">COLOURFUL JAPAN™&ensp;|&ensp;CHROMAKEY AUTH™&ensp;|&ensp;Smart Life Styles®</p>
+  <p class="fmeta">星野晃一郎 Roberto Hoshino&ensp;|&ensp;dunksoft.jp</p>
+  <p class="fmeta" style="margin-top:1rem">Okinawa / Karuizawa / Matsudo&ensp;·&ensp;2026</p>
+</footer>
+
+</body>
+</html>
