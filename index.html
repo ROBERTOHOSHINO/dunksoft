@@ -406,7 +406,96 @@ footer p { font-size: 11px; color: var(--ink3); letter-spacing: .06em; line-heig
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-label">Smart Life Styles® — Love your life, love your time®</div>
+  <div style="display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap; margin-bottom:1.5rem;">
+    <div class="hero-label" style="margin-bottom:0;">Smart Life Styles® — Love your life, love your time®</div>
+
+    <!-- ══ PICTURE SLIDESHOW ══ -->
+    <a href="https://picture.dunksoft.jp/" target="_blank"
+       id="pic-slideshow"
+       style="display:block; text-decoration:none; position:relative;
+              width:220px; height:140px; border-radius:6px; overflow:hidden;
+              border:0.5px solid rgba(0,0,0,0.14); background:#f2efe8;
+              flex-shrink:0; margin-left:auto;">
+      <img id="pic-slide-img" src="" alt=""
+           style="width:100%; height:100%; object-fit:cover; display:block;
+                  opacity:0; transition:opacity 0.8s ease;">
+      <div id="pic-slide-cap"
+           style="position:absolute; left:0; right:0; bottom:0;
+                  padding:6px 10px; font-size:10px; line-height:1.4;
+                  color:#fff; background:linear-gradient(transparent, rgba(0,0,0,0.6));
+                  font-family:'Noto Sans JP',sans-serif; letter-spacing:.04em;"></div>
+      <div style="position:absolute; top:6px; right:8px; font-size:9px;
+                  color:#fff; background:rgba(0,0,0,0.35); padding:2px 7px;
+                  border-radius:10px; letter-spacing:.06em;
+                  font-family:'Noto Sans JP',sans-serif;">picture →</div>
+    </a>
+  </div>
+
+  <script>
+  (function(){
+    var BASE = 'https://picture.dunksoft.jp/';
+    var pics = [
+      {f:"Anthroslan202605.png", t:"Anthropic × ダンクソフト", d:"2026-05"},
+      {f:"roses 20260529.png", t:"薔薇", d:"2026-05-29"},
+      {f:"SHURI-JO OKINAWA2026.jpg", t:"首里城 沖縄", d:"2026"},
+      {f:"NO RAIN-NO RAIBOWS 20231029.jpg", t:"No rain, No rainbows", d:"2023-10-29"},
+      {f:"DRAGON KENNNIJI-TEMPLE KYOTO 20240103.jpg", t:"建仁寺の龍 京都", d:"2024-01-03"},
+      {f:"MT FUJI20240108.jpg", t:"富士山", d:"2024-01-08"},
+      {f:"INDIGO FARM OF MY OFFICE TERRACE 2022-06-10.jpg", t:"オフィステラスの藍農園", d:"2022-06-10"},
+      {f:"INDIGO FRESH COLOURFUL 20221028.jpg", t:"藍 FRESH COLOURFUL", d:"2022-10-28"},
+      {f:"INDIGO FRESH COLOURFUL 20221028-2.jpg", t:"藍 FRESH COLOURFUL 2", d:"2022-10-28"},
+      {f:"WITH YOYOMA 20211108.jpg", t:"ヨーヨー・マ 沖縄アリーナ最前列", d:"2021-11-08"},
+      {f:"No rain,-No rainbows OKINAWA 20211223.jpg", t:"No rain, No rainbows 沖縄", d:"2021-12-23"},
+      {f:"Volunteers of TOKYO Olympic 20210904 MAKUHARI VENUE.jpg", t:"東京五輪ボランティア 幕張会場", d:"2021-09-04"},
+      {f:"Volunteers of TOKYO Olympic 20210904 MAKUHARI VENUE CENTER 20210829.jpg", t:"東京五輪ボランティア 幕張センター", d:"2021-08-29"},
+      {f:"Volunteers of TOKYO Olympic 20210904 MAKUHARI VENUE Press Room 2021-08-29.jpg", t:"東京五輪ボランティア 幕張プレスルーム", d:"2021-08-29"},
+      {f:"Perticipation TOKYO Olympic 20210814.jpg", t:"東京オリンピック参加", d:"2021-08-14"},
+      {f:"SUNSET TOYOSU 2021-08-05.jpg", t:"豊洲サンセット", d:"2021-08-05"},
+      {f:"RAINBOWS above The Olympic Village 2021-07-27.jpg", t:"虹、オリンピックヴィレッジの上に", d:"2021-07-27"},
+      {f:"Good vibes attract good lives 2020-12-22.jpg", t:"笑う門には福来る——冬至のお飾り", d:"2020-12-22"},
+      {f:"せーふぁーうたき（斎場御嶽 20201119.jpg", t:"斎場御嶽", d:"2020-11-19"},
+      {f:"The Emperor's Enthronement Ceremony 2019-10-23.jpg", t:"即位の礼 翌朝の日の出", d:"2019-10-23"},
+      {f:"LONDON ATP FINAL 20191118.jpg", t:"ATPファイナル決勝 ロンドン", d:"2019-11-18"},
+      {f:"MATUE LIGHTUP PARK 20191121.jpg", t:"松江ライトアップパーク", d:"2019-11-21"},
+      {f:"IT AWARD 2019-06-08 TORANOMON-HALL (FROM MITI).jpg", t:"IT表彰 虎ノ門ホール（経産省）", d:"2019-06-08"},
+      {f:"BIG RAINBOW TOYOSU 2019-3-16.png", t:"豊洲の大きな虹", d:"2019-03-16"},
+      {f:"Rising power 2018-11-1.jpg", t:"富士山の気——雲を二分する力", d:"2018-11-01"},
+      {f:"NASUKOGEN KAIKO BRIDGE 2018-10-07.jpg", t:"那須高原 回顧の吊橋", d:"2018-10-07"},
+      {f:"HALO 2018-06-30.jpg", t:"日暈——太陽の周りの虹の輪", d:"2018-06-30"},
+      {f:"DIGITAL RE-Creation 2018-06-19.jpg", t:"DIGITAL RE-Creation", d:"2018-06-19"},
+      {f:"CARP STREAMERS 2018-04-30.jpg", t:"鯉のぼり", d:"2018-04-30"},
+      {f:"ATAMI PLUM GARDEN 2018-03-02.png", t:"熱海梅園", d:"2018-03-02"},
+      {f:"TOKYO LIFE WORK BALANCE AWARD CEREMONY WITH TOKYO GOVERNER.jpg", t:"東京ライフワークバランス表彰式", d:"2018-02-01"},
+      {f:"MY ID OF IT HISTORY.jpg", t:"IT歴史の証明 1987→デジタル庁", d:"2024"}
+    ];
+    var imgEl = document.getElementById('pic-slide-img');
+    var capEl = document.getElementById('pic-slide-cap');
+    var order = [], idx = 0;
+    function shuffle(a){
+      for (var i=a.length-1; i>0; i--){
+        var j = Math.floor(Math.random()*(i+1));
+        var t=a[i]; a[i]=a[j]; a[j]=t;
+      }
+      return a;
+    }
+    function showNext(){
+      if (idx >= order.length){ order = shuffle(pics.slice()); idx = 0; }
+      var p = order[idx++];
+      var url = BASE + encodeURIComponent(p.f);
+      imgEl.style.opacity = 0;
+      setTimeout(function(){
+        imgEl.src = url;
+        capEl.textContent = p.t + (p.d ? '\u3000' + p.d : '');
+        imgEl.onload = function(){ imgEl.style.opacity = 1; };
+      }, 800);
+    }
+    order = shuffle(pics.slice());
+    showNext();
+    setInterval(showNext, 4500);
+  })();
+  </script>
+  <!-- ══ /PICTURE SLIDESHOW ══ -->
+
   <h1 id="hero-h1">
     <ruby><span style="color:#F9A825">時</span><span style="color:#A1887F">代</span><rt>じだい</rt></ruby>を<ruby><span style="color:#EC407A">繋</span><rt>つな</rt></ruby>ぐ、<br>
     <ruby><span style="color:#AB47BC">自</span><span style="color:#AB47BC">己</span><span style="color:#66BB6A">成</span><span style="color:#A1887F">長</span><rt>じこせいちょう</rt></ruby>の<ruby><span style="color:#EC407A">連</span><span style="color:#EC407A">鎖</span><rt>れんさ</rt></ruby>
@@ -430,71 +519,7 @@ footer p { font-size: 11px; color: var(--ink3); letter-spacing: .06em; line-heig
       <span class="stat-num"><ruby>複利<rt>ふくり</rt></ruby></span>
       <span class="stat-label"><ruby>成長<rt>せいちょう</rt></ruby>モデル</span>
     </div>
-<!-- ══════════════════════════════════════════════════════════
-     PICTURE SLIDESHOW — hero-stats の3つ目（複利成長モデル）の
-     直後、</div> で hero-stats が閉じる前に貼り付けてください。
-     picture.dunksoft.jp の picture-index.json をランダム表示。
-     ══════════════════════════════════════════════════════════ -->
-<div class="stat-item" style="margin-left:auto;">
-  <a href="https://picture.dunksoft.jp/" target="_blank"
-     id="pic-slideshow"
-     style="display:block; text-decoration:none; position:relative;
-            width:160px; height:100px; border-radius:4px; overflow:hidden;
-            border:0.5px solid rgba(0,0,0,0.12); background:#f2efe8;">
-    <img id="pic-slide-img" src="" alt=""
-         style="width:100%; height:100%; object-fit:cover; display:block;
-                opacity:0; transition:opacity 0.8s ease;">
-    <div id="pic-slide-cap"
-         style="position:absolute; left:0; right:0; bottom:0;
-                padding:4px 8px; font-size:9px; line-height:1.4;
-                color:#fff; background:linear-gradient(transparent, rgba(0,0,0,0.55));
-                font-family:'Noto Sans JP',sans-serif; letter-spacing:.04em;"></div>
-  </a>
-  <span class="stat-label" style="display:block; margin-top:6px;">
-    <ruby>記憶<rt>きおく</rt></ruby>の<ruby>連鎖<rt>れんさ</rt></ruby> / picture →
-  </span>
-</div>
 
-<script>
-(function(){
-  var BASE = 'https://picture.dunksoft.jp/';
-  var imgEl = document.getElementById('pic-slide-img');
-  var capEl = document.getElementById('pic-slide-cap');
-  var pics = [], order = [], idx = 0;
-
-  function shuffle(a){
-    for (var i=a.length-1; i>0; i--){
-      var j = Math.floor(Math.random()*(i+1));
-      var t=a[i]; a[i]=a[j]; a[j]=t;
-    }
-    return a;
-  }
-
-  function showNext(){
-    if (!pics.length) return;
-    if (idx >= order.length){ order = shuffle(pics.slice()); idx = 0; }
-    var p = order[idx++];
-    var url = BASE + encodeURIComponent(p.file);
-    imgEl.style.opacity = 0;
-    setTimeout(function(){
-      imgEl.src = url;
-      capEl.textContent = (p.title || '') + (p.date ? '　' + p.date : '');
-      imgEl.onload = function(){ imgEl.style.opacity = 1; };
-    }, 800);
-  }
-
-  fetch(BASE + 'picture-index.json')
-    .then(function(r){ return r.json(); })
-    .then(function(data){
-      pics = data;
-      order = shuffle(pics.slice());
-      showNext();
-      setInterval(showNext, 4500);
-    })
-    .catch(function(){ /* 読み込み失敗時は静かに何もしない */ });
-})();
-</script>
-<!-- ══════════ /PICTURE SLIDESHOW ══════════ -->
 
   </div>
 </section>
