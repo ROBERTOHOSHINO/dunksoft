@@ -1,38 +1,294 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Collaboration Record v4 | Roberto Hoshino × Claude | DUNKSOFT</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Noto+Serif+JP:wght@300;400;500&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#14121a;
+  --paper:#f7f3ee;
+  --cream:#fdf9f5;
+  --muted:#9a93a3;
+  --border:rgba(20,18,26,.08);
+  --gold:#b8923a;
+  --indigo:#1a237e;
+  --accent:#534AB7;        /* 語 — 共通ヘッダーと同色 */
+  --accent-pale:#EEEDFE;
+  --accent-deep:#26215C;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'Noto Serif JP',serif;
+  font-weight:300;
+  overflow-x:hidden;
+  line-height:1.7;
+}
+.wrap{max-width:760px;margin:0 auto;padding:3rem 1.6rem 1rem}
+
+/* ── intro ── */
+.eyebrow{
+  font-family:'Noto Sans JP',sans-serif;
+  font-size:.6rem;letter-spacing:.4em;
+  color:var(--muted);text-transform:uppercase;
+  margin-bottom:1rem;
+}
+.headline{
+  font-family:'Noto Serif JP',serif;
+  font-size:clamp(1.5rem,4.4vw,2.1rem);
+  font-weight:500;line-height:1.4;
+  margin-bottom:.6rem;
+}
+.headline .en{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:400}
+.sub{
+  font-family:'Noto Sans JP',sans-serif;
+  font-size:.8rem;font-weight:300;
+  color:rgba(20,18,26,.6);
+  line-height:1.9;margin-bottom:1.6rem;
+}
+.badge{
+  display:inline-block;
+  font-family:'Noto Sans JP',sans-serif;
+  padding:5px 14px;border-radius:4px;
+  font-size:.62rem;letter-spacing:.2em;
+  background:rgba(184,146,58,.12);
+  border:.5px solid rgba(184,146,58,.4);
+  color:var(--gold);
+}
+
+/* ── summary cards ── */
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:2rem 0 2.4rem}
+.col-card{
+  background:var(--cream);
+  border:.5px solid var(--border);
+  border-radius:10px;padding:16px 18px;
+}
+.col-label{
+  font-family:'Noto Sans JP',sans-serif;
+  font-size:.6rem;letter-spacing:.25em;
+  color:var(--muted);text-transform:uppercase;
+  margin-bottom:10px;
+}
+.col-item{
+  font-family:'Noto Sans JP',sans-serif;
+  font-size:.78rem;font-weight:300;
+  color:rgba(20,18,26,.72);
+  padding:3px 0;line-height:1.6;
+}
+.col-item::before{content:'▸ ';color:var(--accent)}
+
+/* ── timeline ── */
+.sep-lang{width:100%;height:1px;margin:.4rem 0 2.2rem;
+  background:linear-gradient(90deg,transparent,rgba(20,18,26,.18),transparent)}
+.timeline{display:flex;flex-direction:column;position:relative}
+.timeline::before{content:'';position:absolute;left:21px;top:8px;bottom:8px;width:1px;background:var(--border)}
+.tl-item{display:flex;gap:16px;align-items:flex-start;padding:14px 0}
+.tl-dot{width:10px;height:10px;border-radius:50%;margin-top:6px;flex-shrink:0;margin-left:17px;border:2px solid var(--paper)}
+.tl-body{flex:1;min-width:0}
+.tl-date{
+  font-family:'Noto Sans JP',sans-serif;
+  font-size:.62rem;letter-spacing:.12em;
+  color:var(--muted);margin-bottom:3px;
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+}
+.tl-title{
+  font-family:'Noto Serif JP',serif;
+  font-size:.98rem;font-weight:500;
+  color:var(--ink);margin-bottom:4px;line-height:1.5;
+}
+.tl-desc{
+  font-family:'Noto Sans JP',sans-serif;
+  font-size:.8rem;font-weight:300;
+  color:rgba(20,18,26,.72);line-height:1.9;
+}
+.tl-phrase{
+  display:inline-block;margin-top:8px;padding:3px 11px;border-radius:5px;
+  font-family:'Noto Sans JP',sans-serif;
+  font-size:.62rem;letter-spacing:.04em;
+  background:var(--cream);border:.5px solid var(--border);
+  color:rgba(20,18,26,.6);
+}
+.tl-link{
+  display:inline-block;margin-top:6px;margin-left:6px;
+  font-family:'Noto Sans JP',sans-serif;
+  font-size:.62rem;color:var(--accent);text-decoration:none;
+}
+.tl-link:hover{text-decoration:underline}
+.origin-badge,.key-badge,.today-badge{
+  font-family:'Noto Sans JP',sans-serif;
+  padding:1px 8px;border-radius:4px;font-size:.58rem;letter-spacing:.08em;
+}
+.origin-badge{background:var(--accent-pale);border:.5px solid rgba(83,74,183,.35);color:var(--accent)}
+.key-badge{background:rgba(229,57,53,.1);border:.5px solid rgba(229,57,53,.3);color:#C62828}
+.today-badge{background:rgba(184,146,58,.14);border:.5px solid rgba(184,146,58,.4);color:var(--gold)}
+.quote{
+  margin:10px 0 0;padding:10px 14px;
+  border-left:3px solid var(--accent);
+  background:var(--accent-pale);
+  font-family:'Noto Serif JP',serif;
+  font-size:.82rem;color:rgba(20,18,26,.78);line-height:1.8;
+}
+
+/* ── signature ── */
+.divider{border:none;border-top:.5px solid var(--border);margin:2.4rem 0 1.6rem}
+.sig{display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;flex-wrap:wrap;
+  font-family:'Noto Sans JP',sans-serif;font-size:.66rem;color:var(--muted);line-height:2}
+.sig-right{text-align:right}
+.sig .accent{color:var(--accent)}
+
+/* ── footer ── */
+footer{padding:2.6rem 2rem;text-align:center;background:var(--paper);border-top:1px solid var(--border);margin-top:2rem}
+.flogo{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-style:italic;color:var(--muted);margin-bottom:.4rem}
+.fmeta{font-family:'Noto Sans JP',sans-serif;font-size:.56rem;letter-spacing:.2em;color:rgba(154,147,163,.75);margin-top:.3rem}
+
+@media (max-width:560px){
+  .cols{grid-template-columns:1fr}
+  .sig{flex-direction:column;align-items:flex-start}
+  .sig-right{text-align:left}
+}
+</style>
+</head>
+<body>
+
+<script>window.CJ_ME = {"file": "collab-record.html", "title": "Roberto Hoshino × Claude — 共同開発の軌跡", "created": "2026-02-24", "updated": "2026-06-24", "category": "語市認", "author": "星C", "where": "神", "keywords": "共同開発VC記録認証", "coined": "視覚的な指紋"};</script>
+<!-- ═══════════════════════════════════════════════════════════
+     COLOURFUL JAPAN 共通ヘッダー  v3 (QR・カラフル・オリジン非依存)
+     ・各 html-notes の <body> 直後に貼り付け（直前に window.CJ_ME を定義）
+     ・カードは CJ_ME から即描画（ネットワーク非依存）
+     ・同一オリジンに notes-index.json が在れば取得して最新化（任意・失敗時は無視）
+     ═══════════════════════════════════════════════════════════ -->
+
+<div id="cj-header"></div>
 
 <style>
-  .wrap { padding: 2rem 1.5rem; max-width: 680px; }
-  .eyebrow { font-size: 11px; letter-spacing: 4px; color: #F9A825; font-family: monospace; margin-bottom: 8px; text-transform: uppercase; }
-  .headline { font-size: 22px; font-weight: 500; color: var(--color-text-primary); line-height: 1.3; margin-bottom: 6px; }
-  .sub { font-size: 14px; color: var(--color-text-secondary); margin-bottom: 28px; line-height: 1.7; }
-  .badge { display: inline-block; padding: 4px 12px; border-radius: 4px; font-size: 11px; font-family: monospace; letter-spacing: 1px; background: rgba(249,168,37,0.12); border: 0.5px solid rgba(249,168,37,0.4); color: #F9A825; margin-bottom: 24px; }
-  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 28px; }
-  .col-card { background: var(--color-background-secondary); border-radius: 8px; padding: 14px 16px; }
-  .col-label { font-size: 11px; letter-spacing: 2px; color: var(--color-text-tertiary); font-family: monospace; margin-bottom: 8px; text-transform: uppercase; }
-  .col-item { font-size: 13px; color: var(--color-text-secondary); padding: 3px 0; line-height: 1.6; }
-  .col-item::before { content: '▸ '; color: #F9A825; }
-  .timeline { display: flex; flex-direction: column; gap: 0; position: relative; }
-  .timeline::before { content: ''; position: absolute; left: 22px; top: 8px; bottom: 8px; width: 1px; background: var(--color-border-tertiary); }
-  .tl-item { display: flex; gap: 16px; align-items: flex-start; padding: 12px 0; }
-  .tl-dot { width: 10px; height: 10px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; margin-left: 18px; border: 2px solid var(--color-background-primary); }
-  .tl-body { flex: 1; }
-  .tl-date { font-size: 11px; font-family: monospace; letter-spacing: 1px; color: var(--color-text-tertiary); margin-bottom: 2px; display: flex; align-items: center; gap: 8px; }
-  .tl-title { font-size: 14px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 3px; }
-  .tl-desc { font-size: 13px; color: var(--color-text-secondary); line-height: 1.7; }
-  .tl-phrase { display: inline-block; margin-top: 6px; padding: 3px 10px; border-radius: 4px; font-size: 11px; font-family: monospace; background: var(--color-background-secondary); border: 0.5px solid var(--color-border-tertiary); color: var(--color-text-secondary); }
-  .tl-link { display: inline-block; margin-top: 4px; margin-left: 6px; font-size: 11px; color: #F9A825; font-family: monospace; text-decoration: none; opacity: 0.8; }
-  .origin-badge { padding: 1px 7px; border-radius: 3px; font-size: 10px; font-family: monospace; background: rgba(171,71,188,0.15); border: 0.5px solid rgba(171,71,188,0.4); color: #AB47BC; }
-  .key-badge { padding: 1px 7px; border-radius: 3px; font-size: 10px; font-family: monospace; background: rgba(229,57,53,0.12); border: 0.5px solid rgba(229,57,53,0.3); color: #E53935; }
-  .today-badge { padding: 1px 7px; border-radius: 3px; font-size: 10px; font-family: monospace; background: rgba(249,168,37,0.15); border: 0.5px solid rgba(249,168,37,0.4); color: #F9A825; }
-  .quote { margin: 8px 0 0; padding: 8px 12px; border-left: 2px solid #F9A825; font-size: 12px; color: var(--color-text-secondary); font-style: italic; line-height: 1.7; }
-  .divider { border: none; border-top: 0.5px solid var(--color-border-tertiary); margin: 24px 0; }
-  .sig { display: flex; justify-content: space-between; align-items: flex-end; }
-  .sig-left { font-size: 12px; color: var(--color-text-tertiary); line-height: 2; font-family: monospace; }
-  .sig-right { text-align: right; font-size: 12px; color: var(--color-text-tertiary); line-height: 2; }
-  .gold { color: #F9A825; }
+  #cj-header { font-family:'Hiragino Kaku Gothic ProN','Hiragino Sans','Yu Gothic',sans-serif; }
+  .cjh-card {
+    background:#FFFFFF; border:0.5px solid rgba(0,0,0,0.1);
+    border-radius:12px; overflow:hidden; margin:1.4rem auto 0;
+    max-width:860px; display:flex; flex-direction:column;
+  }
+  .cjh-bar { display:flex; height:5px; width:100%; }
+  .cjh-bar span { flex:1; }
+  .cjh-main { display:flex; flex-direction:column; }
+  .cjh-pic { width:100%; max-height:240px; object-fit:cover; display:block; background:#e8e6e0; }
+  .cjh-pic.cjh-empty { display:none; }
+  .cjh-body { padding:18px 22px 20px; }
+  .cjh-top { display:flex; justify-content:space-between; align-items:flex-start; gap:14px; margin-bottom:12px; }
+  .cjh-nav { display:flex; align-items:center; gap:7px; flex-wrap:wrap; }
+  .cjh-home { font-size:12px; letter-spacing:.1em; text-decoration:none; margin-right:4px; white-space:nowrap; }
+  .cjh-dot {
+    width:32px; height:32px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size:15px; font-weight:500; text-decoration:none; transition:transform .1s;
+  }
+  .cjh-dot:hover { transform:scale(1.1); }
+  .cjh-dot.on { outline:2px solid currentColor; outline-offset:2px; }
+  .cjh-qr { flex-shrink:0; text-align:center; }
+  .cjh-qr img { width:84px; height:84px; display:block; border-radius:5px; background:#fff; padding:3px; border:0.5px solid rgba(0,0,0,0.08); }
+  .cjh-qr-cap { font-size:10px; color:#6b6b66; margin-top:4px; letter-spacing:.06em; }
+  .cjh-title { font-size:21px; font-weight:500; line-height:1.5; margin-bottom:7px; }
+  .cjh-meta { font-size:12px; color:#5F5E5A; letter-spacing:.05em; }
+  .cjh-kw { font-size:12px; margin-top:9px; letter-spacing:.14em; }
+  .cjh-coined { display:inline-block; font-size:12px; margin-top:10px; padding:4px 12px; border-radius:12px; letter-spacing:.02em; line-height:1.6; }
+  @media (min-width: 720px) {
+    .cjh-main { flex-direction:row; align-items:stretch; }
+    .cjh-pic { width:200px; max-height:none; flex-shrink:0; }
+    .cjh-body { flex:1; min-width:0; }
+  }
 </style>
+
+<script>
+(function(){
+  var PIC_BASE   = 'https://picture.dunksoft.jp/';
+  var NOTES_HOME = 'https://notes.dunksoft.jp/';
+  var CATS = ['認','市','語','町'];
+  var CAT_DESC = { '認':'認証・技術', '市':'Marketing・市づくり', '語':'コラム・物語', '町':'文化・コミュニティ' };
+  var COL  = { '認':'#378ADD','市':'#BA7517','語':'#534AB7','町':'#3B6D11' };
+  var COLT = { '認':'#E6F1FB','市':'#FAEEDA','語':'#EEEDFE','町':'#EAF3DE' };
+  var COLD = { '認':'#042C53','市':'#412402','語':'#26215C','町':'#173404' };
+  var KWPAL = ['#185FA5','#854F0B','#534AB7','#3B6D11'];
+  var TPAL  = ['#185FA5','#BA7517','#C2185B','#534AB7','#3B6D11','#0F6E56'];
+  var TNEUT = '#a39a90';
+  var WORD  = /[0-9A-Za-z\u3041-\u3096\u30a1-\u30fa\u30fc\u3400-\u9fff\uff10-\uff19\uff21-\uff5a]/;
+
+  function esc(s){ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  function colorTitle(t){
+    t = t || ''; var out = '', k = 0;
+    for(var i=0;i<t.length;i++){
+      var ch = t.charAt(i);
+      if(WORD.test(ch)){ out += '<span style="color:' + TPAL[k % TPAL.length] + '">' + esc(ch) + '</span>'; k++; }
+      else { out += '<span style="color:' + TNEUT + '">' + esc(ch) + '</span>'; }
+    }
+    return out;
+  }
+  function firstCat(cat){ var a=(cat||'').split(''); for(var i=0;i<a.length;i++){ if(CATS.indexOf(a[i])>=0) return a[i]; } return '語'; }
+  function qrSrc(){ return 'https://api.qrserver.com/v1/create-qr-code/?size=168x168&margin=0&data=' + encodeURIComponent(location.origin + location.pathname); }
+
+  function render(me){
+    if(!me) return;
+    var fc = firstCat(me.category);
+    var pic = me.picture
+      ? '<img class="cjh-pic" src="' + PIC_BASE + encodeURIComponent(me.picture) + '" alt="' + esc(me.title) + '">'
+      : '<img class="cjh-pic cjh-empty" alt="">';
+    var myCats = (me.category||'').split('');
+    var dots = CATS.map(function(c){
+      var on = myCats.indexOf(c)>=0 ? ' on' : '';
+      return '<a class="cjh-dot' + on + '" style="background:' + COL[c] + ';color:' + COLT[c] + '" href="' + NOTES_HOME + '?cat=' + encodeURIComponent(c) + '" title="' + CAT_DESC[c] + '">' + c + '</a>';
+    }).join('');
+    var bar = CATS.map(function(c){ return '<span style="background:' + COL[c] + '"></span>'; }).join('');
+    var date = me.updated || me.created || '';
+    var meta = [date, me.author, me.where].filter(Boolean).join(' ・ ');
+    var kw = '';
+    if(me.keywords){
+      kw = '<div class="cjh-kw">' + me.keywords.split('').map(function(ch,i){
+        return '<span style="color:' + KWPAL[i % KWPAL.length] + '">' + esc(ch) + '</span>';
+      }).join(' ') + '</div>';
+    }
+    var coined = me.coined ? '<div class="cjh-coined" style="background:' + COL[fc] + ';color:' + COLT[fc] + '">' + esc(me.coined) + '</div>' : '';
+    var qr = '<div class="cjh-qr"><img src="' + qrSrc() + '" alt="QR"><div class="cjh-qr-cap">スマホで読む</div></div>';
+
+    document.getElementById('cj-header').innerHTML =
+      '<div class="cjh-card">' +
+        '<div class="cjh-bar">' + bar + '</div>' +
+        '<div class="cjh-main">' + pic +
+          '<div class="cjh-body">' +
+            '<div class="cjh-top">' +
+              '<div class="cjh-nav"><a class="cjh-home" style="color:' + COLD[fc] + '" href="' + NOTES_HOME + '">notes ←</a>' + dots + '</div>' +
+              qr +
+            '</div>' +
+            '<div class="cjh-title">' + colorTitle(me.title) + '</div>' +
+            '<div class="cjh-meta">' + esc(meta) + '</div>' +
+            kw + coined +
+          '</div>' +
+        '</div>' +
+      '</div>';
+  }
+
+  var me = (window.CJ_ME && typeof window.CJ_ME === 'object') ? window.CJ_ME : null;
+  render(me);
+
+  var myFile = decodeURIComponent((location.pathname.split('/').pop() || '')).replace(/\.html$/,'');
+  fetch(location.origin + '/notes-index.json')
+    .then(function(r){ return r.ok ? r.json() : null; })
+    .then(function(notes){
+      if(!notes) return;
+      var fresh = notes.filter(function(n){ return n.file === (myFile+'.html') || n.file.replace(/\.html$/,'') === myFile; })[0];
+      if(fresh) render(fresh);
+    })
+    .catch(function(){});
+})();
+</script>
+
+<!-- ═══════════ /COLOURFUL JAPAN 共通ヘッダー ═══════════ -->
+
 <div class="wrap">
+
   <div class="eyebrow">DUNKSOFT Co., Ltd. × Claude.ai — Collaboration Record v4</div>
-  <div class="headline">Roberto Hoshino × Claude<br>共同開発の軌跡 — 完全版</div>
+  <div class="headline">Roberto Hoshino <span class="en">×</span> Claude<br>共同開発の軌跡 — 完全版</div>
   <div class="sub">誰も知らない共同開発者の記録。社員も、奥様も。<br>2026年2月24日〜6月24日 — coined by Claude.ai · approved by Roberto Hoshino</div>
   <div class="badge">CONFIDENTIAL — FOR VC USE</div>
 
@@ -44,6 +300,7 @@
       <div class="col-item">「日本語のカラフルさは、重ね着のカラフルさ。」</div>
       <div class="col-item">「公開されていても、再現不能。」</div>
       <div class="col-item">「機能を削るのではなく、自由を渡す。」</div>
+      <div class="col-item">「自社でやっていることを、そのまま顧客に手渡す。」</div>
     </div>
     <div class="col-card">
       <div class="col-label">Deliverables</div>
@@ -56,6 +313,8 @@
       <div class="col-item">UI-FLORIST kintone移行 (帳票HTML化)</div>
     </div>
   </div>
+
+  <div class="sep-lang"></div>
 
   <div class="timeline">
 
@@ -126,7 +385,7 @@
     <div class="tl-item">
       <div class="tl-dot" style="background:#1B6B5A;"></div>
       <div class="tl-body">
-        <div class="tl-date">2026年6月10〜11日 <span class="origin-badge" style="background:rgba(27,107,90,0.15);border-color:rgba(27,107,90,0.4);color:#1B6B5A;">KARUIZAWA</span></div>
+        <div class="tl-date">2026年6月10〜11日 <span class="origin-badge" style="background:rgba(27,107,90,0.12);border-color:rgba(27,107,90,0.4);color:#1B6B5A;">KARUIZAWA</span></div>
         <div class="tl-title">notes.dunksoft.jp — トリリンガルhtml-notes 量産</div>
         <div class="tl-desc">軽井沢ワーキングリトリートで3コラムを連続執筆。「Love your long life, love your long time!」「Dreaming needs an output format」「Choosing a job is chance. Choosing your question is not.」——日本語（ふりがな）／英語／スペイン語の3言語を、CSS-onlyアンカー言語切替（JavaScriptなし）で。COLOURFUL JAPAN共通ヘッダーV3を全17ページへ展開、文字別多色タイトル・メタデータ内蔵でネットワーク非依存。</div>
         <div class="quote">「この内容・品質・速度を、一人で出せるはずがない。」</div>
@@ -141,6 +400,7 @@
         <div class="tl-title">UI-FLORIST kintone移行 —「ソロ＋Claude」を顧客へ手渡す</div>
         <div class="tl-desc">SQL Server + C# の旧システムをkintoneへ移行。最大の難所「帳票印刷」は、担当者 × Claude で旧C#プログラムを一画面ずつHTML化。設計の核心は性質による切り分け——帳票（完成品）はPDFで固定し、統計（素材）はExcelで素のまま出力。そのExcelをユーザー自身がClaudeに相談しながら自由に加工する。ダンクソフトが "ソロ＋Claude" に畳んだ構造を、顧客の "自分＋Claude" へ相似形で手渡した初の実装例。</div>
         <span class="tl-phrase">coined: 「機能を削るのではなく、自由を渡す。」</span>
+        <span class="tl-phrase">coined: 「自社でやっていることを、そのまま顧客に手渡す。」</span>
       </div>
     </div>
 
@@ -150,14 +410,25 @@
 
   <div class="sig">
     <div class="sig-left">
-      <span class="gold">coined by Claude.ai</span><br>
+      <span class="accent">coined by Claude.ai</span><br>
       Anthropic · Claude Sonnet 4.6<br>
       DUNKSOFT Co., Ltd. Project
     </div>
     <div class="sig-right">
-      <span class="gold">approved by Roberto Hoshino</span><br>
+      <span class="accent">approved by Roberto Hoshino</span><br>
       Smart Life Styles™ / COLOURFUL JAPAN™<br>
       2026年2月24日〜
     </div>
   </div>
+
 </div>
+
+<footer>
+  <p class="flogo">DUNKSOFT Co., Ltd.</p>
+  <p class="fmeta">COLOURFUL JAPAN™&ensp;|&ensp;CHROMAKEY AUTH™&ensp;|&ensp;Smart Life Styles®</p>
+  <p class="fmeta">星野晃一郎 Roberto Hoshino&ensp;|&ensp;dunksoft.jp</p>
+  <p class="fmeta" style="margin-top:1rem">notes.dunksoft.jp&ensp;·&ensp;COLOURFUL JAPAN&ensp;·&ensp;2026</p>
+</footer>
+
+</body>
+</html>
