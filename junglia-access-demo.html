@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JUNGLIA｜アクセス＆ガイド（提案デモ）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+TC:wght@400;700&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0C241D;
+    --canopy:#143A2E;
+    --canopy-2:#1C4A3A;
+    --leaf:#4FB477;
+    --lime:#CDEB5B;
+    --sand:#ECE4D0;
+    --cream:#EFF3EA;
+    --muted:#9DB3A6;
+    --line:rgba(207,229,200,.16);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Noto Sans JP","Noto Sans TC","Noto Sans KR",sans-serif;
+    background:
+      radial-gradient(120% 80% at 80% -10%, rgba(79,180,119,.18), transparent 55%),
+      radial-gradient(90% 70% at -10% 10%, rgba(205,235,91,.08), transparent 50%),
+      var(--ink);
+    color:var(--cream);
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  ruby rt{font-size:.55em;color:var(--lime);font-weight:500;letter-spacing:0}
+  body.no-furi rt{display:none}
+  .wrap{max-width:880px;margin:0 auto;padding:0 22px}
+
+  /* top bar */
+  .topbar{
+    position:sticky;top:0;z-index:50;
+    backdrop-filter:blur(12px);
+    background:linear-gradient(var(--ink),rgba(12,36,29,.78));
+    border-bottom:1px solid var(--line);
+  }
+  .topbar .wrap{display:flex;align-items:center;gap:14px;padding-top:12px;padding-bottom:12px;flex-wrap:wrap}
+  .badge{
+    font-family:"Zen Kaku Gothic New",sans-serif;
+    font-size:11px;font-weight:700;letter-spacing:.14em;
+    color:var(--ink);background:var(--lime);
+    padding:5px 10px;border-radius:999px;white-space:nowrap;
+  }
+  .controls{margin-left:auto;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .langset{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+  .langset button{
+    font-family:inherit;font-size:13px;font-weight:700;
+    background:transparent;color:var(--muted);border:0;cursor:pointer;
+    padding:7px 13px;transition:background .2s,color .2s;
+  }
+  .langset button:hover{color:var(--cream)}
+  .langset button[aria-pressed="true"]{background:var(--leaf);color:var(--ink)}
+  .furi-btn{
+    font-family:inherit;font-size:12px;font-weight:700;letter-spacing:.04em;
+    background:transparent;color:var(--lime);
+    border:1px solid var(--lime);border-radius:999px;
+    padding:7px 12px;cursor:pointer;transition:background .2s,color .2s;white-space:nowrap;
+  }
+  .furi-btn[aria-pressed="false"]{color:var(--muted);border-color:var(--line)}
+  .furi-btn.hidden{display:none}
+  button:focus-visible,a:focus-visible{outline:2px solid var(--lime);outline-offset:3px}
+
+  /* hero */
+  .hero{padding:64px 0 40px;position:relative}
+  .eyebrow{
+    font-family:"Zen Kaku Gothic New",sans-serif;
+    font-size:13px;font-weight:700;letter-spacing:.1em;color:var(--leaf);
+    margin-bottom:18px;display:inline-block;
+  }
+  .hero h1{
+    font-family:"Zen Kaku Gothic New",sans-serif;
+    font-weight:900;line-height:1.15;
+    font-size:clamp(34px,7vw,58px);
+    letter-spacing:-.01em;margin-bottom:18px;
+  }
+  .hero h1 .glow{color:var(--lime)}
+  .hero p.sub{font-size:clamp(15px,2.4vw,18px);color:var(--sand);max-width:46ch}
+
+  /* section heading */
+  .sec{padding:38px 0}
+  .sec-label{
+    font-family:"Zen Kaku Gothic New",sans-serif;
+    display:flex;align-items:center;gap:12px;
+    font-size:14px;font-weight:700;letter-spacing:.12em;color:var(--muted);
+    text-transform:uppercase;margin-bottom:28px;
+  }
+  .sec-label::after{content:"";flex:1;height:1px;background:var(--line)}
+
+  /* TRAIL — signature element */
+  .trail{position:relative;padding-left:8px}
+  .trail::before{
+    content:"";position:absolute;left:23px;top:14px;bottom:34px;
+    width:2px;border-left:2px dashed var(--leaf);opacity:.5;
+  }
+  .stop{position:relative;display:grid;grid-template-columns:48px 1fr;gap:20px;
+    padding:0 0 30px;opacity:0;transform:translateY(14px);
+    animation:rise .6s ease forwards;
+  }
+  .stop:nth-child(2){animation-delay:.05s}
+  .stop:nth-child(3){animation-delay:.18s}
+  .stop:nth-child(4){animation-delay:.31s}
+  .marker{
+    width:48px;height:48px;border-radius:50%;
+    background:var(--canopy);border:2px solid var(--leaf);
+    display:flex;align-items:center;justify-content:center;
+    font-family:"Zen Kaku Gothic New",sans-serif;font-weight:900;font-size:18px;color:var(--lime);
+    position:relative;z-index:2;flex-shrink:0;
+  }
+  .stop:last-of-type .marker{background:var(--lime);color:var(--ink);border-color:var(--lime)}
+  .stop-body{padding-top:4px}
+  .stop-body h3{
+    font-family:"Zen Kaku Gothic New",sans-serif;
+    font-size:19px;font-weight:700;margin-bottom:6px;
+  }
+  .stop-body .tag{font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--leaf);display:block;margin-bottom:4px}
+  .stop-body p{font-size:15px;color:var(--sand)}
+
+  .note{
+    margin-top:6px;background:var(--canopy);border:1px solid var(--line);
+    border-radius:16px;padding:20px 22px;
+  }
+  .note h4{font-family:"Zen Kaku Gothic New",sans-serif;font-size:14px;color:var(--lime);margin-bottom:8px;font-weight:700}
+  .note p{font-size:14px;color:var(--sand)}
+
+  /* attraction card */
+  .card{
+    background:linear-gradient(160deg,var(--canopy-2),var(--canopy));
+    border:1px solid var(--line);border-radius:22px;overflow:hidden;
+  }
+  .card-top{
+    padding:30px 28px 24px;
+    background:
+      radial-gradient(120% 100% at 100% 0%, rgba(205,235,91,.12), transparent 60%);
+  }
+  .card .tag{font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--lime);display:block;margin-bottom:10px}
+  .card h3{font-family:"Zen Kaku Gothic New",sans-serif;font-size:clamp(22px,4vw,28px);font-weight:900;margin-bottom:14px}
+  .card p.lead{font-size:15px;color:var(--sand)}
+  .meta{display:flex;flex-wrap:wrap;gap:10px;padding:18px 28px 26px;border-top:1px solid var(--line)}
+  .chip{
+    font-size:12px;font-weight:500;color:var(--cream);
+    background:rgba(207,229,200,.08);border:1px solid var(--line);
+    padding:6px 12px;border-radius:999px;
+  }
+  .chip b{color:var(--lime);font-weight:700}
+
+  footer{padding:48px 0 60px;border-top:1px solid var(--line);margin-top:30px}
+  footer .wrap{display:flex;flex-wrap:wrap;gap:8px;align-items:baseline;justify-content:space-between}
+  footer .credit{font-family:"Zen Kaku Gothic New",sans-serif;font-size:13px;color:var(--muted)}
+  footer .credit b{color:var(--cream);font-weight:700}
+  footer .scope{font-size:12px;color:var(--muted);max-width:44ch}
+
+  @keyframes rise{to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){
+    .stop{animation:none;opacity:1;transform:none}
+    html{scroll-behavior:auto}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <span class="badge" data-i18n="badge">提案デモ・非公式</span>
+    <div class="controls">
+      <button class="furi-btn" id="furiBtn" aria-pressed="true">ふりがな ON</button>
+      <div class="langset" role="group" aria-label="Language">
+        <button data-lang="jp" aria-pressed="true">日本語</button>
+        <button data-lang="en" aria-pressed="false">EN</button>
+        <button data-lang="tc" aria-pressed="false">繁中</button>
+        <button data-lang="ko" aria-pressed="false">한국어</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow" data-i18n="eyebrow"></span>
+    <h1 data-i18n="title"></h1>
+    <p class="sub" data-i18n="sub"></p>
+  </div>
+</header>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-label" data-i18n="access_label"></div>
+
+    <div class="trail">
+      <div class="stop">
+        <div class="marker">01</div>
+        <div class="stop-body">
+          <span class="tag" data-i18n="s1tag"></span>
+          <h3 data-i18n="s1title"></h3>
+          <p data-i18n="s1body"></p>
+        </div>
+      </div>
+      <div class="stop">
+        <div class="marker">02</div>
+        <div class="stop-body">
+          <span class="tag" data-i18n="s2tag"></span>
+          <h3 data-i18n="s2title"></h3>
+          <p data-i18n="s2body"></p>
+        </div>
+      </div>
+      <div class="stop">
+        <div class="marker">03</div>
+        <div class="stop-body">
+          <span class="tag" data-i18n="s3tag"></span>
+          <h3 data-i18n="s3title"></h3>
+          <p data-i18n="s3body"></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="note">
+      <h4 data-i18n="why_title"></h4>
+      <p data-i18n="why_body"></p>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-label" data-i18n="attr_label"></div>
+    <div class="card">
+      <div class="card-top">
+        <span class="tag" data-i18n="attr_tag"></span>
+        <h3 data-i18n="attr_title"></h3>
+        <p class="lead" data-i18n="attr_body"></p>
+      </div>
+      <div class="meta">
+        <span class="chip" data-i18n="chip1"></span>
+        <span class="chip" data-i18n="chip2"></span>
+        <span class="chip" data-i18n="chip3"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span class="credit" data-i18n="credit"></span>
+    <span class="scope" data-i18n="scope"></span>
+  </div>
+</footer>
+
+<script>
+const DICT = {
+  jp:{
+    badge:"提案デモ・非公式",
+    eyebrow:"はじめての方・海外からのお客さまへ",
+    title:'<ruby>迷<rt>まよ</rt></ruby>わず<ruby>入園<rt>にゅうえん</rt></ruby>。<br><span class="glow"><ruby>駐車<rt>ちゅうしゃ</rt></ruby>から<ruby>入園<rt>にゅうえん</rt></ruby>まで</span>のガイド。',
+    sub:'<ruby>周辺<rt>しゅうへん</rt></ruby>の<ruby>駐車場<rt>ちゅうしゃじょう</rt></ruby>から<ruby>無料<rt>むりょう</rt></ruby>シャトルでゲートへ。はじめてでも、3つの<ruby>step<rt>ステップ</rt></ruby>で<ruby>分<rt>わ</rt></ruby>かります。',
+    access_label:"アクセスの流れ / How to arrive",
+    s1tag:"STEP 01",
+    s1title:'<ruby>駐車<rt>ちゅうしゃ</rt></ruby>する',
+    s1body:'<ruby>指定<rt>してい</rt></ruby>の<ruby>周辺<rt>しゅうへん</rt></ruby><ruby>駐車場<rt>ちゅうしゃじょう</rt></ruby>にお<ruby>停<rt>と</rt></ruby>めください。ゲート<ruby>前<rt>まえ</rt></ruby>の<ruby>駐車<rt>ちゅうしゃ</rt></ruby>には<ruby>限<rt>かぎ</rt></ruby>りがあります。',
+    s2tag:"STEP 02",
+    s2title:'シャトルに<ruby>乗<rt>の</rt></ruby>る',
+    s2body:'<ruby>無料<rt>むりょう</rt></ruby>のマイクロバスでゲートまで。<ruby>約<rt>やく</rt></ruby>◯<ruby>分<rt>ぷん</rt></ruby><ruby>間隔<rt>かんかく</rt></ruby>で<ruby>運行<rt>うんこう</rt></ruby>（※<ruby>実際<rt>じっさい</rt></ruby>の<ruby>時刻<rt>じこく</rt></ruby>は<ruby>要<rt>よう</rt></ruby><ruby>確認<rt>かくにん</rt></ruby>）。',
+    s3tag:"STEP 03",
+    s3title:'<ruby>入園<rt>にゅうえん</rt></ruby>する',
+    s3body:'ゲートに<ruby>到着<rt>とうちゃく</rt></ruby>。チケットを<ruby>準備<rt>じゅんび</rt></ruby>して、そのまま<ruby>入園<rt>にゅうえん</rt></ruby>。',
+    why_title:"なぜこの方式？",
+    why_body:'<ruby>大自然<rt>だいしぜん</rt></ruby>のなかの<ruby>広大<rt>こうだい</rt></ruby>なパーク。<ruby>渋滞<rt>じゅうたい</rt></ruby>と<ruby>環境<rt>かんきょう</rt></ruby>への<ruby>負担<rt>ふたん</rt></ruby>を<ruby>減<rt>へ</rt></ruby>らすため、パーク＆ライド<ruby>方式<rt>ほうしき</rt></ruby>をとっています。',
+    attr_label:"楽しみ方の一例 / Sample experience",
+    attr_tag:"ATTRACTION",
+    attr_title:'<ruby>森<rt>もり</rt></ruby>を<ruby>歩<rt>ある</rt></ruby>く<ruby>恐竜<rt>きょうりゅう</rt></ruby><ruby>探検<rt>たんけん</rt></ruby>',
+    attr_body:'<ruby>鬱蒼<rt>うっそう</rt></ruby>とした<ruby>亜熱帯<rt>あねったい</rt></ruby>の<ruby>森<rt>もり</rt></ruby>を、<ruby>自分<rt>じぶん</rt></ruby>の<ruby>足<rt>あし</rt></ruby>で<ruby>進<rt>すす</rt></ruby>む<ruby>探検<rt>たんけん</rt></ruby><ruby>型<rt>がた</rt></ruby>アトラクション。<ruby>茂<rt>しげ</rt></ruby>みの<ruby>奥<rt>おく</rt></ruby>から<ruby>現<rt>あらわ</rt></ruby>れる<ruby>恐竜<rt>きょうりゅう</rt></ruby>と、すぐそこで<ruby>対面<rt>たいめん</rt></ruby>。',
+    chip1:'<ruby>所要<rt>しょよう</rt></ruby>：<b>約◯分</b>',
+    chip2:'<ruby>徒歩<rt>とほ</rt></ruby><ruby>体験<rt>たいけん</rt></ruby>',
+    chip3:'<ruby>雨天<rt>うてん</rt></ruby>：<b>要<ruby>確認<rt>かくにん</rt></ruby></b>',
+    credit:'提案デモ ｜ Concept by <b>あなたのお名前</b>',
+    scope:"多言語＋ふりがな対応・アクセス導線の再設計サンプル。数値（◯）は実データを差し込む箇所です。"
+  },
+  en:{
+    badge:"CONCEPT · UNOFFICIAL",
+    eyebrow:"For first-time & overseas guests",
+    title:'Arrive without the guesswork.<br><span class="glow">From parking to the gate.</span>',
+    sub:"Park nearby, hop on the free shuttle, walk in. Three simple steps — even on your first visit.",
+    access_label:"How to arrive",
+    s1tag:"STEP 01",
+    s1title:"Park",
+    s1body:"Park at a designated lot near the park. Parking at the gate itself is limited.",
+    s2tag:"STEP 02",
+    s2title:"Ride the shuttle",
+    s2body:"Take the free shuttle (microbus) to the gate. Runs about every ○ min (verify actual times).",
+    s3tag:"STEP 03",
+    s3title:"Enter",
+    s3body:"Arrive at the gate, have your ticket ready, and walk straight in.",
+    why_title:"Why a shuttle?",
+    why_body:"It's a vast park set in untouched nature. A park-and-ride system keeps traffic and environmental impact low.",
+    attr_label:"Sample experience",
+    attr_tag:"ATTRACTION",
+    attr_title:"Dinosaur Forest Trek",
+    attr_body:"A walking expedition through dense subtropical forest. Come face to face with dinosaurs emerging from the brush, right in front of you.",
+    chip1:"Duration: <b>~◯ min</b>",
+    chip2:"On foot",
+    chip3:"Rain: <b>check ahead</b>",
+    credit:"Concept demo ｜ by <b>Your Name</b>",
+    scope:"A sample of multilingual + furigana support and redesigned access wayfinding. The ○ values are placeholders for real data."
+  },
+  tc:{
+    badge:"提案範例 · 非官方",
+    eyebrow:"給初次造訪與海外旅客",
+    title:'不再迷路，輕鬆入園。<br><span class="glow">從停車到入園</span>的指南。',
+    sub:"停在周邊停車場，搭乘免費接駁巴士前往大門。即使第一次來，三步驟就懂。",
+    access_label:"交通流程 / How to arrive",
+    s1tag:"STEP 01",
+    s1title:"停車",
+    s1body:"請停在園區周邊的指定停車場。大門前的車位有限。",
+    s2tag:"STEP 02",
+    s2title:"搭接駁巴士",
+    s2body:"搭乘免費接駁巴士（小巴）前往大門。約每○分鐘一班（實際時間請確認）。",
+    s3tag:"STEP 03",
+    s3title:"入園",
+    s3body:"抵達大門，備妥門票即可直接入園。",
+    why_title:"為什麼採用接駁制？",
+    why_body:"這是一座坐落於大自然中的廣闊園區。採用停車轉乘制度，以減少交通與環境負擔。",
+    attr_label:"遊玩範例 / Sample experience",
+    attr_tag:"ATTRACTION",
+    attr_title:"森林恐龍探險",
+    attr_body:"徒步穿越茂密亞熱帶森林的探險型設施。與從草叢中現身的恐龍近距離相遇。",
+    chip1:"所需時間：<b>約○分</b>",
+    chip2:"步行體驗",
+    chip3:"雨天：<b>請確認</b>",
+    credit:"提案範例 ｜ Concept by <b>您的姓名</b>",
+    scope:"多語言＋假名標註與交通動線重新設計的範例。○ 為實際資料的填入處。"
+  },
+  ko:{
+    badge:"제안 데모 · 비공식",
+    eyebrow:"처음 오시는 분·해외 고객님께",
+    title:'헤매지 않고 입장.<br><span class="glow">주차부터 입장까지</span> 안내.',
+    sub:"인근 주차장에 주차하고 무료 셔틀로 정문까지. 처음이라도 3단계면 충분합니다.",
+    access_label:"오시는 길 / How to arrive",
+    s1tag:"STEP 01",
+    s1title:"주차하기",
+    s1body:"지정된 인근 주차장에 주차하세요. 정문 앞 주차는 제한적입니다.",
+    s2tag:"STEP 02",
+    s2title:"셔틀 타기",
+    s2body:"무료 셔틀(미니버스)로 정문까지. 약 ○분 간격 운행(실제 시간 확인 필요).",
+    s3tag:"STEP 03",
+    s3title:"입장하기",
+    s3body:"정문 도착 후 티켓을 준비해 그대로 입장하세요.",
+    why_title:"왜 셔틀 방식인가요?",
+    why_body:"대자연 속 광활한 파크입니다. 교통 혼잡과 환경 부담을 줄이기 위해 파크 앤 라이드 방식을 채택했습니다.",
+    attr_label:"즐기는 법 예시 / Sample experience",
+    attr_tag:"ATTRACTION",
+    attr_title:"숲을 걷는 공룡 탐험",
+    attr_body:"울창한 아열대 숲을 직접 걸으며 즐기는 탐험형 어트랙션. 수풀 속에서 나타나는 공룡과 코앞에서 마주칩니다.",
+    chip1:"소요: <b>약 ○분</b>",
+    chip2:"도보 체험",
+    chip3:"우천: <b>확인 필요</b>",
+    credit:"제안 데모 ｜ Concept by <b>이름</b>",
+    scope:"다국어＋후리가나 지원과 접근 동선 재설계 샘플입니다. ○ 값은 실제 데이터를 넣는 자리입니다."
+  }
+};
+
+const LANG_ATTR = {jp:"ja",en:"en",tc:"zh-Hant",ko:"ko"};
+let current = "jp";
+
+function render(lang){
+  current = lang;
+  document.documentElement.lang = LANG_ATTR[lang];
+  const d = DICT[lang];
+  document.querySelectorAll("[data-i18n]").forEach(el=>{
+    const k = el.getAttribute("data-i18n");
+    if(d[k] !== undefined) el.innerHTML = d[k];
+  });
+  document.querySelectorAll(".langset button").forEach(b=>{
+    b.setAttribute("aria-pressed", b.dataset.lang === lang ? "true":"false");
+  });
+  const furiBtn = document.getElementById("furiBtn");
+  furiBtn.classList.toggle("hidden", lang !== "jp");
+}
+
+document.querySelectorAll(".langset button").forEach(b=>{
+  b.addEventListener("click", ()=> render(b.dataset.lang));
+});
+
+const furiBtn = document.getElementById("furiBtn");
+furiBtn.addEventListener("click", ()=>{
+  const on = furiBtn.getAttribute("aria-pressed") === "true";
+  furiBtn.setAttribute("aria-pressed", String(!on));
+  furiBtn.textContent = on ? "ふりがな OFF" : "ふりがな ON";
+  document.body.classList.toggle("no-furi", on);
+});
+
+render("jp");
+</script>
+</body>
+</html>
