@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ダンクソフト｜Smart Life Styles と動的平衡（提案デモ）</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Noto+Serif+JP:wght@300;400;500&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#14121a; --paper:#f7f3ee; --cream:#fdf9f5; --muted:#9a93a3;
+  --border:rgba(20,18,26,.08); --gold:#b8923a;
+  --accent:#534AB7; --accent-pale:#EEEDFE; --accent-deep:#26215C;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:'Noto Serif JP',serif;font-weight:300;line-height:1.7;overflow-x:hidden}
+.wrap{max-width:760px;margin:0 auto;padding:2.4rem 1.6rem 1rem}
+
+.eyebrow{font-family:'Noto Sans JP',sans-serif;font-size:.6rem;letter-spacing:.34em;color:var(--muted);text-transform:uppercase;margin-bottom:1rem}
+.headline{font-family:'Noto Serif JP',serif;font-size:clamp(1.6rem,5vw,2.3rem);font-weight:500;line-height:1.4;margin-bottom:.7rem}
+.headline .en{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:400;color:var(--accent)}
+.sub{font-family:'Noto Sans JP',sans-serif;font-size:.82rem;font-weight:300;color:rgba(20,18,26,.62);line-height:1.95;margin-bottom:1.4rem;max-width:54ch}
+.badge{display:inline-block;font-family:'Noto Sans JP',sans-serif;padding:5px 14px;border-radius:4px;font-size:.62rem;letter-spacing:.2em;
+  background:var(--accent-pale);border:.5px solid rgba(83,74,183,.4);color:var(--accent)}
+
+.sep{width:100%;height:1px;margin:2.2rem 0;background:linear-gradient(90deg,transparent,rgba(20,18,26,.16),transparent)}
+
+.section{margin:2.4rem 0}
+.block-label{font-family:'Noto Sans JP',sans-serif;font-size:.6rem;letter-spacing:.3em;color:var(--muted);text-transform:uppercase;margin-bottom:.8rem}
+.block-title{font-family:'Noto Serif JP',serif;font-weight:500;font-size:clamp(1.2rem,3.6vw,1.7rem);line-height:1.5;margin-bottom:1rem}
+.prose p{font-family:'Noto Sans JP',sans-serif;font-size:.86rem;font-weight:300;color:rgba(20,18,26,.8);line-height:1.95;margin-bottom:.9rem}
+
+.quote{margin:1rem 0 0;padding:12px 16px;border-left:3px solid var(--accent);background:var(--accent-pale);
+  font-family:'Noto Serif JP',serif;font-weight:400;font-size:.92rem;color:rgba(20,18,26,.82);line-height:1.8}
+
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:1.1rem 0 0}
+.pcard{background:var(--cream);border:.5px solid var(--border);border-radius:12px;padding:20px 22px}
+.pcard .pk{font-family:'Noto Sans JP',sans-serif;font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;margin-bottom:8px}
+.pcard.origin .pk{color:var(--gold)} .pcard.now .pk{color:var(--accent)}
+.pcard h3{font-family:'Noto Serif JP',serif;font-size:1.05rem;font-weight:500;margin-bottom:9px;color:var(--ink)}
+.pcard p{font-family:'Noto Sans JP',sans-serif;font-size:.8rem;font-weight:300;color:rgba(20,18,26,.74);line-height:1.85}
+.pcard .star{color:var(--gold);font-weight:500;white-space:nowrap}
+.pair-note{font-family:'Noto Sans JP',sans-serif;font-size:.76rem;color:var(--muted);margin-top:.9rem;text-align:center}
+
+.timeline{display:flex;flex-direction:column;position:relative;margin-top:1.1rem}
+.timeline::before{content:'';position:absolute;left:15px;top:10px;bottom:10px;width:1px;background:var(--border)}
+.tl-item{display:flex;gap:16px;align-items:flex-start;padding:11px 0}
+.tl-dot{width:11px;height:11px;border-radius:50%;margin-top:7px;flex-shrink:0;margin-left:10px;border:2px solid var(--paper)}
+.tl-body{flex:1;min-width:0}
+.tl-title{font-family:'Noto Serif JP',serif;font-size:1rem;font-weight:500;color:var(--ink);margin-bottom:3px}
+.tl-desc{font-family:'Noto Sans JP',sans-serif;font-size:.8rem;font-weight:300;color:rgba(20,18,26,.72);line-height:1.85}
+.flow-note{font-family:'Noto Sans JP',sans-serif;font-size:.76rem;color:var(--muted);margin-top:1rem}
+
+.proof{display:grid;gap:12px;margin-top:1.1rem}
+.pl{display:block;text-decoration:none;background:var(--cream);border:.5px solid var(--border);border-radius:12px;padding:16px 20px;transition:border-color .2s,transform .2s}
+.pl:hover{border-color:var(--accent);transform:translateY(-2px)}
+.pl .plk{font-family:'Noto Sans JP',sans-serif;font-size:.56rem;letter-spacing:.2em;color:var(--accent);text-transform:uppercase;margin-bottom:6px}
+.pl h4{font-family:'Noto Serif JP',serif;font-size:.98rem;font-weight:500;color:var(--ink);margin-bottom:4px}
+.pl p{font-family:'Noto Sans JP',sans-serif;font-size:.78rem;font-weight:300;color:rgba(20,18,26,.66)}
+.pl .go{font-family:'Noto Sans JP',sans-serif;font-size:.7rem;color:var(--accent);margin-top:8px;display:inline-block;letter-spacing:.04em}
+
+.divider{border:none;border-top:.5px solid var(--border);margin:2.4rem 0 1.6rem}
+.closing-line{font-family:'Noto Serif JP',serif;font-weight:500;font-size:clamp(1.3rem,4vw,1.9rem);line-height:1.5;text-align:center;margin-bottom:.8rem}
+.closing-line .em{color:var(--accent)}
+.closing-sub{font-family:'Noto Sans JP',sans-serif;font-size:.8rem;font-weight:300;color:rgba(20,18,26,.6);text-align:center;max-width:42ch;margin:0 auto 2rem;line-height:1.9}
+
+.sig{display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;flex-wrap:wrap;
+  font-family:'Noto Sans JP',sans-serif;font-size:.66rem;color:var(--muted);line-height:2}
+.sig-right{text-align:right}
+.sig .accent{color:var(--accent)}
+
+footer{padding:2.6rem 2rem;text-align:center;background:var(--paper);border-top:1px solid var(--border);margin-top:2.2rem}
+.flogo{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;color:var(--muted);margin-bottom:.4rem}
+.fmeta{font-family:'Noto Sans JP',sans-serif;font-size:.56rem;letter-spacing:.16em;color:rgba(154,147,163,.85);margin-top:.3rem}
+
+@media (max-width:560px){
+  .pair{grid-template-columns:1fr}
+  .sig{flex-direction:column;align-items:flex-start}
+  .sig-right{text-align:left}
+}
+</style>
+</head>
+<body>
+
+<script>window.CJ_ME = {"file":"dunksoft-top-note.html","title":"ダンクソフト｜Smart Life Styles と動的平衡","created":"2026-06-24","updated":"2026-06-25","category":"語市認","author":"星C","keywords":"動的平衡あいだ流れ継承","coined":"流れているから、同じでいられる。","picture":"dunksoft-top.jpg"};</script>
+<!-- ═══════════ COLOURFUL JAPAN 共通ヘッダー v3 ═══════════ -->
+<div id="cj-header"></div>
+<style>
+  #cj-header { font-family:'Hiragino Kaku Gothic ProN','Hiragino Sans','Yu Gothic',sans-serif; }
+  .cjh-card {
+    background:#FFFFFF; border:0.5px solid rgba(0,0,0,0.1);
+    border-radius:12px; overflow:hidden; margin:1.4rem auto 0;
+    max-width:760px; display:flex; flex-direction:column;
+  }
+  .cjh-bar { display:flex; height:5px; width:100%; }
+  .cjh-bar span { flex:1; }
+  .cjh-main { display:flex; flex-direction:column; }
+  .cjh-pic { width:100%; max-height:240px; object-fit:cover; display:block; background:#e8e6e0; }
+  .cjh-pic.cjh-empty { display:none; }
+  .cjh-body { padding:18px 22px 20px; }
+  .cjh-top { display:flex; justify-content:space-between; align-items:flex-start; gap:14px; margin-bottom:12px; }
+  .cjh-nav { display:flex; align-items:center; gap:7px; flex-wrap:wrap; }
+  .cjh-home { font-size:12px; letter-spacing:.1em; text-decoration:none; margin-right:4px; white-space:nowrap; }
+  .cjh-dot {
+    width:32px; height:32px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size:15px; font-weight:500; text-decoration:none; transition:transform .1s;
+  }
+  .cjh-dot:hover { transform:scale(1.1); }
+  .cjh-dot.on { outline:2px solid currentColor; outline-offset:2px; }
+  .cjh-qr { flex-shrink:0; text-align:center; }
+  .cjh-qr img { width:84px; height:84px; display:block; border-radius:5px; background:#fff; padding:3px; border:0.5px solid rgba(0,0,0,0.08); }
+  .cjh-qr-cap { font-size:10px; color:#6b6b66; margin-top:4px; letter-spacing:.06em; }
+  .cjh-title { font-size:21px; font-weight:500; line-height:1.5; margin-bottom:7px; }
+  .cjh-meta { font-size:12px; color:#5F5E5A; letter-spacing:.05em; }
+  .cjh-kw { font-size:12px; margin-top:9px; letter-spacing:.14em; }
+  .cjh-coined { display:inline-block; font-size:12px; margin-top:10px; padding:4px 12px; border-radius:12px; letter-spacing:.02em; line-height:1.6; }
+  @media (min-width: 720px) {
+    .cjh-main { flex-direction:row; align-items:stretch; }
+    .cjh-pic { width:200px; max-height:none; flex-shrink:0; }
+    .cjh-body { flex:1; min-width:0; }
+  }
+</style>
+<script>
+(function(){
+  var PIC_BASE   = 'https://picture.dunksoft.jp/';
+  var NOTES_HOME = 'https://notes.dunksoft.jp/';
+  var CATS = ['認','市','語','町'];
+  var CAT_DESC = { '認':'認証・技術', '市':'Marketing・市づくり', '語':'コラム・物語', '町':'文化・コミュニティ' };
+  var COL  = { '認':'#378ADD','市':'#BA7517','語':'#534AB7','町':'#3B6D11' };
+  var COLT = { '認':'#E6F1FB','市':'#FAEEDA','語':'#EEEDFE','町':'#EAF3DE' };
+  var COLD = { '認':'#042C53','市':'#412402','語':'#26215C','町':'#173404' };
+  var KWPAL = ['#185FA5','#854F0B','#534AB7','#3B6D11'];
+  var TPAL  = ['#185FA5','#BA7517','#C2185B','#534AB7','#3B6D11','#0F6E56'];
+  var TNEUT = '#a39a90';
+  var WORD  = /[0-9A-Za-z\u3041-\u3096\u30a1-\u30fa\u30fc\u3400-\u9fff\uff10-\uff19\uff21-\uff5a]/;
+  function esc(s){ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  function colorTitle(t){
+    t = t || ''; var out = '', k = 0;
+    for(var i=0;i<t.length;i++){
+      var ch = t.charAt(i);
+      if(WORD.test(ch)){ out += '<span style="color:' + TPAL[k % TPAL.length] + '">' + esc(ch) + '</span>'; k++; }
+      else { out += '<span style="color:' + TNEUT + '">' + esc(ch) + '</span>'; }
+    }
+    return out;
+  }
+  function firstCat(cat){ var a=(cat||'').split(''); for(var i=0;i<a.length;i++){ if(CATS.indexOf(a[i])>=0) return a[i]; } return '語'; }
+  function qrSrc(){ return 'https://api.qrserver.com/v1/create-qr-code/?size=168x168&margin=0&data=' + encodeURIComponent(location.origin + location.pathname); }
+  function render(me){
+    if(!me) return;
+    var fc = firstCat(me.category);
+    var pic = me.picture
+      ? '<img class="cjh-pic" src="' + PIC_BASE + encodeURIComponent(me.picture) + '" alt="' + esc(me.title) + '">'
+      : '<img class="cjh-pic cjh-empty" alt="">';
+    var myCats = (me.category||'').split('');
+    var dots = CATS.map(function(c){
+      var on = myCats.indexOf(c)>=0 ? ' on' : '';
+      return '<a class="cjh-dot' + on + '" style="background:' + COL[c] + ';color:' + COLT[c] + '" href="' + NOTES_HOME + '?cat=' + encodeURIComponent(c) + '" title="' + CAT_DESC[c] + '">' + c + '</a>';
+    }).join('');
+    var bar = CATS.map(function(c){ return '<span style="background:' + COL[c] + '"></span>'; }).join('');
+    var date = me.updated || me.created || '';
+    var meta = [date, me.author, me.where].filter(Boolean).join(' ・ ');
+    var kw = '';
+    if(me.keywords){
+      kw = '<div class="cjh-kw">' + me.keywords.split('').map(function(ch,i){
+        return '<span style="color:' + KWPAL[i % KWPAL.length] + '">' + esc(ch) + '</span>';
+      }).join(' ') + '</div>';
+    }
+    var coined = me.coined ? '<div class="cjh-coined" style="background:' + COL[fc] + ';color:' + COLT[fc] + '">' + esc(me.coined) + '</div>' : '';
+    var qr = '<div class="cjh-qr"><img src="' + qrSrc() + '" alt="QR"><div class="cjh-qr-cap">スマホで読む</div></div>';
+    document.getElementById('cj-header').innerHTML =
+      '<div class="cjh-card">' +
+        '<div class="cjh-bar">' + bar + '</div>' +
+        '<div class="cjh-main">' + pic +
+          '<div class="cjh-body">' +
+            '<div class="cjh-top">' +
+              '<div class="cjh-nav"><a class="cjh-home" style="color:' + COLD[fc] + '" href="' + NOTES_HOME + '">notes ←</a>' + dots + '</div>' +
+              qr +
+            '</div>' +
+            '<div class="cjh-title">' + colorTitle(me.title) + '</div>' +
+            '<div class="cjh-meta">' + esc(meta) + '</div>' +
+            kw + coined +
+          '</div>' +
+        '</div>' +
+      '</div>';
+  }
+  var me = (window.CJ_ME && typeof window.CJ_ME === 'object') ? window.CJ_ME : null;
+  render(me);
+  var myFile = decodeURIComponent((location.pathname.split('/').pop() || '')).replace(/\.html$/,'');
+  fetch(location.origin + '/notes-index.json')
+    .then(function(r){ return r.ok ? r.json() : null; })
+    .then(function(notes){
+      if(!notes) return;
+      var fresh = notes.filter(function(n){ return n.file === (myFile+'.html') || n.file.replace(/\.html$/,'') === myFile; })[0];
+      if(fresh) render(fresh);
+    })
+    .catch(function(){});
+})();
+</script>
+<!-- ═══════════ /COLOURFUL JAPAN 共通ヘッダー ═══════════ -->
+
+<div class="wrap">
+
+  <div class="eyebrow">DUNKSOFT — Brand / 動的平衡</div>
+  <div class="headline">流れているから、同じでいられる。<span class="en"> — Dynamic Equilibrium</span></div>
+  <div class="sub">「内と外のあいだにデジタルを」という原点（digiterior）は、いまも update を続け、「暮らしそのものが軽くなる」（Smart Life Styles）へと育ちました。名前は変わる。あいだに流れる思想は、変わらない。</div>
+  <div class="badge">提案デモ — CONCEPT</div>
+
+  <div class="sep"></div>
+
+  <div class="section">
+    <div class="block-label">The Principle — 動的平衡</div>
+    <div class="block-title">変わり続けることで、変わらずにいる。</div>
+    <div class="prose">
+      <p>生きものの分子は、数か月でそのほとんどが入れ替わります。それでも「その人」であり続けるのは、形ではなく“流れ”こそが本体だから。分解と再生をくり返しながら、かたちを保つ——これが動的平衡です。</p>
+      <p>ブランドも同じだと、私たちは考えています。言葉（digiterior → Smart Life Styles）は時代に合わせて更新されても、あいだに流れる思想は途切れない。むしろ、update し続けているからこそ生きている。</p>
+    </div>
+    <div class="quote">箱は、固まった瞬間に古びる。流れは、動いている限り新しい。</div>
+  </div>
+
+  <div class="section">
+    <div class="block-label">The Update — 言葉の進化</div>
+    <div class="block-title">同じDNA。表現が、update されただけ。</div>
+    <div class="pair">
+      <div class="pcard origin">
+        <div class="pk">Origin / 原点</div>
+        <h3>digiterior</h3>
+        <p>内と外の「あいだ」にデジタルを置く、という発明。なぜ暮らしが軽くなるのか——その仕組みを名づけた言葉です。ひとつの <span class="star">★ star（星）</span> から、すべての流れは始まりました。</p>
+      </div>
+      <div class="pcard now">
+        <div class="pk">Now / 現在</div>
+        <h3>Smart Life Styles</h3>
+        <p>その仕組みが育ち、「smart な暮らしそのもの」へ。仕組みの説明から、暮らしの結果へ。結果が、そのまま名前になりました。</p>
+      </div>
+    </div>
+    <div class="pair-note">digiterior は捨てた言葉ではなく、いまも地下を流れるエンジンです。</div>
+  </div>
+
+  <div class="section">
+    <div class="block-label">Two Scales — 二つのあいだ</div>
+    <div class="block-title">「あいだ」は、二つのスケールにある。</div>
+    <div class="pair">
+      <div class="pcard origin">
+        <div class="pk">At Home / 暮らし</div>
+        <h3>暮らしのあいだ</h3>
+        <p>家の内と外をデジタルがつなぎ、毎日の小さな手間が静かに消える。スイッチひとつで、暮らしそのものが軽くなる。</p>
+      </div>
+      <div class="pcard now">
+        <div class="pk">In Regions / 地域</div>
+        <h3>地域のあいだ</h3>
+        <p>人と人、土地とその知恵をデジタルがつなぐ。埋もれた叡智が継がれ、コミュニティの宝になり、世界へ流れていく。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="block-label">What We Do — 流れをつくる</div>
+    <div class="block-title">私たちは「箱」をつくりません。流れをつくります。</div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot" style="background:#534AB7"></div>
+        <div class="tl-body"><div class="tl-title">掘り起こす</div><div class="tl-desc">地域に埋もれた人と物語を見つける。資源は建物ではなく、人とその知恵。</div></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="background:#185FA5"></div>
+        <div class="tl-body"><div class="tl-title">訳す</div><div class="tl-desc">色彩日本語で、子どもから海外の方まで、多言語で読みやすく。</div></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="background:#0F6E56"></div>
+        <div class="tl-body"><div class="tl-title">つなぐ・巡る</div><div class="tl-desc">WeARee! で、人と場所をデジタルで巡る体験に変える。</div></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="background:#b8923a"></div>
+        <div class="tl-body"><div class="tl-title">継承・伝播</div><div class="tl-desc">叡智がコミュニティ全体の宝となり、手から手へ、世界へ。</div></div>
+      </div>
+    </div>
+    <div class="flow-note">これも一つの動的平衡。叡智は、継がれることで生き続ける。</div>
+  </div>
+
+  <div class="section">
+    <div class="block-label">Already Built — もう、つくっている</div>
+    <div class="block-title">語るだけでは、ありません。</div>
+    <div class="proof">
+      <a class="pl" href="https://dunksoft.jp/shurijo">
+        <div class="plk">色彩日本語</div>
+        <h4>首里城 — 火災消失と復興の意義</h4>
+        <p>品詞を色分け・ふりがな・日英併記で伝える歴史デモ。</p>
+        <span class="go">見る →</span>
+      </a>
+      <a class="pl" href="https://dunksoft.jp/kaigungodemo">
+        <div class="plk">色彩日本語</div>
+        <h4>旧海軍司令部壕</h4>
+        <p>沖縄戦の記憶を、誰にでも届く形で継ぐ試み。</p>
+        <span class="go">見る →</span>
+      </a>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="closing-line">箱物は、古びる。<span class="em">叡智は、継がれて増える。</span></div>
+  <div class="closing-sub">変わり続けることで、変わらずにいる。デジタルで無駄を省き、人と地域の人生を豊かに。</div>
+
+  <div class="sig">
+    <div class="sig-left">
+      <span class="accent">coined by Claude.ai</span><br>
+      Anthropic · Claude<br>
+      DUNKSOFT Co., Ltd. Project
+    </div>
+    <div class="sig-right">
+      <span class="accent">approved by Roberto Hoshino</span><br>
+      Smart Life Styles / COLOURFUL JAPAN™<br>
+      2026年〜
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p class="flogo">DUNKSOFT Co., Ltd.</p>
+  <p class="fmeta">COLOURFUL JAPAN™&ensp;|&ensp;CHROMAKEY AUTH™&ensp;|&ensp;Smart Life Styles</p>
+  <p class="fmeta">星野晃一郎 Roberto Hoshino&ensp;|&ensp;dunksoft.jp</p>
+  <p class="fmeta" style="margin-top:1rem">digiterior は当社が名づけた造語です&ensp;·&ensp;提案デモ（非公式）</p>
+</footer>
+
+</body>
+</html>
