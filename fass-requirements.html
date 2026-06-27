@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A. 要件定義 | 次世代FASS 移行ドキュメント</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#14121a; --paper:#f7f3ee; --cream:#fdf9f5; --muted:#8b8590;
+  --border:rgba(20,18,26,.10); --gold:#b8923a;
+  --c1:#185FA5; --c2:#0F6E56; --c3:#BA7517; --c4:#C2185B; --c5:#534AB7; --c6:#3B6D11; --c7:#9A6A00;
+  --wish:#2e7d32; --wish-bg:#eef6ee; --hot:#C2185B;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:'Noto Serif JP',serif;font-weight:300;line-height:1.8;-webkit-text-size-adjust:100%}
+.wrap{max-width:980px;margin:0 auto;padding:2.4rem 1.4rem 1rem}
+.eyebrow{font-family:'Noto Sans JP',sans-serif;font-size:.6rem;letter-spacing:.4em;color:var(--muted);text-transform:uppercase;margin-bottom:.7rem}
+h1.page{font-size:clamp(1.5rem,4.4vw,2.15rem);font-weight:600;line-height:1.35;margin-bottom:.5rem;letter-spacing:.01em}
+h1.page .a{color:var(--c5)} h1.page .b{color:var(--c4)} h1.page .c{color:var(--c1)}
+.lead{font-family:'Noto Sans JP',sans-serif;font-size:.82rem;font-weight:300;color:rgba(20,18,26,.66);line-height:1.95;margin-bottom:1.3rem;max-width:760px}
+.nav{display:flex;gap:8px;flex-wrap:wrap;margin:1.2rem 0 2rem;font-family:'Noto Sans JP',sans-serif}
+.nav a{font-size:.72rem;letter-spacing:.04em;text-decoration:none;padding:7px 14px;border-radius:20px;border:.5px solid var(--border);color:rgba(20,18,26,.6);background:var(--cream)}
+.nav a.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.sec-h{font-family:'Noto Sans JP',sans-serif;font-size:.62rem;letter-spacing:.3em;color:var(--muted);text-transform:uppercase;margin:2.2rem 0 .9rem;border-top:.5px solid var(--border);padding-top:1.4rem}
+table{width:100%;border-collapse:collapse;font-family:'Noto Sans JP',sans-serif;font-size:.76rem;font-weight:300;margin:.6rem 0 1.2rem}
+th{background:var(--cream);text-align:left;font-weight:500;color:rgba(20,18,26,.7);padding:9px 10px;border-bottom:1.5px solid var(--border);letter-spacing:.03em;font-size:.68rem;white-space:nowrap}
+td{padding:9px 10px;border-bottom:.5px solid var(--border);vertical-align:top;line-height:1.7;color:rgba(20,18,26,.82)}
+tr:hover td{background:rgba(83,74,183,.03)}
+.pri{display:inline-block;font-size:.62rem;font-weight:500;padding:2px 9px;border-radius:10px;letter-spacing:.04em;white-space:nowrap}
+.p-max{background:#fde7ee;color:#a3123f} .p-hi{background:#fbeee0;color:#8a5600} .p-mid{background:#e9eef7;color:#1f4f86} .p-lo{background:#eee;color:#666}
+.tag{display:inline-block;font-size:.6rem;padding:2px 8px;border-radius:8px;background:var(--cream);border:.5px solid var(--border);color:var(--muted);letter-spacing:.04em;white-space:nowrap}
+.src{color:var(--muted);font-size:.66rem}
+.blank{color:#c8c0b6;letter-spacing:.05em}
+.note{background:var(--cream);border-left:3px solid var(--gold);padding:.9rem 1.1rem;border-radius:0 6px 6px 0;font-family:'Noto Sans JP',sans-serif;font-size:.76rem;font-weight:300;color:rgba(20,18,26,.78);line-height:1.9;margin:1rem 0 1.4rem}
+.note b{font-weight:500;color:var(--ink)}
+/* flow */
+.band{margin:1.6rem 0}
+.band-h{font-family:'Noto Sans JP',sans-serif;font-size:.86rem;font-weight:500;color:var(--ink);padding:6px 12px;background:linear-gradient(90deg,rgba(83,74,183,.10),transparent);border-left:4px solid var(--c5);border-radius:0 4px 4px 0;margin-bottom:.8rem}
+.lanes{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}
+.lane{background:var(--cream);border:.5px solid var(--border);border-radius:9px;padding:11px 13px}
+.lane-h{font-family:'Noto Sans JP',sans-serif;font-size:.66rem;font-weight:600;letter-spacing:.06em;color:var(--lc);border-bottom:2px solid var(--lc);padding-bottom:5px;margin-bottom:8px}
+.step{font-family:'Noto Sans JP',sans-serif;font-size:.74rem;font-weight:300;color:rgba(20,18,26,.82);padding:6px 0;border-bottom:.5px dotted var(--border);line-height:1.6}
+.step:last-of-type{border-bottom:none}
+.wish{font-family:'Noto Sans JP',sans-serif;font-size:.72rem;font-weight:300;color:#235c27;background:var(--wish-bg);border-radius:6px;padding:7px 9px;margin-top:7px;line-height:1.65}
+.wish-tag{display:inline-block;font-size:.56rem;font-weight:500;background:var(--wish);color:#fff;padding:1px 7px;border-radius:7px;margin-right:6px;letter-spacing:.05em;vertical-align:1px}
+.exc{font-family:'Noto Sans JP',sans-serif;font-size:.64rem;color:var(--muted);margin-top:9px;padding-top:7px;border-top:.5px dashed var(--border)}
+.exc-blank{color:#cfc7bc}
+.legend{display:flex;flex-wrap:wrap;gap:7px;margin:.4rem 0 1rem}
+.leg{font-family:'Noto Sans JP',sans-serif;font-size:.66rem;color:rgba(20,18,26,.7);background:var(--cream);border:.5px solid var(--border);border-radius:6px;padding:4px 9px}
+.glob{font-family:'Noto Sans JP',sans-serif;font-size:.76rem;font-weight:300;color:#235c27;margin:.4rem 0 1rem 1.1rem;line-height:1.9}
+footer{padding:2.4rem 2rem;text-align:center;border-top:1px solid var(--border);margin-top:2rem;font-family:'Noto Sans JP',sans-serif}
+.flogo{font-size:.82rem;color:var(--muted);letter-spacing:.05em;margin-bottom:.4rem}
+.fmeta{font-size:.56rem;letter-spacing:.18em;color:rgba(139,133,144,.8);margin-top:.3rem}
+@media(max-width:560px){.lanes{grid-template-columns:1fr}table{font-size:.72rem}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="eyebrow">UI-FLORIST &times; kintone &mdash; 次世代FASS 移行ドキュメント</div>
+<h1 class="page"><span class="a">A.</span> 改善要件 → kintone 実装方針</h1><p class="lead">グランドハイアット東京ワークショップのアンケートと「改善希望」シートを、kintoneでの実装方針に対応づけた一覧です。これは検討の出発点。各行の<b>例外・前提・現場判断</b>は、運用される皆さんが追記して確定させてください。</p><nav class="nav"><a href="fass-requirements.html" class="on">A. 要件定義</a><a href="fass-flow.html">B. 業務フロー</a><a href="fass-forms.html">C. 帳票・優先順位</a><a href="fass-manual.html">フェーズ別マニュアル</a></nav><div class="note">★印の2件 ——「印刷が遅い」「過去データへの不安」—— は移行設計の急所です。特に<b>過去帳票の再発行経路</b>は、現場が明確に不安視しており、カットオーバー前に必ず方式を固めます。また「スプレッドシート連動が欲しい」という声は、<b>統計＝Excel出力</b>の方針が現場要望に直接応えている裏付けになります。</div><table><thead><tr><th>#</th><th>区分</th><th>現場の声（出典）</th><th>kintone 実装方針</th><th>優先</th><th>例外・現場補記</th></tr></thead><tbody><tr><td>1</td><td><span class="tag">UI/操作</span></td><td>印刷画面がなかなか出てこない<br><span class="src">— 釜石／アンケート</span></td><td>帳票をHTML/PDF化。ワンクリック印刷・即時プレビュー</td><td><span class="pri p-max">最優先</span></td><td><span class="blank">＿＿＿＿</span></td></tr><tr><td>2</td><td><span class="tag">UI/操作</span></td><td>「元に戻す」機能が無く、誤入力・誤削除の修正が大変<br><span class="src">— 中村・塚田ほか複数</span></td><td>kintone標準の<b>レコード変更履歴・フィールド単位の復元</b>。削除前に確認ダイアログ</td><td><span class="pri p-hi">高</span></td><td><span class="blank">＿＿＿＿</span></td></tr><tr><td>3</td><td><span class="tag">UI/操作</span></td><td>自動保存が欲しい<br><span class="src">— 吉田</span></td><td>kintoneの編集保存＋下書き運用で担保</td><td><span class="pri p-mid">中</span></td><td><span class="blank">＿＿＿＿</span></td></tr><tr><td>4</td><td><span class="tag">連動</span></td><td>スプレッドシートと連動させたい<br><span class="src">— 鈴木真由美</span></td><td><b>統計帳票はExcel書き出し → 現場がClaudeと自由に加工</b>。標準のCSV/Excel出力を活用</td><td><span class="pri p-hi">高</span></td><td><span class="blank">＿＿＿＿</span></td></tr><tr><td>5</td><td><span class="tag">連動</span></td><td>基本情報のセット数と各項目のセット数を連動<br><span class="src">— 稲垣</span></td><td>サブテーブル＋計算フィールド／ルックアップで自動連動</td><td><span class="pri p-hi">高</span></td><td><span class="blank">＿＿＿＿</span></td></tr><tr><td>6</td><td><span class="tag">連動</span></td><td>花材出し入力数とベースノート事前入力数を連動<br><span class="src">— 改善希望</span></td><td>関連レコード／サブテーブルで数量連動。確定時に最終調整が完了する設計</td><td><span class="pri p-hi">高</span></td><td><span class="blank">＿＿＿＿</span></td></tr><tr><td>7</td><td><span class="tag">機能</span></td><td>ベースノート（花器の個数管理）をFASS内に統合<br><span class="src">— 改善希望（花器管理）</span></td><td><b>花器マスタ</b>アプリ＋関連レコードで個数・使用予定順を管理</td><td><span class="pri p-hi">高</span></td><td><span class="blank">＿＿＿＿</span></td></tr><tr><td>8</td><td><span class="tag">機能</span></td><td>移動の必要な花器を選出しリスト化<br><span class="src">— 改善希望（婚礼担当者）</span></td><td>保管場所×ベースノート×花材出しから移動要否を自動抽出</td><td><span class="pri p-mid">中</span></td><td><span class="blank">＿＿＿＿</span></td></tr><tr><td>9</td><td><span class="tag">機能</span></td><td>前週の移動表と比較し移動を最小化<br><span class="src">— 改善希望（資材管理）</span></td><td>前週レコードとの差分表示</td><td><span class="pri p-mid">中</span></td><td><span class="blank">＿＿＿＿</span></td></tr><tr><td>10</td><td><span class="tag">機能</span></td><td>ブーケ類お届け表をFASS上で自動構築（修正可）<br><span class="src">— 改善希望（ALL）</span></td><td>花材出しのブーケ項目から自動生成＋手修正</td><td><span class="pri p-mid">中</span></td><td><span class="blank">＿＿＿＿</span></td></tr><tr><td>11</td><td><span class="tag">印刷</span></td><td>発注書を代表メーカー別に印刷可能に<br><span class="src">— 改善希望（資材）</span></td><td>仕入先マスタ別に発注書帳票を出力</td><td><span class="pri p-mid">中</span></td><td><span class="blank">＿＿＿＿</span></td></tr><tr><td>12</td><td><span class="tag">データ</span></td><td>FASS発注分を「入力済み」ステータス管理（手書き分の追加・修正可）<br><span class="src">— 改善希望</span></td><td>発注ステータスフィールド＋手書き発注の追記機能</td><td><span class="pri p-mid">中</span></td><td><span class="blank">＿＿＿＿</span></td></tr><tr><td>13</td><td><span class="tag">機能</span></td><td>各花器・各資材にメモ短縮ワードを登録、プレビュー時に変更<br><span class="src">— 改善希望（読み合わせ）</span></td><td>メモ定型文マスタ＋一覧プレビューでの個別編集</td><td><span class="pri p-mid">中</span></td><td><span class="blank">＿＿＿＿</span></td></tr><tr><td>14</td><td><span class="tag">UI</span></td><td>一覧でアイテムの上下操作、各表で並び順をリンク<br><span class="src">— 松村</span></td><td>並び順フィールド＋各帳票で表示順を共有</td><td><span class="pri p-mid">中</span></td><td><span class="blank">＿＿＿＿</span></td></tr><tr><td>15</td><td><span class="tag">UI</span></td><td>花セッティング表に任意で改行<br><span class="src">— 稲垣</span></td><td>改行可テキスト／リッチ編集フィールド</td><td><span class="pri p-lo">低</span></td><td><span class="blank">＿＿＿＿</span></td></tr><tr><td>16</td><td><span class="tag">データ</span></td><td>過去のデータにアクセスできなくなる不安<br><span class="src">— 松村</span></td><td><b>過去帳票の参照・再発行をカットオーバー設計で必須担保</b>（旧データ閲覧＋再出力経路の確保）</td><td><span class="pri p-max">最優先</span></td><td><span class="blank">＿＿＿＿</span></td></tr><tr><td>17</td><td><span class="tag">UI</span></td><td>セッティング表のケーキ欄を細く／メインバック欄の文字数を増やす<br><span class="src">— 松村</span></td><td>帳票レイアウト・項目幅の見直し</td><td><span class="pri p-lo">低</span></td><td><span class="blank">＿＿＿＿</span></td></tr><tr><td>18</td><td><span class="tag">業務</span></td><td>キャンドルサービスのナフキンフラワー欄を「その他」へ<br><span class="src">— 松村</span></td><td>項目マスタの見直し</td><td><span class="pri p-lo">低</span></td><td><span class="blank">＿＿＿＿</span></td></tr></tbody></table></div>
+<footer>
+<p class="flogo">DUNKSOFT Co., Ltd. &times; Claude &mdash; 次世代FASS</p>
+<p class="fmeta">UI-FLORIST kintone 移行プロジェクト &nbsp;|&nbsp; 2026</p>
+<p class="fmeta" style="margin-top:.8rem;color:#b9b2a8">このドキュメントは「足場」です。例外処理・現場の知恵は、御社が書き込んで完成させてください。</p>
+</footer>
+</body></html>

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B. 業務フロー | 次世代FASS 移行ドキュメント</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#14121a; --paper:#f7f3ee; --cream:#fdf9f5; --muted:#8b8590;
+  --border:rgba(20,18,26,.10); --gold:#b8923a;
+  --c1:#185FA5; --c2:#0F6E56; --c3:#BA7517; --c4:#C2185B; --c5:#534AB7; --c6:#3B6D11; --c7:#9A6A00;
+  --wish:#2e7d32; --wish-bg:#eef6ee; --hot:#C2185B;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:'Noto Serif JP',serif;font-weight:300;line-height:1.8;-webkit-text-size-adjust:100%}
+.wrap{max-width:980px;margin:0 auto;padding:2.4rem 1.4rem 1rem}
+.eyebrow{font-family:'Noto Sans JP',sans-serif;font-size:.6rem;letter-spacing:.4em;color:var(--muted);text-transform:uppercase;margin-bottom:.7rem}
+h1.page{font-size:clamp(1.5rem,4.4vw,2.15rem);font-weight:600;line-height:1.35;margin-bottom:.5rem;letter-spacing:.01em}
+h1.page .a{color:var(--c5)} h1.page .b{color:var(--c4)} h1.page .c{color:var(--c1)}
+.lead{font-family:'Noto Sans JP',sans-serif;font-size:.82rem;font-weight:300;color:rgba(20,18,26,.66);line-height:1.95;margin-bottom:1.3rem;max-width:760px}
+.nav{display:flex;gap:8px;flex-wrap:wrap;margin:1.2rem 0 2rem;font-family:'Noto Sans JP',sans-serif}
+.nav a{font-size:.72rem;letter-spacing:.04em;text-decoration:none;padding:7px 14px;border-radius:20px;border:.5px solid var(--border);color:rgba(20,18,26,.6);background:var(--cream)}
+.nav a.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.sec-h{font-family:'Noto Sans JP',sans-serif;font-size:.62rem;letter-spacing:.3em;color:var(--muted);text-transform:uppercase;margin:2.2rem 0 .9rem;border-top:.5px solid var(--border);padding-top:1.4rem}
+table{width:100%;border-collapse:collapse;font-family:'Noto Sans JP',sans-serif;font-size:.76rem;font-weight:300;margin:.6rem 0 1.2rem}
+th{background:var(--cream);text-align:left;font-weight:500;color:rgba(20,18,26,.7);padding:9px 10px;border-bottom:1.5px solid var(--border);letter-spacing:.03em;font-size:.68rem;white-space:nowrap}
+td{padding:9px 10px;border-bottom:.5px solid var(--border);vertical-align:top;line-height:1.7;color:rgba(20,18,26,.82)}
+tr:hover td{background:rgba(83,74,183,.03)}
+.pri{display:inline-block;font-size:.62rem;font-weight:500;padding:2px 9px;border-radius:10px;letter-spacing:.04em;white-space:nowrap}
+.p-max{background:#fde7ee;color:#a3123f} .p-hi{background:#fbeee0;color:#8a5600} .p-mid{background:#e9eef7;color:#1f4f86} .p-lo{background:#eee;color:#666}
+.tag{display:inline-block;font-size:.6rem;padding:2px 8px;border-radius:8px;background:var(--cream);border:.5px solid var(--border);color:var(--muted);letter-spacing:.04em;white-space:nowrap}
+.src{color:var(--muted);font-size:.66rem}
+.blank{color:#c8c0b6;letter-spacing:.05em}
+.note{background:var(--cream);border-left:3px solid var(--gold);padding:.9rem 1.1rem;border-radius:0 6px 6px 0;font-family:'Noto Sans JP',sans-serif;font-size:.76rem;font-weight:300;color:rgba(20,18,26,.78);line-height:1.9;margin:1rem 0 1.4rem}
+.note b{font-weight:500;color:var(--ink)}
+/* flow */
+.band{margin:1.6rem 0}
+.band-h{font-family:'Noto Sans JP',sans-serif;font-size:.86rem;font-weight:500;color:var(--ink);padding:6px 12px;background:linear-gradient(90deg,rgba(83,74,183,.10),transparent);border-left:4px solid var(--c5);border-radius:0 4px 4px 0;margin-bottom:.8rem}
+.lanes{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}
+.lane{background:var(--cream);border:.5px solid var(--border);border-radius:9px;padding:11px 13px}
+.lane-h{font-family:'Noto Sans JP',sans-serif;font-size:.66rem;font-weight:600;letter-spacing:.06em;color:var(--lc);border-bottom:2px solid var(--lc);padding-bottom:5px;margin-bottom:8px}
+.step{font-family:'Noto Sans JP',sans-serif;font-size:.74rem;font-weight:300;color:rgba(20,18,26,.82);padding:6px 0;border-bottom:.5px dotted var(--border);line-height:1.6}
+.step:last-of-type{border-bottom:none}
+.wish{font-family:'Noto Sans JP',sans-serif;font-size:.72rem;font-weight:300;color:#235c27;background:var(--wish-bg);border-radius:6px;padding:7px 9px;margin-top:7px;line-height:1.65}
+.wish-tag{display:inline-block;font-size:.56rem;font-weight:500;background:var(--wish);color:#fff;padding:1px 7px;border-radius:7px;margin-right:6px;letter-spacing:.05em;vertical-align:1px}
+.exc{font-family:'Noto Sans JP',sans-serif;font-size:.64rem;color:var(--muted);margin-top:9px;padding-top:7px;border-top:.5px dashed var(--border)}
+.exc-blank{color:#cfc7bc}
+.legend{display:flex;flex-wrap:wrap;gap:7px;margin:.4rem 0 1rem}
+.leg{font-family:'Noto Sans JP',sans-serif;font-size:.66rem;color:rgba(20,18,26,.7);background:var(--cream);border:.5px solid var(--border);border-radius:6px;padding:4px 9px}
+.glob{font-family:'Noto Sans JP',sans-serif;font-size:.76rem;font-weight:300;color:#235c27;margin:.4rem 0 1rem 1.1rem;line-height:1.9}
+footer{padding:2.4rem 2rem;text-align:center;border-top:1px solid var(--border);margin-top:2rem;font-family:'Noto Sans JP',sans-serif}
+.flogo{font-size:.82rem;color:var(--muted);letter-spacing:.05em;margin-bottom:.4rem}
+.fmeta{font-size:.56rem;letter-spacing:.18em;color:rgba(139,133,144,.8);margin-top:.3rem}
+@media(max-width:560px){.lanes{grid-template-columns:1fr}table{font-size:.72rem}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="eyebrow">UI-FLORIST &times; kintone &mdash; 次世代FASS 移行ドキュメント</div>
+<h1 class="page"><span class="b">B.</span> 業務フロー（AS-IS / TO-BE）</h1><p class="lead">「現在」シートの実作業（黒）と「改善希望」シート（<span style="color:#235c27">緑＝改善希望</span>）を、時系列バンド × 担当レーンで再構成しました。各レーン末尾の「例外・現場補記」欄に、マニュアル化で拾うべき例外処理を書き足していけます。</p><nav class="nav"><a href="fass-requirements.html">A. 要件定義</a><a href="fass-flow.html" class="on">B. 業務フロー</a><a href="fass-forms.html">C. 帳票・優先順位</a><a href="fass-manual.html">フェーズ別マニュアル</a></nav><div class="sec-h">凡例（記号説明）</div><div class="legend"><span class="leg">Googleスプレッドシート使用</span>
+<span class="leg">MicrosoftPowerPoint使用</span>
+<span class="leg">FASS 使用</span>
+<span class="leg">FASSとスプレッドを併用</span>
+<span class="leg">FASSとアナログを併用</span>
+<span class="leg">アナログ処理(PCを用いない事務や対面、目視確認など)</span>
+<span class="leg">MicrosoftExcel使用</span>
+<span class="leg">分岐箇所</span></div><div class="sec-h">全体への機能希望</div><ul class="glob"><li>生花発注と同じく、各資材の代表メーカーについて「発注書」まで印刷可能にしていただくと業務短縮に繋がります</li>
+<li>FASS上で制作した発注書分について、入力済みとなる機能が欲しいです。※手書き発注分の追加・修正の出来る機能 付</li></ul><div class="sec-h">業務フロー　婚礼打合せ → 当日撤去</div><section class="band"><h3 class="band-h">打合せ前</h3><div class="lanes">
+<div class="lane"><div class="lane-h" style="--lc:#185FA5">ALLスタッフ</div>
+<div class="step">ホテルから婚礼打ち合わせアポイントメント</div>
+<div class="exc">例外・現場補記：<span class="exc-blank">＿＿＿＿＿＿＿＿＿＿</span></div>
+</div>
+</div></section>
+<section class="band"><h3 class="band-h">婚礼2〜3か月前</h3><div class="lanes">
+<div class="lane"><div class="lane-h" style="--lc:#185FA5">ALLスタッフ</div>
+<div class="step">ホテルから再打ち合わせのアポイントメント</div>
+<div class="step">ホテルから再打ち合わせのアポイントメント</div>
+<div class="exc">例外・現場補記：<span class="exc-blank">＿＿＿＿＿＿＿＿＿＿</span></div>
+</div>
+<div class="lane"><div class="lane-h" style="--lc:#C2185B">入荷管理</div>
+<div class="step">装花内容決定までこのループを繰り返します。</div>
+<div class="step">再打ち合わせ有り</div>
+<div class="exc">例外・現場補記：<span class="exc-blank">＿＿＿＿＿＿＿＿＿＿</span></div>
+</div>
+<div class="lane"><div class="lane-h" style="--lc:#534AB7">婚礼担当者</div>
+<div class="step">婚礼担当者 決定</div>
+<div class="step">事前アンケート配布・確認</div>
+<div class="step">ベースノート確認(花器使用予定確認)</div>
+<div class="step">第一回装花お打ち合わせ(成約後初or2回目の来館時)</div>
+<div class="step">お打ち合わせ内容ホテルへ共有</div>
+<div class="step">ベースノート入力</div>
+<div class="step">再打ち合わせの有無</div>
+<div class="step">再打ち合わせ無し</div>
+<div class="step">再打ち合わせ有り</div>
+<div class="step">装花打ち合わせ資料制作</div>
+<div class="step">ベースノート確認</div>
+<div class="step">第二回装花お打ち合わせ</div>
+<div class="step">お打ち合わせ内容ホテルへ共有</div>
+<div class="step">ベースノート入力</div>
+<div class="step">再打ち合わせの有無</div>
+<div class="step">再打ち合わせ無し</div>
+<div class="wish"><span class="wish-tag">改善希望</span>FASS内「ベースノート」確認</div>
+<div class="wish"><span class="wish-tag">改善希望</span>FASS内「ベースノート」入力</div>
+<div class="wish"><span class="wish-tag">改善希望</span>FASS内「ベースノート」確認</div>
+<div class="wish"><span class="wish-tag">改善希望</span>FASS内「ベースノート」入力</div>
+<div class="exc">例外・現場補記：<span class="exc-blank">＿＿＿＿＿＿＿＿＿＿</span></div>
+</div>
+<div class="lane"><div class="lane-h" style="--lc:#3B6D11">花器管理</div>
+<div class="wish"><span class="wish-tag">改善希望</span>FASS内に「ベースノート」機能を追加していただくことで、花器の個数管理がスマートになり、花材出しや花器管理事務の軽減に繋がります。</div>
+<div class="exc">例外・現場補記：<span class="exc-blank">＿＿＿＿＿＿＿＿＿＿</span></div>
+</div>
+</div></section>
+<section class="band"><h3 class="band-h">挙式2週間前：内容確定</h3><div class="lanes">
+<div class="lane"><div class="lane-h" style="--lc:#534AB7">婚礼担当者</div>
+<div class="step">挙式2週間前装花内容 確定</div>
+<div class="exc">例外・現場補記：<span class="exc-blank">＿＿＿＿＿＿＿＿＿＿</span></div>
+</div>
+<div class="lane"><div class="lane-h" style="--lc:#9A6A00">資材管理</div>
+<div class="wish"><span class="wish-tag">改善希望</span>花材出し入力数とベースノートの事前入力数を連動させることで、ベースノートの最終調整が終了するのが理想です。この後の在庫数と使用予定順の確認作業を軽減に</div>
+<div class="exc">例外・現場補記：<span class="exc-blank">＿＿＿＿＿＿＿＿＿＿</span></div>
+</div>
+</div></section>
+<section class="band"><h3 class="band-h">花材出し</h3><div class="lanes">
+<div class="lane"><div class="lane-h" style="--lc:#534AB7">婚礼担当者</div>
+<div class="step">婚礼担当者花材出し・絵入れ</div>
+<div class="step">ベースノート確認・修正</div>
+<div class="wish"><span class="wish-tag">改善希望</span>FASS内ベースノートと連動確認・修正</div>
+<div class="exc">例外・現場補記：<span class="exc-blank">＿＿＿＿＿＿＿＿＿＿</span></div>
+</div>
+</div></section>
+<section class="band"><h3 class="band-h">本番1週間半前</h3><div class="lanes">
+<div class="lane"><div class="lane-h" style="--lc:#0F6E56">読み合わせ・前日</div>
+<div class="step">(本番1週間半前)花材出し入力内容 確認</div>
+<div class="wish"><span class="wish-tag">改善希望</span>各花器、各資材に「メモ」用の短縮ワードを登録し、メモ入力時間を短縮します。一部条件で記載しないメモもあるため一覧プレビュー時に変更する機能も欲しいです。</div>
+<div class="exc">例外・現場補記：<span class="exc-blank">＿＿＿＿＿＿＿＿＿＿</span></div>
+</div>
+<div class="lane"><div class="lane-h" style="--lc:#C2185B">入荷管理</div>
+<div class="step">(1週間半前)花材の集計・発注FASS「花材集計表」印刷</div>
+<div class="step">欠品予定など確認欠品や代案を報告</div>
+<div class="step">修正箇所に合わせて追加発注</div>
+<div class="exc">例外・現場補記：<span class="exc-blank">＿＿＿＿＿＿＿＿＿＿</span></div>
+</div>
+<div class="lane"><div class="lane-h" style="--lc:#534AB7">婚礼担当者</div>
+<div class="step">欠品・修正箇所を婚礼担当者が修正</div>
+<div class="wish"><span class="wish-tag">改善希望</span>花器の管理場所と連想したベースノートと花材出しから、移動の必要な花器を選出しリスト化する機能が欲しいです。</div>
+<div class="exc">例外・現場補記：<span class="exc-blank">＿＿＿＿＿＿＿＿＿＿</span></div>
+</div>
+<div class="lane"><div class="lane-h" style="--lc:#3B6D11">花器管理</div>
+<div class="step">花材出しされた花器を在庫数と使用予定順の確認</div>
+<div class="step">在庫不足やダブルブッキングへの対応や代案を報告</div>
+<div class="step">花器倉庫間移動スケジューリング</div>
+<div class="step">FASS「項目別花材表」「ファンクション別花表」印刷</div>
+<div class="wish"><span class="wish-tag">改善希望</span>花材出しされた花器を在庫数と使用予定順の確認業務短縮</div>
+<div class="wish"><span class="wish-tag">改善希望</span>FASS内花器倉庫間移動スケジューリング</div>
+<div class="exc">例外・現場補記：<span class="exc-blank">＿＿＿＿＿＿＿＿＿＿</span></div>
+</div>
+<div class="lane"><div class="lane-h" style="--lc:#9A6A00">資材管理</div>
+<div class="step">花材出しされた資材を内容と在庫数と確認</div>
+<div class="step">不足品を発注欠品を報告</div>
+<div class="step">修正箇所に合わせて発注</div>
+<div class="exc">例外・現場補記：<span class="exc-blank">＿＿＿＿＿＿＿＿＿＿</span></div>
+</div>
+</div></section>
+<section class="band"><h3 class="band-h">読み合わせ週</h3><div class="lanes">
+<div class="lane"><div class="lane-h" style="--lc:#185FA5">ALLスタッフ</div>
+<div class="wish"><span class="wish-tag">改善希望</span>花材出しのブーケ類項目に連動して、「ブーケ類お届け表」のたたきをFASS上で構築して欲しいです。※イレギュラーもあるため修正機能 付</div>
+<div class="exc">例外・現場補記：<span class="exc-blank">＿＿＿＿＿＿＿＿＿＿</span></div>
+</div>
+<div class="lane"><div class="lane-h" style="--lc:#0F6E56">読み合わせ・前日</div>
+<div class="step">ホテルと内容確認MTG「読み合わせ」</div>
+<div class="step">FASS「セッティングメモ」入力「花器メモ」入力</div>
+<div class="step">「ブーケ類お届け表」制作</div>
+<div class="step">FASS「花セッティング表」印刷</div>
+<div class="wish"><span class="wish-tag">改善希望</span>FASS「セッティングメモ」入力「花器メモ」入力業務短縮</div>
+<div class="wish"><span class="wish-tag">改善希望</span>FASS内「ブーケ類お届け表」制作業務短縮</div>
+<div class="exc">例外・現場補記：<span class="exc-blank">＿＿＿＿＿＿＿＿＿＿</span></div>
+</div>
+<div class="lane"><div class="lane-h" style="--lc:#BA7517">ホテル請求伝票</div>
+<div class="step">(読み合わせ後)伝票記入※ホテル指定伝票</div>
+<div class="exc">例外・現場補記：<span class="exc-blank">＿＿＿＿＿＿＿＿＿＿</span></div>
+</div>
+<div class="lane"><div class="lane-h" style="--lc:#C2185B">入荷管理</div>
+<div class="step">花材により、月曜日切り花入荷や木曜日鉢物入荷有り</div>
+<div class="exc">例外・現場補記：<span class="exc-blank">＿＿＿＿＿＿＿＿＿＿</span></div>
+</div>
+<div class="lane"><div class="lane-h" style="--lc:#9A6A00">資材管理</div>
+<div class="step">納品後WCR入力(週間コストレポート)</div>
+<div class="wish"><span class="wish-tag">改善希望</span>納品後FASS　WCR入力(週間コストレポート)</div>
+<div class="exc">例外・現場補記：<span class="exc-blank">＿＿＿＿＿＿＿＿＿＿</span></div>
+</div>
+</div></section>
+<section class="band"><h3 class="band-h">本番週・月</h3><div class="lanes">
+<div class="lane"><div class="lane-h" style="--lc:#0F6E56">読み合わせ・前日</div>
+<div class="step">(本番週の月曜日)「花セッティング表」へ不足情報の追記</div>
+<div class="exc">例外・現場補記：<span class="exc-blank">＿＿＿＿＿＿＿＿＿＿</span></div>
+</div>
+</div></section>
+<section class="band"><h3 class="band-h">本番週・水</h3><div class="lanes">
+<div class="lane"><div class="lane-h" style="--lc:#185FA5">ALLスタッフ</div>
+<div class="step">(本番週の水曜日)婚礼用生花水揚げ</div>
+<div class="exc">例外・現場補記：<span class="exc-blank">＿＿＿＿＿＿＿＿＿＿</span></div>
+</div>
+<div class="lane"><div class="lane-h" style="--lc:#BA7517">ホテル請求伝票</div>
+<div class="step">FASS「納品明細」印刷</div>
+<div class="exc">例外・現場補記：<span class="exc-blank">＿＿＿＿＿＿＿＿＿＿</span></div>
+</div>
+<div class="lane"><div class="lane-h" style="--lc:#C2185B">入荷管理</div>
+<div class="step">(本番週の水曜日)婚礼用生花入荷確認・検品</div>
+<div class="step">「花セッティング表」に制作スケジュールを記入</div>
+<div class="step">不足品・不良品再発注</div>
+<div class="exc">例外・現場補記：<span class="exc-blank">＿＿＿＿＿＿＿＿＿＿</span></div>
+</div>
+<div class="lane"><div class="lane-h" style="--lc:#534AB7">婚礼担当者</div>
+<div class="step">担当婚礼分生花確認(一部抜粋して確認)</div>
+<div class="exc">例外・現場補記：<span class="exc-blank">＿＿＿＿＿＿＿＿＿＿</span></div>
+</div>
+<div class="lane"><div class="lane-h" style="--lc:#3B6D11">花器管理</div>
+<div class="step">(本番週の水曜日以降)週末使用花器における準備内容を確認・まとめ「資材表」記入</div>
+<div class="exc">例外・現場補記：<span class="exc-blank">＿＿＿＿＿＿＿＿＿＿</span></div>
+</div>
+</div></section>
+<section class="band"><h3 class="band-h">本番週・木</h3><div class="lanes">
+<div class="lane"><div class="lane-h" style="--lc:#185FA5">ALLスタッフ</div>
+<div class="step">(本番週の木曜日から)婚礼用装飾制作開始</div>
+<div class="exc">例外・現場補記：<span class="exc-blank">＿＿＿＿＿＿＿＿＿＿</span></div>
+</div>
+</div></section>
+<section class="band"><h3 class="band-h">本番週・金（前日）</h3><div class="lanes">
+<div class="lane"><div class="lane-h" style="--lc:#185FA5">ALLスタッフ</div>
+<div class="step">(本番週の金曜日)・生花 水揚げ・装飾制作・花器 資材準備</div>
+<div class="exc">例外・現場補記：<span class="exc-blank">＿＿＿＿＿＿＿＿＿＿</span></div>
+</div>
+<div class="lane"><div class="lane-h" style="--lc:#0F6E56">読み合わせ・前日</div>
+<div class="step">(本番婚礼の前日)「花セッティング表」(修正版)と「ブーケお届け表」と「ホテルマスター」を用いて最終チェック</div>
+<div class="exc">例外・現場補記：<span class="exc-blank">＿＿＿＿＿＿＿＿＿＿</span></div>
+</div>
+<div class="lane"><div class="lane-h" style="--lc:#C2185B">入荷管理</div>
+<div class="step">(本番週の金曜日)婚礼用生花入荷確認・検品</div>
+<div class="exc">例外・現場補記：<span class="exc-blank">＿＿＿＿＿＿＿＿＿＿</span></div>
+</div>
+</div></section>
+<section class="band"><h3 class="band-h">婚礼当日（土・日）</h3><div class="lanes">
+<div class="lane"><div class="lane-h" style="--lc:#185FA5">ALLスタッフ</div>
+<div class="step">婚礼当日設営準備</div>
+<div class="step">婚礼当日設営</div>
+<div class="step">婚礼当日撤去準備</div>
+<div class="step">婚礼当日撤去・片し</div>
+<div class="exc">例外・現場補記：<span class="exc-blank">＿＿＿＿＿＿＿＿＿＿</span></div>
+</div>
+<div class="lane"><div class="lane-h" style="--lc:#BA7517">ホテル請求伝票</div>
+<div class="wish"><span class="wish-tag">改善希望</span>FASS上で制作した発注書分について、入力済みとなる機能が欲しいです。※手書き発注分の追加・修正の出来る機能 付</div>
+<div class="exc">例外・現場補記：<span class="exc-blank">＿＿＿＿＿＿＿＿＿＿</span></div>
+</div>
+<div class="lane"><div class="lane-h" style="--lc:#C2185B">入荷管理</div>
+<div class="step">WCR入力(週間コストレポート)</div>
+<div class="step">仕入れ先FAXにて入荷金額確認</div>
+<div class="wish"><span class="wish-tag">改善希望</span>FASS　WCR入力(週間コストレポート)</div>
+<div class="exc">例外・現場補記：<span class="exc-blank">＿＿＿＿＿＿＿＿＿＿</span></div>
+</div>
+<div class="lane"><div class="lane-h" style="--lc:#534AB7">婚礼担当者</div>
+<div class="step">担当者または代理会場設営 監督</div>
+<div class="exc">例外・現場補記：<span class="exc-blank">＿＿＿＿＿＿＿＿＿＿</span></div>
+</div>
+<div class="lane"><div class="lane-h" style="--lc:#3B6D11">花器管理</div>
+<div class="wish"><span class="wish-tag">改善希望</span>翌週分花器倉庫間移動※前週と比較</div>
+<div class="exc">例外・現場補記：<span class="exc-blank">＿＿＿＿＿＿＿＿＿＿</span></div>
+</div>
+<div class="lane"><div class="lane-h" style="--lc:#9A6A00">資材管理</div>
+<div class="wish"><span class="wish-tag">改善希望</span>前週の移動表と比較出来ることで、移動を最小限に抑えられます。</div>
+<div class="exc">例外・現場補記：<span class="exc-blank">＿＿＿＿＿＿＿＿＿＿</span></div>
+</div>
+</div></section></div>
+<footer>
+<p class="flogo">DUNKSOFT Co., Ltd. &times; Claude &mdash; 次世代FASS</p>
+<p class="fmeta">UI-FLORIST kintone 移行プロジェクト &nbsp;|&nbsp; 2026</p>
+<p class="fmeta" style="margin-top:.8rem;color:#b9b2a8">このドキュメントは「足場」です。例外処理・現場の知恵は、御社が書き込んで完成させてください。</p>
+</footer>
+</body></html>
