@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>花器の在庫管理 比較デモ（重厚版 vs ベースノート）</title>
+<style>
+  :root{
+    --bg:#f4f6f8; --card:#ffffff; --ink:#1f2a33; --sub:#67757f;
+    --line:#e2e7ec; --navy:#2c4a63; --navy-d:#1c3346;
+    --danger:#c0392b; --danger-bg:#fdecea; --warn:#b9770e; --warn-bg:#fdf4e3;
+    --ok:#1e7d52; --ok-bg:#e7f4ee; --chip:#eef2f5;
+  }
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:var(--bg); color:var(--ink);
+    font-family:"Yu Gothic","Hiragino Kaku Gothic ProN","Noto Sans JP","Meiryo",sans-serif;
+    font-size:14px; line-height:1.6; }
+  .wrap{ max-width:980px; margin:0 auto; padding:20px 18px 60px; }
+
+  header h1{ font-size:20px; margin:0 0 4px; color:var(--navy-d); }
+  header p{ margin:0; color:var(--sub); font-size:13px; }
+
+  .tabs{ display:flex; gap:6px; margin:18px 0; flex-wrap:wrap; }
+  .tab{ border:1px solid var(--line); background:var(--card); color:var(--sub);
+    padding:9px 16px; border-radius:8px; cursor:pointer; font-size:14px; font-weight:600; }
+  .tab.active{ background:var(--navy); color:#fff; border-color:var(--navy); }
+  .tab .em{ font-weight:400; font-size:11px; display:block; opacity:.8; }
+  .tab.active .em{ opacity:.85; }
+
+  .panel{ display:none; } .panel.show{ display:block; animation:f .2s ease; }
+  @keyframes f{ from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:none;} }
+
+  .card{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px 18px; margin-bottom:14px; }
+  .card h2{ font-size:15px; margin:0 0 10px; color:var(--navy-d); display:flex; align-items:center; gap:8px; }
+  .card h3{ font-size:13px; margin:14px 0 6px; color:var(--sub); }
+  .lead{ font-size:13px; color:var(--sub); margin:0 0 12px; }
+
+  table{ width:100%; border-collapse:collapse; font-size:13px; }
+  th,td{ border:1px solid var(--line); padding:6px 9px; text-align:left; }
+  th{ background:var(--chip); font-weight:700; color:var(--sub); font-size:12px; }
+  td.n,th.n{ text-align:right; white-space:nowrap; }
+  td.c,th.c{ text-align:center; white-space:nowrap; }
+
+  .chip{ display:inline-block; font-size:11px; padding:1px 8px; border-radius:99px; background:var(--chip); color:var(--sub); }
+  .chip.out{ background:#e8eef7; color:#2c4a63; }
+  .chip.ok{ background:var(--ok-bg); color:var(--ok); }
+  .chip.late{ background:var(--danger-bg); color:var(--danger); font-weight:700; }
+
+  button.act{ border:none; border-radius:7px; padding:5px 12px; font-size:12px; font-weight:700; cursor:pointer; }
+  button.ret{ background:var(--ok); color:#fff; } button.ret:hover{ filter:brightness(1.05); }
+  button.out{ background:var(--navy); color:#fff; } button.out:hover{ filter:brightness(1.1); }
+  button.ghost{ background:#fff; border:1px solid var(--line); color:var(--sub); }
+
+  .alert{ border-radius:9px; padding:10px 14px; font-size:13px; margin-bottom:12px; }
+  .alert.danger{ background:var(--danger-bg); color:var(--danger); border:1px solid #f3c6c1; }
+  .alert.ok{ background:var(--ok-bg); color:var(--ok); border:1px solid #bfe3d0; }
+  .alert b{ font-weight:800; }
+
+  .kpis{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:6px; }
+  .kpi{ flex:1; min-width:120px; background:var(--bg); border:1px solid var(--line); border-radius:10px; padding:10px 12px; }
+  .kpi .v{ font-size:22px; font-weight:800; color:var(--navy-d); }
+  .kpi .v.bad{ color:var(--danger); } .kpi .v.good{ color:var(--ok); }
+  .kpi .l{ font-size:11px; color:var(--sub); }
+
+  /* 重厚版: 入力負荷を体感させるフォーム */
+  .formgrid{ display:grid; grid-template-columns:repeat(2,1fr); gap:8px 14px; }
+  .field{ font-size:12px; } .field label{ display:block; color:var(--sub); margin-bottom:2px; }
+  .field .req{ color:var(--danger); }
+  .field input,.field select{ width:100%; padding:5px 7px; border:1px solid var(--line); border-radius:6px; font-size:12px; background:#fcfdfe; }
+  .burden{ background:var(--warn-bg); border:1px solid #ecd9a8; border-radius:9px; padding:12px 14px; }
+  .burden ul{ margin:6px 0 0; padding-left:18px; } .burden li{ margin:3px 0; font-size:13px; }
+  .count-badge{ font-size:11px; color:var(--danger); font-weight:700; }
+
+  .subtabs{ display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+  .subtab{ font-size:12px; padding:5px 11px; border:1px solid var(--line); border-radius:99px; background:#fff; cursor:pointer; color:var(--sub); }
+  .subtab.active{ background:var(--navy-d); color:#fff; border-color:var(--navy-d); }
+  .sub{ display:none; } .sub.show{ display:block; }
+
+  .diff-neg{ color:var(--danger); font-weight:700; }
+
+  /* 比較表 */
+  .cmp th:first-child{ width:30%; }
+  .cmp .heavy{ color:var(--danger); } .cmp .light{ color:var(--ok); font-weight:700; }
+  .verdict{ background:linear-gradient(180deg,#fff, #f1f6fb); border:1px solid #cfe0ee; border-radius:12px; padding:16px 18px; }
+  .verdict h2{ color:var(--navy-d); }
+  .note{ font-size:12px; color:var(--sub); margin-top:8px; }
+  .footer{ text-align:center; color:var(--sub); font-size:11px; margin-top:18px; }
+</style>
+</head>
+<body>
+<div style="background:#7a1020;color:#fff;font-family:system-ui,sans-serif;font-size:13px;text-align:center;padding:8px 12px;letter-spacing:.04em;">🔒 社内用・非公開 — 会議の進め方／話法を含みます。公開しないでください。</div>
+<div class="wrap">
+  <header>
+    <h1>花器の在庫管理：2つの作り方を比べる</h1>
+    <p>同じ「花器の出入りを管理したい」という要望に対する、重厚な作り方と軽い作り方の比較デモ（基準日 2025/06/20）</p>
+  </header>
+
+  <div class="tabs">
+    <div class="tab active" data-tab="light" onclick="showTab('light')">軽量版：ベースノート<span class="em">出庫/返却ログ・回収漏れ検知</span></div>
+    <div class="tab" data-tab="heavy" onclick="showTab('heavy')">重厚版：本格在庫管理<span class="em">資産・棚卸・会計連携</span></div>
+    <div class="tab" data-tab="cmp" onclick="showTab('cmp')">比較・結論<span class="em">どちらを選ぶべきか</span></div>
+  </div>
+
+  <!-- ===================== 軽量版 ===================== -->
+  <div class="panel show" id="panel-light">
+    <div class="card">
+      <h2>① いまの状況</h2>
+      <p class="lead">花器を案件に「出庫」、戻ってきたら「返却」を押すだけ。返却予定日を過ぎたものは自動で回収漏れアラートになります。棚卸も会計処理もありません。</p>
+      <div id="alertArea"></div>
+      <div class="kpis" id="lightKpis"></div>
+    </div>
+
+    <div class="card">
+      <h2>② 貸出中の花器（クリックで返却）</h2>
+      <table>
+        <thead><tr>
+          <th>花器</th><th class="c">数量</th><th>案件</th><th class="c">出庫日</th>
+          <th class="c">返却予定</th><th class="c">状態</th><th class="c">操作</th>
+        </tr></thead>
+        <tbody id="loanBody"></tbody>
+      </table>
+      <p class="note">※実運用では出庫はバーコード/手入力どちらでも数秒。返却はこのボタン1つ。入力項目は「どの花器・何個・どの案件・返却予定日」の4つだけ。</p>
+    </div>
+
+    <div class="card">
+      <h2>③ 花器ごとの空き状況（引当チェック）</h2>
+      <table>
+        <thead><tr><th>花器</th><th class="c">保有</th><th class="c">貸出中</th><th class="c">在庫(空き)</th><th>状況</th></tr></thead>
+        <tbody id="stockBody"></tbody>
+      </table>
+      <p class="note">※先に作った「花器スケジュール表」が、この空き状況を日付軸で見える化したものです。</p>
+    </div>
+
+    <div class="card burden">
+      <h2 style="color:var(--warn)">運用コスト（軽量版）</h2>
+      <ul>
+        <li>日次の手間：出庫時に1件入力、返却時にボタン1つ。<b>1案件あたり数十秒</b>。</li>
+        <li>棚卸：<b>不要</b>（資産計上していないため）。</li>
+        <li>システムとリアルの突合：<b>原則不要</b>。ズレても「貸出中リスト」を見て現物を探すだけ。</li>
+        <li>導入物：<b>なし</b>（RF-TAG・専用端末・棚番管理は不要）。</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ===================== 重厚版 ===================== -->
+  <div class="panel" id="panel-heavy">
+    <div class="alert danger" style="margin-top:4px;">
+      これは「本格的な資産在庫管理」を花器に適用した場合の画面イメージです。<b>項目の多さ・運用の重さ</b>を体感するためのデモです。
+    </div>
+
+    <div class="subtabs">
+      <div class="subtab active" data-sub="reg" onclick="showSub('reg')">花器 資産マスタ登録</div>
+      <div class="subtab" data-sub="ledger" onclick="showSub('ledger')">入出庫トランザクション</div>
+      <div class="subtab" data-sub="stock" onclick="showSub('stock')">棚卸</div>
+      <div class="subtab" data-sub="burden" onclick="showSub('burden')">運用コスト</div>
+    </div>
+
+    <div class="card sub show" id="sub-reg">
+      <h2>花器1点ごとの登録フォーム <span class="count-badge">入力必須項目 18</span></h2>
+      <p class="lead">資産として管理するなら、1点（または1ロット）ごとにこれだけの情報を登録・維持する必要があります。</p>
+      <div class="formgrid">
+        <div class="field"><label>資産番号 <span class="req">*</span></label><input value="KAKI-2023-00471" disabled></div>
+        <div class="field"><label>個体シリアル <span class="req">*</span></label><input value="SN-4471-08" disabled></div>
+        <div class="field"><label>花器名 <span class="req">*</span></label><input value="コンポート花器(白)" disabled></div>
+        <div class="field"><label>分類 / 区分 <span class="req">*</span></label><input value="コンポート / レンタル可" disabled></div>
+        <div class="field"><label>取得日 <span class="req">*</span></label><input value="2023-04-12" disabled></div>
+        <div class="field"><label>取得価額 <span class="req">*</span></label><input value="¥3,200" disabled></div>
+        <div class="field"><label>耐用年数 <span class="req">*</span></label><input value="5年" disabled></div>
+        <div class="field"><label>償却方法 <span class="req">*</span></label><select disabled><option>定額法</option></select></div>
+        <div class="field"><label>期末簿価 <span class="req">*</span></label><input value="¥1,920" disabled></div>
+        <div class="field"><label>保管倉庫 <span class="req">*</span></label><select disabled><option>本店 B1倉庫</option></select></div>
+        <div class="field"><label>棚番地（列-段-位置）<span class="req">*</span></label><input value="C-3-12" disabled></div>
+        <div class="field"><label>RF-TAG ID</label><input value="(貼付する場合)" disabled></div>
+        <div class="field"><label>状態グレード <span class="req">*</span></label><select disabled><option>A（良）</option></select></div>
+        <div class="field"><label>破損・欠け記録</label><input value="縁に小キズ(2024/11)" disabled></div>
+        <div class="field"><label>仕入先 <span class="req">*</span></label><input value="○○硝子" disabled></div>
+        <div class="field"><label>最終棚卸日 <span class="req">*</span></label><input value="2024-12-28" disabled></div>
+        <div class="field"><label>管理担当者 <span class="req">*</span></label><input value="倉庫 田中" disabled></div>
+        <div class="field"><label>勘定科目 <span class="req">*</span></label><select disabled><option>工具器具備品</option></select></div>
+      </div>
+      <p class="note">※保有が多い花器（例：ブリキバケツ20個）は、個体管理なら20レコード必要。ロット管理にしても状態・破損は個体差があり結局崩れます。</p>
+    </div>
+
+    <div class="card sub" id="sub-ledger">
+      <h2>入出庫トランザクション台帳</h2>
+      <p class="lead">資産在庫では「いつ・誰が・どの個体を・どこへ・なぜ」をすべて記録します。1回の出庫・返却ごとに行が増えます。</p>
+      <table>
+        <thead><tr><th>日時</th><th>区分</th><th>資産番号</th><th>個体</th><th>数</th><th>相手/案件</th><th>担当</th><th>承認</th></tr></thead>
+        <tbody>
+          <tr><td>06/13 09:12</td><td>出庫</td><td>KAKI-2023-00471</td><td>SN-08</td><td class="c">1</td><td>山田×鈴木</td><td>佐藤</td><td class="c">✓</td></tr>
+          <tr><td>06/13 09:14</td><td>出庫</td><td>KAKI-2023-00471</td><td>SN-09</td><td class="c">1</td><td>山田×鈴木</td><td>佐藤</td><td class="c">✓</td></tr>
+          <tr><td>06/15 18:40</td><td>返却</td><td>KAKI-2023-00471</td><td>SN-08</td><td class="c">1</td><td>山田×鈴木</td><td>—</td><td class="c diff-neg">未</td></tr>
+          <tr><td>06/16 10:02</td><td>出庫</td><td>KAKI-2021-00120</td><td>SN-02</td><td class="c">1</td><td>田中30名宴会</td><td>鈴木</td><td class="c">✓</td></tr>
+          <tr><td>…</td><td>…</td><td>…</td><td>…</td><td class="c">…</td><td>…</td><td>…</td><td class="c">…</td></tr>
+        </tbody>
+      </table>
+      <p class="note">※個体ごとに記録するため、行数は軽量版の数倍。入力漏れ・承認待ちが日常的に発生します。</p>
+    </div>
+
+    <div class="card sub" id="sub-stock">
+      <h2>棚卸（理論在庫 vs 実在庫）</h2>
+      <p class="lead">資産として持つ以上、定期的な棚卸が必要。理論値と現物を全数照合し、差異を調査・承認します。</p>
+      <div class="alert danger">差異 <b>3品目・計-7個</b> を検出。原因調査と帳簿修正（または除却処理）が必要です。</div>
+      <table>
+        <thead><tr><th>花器</th><th class="n">理論在庫</th><th class="n">実在庫</th><th class="n">差異</th><th>状態</th></tr></thead>
+        <tbody>
+          <tr><td>コンポート花器(白)</td><td class="n">12</td><td class="n">10</td><td class="n diff-neg">-2</td><td>要調査（紛失/未返却?）</td></tr>
+          <tr><td>シリンダー花瓶(大)</td><td class="n">6</td><td class="n">6</td><td class="n">0</td><td>一致</td></tr>
+          <tr><td>ガラスボウル</td><td class="n">10</td><td class="n">7</td><td class="n diff-neg">-3</td><td>要調査・除却検討</td></tr>
+          <tr><td>ブリキバケツ</td><td class="n">20</td><td class="n">18</td><td class="n diff-neg">-2</td><td>要調査</td></tr>
+        </tbody>
+      </table>
+      <p class="note">※この差異照合と原因調査こそ、現場が最も嫌う作業。年に数回、半日〜数日かかります。</p>
+    </div>
+
+    <div class="card sub burden" id="sub-burden">
+      <h2 style="color:var(--warn)">運用コスト（重厚版）</h2>
+      <ul>
+        <li>初期登録：保有花器すべてに18項目を入力。<b>数百レコードの初期データ整備</b>。</li>
+        <li>日次の手間：出庫・返却を個体単位で記録＋承認フロー。<b>入力負荷が大きく、漏れると在庫が即ズレる</b>。</li>
+        <li>棚卸：定期的に全数照合・差異調査・帳簿修正。<b>年に数回、半日〜数日</b>。</li>
+        <li>突合：システムとリアルが常にズレる前提で、照合工数が恒常的に発生。</li>
+        <li>会計連携：取得・除却・評価の処理。<b>本来、花器が資産計上対象でなければ不要な作業</b>。</li>
+      </ul>
+      <p class="note">最大の問題：これだけ入れても入力が追いつかず、<b>「半分しか合っていない在庫データ」</b>が残る。それは在庫データが無い状態より危険（あると思って引き当てたら無い）。</p>
+    </div>
+  </div>
+
+  <!-- ===================== 比較・結論 ===================== -->
+  <div class="panel" id="panel-cmp">
+    <div class="card">
+      <h2>機能の「重さ」で比べる</h2>
+      <table class="cmp">
+        <thead><tr><th>観点</th><th>重厚版（本格在庫管理）</th><th>軽量版（ベースノート）</th></tr></thead>
+        <tbody>
+          <tr><td>解決する困りごと</td><td class="heavy">紛失・空き確認・棚卸・会計</td><td class="light">紛失（回収漏れ）と空き確認 ＝ 本当の困りごと</td></tr>
+          <tr><td>登録項目数（1花器）</td><td class="heavy">約18項目＋個体管理</td><td class="light">花器名・保有数のみ</td></tr>
+          <tr><td>1案件あたりの入力</td><td class="heavy">個体ごと出庫/返却＋承認</td><td class="light">出庫1件＋返却ボタン1つ</td></tr>
+          <tr><td>棚卸</td><td class="heavy">必要（全数照合・差異調査）</td><td class="light">不要</td></tr>
+          <tr><td>会計処理</td><td class="heavy">必要（取得/償却/除却）</td><td class="light">不要</td></tr>
+          <tr><td>RF-TAG・専用端末</td><td class="heavy">実質前提</td><td class="light">不要</td></tr>
+          <tr><td>システムとリアルの突合</td><td class="heavy">恒常的に発生（重い）</td><td class="light">原則不要</td></tr>
+          <tr><td>入力が漏れたとき</td><td class="heavy">在庫が即ズレ→誤った安心</td><td class="light">貸出リストを見て現物を探すだけ</td></tr>
+          <tr><td>開発・維持コスト</td><td class="heavy">大</td><td class="light">小</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="verdict">
+      <h2>結論：争点は「機能の有無」ではなく「機能の重さ」</h2>
+      <p style="margin:0 0 8px;">花器はおそらく資産計上していない消耗品・備品です。だとすれば、棚卸・会計・全数個体管理は<b>本来不要な作業</b>。それでも重厚版を作ると、入力が追いつかず「半分しか合わない在庫データ」が残り、これは在庫データが無いより危険です。</p>
+      <p style="margin:0 0 8px;">一方、現場の本当の困りごとは <b>① 回収し忘れて買い直すコスト</b> と <b>② 次の案件でその花器が空いているか</b> の2点。軽量版（出庫/返却ログ＋回収漏れアラート＋スケジュール連動）で、この2点はほぼ解決します。</p>
+      <p style="margin:0;"><b>提案の言い方：</b>「在庫管理はやりません」ではなく、<b>「“ベースノート”の名のとおり、台帳ベースの軽い出入り管理にしましょう。重い資産管理は花器の実態に合わず、かえって運用が破綻します」</b>と、規模を縮める提案に持ち込むのが勝ち筋です。</p>
+      <p class="note">会議で先に聞くと効く質問：①一番解決したい困りごとは？ ②年間の回収漏れ・買い直しは実際どれくらい？ ③出庫/返却を誰がいつ入力できる？ ④帳簿との突合は要る？ ── 多くの場合、相手自身が「重い版は要らない」と気づきます。</p>
+    </div>
+  </div>
+
+  <div class="footer">花器在庫管理 比較デモ ／ FASS Ver3 検討用</div>
+</div>
+
+<script>
+const TODAY = new Date("2025-06-20");
+
+/* 軽量版データ：貸出ログ */
+let loans = [
+  { id:1, kaki:"コンポート花器(白)", qty:8, ev:"山田×鈴木", out:"2025-06-13", due:"2025-06-16", status:"out" },
+  { id:2, kaki:"シリンダー花瓶(大)", qty:4, ev:"山田×鈴木", out:"2025-06-13", due:"2025-06-16", status:"out" },
+  { id:3, kaki:"ブリキバケツ",       qty:10,ev:"山田×鈴木", out:"2025-06-13", due:"2025-06-16", status:"returned" },
+  { id:4, kaki:"シリンダー花瓶(大)", qty:6, ev:"記念式典",   out:"2025-06-15", due:"2025-06-18", status:"out" },
+  { id:5, kaki:"ガラスボウル",       qty:3, ev:"展示会",     out:"2025-06-16", due:"2025-06-23", status:"out" },
+];
+const stockOwned = { "コンポート花器(白)":12, "シリンダー花瓶(大)":6, "ガラスボウル":10, "陶器花器(和)":8, "ブリキバケツ":20 };
+
+const fmt = d => d.slice(5).replace("-","/");
+function isLate(l){ return l.status==="out" && new Date(l.due) < TODAY; }
+
+function renderLight(){
+  const out = loans.filter(l=>l.status==="out");
+  const late = out.filter(isLate);
+  // アラート
+  let a = "";
+  if(late.length){
+    a = `<div class="alert danger">⚠ <b>回収漏れアラート：${late.length}件</b> が返却予定日を過ぎています（`
+      + late.map(l=>`${l.kaki}×${l.qty}（${l.ev}・予定${fmt(l.due)}）`).join(" / ") + `）。回収または追加手配が必要です。</div>`;
+  } else {
+    a = `<div class="alert ok">✓ 回収漏れはありません。</div>`;
+  }
+  document.getElementById("alertArea").innerHTML = a;
+
+  // KPI
+  const outQty = out.reduce((s,l)=>s+l.qty,0);
+  document.getElementById("lightKpis").innerHTML = `
+    <div class="kpi"><div class="v">${out.length}</div><div class="l">貸出中の件数</div></div>
+    <div class="kpi"><div class="v">${outQty}</div><div class="l">外に出ている花器(個)</div></div>
+    <div class="kpi"><div class="v ${late.length?'bad':'good'}">${late.length}</div><div class="l">回収漏れ(件)</div></div>
+    <div class="kpi"><div class="v good">0</div><div class="l">棚卸・突合の工数</div></div>`;
+
+  // 貸出テーブル
+  document.getElementById("loanBody").innerHTML = loans.map(l=>{
+    const late = isLate(l);
+    const st = l.status==="returned" ? `<span class="chip ok">返却済</span>`
+             : late ? `<span class="chip late">超過</span>` : `<span class="chip out">貸出中</span>`;
+    const btn = l.status==="out"
+      ? `<button class="act ret" onclick="ret(${l.id})">返却</button>`
+      : `<button class="act ghost" onclick="reout(${l.id})">再出庫</button>`;
+    return `<tr style="${late?'background:var(--danger-bg);':''}">
+      <td>${l.kaki}</td><td class="c">${l.qty}</td><td>${l.ev}</td>
+      <td class="c">${fmt(l.out)}</td><td class="c">${fmt(l.due)}</td>
+      <td class="c">${st}</td><td class="c">${btn}</td></tr>`;
+  }).join("");
+
+  // 在庫サマリ
+  document.getElementById("stockBody").innerHTML = Object.keys(stockOwned).map(k=>{
+    const owned = stockOwned[k];
+    const outNow = loans.filter(l=>l.kaki===k && l.status==="out").reduce((s,l)=>s+l.qty,0);
+    const free = owned - outNow;
+    const status = free<0 ? `<span class="chip late">不足 ${free}</span>`
+                 : free===0 ? `<span class="chip">空きなし</span>`
+                 : `<span class="chip ok">空きあり</span>`;
+    return `<tr><td>${k}</td><td class="c">${owned}</td><td class="c">${outNow}</td>
+      <td class="c"><b>${free}</b></td><td>${status}</td></tr>`;
+  }).join("");
+}
+function ret(id){ const l=loans.find(x=>x.id===id); if(l){ l.status="returned"; } renderLight(); }
+function reout(id){ const l=loans.find(x=>x.id===id); if(l){ l.status="out"; } renderLight(); }
+
+function showTab(t){
+  document.querySelectorAll(".tab").forEach(e=>e.classList.toggle("active", e.dataset.tab===t));
+  document.querySelectorAll(".panel").forEach(p=>p.classList.remove("show"));
+  document.getElementById("panel-"+t).classList.add("show");
+}
+function showSub(s){
+  document.querySelectorAll(".subtab").forEach(e=>e.classList.toggle("active", e.dataset.sub===s));
+  document.querySelectorAll(".sub").forEach(p=>p.classList.toggle("show", p.id==="sub-"+s));
+}
+renderLight();
+</script>
+</body>
+</html>
