@@ -18,11 +18,14 @@ body{background:var(--paper);color:var(--ink);font-family:'Noto Serif JP',serif;
 .wrap{max-width:980px;margin:0 auto;padding:2.4rem 1.4rem 1rem}
 .eyebrow{font-family:'Noto Sans JP',sans-serif;font-size:.6rem;letter-spacing:.4em;color:var(--muted);text-transform:uppercase;margin-bottom:.7rem}
 h1.page{font-size:clamp(1.5rem,4.4vw,2.15rem);font-weight:600;line-height:1.35;margin-bottom:.5rem;letter-spacing:.01em}
-h1.page .a{color:var(--c5)} h1.page .b{color:var(--c4)} h1.page .c{color:var(--c1)}
+h1.page .a{color:var(--c5)} h1.page .b{color:var(--c2)} h1.page .c{color:var(--c3)} h1.page .d{color:var(--c1)}
 .lead{font-family:'Noto Sans JP',sans-serif;font-size:.82rem;font-weight:300;color:rgba(20,18,26,.66);line-height:1.95;margin-bottom:1.3rem;max-width:760px}
 .nav{display:flex;gap:8px;flex-wrap:wrap;margin:1.2rem 0 2rem;font-family:'Noto Sans JP',sans-serif}
 .nav a{font-size:.72rem;letter-spacing:.04em;text-decoration:none;padding:7px 14px;border-radius:20px;border:.5px solid var(--border);color:rgba(20,18,26,.6);background:var(--cream)}
 .nav a.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.nav a{font-weight:500;transition:transform .08s}
+.nav a:hover{transform:translateY(-1px)}
+.nav-dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:7px;vertical-align:1px}
 .sec-h{font-family:'Noto Sans JP',sans-serif;font-size:.62rem;letter-spacing:.3em;color:var(--muted);text-transform:uppercase;margin:2.2rem 0 .9rem;border-top:.5px solid var(--border);padding-top:1.4rem}
 table{width:100%;border-collapse:collapse;font-family:'Noto Sans JP',sans-serif;font-size:.76rem;font-weight:300;margin:.6rem 0 1.2rem}
 th{background:var(--cream);text-align:left;font-weight:500;color:rgba(20,18,26,.7);padding:9px 10px;border-bottom:1.5px solid var(--border);letter-spacing:.03em;font-size:.68rem;white-space:nowrap}
@@ -59,7 +62,7 @@ footer{padding:2.4rem 2rem;text-align:center;border-top:1px solid var(--border);
 <body>
 <div class="wrap">
 <div class="eyebrow">UI-FLORIST &times; kintone &mdash; 次世代FASS 移行ドキュメント</div>
-<h1 class="page"><span class="b">B.</span> 業務フロー（AS-IS / TO-BE）</h1><p class="lead">「現在」シートの実作業（黒）と「改善希望」シート（<span style="color:#235c27">緑＝改善希望</span>）を、時系列バンド × 担当レーンで再構成しました。各レーン末尾の「例外・現場補記」欄に、マニュアル化で拾うべき例外処理を書き足していけます。</p><nav class="nav"><a href="fass-requirements.html">A. 要件定義</a><a href="fass-flow.html" class="on">B. 業務フロー</a><a href="fass-forms.html">C. 帳票・優先順位</a><a href="fass-manual.html">フェーズ別マニュアル</a></nav><div class="sec-h">凡例（記号説明）</div><div class="legend"><span class="leg">Googleスプレッドシート使用</span>
+<h1 class="page"><span class="b">B.</span> 業務フロー（AS-IS / TO-BE）</h1><p class="lead">「現在」シートの実作業（黒）と「改善希望」シート（<span style="color:#235c27">緑＝改善希望</span>）を、時系列バンド × 担当レーンで再構成しました。各レーン末尾の「例外・現場補記」欄に、マニュアル化で拾うべき例外処理を書き足していけます。</p><nav class="nav"><a href="fass-requirements.html" style="color:#534AB7;background:#534AB70d;border-color:#534AB755"><span class="nav-dot" style="background:#534AB7"></span>A. 要件定義</a><a href="fass-flow.html" class="on" style="background:#0F6E56;color:#fff;border-color:#0F6E56"><span class="nav-dot" style="background:#fff"></span>B. 業務フロー</a><a href="fass-forms.html" style="color:#BA7517;background:#BA75170d;border-color:#BA751755"><span class="nav-dot" style="background:#BA7517"></span>C. 帳票・優先順位</a><a href="fass-manual.html" style="color:#185FA5;background:#185FA50d;border-color:#185FA555"><span class="nav-dot" style="background:#185FA5"></span>D. フェーズ別マニュアル</a></nav><div class="sec-h">凡例（記号説明）</div><div class="legend"><span class="leg">Googleスプレッドシート使用</span>
 <span class="leg">MicrosoftPowerPoint使用</span>
 <span class="leg">FASS 使用</span>
 <span class="leg">FASSとスプレッドを併用</span>
